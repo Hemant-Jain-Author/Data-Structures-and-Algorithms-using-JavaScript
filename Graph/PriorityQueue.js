@@ -97,15 +97,3 @@ class PriorityQueue {
         }
     }
 }
-
-comp1 = (x, y) => x - y;
-
-main = args => {
-    const a = [1, 9, 6, 7, 8, 0, 2, 4, 5, 3];
-    const hp = new PriorityQueue(a, comp1);
-    hp.print();
-    PriorityQueue.HeapSort(a, comp1);
-    console.log(a);
-};
-
-//main(null);

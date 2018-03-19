@@ -1,8 +1,8 @@
 class StringTreeNode {
     constructor() {
         this.count = 0;
-        this.lChild = null;
-        this.rChild = null;
+        this.left = null;
+        this.right = null;
     }
 }
 
@@ -20,8 +20,8 @@ class StringTree {
             if (curr != null) {
                 console.log(` value is ::${curr.value}`);
                 console.log(` count is :: ${curr.count}`);
-                this.printUtil(curr.lChild);
-                this.printUtil(curr.rChild);
+                this.printUtil(curr.left);
+                this.printUtil(curr.right);
             }
         }
         else
@@ -38,7 +38,7 @@ class StringTree {
             if (curr == null) {
                 curr = new StringTreeNode(this);
                 curr.value = value;
-                curr.lChild = curr.rChild = null;
+                curr.left = curr.right = null;
                 curr.count = 1;
             }
             else {
@@ -46,9 +46,9 @@ class StringTree {
                 if (compare === 0)
                     curr.count++;
                 else if (compare === 1)
-                    curr.lChild = this.insertUtil(value, curr.lChild);
+                    curr.left = this.insertUtil(value, curr.left);
                 else
-                    curr.rChild = this.insertUtil(value, curr.rChild);
+                    curr.right = this.insertUtil(value, curr.right);
             }
             return curr;
         }
@@ -76,9 +76,9 @@ class StringTree {
                 return true;
             else {
                 if (compare === 1)
-                    return this.findUtil(curr.lChild, value);
+                    return this.findUtil(curr.left, value);
                 else
-                    return this.findUtil(curr.rChild, value);
+                    return this.findUtil(curr.right, value);
             }
         }
         else
@@ -99,9 +99,9 @@ class StringTree {
                 return curr.count;
             else {
                 if (compare > 0)
-                    return this.frequencyUtil(curr.lChild, value);
+                    return this.frequencyUtil(curr.left, value);
                 else
-                    return this.frequencyUtil(curr.rChild, value);
+                    return this.frequencyUtil(curr.right, value);
             }
         }
         else

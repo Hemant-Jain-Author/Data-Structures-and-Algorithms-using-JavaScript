@@ -1,7 +1,9 @@
-function QueueNode(v, n) {
-    this.value = 0;
-    this.value = v;
-    this.next = n;
+class QueueNode {
+    constructor(v, n) {
+        this.value = 0;
+        this.value = v;
+        this.next = n;
+    }
 }
 
 class Queue {
@@ -11,21 +13,21 @@ class Queue {
         this.size = 0;
     }
 
-    static length() {
+    length() {
         return this.size;
     }
 
-    static isEmpty() {
+    isEmpty() {
         return this.size === 0;
     }
 
-    static peek() {
+    peek() {
         if (this.isEmpty())
             throw new Error("StackEmptyError");
         return this.head.value;
     }
 
-    static add(value) {
+    add(value) {
         const temp = new QueueNode(value, null);
         if (this.head == null)
             this.head = this.tail = temp;
@@ -36,7 +38,7 @@ class Queue {
         this.size++;
     }
 
-    static remove() {
+    remove() {
         if (this.isEmpty())
             throw new Error("StackEmptyError");
         const value = this.head.value;
@@ -45,7 +47,7 @@ class Queue {
         return value;
     }
 
-    static print() {
+    print() {
         let temp = this.head;
         while ((temp != null)) {
             console.log(`${temp.value} `);
