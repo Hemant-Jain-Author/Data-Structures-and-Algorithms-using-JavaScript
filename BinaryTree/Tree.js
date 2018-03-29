@@ -3,7 +3,7 @@ class TreeNode {
         this.value = data;
         this.left = left;
         this.right = right;
-      }
+    }
 }
 
 class Tree {
@@ -38,7 +38,7 @@ class Tree {
         let temp;
         while (que.isEmpty() === false) {
             let temp = que.remove();
-            str += temp.value 
+            str += temp.value
             str += " "
 
             if (temp.left !== null)
@@ -60,10 +60,10 @@ class Tree {
             str += temp.value
             str += " "
 
-            if (temp.left != null)
-                stk.push(temp.left);
-            if (temp.right != null)
-                stk.push(temp.right);
+            if (temp.rChild != null)
+                stk.push(temp.rChild);
+            if (temp.lChild != null)
+                stk.push(temp.lChild);
         }
         console.log(str)
     }
@@ -118,10 +118,10 @@ class Tree {
                 return (node.value);
             }
             retval = this.nthPreOrderUtil(node.left, index, counter);
-            if(retval != null)
+            if (retval != null)
                 return retval;
             retval = this.nthPreOrderUtil(node.right, index, counter);
-            if(retval != null)
+            if (retval != null)
                 return retval;
         }
         return null;
@@ -151,10 +151,10 @@ class Tree {
         let retval;
         if (node != null) {
             retval = this.nthPostOrderUtil(node.left, index, counter);
-            if(retval != null)
+            if (retval != null)
                 return retval;
             retval = this.nthPostOrderUtil(node.right, index, counter);
-            if(retval != null)
+            if (retval != null)
                 return retval;
             counter[0]++;
             if (counter[0] === index) {
@@ -177,7 +177,7 @@ class Tree {
     }
 
     nthInOrder(index) {
-        const counter=[0];
+        const counter = [0];
         if (typeof index === 'number')
             return this.nthInOrderUtil(this.root, index, counter);
         else
@@ -188,14 +188,14 @@ class Tree {
         let retval;
         if (node != null) {
             retval = this.nthInOrderUtil(node.left, index, counter);
-            if(retval != null)
+            if (retval != null)
                 return retval;
             counter[0]++;
             if (counter[0] === index) {
-                return(node.value);
+                return (node.value);
             }
             retval = this.nthInOrderUtil(node.right, index, counter);
-            if(retval != null)
+            if (retval != null)
                 return retval;
 
         }
@@ -482,24 +482,23 @@ class Tree {
 
     printAllPath() {
         const stk = [];
-        this.printAllPathUtil(this.root,stk);
+        this.printAllPathUtil(this.root, stk);
     }
 
     printAllPathUtil(curr, stk) {
-        if(curr == null)
+        if (curr == null)
             return;
 
         stk.push(curr.value);
 
-        if(curr.left == null && curr.right == null)
-        {
+        if (curr.left == null && curr.right == null) {
             console.log(stk);
             stk.pop();
             return;
         }
 
-        this.printAllPathUtil(curr.left,stk);
-        this.printAllPathUtil(curr.right,stk);
+        this.printAllPathUtil(curr.left, stk);
+        this.printAllPathUtil(curr.right, stk);
         stk.pop();
     }
 
@@ -542,7 +541,7 @@ class Tree {
     }
 
     isBST2() {
-        const count=[MIN_VALUE];
+        const count = [MIN_VALUE];
         return this.isBST2Util(this.root, count);
     }
 
@@ -771,41 +770,43 @@ class Tree {
     }
 
     createBinaryTreeUtil(arr, start, end) {
-            let curr = null;
-            if (start > end)
-                return null;
-            const mid = Math.floor((start + end) / 2);
-            curr = new TreeNode(arr[mid]);
-            curr.left = this.createBinaryTreeUtil(arr, start, mid - 1);
-            curr.right = this.createBinaryTreeUtil(arr, mid + 1, end);
-            return curr;
+        let curr = null;
+        if (start > end)
+            return null;
+        const mid = Math.floor((start + end) / 2);
+        curr = new TreeNode(arr[mid]);
+        curr.left = this.createBinaryTreeUtil(arr, start, mid - 1);
+        curr.right = this.createBinaryTreeUtil(arr, mid + 1, end);
+        return curr;
     }
 }
 
 class Queue {
     constructor() {
-        this.stk1 = [];
-        this.stk2 = [];
+        this.frontIndex = 0;
+        this.data = [];
     }
 
     add(value) {
-        this.stk1.push(value);
+        this.data.push(value);
     }
 
     remove() {
-        let value;
-        if ((this.stk2).length > 0) {
-            return this.stk2.pop();
+        const value = this.data[this.frontIndex];
+        this.frontIndex++;
+        if (this.data.length > 0 && this.frontIndex * 2 >= this.data.length) {
+            this.data = this.data.slice(this.frontIndex);
+            this.frontIndex = 0;
         }
-        while ((this.stk1).length > 0) {
-            value = this.stk1.pop();
-            this.stk2.push(value);
-        };
-        return this.stk2.pop();
+        return value;
     }
 
     isEmpty() {
-        return (this.stk1.length + this.stk2.length) === 0
+        return (this.data.length - this.frontIndex) === 0;
+    }
+
+    length() {
+        return (this.data.length - this.frontIndex);
     }
 }
 

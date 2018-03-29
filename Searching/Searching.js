@@ -30,7 +30,7 @@ function Binarysearch(arr, value) {
     let high = arr.length - 1;
     let mid;
     while ((low <= high)) {
-        mid = low + Math.floor((high - low) / 2);
+        mid = Math.floor((low + high) / 2);
         if (arr[mid] === value) {
             return true;
         }
@@ -52,7 +52,7 @@ function BinarySearchRecursiveUtil(arr, low, high, value) {
     if (low > high) {
         return false;
     }
-    const mid = low + Math.floor((high - low) / 2);
+    const mid = Math.floor((low + high) / 2);
     if (arr[mid] === value) {
         return true;
     }

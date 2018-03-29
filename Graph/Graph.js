@@ -430,30 +430,32 @@ class PriorityQueue {
 }
 
 class Queue {
-	constructor() {
-		this.stk1 = [];
-		this.stk2 = [];
-	}
+    constructor() {
+        this.frontIndex = 0;
+        this.data = [];
+    }
 
-	add(value) {
-		this.stk1.push(value);
-	}
+    add(value) {
+        this.data.push(value);
+    }
 
-	remove() {
-		let value;
-		if ((this.stk2).length > 0) {
-			return this.stk2.pop();
-		}
-		while ((this.stk1).length > 0) {
-			value = this.stk1.pop();
-			this.stk2.push(value);
-		};
-		return this.stk2.pop();
-	}
+    remove() {
+        const value = this.data[this.frontIndex];
+        this.frontIndex++;
+        if (this.data.length > 0 && this.frontIndex * 2 >= this.data.length) {
+            this.data = this.data.slice(this.frontIndex);
+            this.frontIndex = 0;
+        }
+        return value;
+    }
 
-	isEmpty() {
-		return (this.stk1.length + this.stk2.length) === 0
-	}
+    isEmpty() {
+        return (this.data.length - this.frontIndex) === 0;
+    }
+
+    length() {
+        return (this.data.length - this.frontIndex);
+    }
 }
 
 function main() {
