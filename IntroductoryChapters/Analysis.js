@@ -136,6 +136,7 @@ function fun13(n) {
     return m;
 };
 
+// Testing Code
 console.log(`Number of instructions O(n):: ${fun1(100)}`);
 console.log(`Number of instructions O(n^2):: ${fun2(100)}`);
 console.log(`Number of instructions O(n^2):: ${fun3(100)}`);

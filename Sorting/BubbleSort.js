@@ -22,6 +22,12 @@ function BubbleSort(array) {
     }
 }
 
+// Testing code
+const array = [9, 1, 8, 2, 7, 3, 6, 4, 5];
+BubbleSort(array);
+console.log(array);
+
+
 function BubbleSort2(array) {
     const size = array.length;
     let i;
@@ -41,9 +47,7 @@ function BubbleSort2(array) {
     }
 }
 
-const array = [9, 1, 8, 2, 7, 3, 6, 4, 5];
-BubbleSort(array);
-console.log(array);
+// Testing code
 const array2 = [9, 1, 8, 2, 7, 3, 6, 4, 5];
 BubbleSort2(array2);
 console.log(array2);

@@ -409,7 +409,7 @@ function main6(args) {
     console.log(FindPair3(first, 9));
 }
 
-function minabsSumPair(arr) {
+function minAbsSumPair(arr) {
     let l;
     let r;
     const size = arr.length;
@@ -437,7 +437,7 @@ function minabsSumPair(arr) {
     console.log(` The two elements with minimum sum are : ${arr[minFirst]} , ${arr[minSecond]}`);
 };
 
-function minabsSumPair2(arr) {
+function minAbsSumPair2(arr) {
     let l;
     let r;
     const size = arr.length;
@@ -475,8 +475,8 @@ function minabsSumPair2(arr) {
 
 function main7(args) {
     const first = [1, 3, 5, 7, 2, 4, -12, 8, -9, 9, 10];
-    minabsSumPair(first);
-    minabsSumPair2(first);
+    minAbsSumPair(first);
+    minAbsSumPair2(first);
 }
 
 function SearchBotinicArrayMax(arr) {

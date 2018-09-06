@@ -15,6 +15,7 @@ function InsertionSort(arr) {
     }
 };
 
+// Testing code
 const array = [9, 1, 8, 2, 7, 3, 6, 4, 5];
 InsertionSort(array);
 console.log(array);

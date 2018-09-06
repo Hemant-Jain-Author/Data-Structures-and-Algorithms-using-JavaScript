@@ -31,6 +31,7 @@ function QuickSort(arr) {
     quickSortUtil(arr, 0, size - 1);
 };
 
+//Testing code 
 const array = [3, 4, 2, 1, 6, 5, 7, 8, 1, 1];
 QuickSort(array);
 console.log(array);
