@@ -1,22 +1,21 @@
-function BucketSort(array, lowerRange, upperRange) {
+function bucketSort(arr, lowerRange, upperRange) {
     const range = upperRange - lowerRange;
-    const size = array.length;
-    const count = new Array(range);
-    for (let i = 0; i < range; i++) {
-        count[i] = 0;
+    const size = arr.length;
+    const count = new Array(range).fill(0);
+
+    let i;
+    for (i = 0; i < size; i++) {
+        count[arr[i] - lowerRange]++;
     }
-    for (let i = 0; i < size; i++) {
-        count[array[i] - lowerRange]++;
-    }
-    let j = 0;
+
+    j = 0;
     for (i = 0; i < range; i++) {
-        for (; count[i] > 0; (count[i])--) {
-            array[j++] = i + lowerRange;
+        for (; count[i] > 0; count[i]--) {
+            arr[j++] = i + lowerRange;
         }
     }
 };
 
-// Testing code
-const array = [23, 24, 22, 21, 26, 25, 27, 28, 21, 21];
-BucketSort(array, 20, 30);
-console.log(array);
+const arr = [23, 24, 22, 21, 26, 25, 27, 28, 21, 21];
+bucketSort(arr, 20, 30);
+console.log(arr);

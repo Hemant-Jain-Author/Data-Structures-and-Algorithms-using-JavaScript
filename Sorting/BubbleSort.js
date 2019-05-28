@@ -1,53 +1,46 @@
-function less(value1, value2) {
-    return value1 < value2;
-};
-
-function more(value1, value2) {
-    return value1 > value2;
-};
-
-function BubbleSort(array) {
-    const size = array.length;
-    let i;
-    let j;
+function bubbleSort(arr, compare) {
+    const size = arr.length;
     let temp;
-    for (i = 0; i < (size - 1) ; i++) {
-        for (j = 0; j < size - i - 1; j++) {
-            if (more(array[j], array[j + 1])) {
-                temp = array[j];
-                array[j] = array[j + 1];
-                array[j + 1] = temp;
+    for (let i = 0; i < (size - 1); i++) {
+        for (let j = 0; j < size - i - 1; j++) {
+            if (compare(arr[j], arr[j + 1])) {
+                temp = arr[j];
+                arr[j] = arr[j + 1];
+                arr[j + 1] = temp;
             }
         }
     }
-}
+};
 
-// Testing code
-const array = [9, 1, 8, 2, 7, 3, 6, 4, 5];
-BubbleSort(array);
-console.log(array);
-
-
-function BubbleSort2(array) {
-    const size = array.length;
-    let i;
-    let j;
+function bubbleSort2(arr, compare) {
+    const size = arr.length;
     let temp;
     let swapped = 1;
-    for (i = 0; i < (size - 1) && swapped === 1; i++) {
+    for (let i = 0; i < (size - 1) && swapped === 1; i++) {
         swapped = 0;
-        for (j = 0; j < size - i - 1; j++) {
-            if (less(array[j], array[j + 1])) {
-                temp = array[j];
-                array[j] = array[j + 1];
-                array[j + 1] = temp;
+        for (let j = 0; j < size - i - 1; j++) {
+            if (compare(arr[j], arr[j + 1])) {
+                temp = arr[j];
+                arr[j] = arr[j + 1];
+                arr[j + 1] = temp;
                 swapped = 1;
             }
         }
     }
-}
+};
 
-// Testing code
+less = (value1, value2) => value1 < value2;
+
+more = (value1, value2) => value1 > value2;
+
+const array = [9, 1, 8, 2, 7, 3, 6, 4, 5];
+bubbleSort(array, more);
+console.log(array);
+
 const array2 = [9, 1, 8, 2, 7, 3, 6, 4, 5];
-BubbleSort2(array2);
+bubbleSort(array2, less);
 console.log(array2);
+
+const array3 = [9, 1, 8, 2, 7, 3, 6, 4, 5];
+bubbleSort2(array3, more);
+console.log(array3);

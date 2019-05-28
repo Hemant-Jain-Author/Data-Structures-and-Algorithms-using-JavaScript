@@ -1,9 +1,10 @@
-class LinkedListNode {
-    constructor(v, n = null) {
-            this.value = v;
-            this.next = n;
+class CLNode {
+    constructor(v, n) {
+        this.value = v;
+        this.next = n;
     }
 }
+
 class CircularLinkedList {
     constructor() {
         this.length = 0;
@@ -25,7 +26,7 @@ class CircularLinkedList {
     }
 
     addTail(value) {
-        const temp = new LinkedListNode(value, null);
+        const temp = new CLNode(value, null);
         if (this.isEmpty()) {
             this.tail = temp;
             temp.next = temp;
@@ -39,7 +40,7 @@ class CircularLinkedList {
     }
 
     addHead(value) {
-        const temp = new LinkedListNode(value, null);
+        const temp = new CLNode(value, null);
         if (this.isEmpty()) {
             this.tail = temp;
             temp.next = temp;
@@ -55,6 +56,7 @@ class CircularLinkedList {
         if (this.isEmpty()) {
             throw new Error("EmptyListException");
         }
+
         const value = this.tail.next.value;
         if (this.tail === this.tail.next)
             this.tail = null;
@@ -68,6 +70,7 @@ class CircularLinkedList {
         if (this.isEmpty()) {
             return false;
         }
+
         let prev = this.tail;
         let curr = this.tail.next;
         const head = this.tail.next;
@@ -80,7 +83,7 @@ class CircularLinkedList {
         }
         prev = curr;
         curr = curr.next;
-        while ((curr !== head)) {
+        while (curr !== head) {
             if (curr.value === key) {
                 if (curr === this.tail)
                     this.tail = prev;
@@ -97,11 +100,12 @@ class CircularLinkedList {
         const cl = new CircularLinkedList();
         let curr = this.tail.next;
         const head = curr;
+
         if (curr != null) {
             cl.addHead(curr.value);
             curr = curr.next;
         }
-        while ((curr !== head)) {
+        while (curr !== head) {
             cl.addHead(curr.value);
             curr = curr.next;
         };
@@ -112,26 +116,18 @@ class CircularLinkedList {
         const cl = new CircularLinkedList();
         let curr = this.tail.next;
         const head = curr;
+
         if (curr != null) {
             cl.addTail(curr.value);
             curr = curr.next;
         }
-        while ((curr !== head)) {
+        while (curr !== head) {
             cl.addTail(curr.value);
             curr = curr.next;
         };
         return cl;
     }
 
-    find(data) {
-        let temp = this.tail;
-        for (let i = 0; i < this.length; i++) {
-            if (temp.value === data)
-                return true;
-            temp = temp.next;
-        }
-        return false;
-    }
 
     freeList() {
         this.tail = null;
@@ -143,18 +139,18 @@ class CircularLinkedList {
             return;
         }
         let temp = this.tail.next;
-        while ((temp !== this.tail)) {
-            console.log(`${temp.value} `);
+        while (temp !== this.tail) {
+            process.stdout.write(`${temp.value} `);
             temp = temp.next;
         };
-        console.log(temp.value);
+        process.stdout.write(`${temp.value}\n`);
     }
 
-    isPresent(data) {
-        temp = this.tail;
-        size = this.size();
-        for(let i=0;i<size;i++){
-            if(temp.value === data)
+    find(data) {
+        let temp = this.tail;
+        const size = this.size();
+        for (let i = 0; i < size; i++) {
+            if (temp.value === data)
                 return true;
             temp = temp.next;
         }
@@ -167,3 +163,12 @@ ll.addHead(1);
 ll.addHead(2);
 ll.addHead(3);
 ll.print();
+ll.addTail(3)
+ll.addTail(2)
+ll.print();
+console.log(ll.find(3))
+console.log(ll.find(4))
+const ll2 = ll.copyList()
+ll2.print()
+const ll3 = ll.copyListReversed()
+ll3.print()

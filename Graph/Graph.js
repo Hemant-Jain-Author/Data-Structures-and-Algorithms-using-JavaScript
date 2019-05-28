@@ -1,497 +1,1157 @@
-const MAX_VALUE = 99999;
-
-class Graph {
-	constructor(cnt) {
-		function AdjList() {
-			this.head = null;
-		}
-
-		Graph.AdjList = AdjList;
-
-		function AdjNode(src, dst, cst) {
-			if (cst === void 0) {
-				cst = 1;
-			}
-			this.source = src;
-			this.destination = dst;
-			this.cost = cst;
-			this.next = null;
-		}
-
-		Graph.AdjNode = AdjNode;
-
-		this.count = cnt;
-		this.array = new Array(cnt);
-		for (let i = 0; i < cnt; i++) {
-			this.array[i] = new AdjList();
-			this.array[i].head = null;
-		}
-	}
-
-	AddEdge(source, destination, cost) {
-		if (cost === void 0) {
-			cost = 1;
-		}
-		const node = new Graph.AdjNode(source, destination, cost);
-		node.next = this.array[source].head;
-		this.array[source].head = node;
-	}
-
-	AddBiEdge(source, destination, cost) {
-		if (cost === void 0) {
-			cost = 1;
-		}
-		this.AddEdge(source, destination, cost);
-		this.AddEdge(destination, source, cost);
-	}
-
-	Print() {
-		let ad;
-		for (let i = 0; i < this.count; i++) {
-			ad = this.array[i].head;
-			if (ad != null) {
-				console.log(`Vertex ${i} is connected to : `);
-				while ((ad != null)) {
-					console.log(`${ad.destination} `);
-					ad = ad.next;
-				}
-				;
-			}
-		}
-	}
-
-	static Dijkstra(gph, source) {
-		const previous = new Array(gph.count);
-		const dist = new Array(gph.count);
-		for (var i = 0; i < gph.count; i++) {
-			previous[i] = -1;
-			dist[i] = MAX_VALUE;
-		}
-		dist[source] = 0;
-		previous[source] = -1;
-		const queue = new PriorityQueue(null, compare);
-		let node = new Graph.AdjNode(source, source, 0);
-		queue.add(node);
-		while ((queue.isEmpty() === false)) {
-			node = queue.remove();
-			const adl = gph.array[node.destination];
-			let adn = adl.head;
-			while ((adn != null)) {
-				const alt = adn.cost + dist[adn.source];
-				if (alt < dist[adn.destination]) {
-					dist[adn.destination] = alt;
-					previous[adn.destination] = adn.source;
-					node = new Graph.AdjNode(adn.source, adn.destination, alt);
-					queue.add(node);
-				}
-				adn = adn.next;
-			};
-		};
-		const count = gph.count;
-		for (var i = 0; i < count; i++) {
-			if (dist[i] === MAX_VALUE) {
-				console.log(` node id ${i}  prev ${previous[i]} distance : Unreachable`);
-			} else {
-				console.log(` node id ${i}  prev ${previous[i]} distance : ${dist[i]}`);
-			}
-		}
-	}
-
-	static Prims(gph) {
-		const previous = new Array(gph.count);
-		const dist = new Array(gph.count);
-		const source = 1;
-		for (var i = 0; i < gph.count; i++) {
-			previous[i] = -1;
-			dist[i] = MAX_VALUE;
-		}
-		dist[source] = 0;
-		previous[source] = -1;
-		const queue = new PriorityQueue(null, compare);
-		let node = new Graph.AdjNode(source, source, 0);
-		queue.add(node);
-		while ((queue.isEmpty() !== true)) {
-			node = queue.remove();
-			if (dist[node.destination] < node.cost)
-				continue;
-			dist[node.destination] = node.cost;
-			previous[node.destination] = node.source;
-			const adl = gph.array[node.destination];
-			let adn = adl.head;
-			while ((adn != null)) {
-				if (previous[adn.destination] === -1) {
-					node = new Graph.AdjNode(adn.source, adn.destination, adn.cost);
-					queue.add(node);
-				}
-				adn = adn.next;
-			};
-		};
-		const count = gph.count;
-		for (var i = 0; i < count; i++) {
-			if (dist[i] === MAX_VALUE) {
-				console.log(` node id ${i}  prev ${previous[i]} distance : Unreachable`);
-			} else {
-				console.log(` node id ${i}  prev ${previous[i]} distance : ${dist[i]}`);
-			}
-		}
-	}
-
-	static TopologicalSort(gph) {
-		const stk = [];
-		const count = gph.count;
-		const visited = new Array(count);
-		for (var i = 0; i < count; i++) {
-			visited[i] = 0;
-		}
-		for (var i = 0; i < count; i++) {
-			if (visited[i] === 0) {
-				visited[i] = 1;
-				Graph.TopologicalSortDFS(gph, i, visited, stk);
-			}
-		}
-		while ((stk.length !== 0)) {
-			console.log(stk.pop());
-		};
-	}
-
-	static TopologicalSortDFS(gph, index, visited, stk) {
-		let head = gph.array[index].head;
-		while ((head != null)) {
-			if (visited[head.destination] === 0) {
-				visited[head.destination] = 1;
-				Graph.TopologicalSortDFS(gph, head.destination, visited, stk);
-			}
-			head = head.next;
-		};
-		stk.push(index);
-	}
-
-	static PathExist(gph, source, destination) {
-		const count = gph.count;
-		const visited = new Array(count);
-		for (let i = 0; i < count; i++) {
-			visited[i] = 0;
-		}
-		visited[source] = 1;
-		Graph.DFSRecUtil(gph, source, visited);
-		return visited[destination];
-	}
-
-	static DFSStack(gph, index) {
-		const count = gph.count;
-		const visited = new Array(count);
-		let curr;
-		const stk = [];
-		for (let i = 0; i < count; i++) {
-			visited[i] = 0;
-		}
-		visited[index] = 1;
-		console.log(`visited: ${index}`);
-		stk.push(index);
-		while ((stk.length != 0)) {
-			curr = stk.pop();
-			let head = gph.array[curr].head;
-			while ((head != null)) {
-				if (visited[head.destination] === 0) {
-					console.log(`visited: ${head.destination}`);
-					visited[head.destination] = 1;
-					stk.push(head.destination);
-				}
-				head = head.next;
-			};
-		};
-	}
-
-	static DFSRec(gph, index) {
-		const count = gph.count;
-		const visited = new Array(count);
-		for (let i = 0; i < count; i++) {
-			visited[i] = 0;
-		}
-		visited[index] = 1;
-		console.log(`visited: ${index}`);
-		Graph.DFSRecUtil(gph, index, visited);
-	}
-
-	static DFSRecUtil(gph, index, visited) {
-		let head = gph.array[index].head;
-		while ((head != null)) {
-			if (visited[head.destination] === 0) {
-				visited[head.destination] = 1;
-				console.log(`visited: ${head.destination}`);
-				Graph.DFSRecUtil(gph, head.destination, visited);
-			}
-			head = head.next;
-		};
-	}
-
-	static BFS(gph, index) {
-		const count = gph.count;
-		const visited = new Array(count);
-		for (let i = 0; i < count; i++) {
-			visited[i] = 0;
-		}
-		visited[index] = 1;
-		let curr;
-		const que = new Queue();
-		visited[index] = 1;
-		console.log(`visited: ${index}`);
-		que.add(index);
-		while ((que.isEmpty() === false)) {
-			curr = que.remove();
-			let head = gph.array[curr].head;
-			while ((head != null)) {
-				if (visited[head.destination] === 0) {
-					visited[head.destination] = 1;
-					console.log(`visited: ${head.destination}`);
-					que.add(head.destination);
-				}
-				head = head.next;
-			};
-		};
-	}
-
-	static isConnected(gph) {
-		const count = gph.count;
-		const visited = new Array(count);
-		for (var i = 0; i < count; i++) {
-			visited[i] = 0;
-		}
-		visited[0] = 1;
-		Graph.DFSRecUtil(gph, 0, visited);
-		for (var i = 0; i < count; i++) {
-			if (visited[i] === 0) {
-				console.log("Not a connected Graph");
-				return false;
-			}
-		}
-		console.log("Is a connected Graph");
-		return true;
-	}
-
-	static ShortestPath(gph, source) {
-		let curr;
-		const count = gph.count;
-		const distance = new Array(count);
-		const path = new Array(count);
-		const que = new Queue();
-		for (var i = 0; i < count; i++) {
-			distance[i] = -1;
-		}
-		que.add(source);
-		distance[source] = 0;
-		while ((que.isEmpty() === false)) {
-			curr = que.remove();
-			let head = gph.array[curr].head;
-			while ((head != null)) {
-				if (distance[head.destination] === -1) {
-					distance[head.destination] = distance[curr] + 1;
-					path[head.destination] = curr;
-					que.add(head.destination);
-				}
-				head = head.next;
-			};
-		};
-		for (var i = 0; i < count; i++) {
-			console.log(`${path[i]} to ${i} weight ${distance[i]}`);
-		}
-	}
-
-	static BellmanFordShortestPath(gph, source) {
-		const count = gph.count;
-		const distance = new Array(count);
-		const path = new Array(count);
-		for (var i = 0; i < count; i++) {
-			distance[i] = MAX_VALUE;
-		}
-		distance[source] = 0;
-		for (var i = 0; i < count - 1; i++) {
-			for (let j = 0; j < count; j++) {
-				let head = gph.array[j].head;
-				while ((head != null)) {
-					const newDistance = distance[j] + head.cost;
-					if (distance[head.destination] > newDistance) {
-						distance[head.destination] = newDistance;
-						path[head.destination] = j;
-					}
-					head = head.next;
-				};
-			}
-		}
-		for (var i = 0; i < count; i++) {
-			console.log(`${path[i]} to ${i} weight ${distance[i]}`);
-		}
-	}
-}
-
-function compare(x, y) {
-	if (typeof x === 'AdjNode' && typeof y === 'AdjNode') {
-		return (x.cost - y.cost);
-	}
-}
-defaultCmp = (x, y) => x - y;
-
-class PriorityQueue {
-	constructor(array, cmp) {
-		this.comp = (typeof cmp === 'function' && cmp != null) ? cmp : defaultCmp;
-
-		if (array != null && array instanceof Array) {
-			this.length = array.length;
-			this.arr = [0].concat(array);
-			for (let i = Math.floor(this.length / 2); i > 0; i--) {
-				this.proclateDown(i);
-			}
-		}
-		else if (array === undefined || array === null) {
-			this.length = 0;
-			this.arr = [0];
-		}
-		else
-			throw new Error('invalid arguments');
-	}
-
-	proclateDown(position) {
-		const lChild = 2 * position;
-		const rChild = lChild + 1;
-		let small = -1;
-		let temp;
-		if (lChild <= this.length) {
-			small = lChild;
-		}
-		if (rChild <= this.length && this.comp(this.arr[rChild], this.arr[lChild]) < 0) {
-			small = rChild;
-		}
-		if (small !== -1 && this.comp(this.arr[small], this.arr[position]) < 0) {
-			temp = this.arr[position];
-			this.arr[position] = this.arr[small];
-			this.arr[small] = temp;
-			this.proclateDown(small);
-		}
-	}
-
-	proclateUp(position) {
-		const parent = Math.floor(position / 2);
-		let temp;
-		if (parent === 0) {
-			return;
-		}
-		if (this.comp(this.arr[parent], this.arr[position]) < 0) {
-			temp = this.arr[position];
-			this.arr[position] = this.arr[parent];
-			this.arr[parent] = temp;
-			this.proclateUp(parent);
-		}
-	}
-
-	add(value) {
-		++this.length;
-		this.arr[this.length] = value;
-		this.proclateUp(this.length);
-	}
-
-	remove() {
-		if (this.isEmpty()) {
-			throw new Error();
-		}
-		const value = this.arr[1];
-		this.arr[1] = this.arr[this.length];
-		this.length--;
-		this.proclateDown(1);
-		return value;
-	}
-
-	print() {
-		for (let i = 1; i <= this.length; i++) {
-			console.log(` ${this.arr[i]}`);
-		}
-	}
-
-	isEmpty() {
-		return (this.length === 0);
-	}
-
-	size() {
-		return this.length;
-	}
-
-	peek() {
-		if (this.isEmpty()) {
-			throw new Error();
-		}
-		return this.arr[1];
-	}
-
-	HeapSort(array, cmp) {
-		const hp = new PriorityQueue(array, cmp);
-		for (let i = 0; i < array.length; i++) {
-			array[i] = hp.remove();
-		}
-	}
-}
-
 class Queue {
     constructor() {
-        this.frontIndex = 0;
-        this.data = [];
+        this.stk1 = [];
+        this.stk2 = [];
     }
 
     add(value) {
-        this.data.push(value);
+        this.stk1.push(value);
     }
 
     remove() {
-        const value = this.data[this.frontIndex];
-        this.frontIndex++;
-        if (this.data.length > 0 && this.frontIndex * 2 >= this.data.length) {
-            this.data = this.data.slice(this.frontIndex);
-            this.frontIndex = 0;
+        let value;
+
+        if (this.stk2.length > 0) {
+            return this.stk2.pop();
         }
-        return value;
+        while (this.stk1.length > 0) {
+            value = this.stk1.pop();
+            this.stk2.push(value);
+        };
+        return this.stk2.pop();
     }
 
     isEmpty() {
-        return (this.data.length - this.frontIndex) === 0;
-    }
-
-    length() {
-        return (this.data.length - this.frontIndex);
+        return (this.stk1.length + this.stk2.length) === 0
     }
 }
 
-function main() {
-	const gph = new Graph(9);
-	gph.AddBiEdge(0, 2, 1);
-	gph.AddBiEdge(1, 2, 5);
-	gph.AddBiEdge(1, 3, 7);
-	gph.AddBiEdge(1, 4, 9);
-	gph.AddBiEdge(3, 2, 2);
-	gph.AddBiEdge(3, 5, 4);
-	gph.AddBiEdge(4, 5, 6);
-	gph.AddBiEdge(4, 6, 3);
-	gph.AddBiEdge(5, 7, 1);
-	gph.AddBiEdge(6, 7, 7);
-	gph.AddBiEdge(7, 8, 17);
-	gph.Print();
-	// console.log(Graph.PathExist(gph, 0, 7));
-	Graph.Prims(gph);
-	Graph.Dijkstra(gph, 0);
-	Graph.DFSStack(gph, 0);
-	Graph.DFSRec(gph, 0);
-	Graph.BFS(gph, 0);
-	Graph.isConnected(gph);
+defaultCmp = (x, y) => x - y;
+
+class PriorityQueue {
+    constructor(array, cmp) {
+        this.comp = (typeof cmp === 'function' && cmp != null) ? cmp : defaultCmp;
+
+        if (array != null && array instanceof Array) {
+            this.length = array.length;
+            this.arr = [0].concat(array);
+            for (let i = Math.floor(this.length / 2); i > 0; i--) {
+                this.proclateDown(i);
+            }
+        }
+        else if (array === undefined || array === null) {
+            this.length = 0;
+            this.arr = [0];
+        }
+        else
+            throw new Error('Invalid arguments');
+    }
+
+    proclateDown(position) {
+        const lChild = 2 * position;
+        const rChild = lChild + 1;
+        let small = -1;
+        let temp;
+        if (lChild <= this.length) {
+            small = lChild;
+        }
+        if (rChild <= this.length && this.comp(this.arr[rChild], this.arr[lChild]) < 0) {
+            small = rChild;
+        }
+        if (small !== -1 && this.comp(this.arr[small], this.arr[position]) < 0) {
+            temp = this.arr[position];
+            this.arr[position] = this.arr[small];
+            this.arr[small] = temp;
+            this.proclateDown(small);
+        }
+    }
+
+    proclateUp(position) {
+        const parent = Math.floor(position / 2);
+        let temp;
+        if (parent === 0) {
+            return;
+        }
+        if (this.comp(this.arr[parent], this.arr[position]) < 0) {
+            temp = this.arr[position];
+            this.arr[position] = this.arr[parent];
+            this.arr[parent] = temp;
+            this.proclateUp(parent);
+        }
+    }
+
+    add(value) {
+        this.length++;
+        this.arr[this.length] = value;
+        this.proclateUp(this.length);
+    }
+
+    remove() {
+        if (this.isEmpty()) {
+            throw new Error('Queue Empty');
+        }
+        const value = this.arr[1];
+        this.arr[1] = this.arr[this.length];
+        this.length--;
+        this.proclateDown(1);
+        return value;
+    }
+
+    print() {
+        for (let i = 1; i <= this.length; i++) {
+            console.log(` ${this.arr[i]}`);
+        }
+    }
+
+    isEmpty() {
+        return (this.length === 0);
+    }
+
+    size() {
+        return this.length;
+    }
+
+    peek() {
+        if (this.isEmpty()) {
+            throw new Error('Queue Empty');
+        }
+        return this.arr[1];
+    }
 }
 
-function main2() {
-	const g = new Graph(6);
-	g.AddEdge(5, 2);
-	g.AddEdge(5, 0);
-	g.AddEdge(4, 0);
-	g.AddEdge(4, 1);
-	g.AddEdge(2, 3);
-	g.AddEdge(3, 1);
-	console.log("Following is a Topological Sort of the given graph.");
-	Graph.TopologicalSort(g);
+class GraphEdge {
+    constructor(dst, cst) {
+        if (cst === undefined)
+            cst = 1
+        this.dest = dst
+        this.cost = cst      
+    }
 }
 
-main();
-main2();
+GraphEdgeComparator = (x, y) => x - y;
+
+class Graph {
+    constructor(cnt) {
+        if (cnt === undefined)
+            throw new Error('Invalid argument')
+
+        this.count = cnt
+        this.Adj = new Array()
+     
+        for (let i = 0; i < cnt; i++) {
+            this.Adj[i] = new Array()
+        }
+    }
+
+    addDirectedEdge(source, dest, cost) {
+        if ((typeof source === 'number') && (typeof dest === 'number') && 
+            (typeof cost === 'number')) {
+            var edge = new GraphEdge(dest, cost)
+            this.Adj[source].push(edge)
+        }
+        else if ((typeof source === 'number') && (typeof dest === 'number') && 
+            cost === undefined) {
+            var edge = new GraphEdge(dest, 1)
+            this.Adj[source].push(edge)
+        }
+        else
+            throw new Error('Invalid argument')
+    }
+
+    addUndirectedEdge(source, dest, cost) {
+        this.addDirectedEdge(source, dest, cost)
+        this.addDirectedEdge(dest, source, cost)
+    }
+
+    print() {
+        for (let i = 0; i < this.count; i++) {
+            const ad = this.Adj[i];
+            console.log(`Vertex ${i} is connected to : `)
+            for (let j = 0; j < ad.length; j++) {
+                const adn = ad[j];
+                console.log(`(${adn.dest}, ${adn.cost}) `)
+            }
+        }
+    }
+
+    dfsStack(source, target) {
+        const count = this.count;
+        const visited = new Array(count).fill(false);
+        const stk = ([]);
+
+        stk.push(source)
+        visited[source] = true
+        
+        while (stk.length != 0) {
+            const curr = stk.pop();
+            const adl = this.Adj[curr];
+            for (let index = 0; index < adl.length; index++) {
+                const adn = adl[index];
+                if (visited[adn.dest] === false) {
+                    visited[adn.dest] = true
+                    stk.push(adn.dest)
+                }
+            }
+        }
+        return visited[target]
+    }
+
+    dfs(source, target) {
+        const count = this.count;
+        const visited = new Array(count).fill(false);
+        this.dfsUtil(source, visited)
+        return visited[target]
+    }
+
+    dfsUtil(index, visited) {
+        visited[index] = true
+        const adl = this.Adj[index];
+
+        for (var index = 0; index < adl.length; index++) {
+            const adn = adl[index];
+            if (visited[adn.dest] === false)
+                this.dfsUtil(adn.dest, visited)
+        }
+    }
+
+    bfs(source, target) {
+        const count = this.count;
+        const visited = new Array(count).fill(false);
+        const que = new Queue();
+        que.add(source)
+        visited[source] = true
+
+        while (que.isEmpty() === false) {
+            const curr = que.remove();
+            const adl = this.Adj[curr];
+            for (let index = 0; index < adl.length; index++) {
+                const adn = adl[index];
+                if (visited[adn.dest] === false) {
+                    visited[adn.dest] = true
+                    que.add(adn.dest)
+                }
+            }
+        }
+        return visited[target]
+    }
+
+    dfsUtil2(src, visited, stk) {
+        visited[src] = true
+        const adl = this.Adj[src];
+        for (let index = 0; index < adl.length; index++) {
+            const adn = adl[index];
+            if (visited[adn.dest] === false) {
+                this.dfsUtil2(adn.dest, visited, stk)
+            }
+        }
+        stk.push(src)
+    }
+
+    topologicalSort() {
+        const stk = ([]);
+        const count = this.count;
+        const visited = new Array(count).fill(false);
+
+        for (let i = 0; i < count; i++) {
+            if (visited[i] === false) {
+                this.dfsUtil2(i, visited, stk)
+            }
+        }
+        console.log('topologicalSort :: ')
+        while (stk.length != 0) {
+            console.log(stk.pop())
+        }
+    }
+
+    pathExist(source, dest) {
+        const count = this.count;
+        const visited = new Array(count).fill(false);
+        this.dfsUtil(source, visited)
+        return visited[dest]
+    }
+
+    countAllPathDFS(visited, source, dest) {
+        if (source === dest) {
+            return 1
+        }
+        let count = 0;
+        visited[source] = true
+        const adl = this.Adj[source];
+        
+        for (let index = 0; index < adl.length; index++) {
+            const adn = adl[index];
+            if (visited[adn.dest] === false) {
+                count += this.countAllPathDFS(visited, adn.dest, dest)
+            }
+        }
+        visited[source] = false
+        return count
+    }
+
+    countAllPath(src, dest) {
+        const count = this.count;
+        const visited = new Array(count).fill(false);
+        return this.countAllPathDFS(visited, src, dest)
+    }
+
+    printAllPathDFS(visited, source, dest, path) {
+        path.push(source)
+        if (source === dest) {
+            console.log(path)
+            path.pop()
+            return
+        }
+
+        visited[source] = true
+        const adl = this.Adj[source];
+        
+        for (let index = 0; index < adl.length; index++) {
+            const adn = adl[index];
+            if (visited[adn.dest] === false) {
+                this.printAllPathDFS(visited, adn.dest, dest, path)
+            }
+        }
+        visited[source] = false
+        path.pop()
+    }
+
+    printAllPath(src, dest) {
+        const count = this.count;
+        const visited = new Array(count).fill(false);
+        const path = ([]);
+        this.printAllPathDFS(visited, src, dest, path)
+    }
+
+    rootVertex() {
+        const count = this.count;
+        const visited = new Array(count).fill(false);
+        let retVal = -1;
+        for (let i = 0; i < count; i++) {
+            if (visited[i] === false) {
+                this.dfsUtil(i, visited)
+                retVal = i
+            }
+        }
+        console.log(`Root vertex is :: ${retVal}`)
+        return retVal
+    }
+
+    transitiveClosureUtil(source, dest, tc) {
+        tc[source][dest] = 1
+        const adl = this.Adj[dest];
+        for (let index = 0; index < adl.length; index++) {
+            const adn = adl[index];
+            if (tc[source][adn.dest] === 0)
+                this.transitiveClosureUtil(source, adn.dest, tc)
+        }
+    }
+
+    transitiveClosure() {
+        const count = this.count;
+        const tc = new Array(count);
+        for (var i = 0; i < count; i++) {
+            tc[i] = new Array(count).fill(0);
+        }
+
+        for (var i = 0; i < count; i++) {
+            this.transitiveClosureUtil(i, i, tc)
+        }
+        return tc
+    }
+
+    bfsLevelNode(source) {
+        const count = this.count;
+        const visited = new Array(count).fill(false);
+        const level = new Array(count).fill(0);
+
+        visited[source] = true
+        level[source] = 0
+        const que = new Queue();
+        que.add(source)
+
+        console.log('Node  - Level')
+        while (que.isEmpty() === false) {
+            let curr = que.remove()
+            const depth = level[curr];
+            const adl = this.Adj[curr];
+            console.log(`${curr} - ${depth}`)
+            for (let index = 0; index < adl.length; index++) {
+                const adn = adl[index];
+                if (visited[adn.dest] === false) {
+                    visited[adn.dest] = true
+                    que.add(adn.dest)
+                    level[adn.dest] = depth + 1
+                }
+            }
+        }
+    }
+
+    bfsDistance(source, dest) {
+        const count = this.count;
+        const visited = new Array(count).fill(false);
+        const level = new Array(count).fill(0);
+
+        visited[source] = true
+        level[source] = 0
+        const que = new Queue();
+        que.add(source)
+
+        while (que.isEmpty() === false) {
+            const curr = que.remove();
+            const depth = level[curr];
+            const adl = this.Adj[curr];
+            for (let index = 0; index < adl.length; index++) {
+                const adn = adl[index];
+                if (adn.dest === dest) {
+                    return depth + 1
+                }
+                if (visited[adn.dest] === false) {
+                    visited[adn.dest] = true
+                    que.add(adn.dest)
+                    level[adn.dest] = depth + 1
+                }
+            }
+        }
+        return -1
+    }
+
+    isCyclePresentUndirectedDFS(src, parentIndex, visited) {
+        visited[src] = true
+        let dest;
+        const adl = this.Adj[src];
+
+        for (let index = 0; index < adl.length; index++) {
+            const adn = adl[index];
+            dest = adn.dest
+            if (visited[dest] === false) {
+                if (this.isCyclePresentUndirectedDFS(dest, src, visited))
+                    return true
+            }
+            else if (parentIndex !== dest)
+                return true
+        }
+        return false
+    }
+
+    isCyclePresentUndirected() {
+        const count = this.count;
+        const visited = new Array(count).fill(false);
+
+        for (let i = 0; i < count; i++) {
+            if (visited[i] === false)
+                if (this.isCyclePresentUndirectedDFS(i, -1, visited))
+                    return true
+        }
+        return false
+    }
+
+    isCyclePresentDFS(index, visited, marked) {
+        visited[index] = true
+        marked[index] = 1
+        const adl = this.Adj[index];
+        for (var index = 0; index < adl.length; index++) {
+            const adn = adl[index];
+            const dest = adn.dest;
+            if (marked[dest] === 1)
+                return true
+            if (visited[dest] === false)
+                if (this.isCyclePresentDFS(dest, visited, marked))
+                    return true
+        }
+        marked[index] = 0
+        return false
+    }
+
+    isCyclePresent() {
+        const count = this.count;
+        const visited = new Array(count).fill(false);
+        const marked = new Array(count).fill(0);
+
+        for (let index = 0; index < count; index++) {
+            if (visited[index] === false)
+                if (this.isCyclePresentDFS(index, visited, marked))
+                    return true
+        }
+        return false
+    }
+
+    isCyclePresentDFSColor(index, visited) {
+        visited[index] = 1
+        let dest;
+        const adl = this.Adj[index];
+        for (var index = 0; index < adl.length; index++) {
+            const adn = adl[index];
+            dest = adn.dest
+            if (visited[dest] === 1)
+                return true
+            if (visited[dest] === 0)
+                if (this.isCyclePresentDFSColor(dest, visited))
+                    return true
+        }
+        visited[index] = 2
+        return false
+    }
+
+    isCyclePresentColor() {
+        const count = this.count;
+        const visited = new Array(count).fill(0); // fill with 0
+
+        for (let i = 0; i < count; i++) {
+            if (visited[i] === 0)
+                if (this.isCyclePresentDFSColor(i, visited))
+                    return true
+        }
+        return false
+    }
+
+    transposeGraph() {
+        const count = this.count;
+        const g = new Graph(count);
+        for (let i = 0; i < count; i++) {
+            const adl = this.Adj[i];
+            for (let index = 0; index < adl.length; index++) {
+                const adn = adl[index];
+                const dest = adn.dest;
+                g.addDirectedEdge(dest, i)
+            }
+        }
+        return g
+    }
+
+    isConnectedUndirected() {
+        const count = this.count;
+        const visited = new Array(count).fill(false);
+
+        this.dfsUtil(0, visited)
+        for (let i = 0; i < count; i++) {
+            if (visited[i] === false) {
+                return false
+            }
+        }
+        return true
+    }
+
+    isStronglyConnected() {
+        const count = this.count;
+        const visited = new Array(count).fill(false);
+
+        this.dfsUtil(0, visited)
+        for (var i = 0; i < count; i++) {
+            if (visited[i] === false) {
+                return false
+            }
+        }
+        const gReversed = this.transposeGraph();
+        visited.fill(false)
+
+        gReversed.dfsUtil(0, visited)
+        for (var i = 0; i < count; i++) {
+            if (visited[i] === false) {
+                return false
+            }
+        }
+        return true
+    }
+
+    stronglyConnectedComponent() {
+        const count = this.count;
+        const visited = new Array(count).fill(false);
+        const stk = ([]);
+
+        for (let i = 0; i < count; i++) {
+            if (visited[i] === false) {
+                this.dfsUtil2(i, visited, stk)
+            }
+        }
+        const gReversed = this.transposeGraph();
+        visited.fill(false)
+
+        const stk2 = ([]);
+        while (stk.length != 0) {
+            const curr = stk.pop();
+            if (visited[curr] === false) {
+                stk2.length = 0
+                gReversed.dfsUtil2(curr, visited, stk2)
+                console.log(stk2)
+            }
+        }
+    }
+
+    prims() {
+        const count = this.count;
+        const previous = new Array(count).fill(-1);
+        const infi = 2147483647;
+        const dist = new Array(count).fill(infi);
+        const visited = new Array(count).fill(false);
+        let source = 1;
+        dist[source] = 0
+
+        const queue = new PriorityQueue(null, GraphEdgeComparator);
+        let node = new GraphEdge(source, 0);
+        queue.add(node)
+
+        while (queue.isEmpty() === false) {
+            node = queue.remove()
+            visited[source] = true
+            source = node.dest
+            const adl = this.Adj[source];
+            for (let index = 0; index < adl.length; index++) {
+                const adn = adl[index];
+                const dest = adn.dest;
+                const alt = adn.cost;
+                if (dist[dest] > alt && visited[dest] === false) {
+                    dist[dest] = alt
+                    previous[dest] = source
+                    node = new GraphEdge(dest, alt)
+                    queue.add(node)
+                }
+            }
+        }
+        for (let i = 0; i < count; i++) {
+            if (dist[i] === infi) {
+                console.log(` node id ${i}  prev ${previous[i]} distance : Unreachable`)
+            } else {
+                console.log(` node id ${i}  prev ${previous[i]} distance : ${dist[i]}`)
+            }
+        }
+    }
+
+    dijkstra(source) {
+        const count = this.count;
+        const previous = new Array(count).fill(-1);
+        const infi = 2147483647;
+        const dist = new Array(count).fill(infi);
+        const visited = new Array(count).fill(false);
+
+        dist[source] = 0
+        previous[source] = -1
+
+        const queue = new PriorityQueue(null, GraphEdgeComparator);
+        let node = new GraphEdge(source, 0);
+        queue.add(node)
+
+        while (queue.isEmpty() === false) {
+            node = queue.remove()
+            source = node.dest
+            visited[source] = true
+            const adl = this.Adj[source];
+            for (let index = 0; index < adl.length; index++) {
+                const adn = adl[index];
+                const dest = adn.dest;
+                const alt = adn.cost + dist[source];
+                if (dist[dest] > alt && visited[dest] === false) {
+                    dist[dest] = alt
+                    previous[dest] = source
+                    node = new GraphEdge(dest, alt)
+                    queue.add(node)
+                }
+            }
+        }
+        for (let i = 0; i < count; i++) {
+            if (dist[i] === infi) {
+                console.log(` \n node id ${i}  prev ${previous[i]} distance : Unreachable`)
+            } else {
+                console.log(` node id ${i}  prev ${previous[i]} distance : ${dist[i]}`)
+            }
+        }
+    }
+
+    shortestPath(source) {
+        let curr;
+        const count = this.count;
+        const infi = 2147483647;
+        const distance = new Array(count).fill(infi);
+        const path = new Array(count).fill(0);
+
+        const que = new Queue();
+        que.add(source)
+        distance[source] = 0
+
+        while (que.isEmpty() === false) {
+            curr = que.remove()
+            const adl = this.Adj[curr];
+            for (let index = 0; index < adl.length; index++) {
+                const adn = adl[index];
+                if (distance[adn.dest] === infi) {
+                    distance[adn.dest] = distance[curr] + 1
+                    path[adn.dest] = curr
+                    que.add(adn.dest)
+                }
+            }
+        }
+
+        for (let i = 0; i < count; i++) {
+            console.log(`${path[i]} to ${i} weight ${distance[i]}`)
+        }
+    }
+
+    bellmanFordshortestPath(source) {
+        const count = this.count;
+        const path = new Array(count).fill(-1);
+        const infi = 2147483647;
+        const distance = new Array(count).fill(infi);
+
+        distance[source] = 0
+        for (var i = 0; i < count - 1; i++) {
+            for (let j = 0; j < count; j++) {
+                const adl = this.Adj[j];
+                for (let index = 0; index < adl.length; index++) {
+                    const adn = adl[index];
+                    const newDistance = distance[j] + adn.cost;
+                    if (distance[adn.dest] > newDistance) {
+                        distance[adn.dest] = newDistance
+                        path[adn.dest] = j
+                    }
+                }
+            }
+        }
+        for (var i = 0; i < count; i++) {
+            console.log(`${path[i]} to ${i} weight ${distance[i]}`)
+        }
+    }
+
+    bestFirstSearchPQ(source, dest) {
+        const count = this.count;
+        const previous = new Array(count).fill(-1);
+        const infi = 2147483647;
+        const dist = new Array(count).fill(infi);
+        const visited = new Array(count).fill(false);
+
+        dist[source] = 0
+        previous[source] = -1
+
+        const pq = new PriorityQueue(null, GraphEdgeComparator);
+        let node = new GraphEdge(source, 0);
+        pq.add(node)
+
+        while (pq.isEmpty() !== false) {
+            node = pq.remove()
+            source = node.dest
+            if (source === dest) {
+                return node.cost
+            }
+            visited[source] = true
+            const adl = this.Adj[source];
+            for (let index = 0; index < adl.length; index++) {
+                const adn = adl[index];
+                const curr = adn.dest;
+                const cost = adn.cost;
+                const alt = cost + dist[source];
+                if (dist[curr] > alt && visited[curr] === false) {
+                    dist[curr] = alt
+                    previous[curr] = source
+                    node = new GraphEdge(curr, alt)
+                    pq.add(node)
+                }
+            }
+        }
+        return -1
+    }
+
+    isConnected() {
+        const count = this.count;
+        const visited = new Array(count).fill(false);
+        let adl;
+        for (var i = 0; i < count; i++) {
+            adl = this.Adj[i]
+            if (adl.length > 0) {
+                this.dfsUtil(i, visited)
+                break
+            }
+        }
+        for (var i = 0; i < count; i++) {
+            adl = this.Adj[i]
+            if (adl.length > 0)
+                if (visited[i] === false)
+                    return false
+        }
+        return true
+    }
+
+    isEulerian() {
+        const count = this.count;
+
+        if (this.isConnected() === false) {
+            console.log('graph is not Eulerian')
+            return 0
+        }
+        let odd = 0;
+        const inDegree = new Array(count).fill(0);
+        const outDegree = new Array(count).fill(0);
+
+        for (var i = 0; i < count; i++) {
+            let adl = this.Adj[i]
+            for (let index = 0; index < adl.length; index++) {
+                const adn = adl[index];
+                outDegree[i] += 1
+                inDegree[adn.dest] += 1
+            }
+        }
+        for (var i = 0; i < count; i++) {
+            if ((inDegree[i] + outDegree[i]) % 2 !== 0) {
+                odd += 1
+            }
+        }
+
+        if (odd === 0) {
+            console.log('graph is Eulerian')
+            return 2
+        } else if (odd === 2) {
+            console.log('graph is Semi-Eulerian')
+            return 1
+        } else {
+            console.log('graph is not Eulerian')
+            return 0
+        }
+    }
+
+    isStronglyConnected2() {
+        const count = this.count;
+        const visited = new Array(count).fill(false);
+        let adl;
+
+        for (var index = 0; index < count; index++) {
+            adl = this.Adj[index]
+            if (adl.length > 0)
+                break
+        }
+
+        this.dfsUtil(index, visited)
+        for (var i = 0; i < count; i++) {
+            adl = this.Adj[i]
+            if (visited[i] === false && adl.length > 0)
+                return false
+        }
+
+        const gReversed = this.transposeGraph();
+        visited.fill(false)
+
+        gReversed.dfsUtil(index, visited)
+        for (var i = 0; i < count; i++) {
+            adl = gReversed.Adj[i]
+            if (visited[i] === false && adl.length > 0)
+                return false
+        }
+        return true
+    }
+
+    isEulerianCycle() {
+        const count = this.count;
+        const inDegree = new Array(count).fill(0);
+        const outDegree = new Array(count).fill(0);
+
+        if (!this.isStronglyConnected2())
+            return false
+
+        for (var i = 0; i < count; i++) {
+            const adl = this.Adj[i];
+            for (let index = 0; index < adl.length; index++) {
+                const adn = adl[index];
+                outDegree[i] += 1
+                inDegree[adn.dest] += 1
+            }
+        }
+
+        for (var i = 0; i < count; i++) {
+            if (inDegree[i] !== outDegree[i])
+                return false
+        }
+        return true
+    }
+}
+
+function test1(){
+    const gph = new Graph(5);
+    gph.addDirectedEdge(0, 1, 3)
+    gph.addDirectedEdge(0, 4, 2)
+    gph.addDirectedEdge(1, 2, 1)
+    gph.addDirectedEdge(2, 3, 1)
+    gph.addDirectedEdge(4, 1, 2)
+    gph.addDirectedEdge(4, 3, 1)
+    gph.print()
+    console.log(gph.dfs(0, 2))
+    console.log(gph.bfs(0, 2))
+    console.log(gph.dfsStack(0, 2))
+}
+
+//test1()
+
+function test2(){
+    const gph = new Graph(6);
+    gph.addDirectedEdge(5, 2, 1)
+    gph.addDirectedEdge(5, 0, 1)
+    gph.addDirectedEdge(4, 0, 1)
+    gph.addDirectedEdge(4, 1, 1)
+    gph.addDirectedEdge(2, 3, 1)
+    gph.addDirectedEdge(3, 1, 1)
+    gph.print()
+    gph.topologicalSort()
+}
+
+//test2()
+
+function test3(){
+    const gph = new Graph(5);
+    gph.addDirectedEdge(0, 1, 1)
+    gph.addDirectedEdge(0, 2, 1)
+    gph.addDirectedEdge(2, 3, 1)
+    gph.addDirectedEdge(1, 3, 1)
+    gph.addDirectedEdge(3, 4, 1)
+    gph.addDirectedEdge(1, 4, 1)
+    gph.print()
+    console.log(`PathExist :: ${gph.pathExist(0, 4)}`)
+    console.log("Count All Path")
+    console.log(gph.countAllPath(0, 4))
+    gph.printAllPath(0, 4)
+}
+
+//test3()
+
+function test4(){
+    const gph = new Graph(7);
+    gph.addDirectedEdge(0, 1, 1)
+    gph.addDirectedEdge(0, 2, 1)
+    gph.addDirectedEdge(1, 3, 1)
+    gph.addDirectedEdge(4, 1, 1)
+    gph.addDirectedEdge(6, 4, 1)
+    gph.addDirectedEdge(5, 6, 1)
+    gph.addDirectedEdge(5, 2, 1)
+    gph.addDirectedEdge(6, 0, 1)
+    gph.print()
+    gph.rootVertex()
+}
+
+//test4()
+
+function test5(){
+    const gph = new Graph(4);
+    gph.addDirectedEdge(0, 1, 1)
+    gph.addDirectedEdge(0, 2, 1)
+    gph.addDirectedEdge(1, 2, 1)
+    gph.addDirectedEdge(2, 0, 1)
+    gph.addDirectedEdge(2, 3, 1)
+    gph.addDirectedEdge(3, 3, 1)
+    const tc = gph.transitiveClosure();
+    for (let i = 0; i < 4; i++) {
+        console.log(tc[i])
+    }
+}
+
+//test5()
+
+function test6(){
+    const gph = new Graph(7);
+    gph.addUndirectedEdge(0, 1, 1)
+    gph.addUndirectedEdge(0, 2, 1)
+    gph.addUndirectedEdge(0, 4, 1)
+    gph.addUndirectedEdge(1, 2, 1)
+    gph.addUndirectedEdge(2, 5, 1)
+    gph.addUndirectedEdge(3, 4, 1)
+    gph.addUndirectedEdge(4, 5, 1)
+    gph.addUndirectedEdge(4, 6, 1)
+    gph.print()
+    gph.bfsLevelNode(1)
+    console.log(gph.bfsDistance(1, 6))
+}
+
+//test6()
+
+function test7(){
+    const gph = new Graph(6);
+    gph.addUndirectedEdge(0, 1, 1)
+    gph.addUndirectedEdge(1, 2, 1)
+    gph.addUndirectedEdge(3, 4, 1)
+    gph.addUndirectedEdge(4, 2, 1)
+    gph.addUndirectedEdge(2, 5, 1)
+    gph.addUndirectedEdge(3, 5, 1)
+    console.log(gph.isCyclePresentUndirected())
+}
+
+//test7()
+
+function test8(){
+    const gph = new Graph(5);
+    gph.addDirectedEdge(0, 1, 1)
+    gph.addDirectedEdge(0, 2, 1)
+    gph.addDirectedEdge(2, 3, 1)
+    gph.addDirectedEdge(1, 3, 1)
+    gph.addDirectedEdge(3, 4, 1)
+    gph.addDirectedEdge(4, 1, 1)
+    console.log(gph.isCyclePresentColor())
+}
+
+//test8()
+
+function test9(){
+    const gph = new Graph(5);
+    gph.addDirectedEdge(0, 1, 1)
+    gph.addDirectedEdge(1, 2, 1)
+    gph.addDirectedEdge(2, 3, 1)
+    gph.addDirectedEdge(3, 0, 1)
+    gph.addDirectedEdge(2, 4, 1)
+    gph.addDirectedEdge(4, 2, 1)
+    console.log(` IsStronglyConnected:: ${gph.isStronglyConnected()}`)
+}
+
+//test9()
+
+function test10(){
+    const gph = new Graph(7);
+    gph.addDirectedEdge(0, 1, 1)
+    gph.addDirectedEdge(1, 2, 1)
+    gph.addDirectedEdge(2, 0, 1)
+    gph.addDirectedEdge(2, 3, 1)
+    gph.addDirectedEdge(3, 4, 1)
+    gph.addDirectedEdge(4, 5, 1)
+    gph.addDirectedEdge(5, 3, 1)
+    gph.addDirectedEdge(5, 6, 1)
+    gph.stronglyConnectedComponent()
+}
+
+//test10()
+
+function test11(){
+    const gph = new Graph(9);
+    gph.addUndirectedEdge(0, 1, 4)
+    gph.addUndirectedEdge(0, 7, 8)
+    gph.addUndirectedEdge(1, 2, 8)
+    gph.addUndirectedEdge(1, 7, 11)
+    gph.addUndirectedEdge(2, 3, 7)
+    gph.addUndirectedEdge(2, 8, 2)
+    gph.addUndirectedEdge(2, 5, 4)
+    gph.addUndirectedEdge(3, 4, 9)
+    gph.addUndirectedEdge(3, 5, 14)
+    gph.addUndirectedEdge(4, 5, 10)
+    gph.addUndirectedEdge(5, 6, 2)
+    gph.addUndirectedEdge(6, 7, 1)
+    gph.addUndirectedEdge(6, 8, 6)
+    gph.addUndirectedEdge(7, 8, 7)
+    gph.prims()
+    gph.dijkstra(0)
+}
+
+test11()
+
+function test12(){
+    const gph = new Graph(9);
+    gph.addUndirectedEdge(0, 2, 1)
+    gph.addUndirectedEdge(1, 2, 5)
+    gph.addUndirectedEdge(1, 3, 7)
+    gph.addUndirectedEdge(1, 4, 9)
+    gph.addUndirectedEdge(3, 2, 2)
+    gph.addUndirectedEdge(3, 5, 4)
+    gph.addUndirectedEdge(4, 5, 6)
+    gph.addUndirectedEdge(4, 6, 3)
+    gph.addUndirectedEdge(5, 7, 1)
+    gph.addUndirectedEdge(6, 7, 7)
+    gph.addUndirectedEdge(7, 8, 17)
+    gph.bellmanFordshortestPath(1)
+    console.log(`isConnectedUndirected :: ${gph.isConnectedUndirected()}`)
+}
+
+test12()
+
+function test13(){
+    const gph = new Graph(5);
+    gph.addDirectedEdge(0, 1, 3)
+    gph.addDirectedEdge(0, 4, 2)
+    gph.addDirectedEdge(1, 2, 1)
+    gph.addDirectedEdge(2, 3, 1)
+    gph.addDirectedEdge(4, 1, -2)
+    gph.addDirectedEdge(4, 3, 1)
+    gph.bellmanFordshortestPath(0)
+}
+
+test13()
+
+function heightTreeParentArr(arr){
+    const count = arr.length;
+    const heightArr = new Array(count).fill(0);
+    const gph = new Graph(count);
+    const visited = new Array(count).fill(false);
+    let source = 0;
+
+    for (let i = 0; i < count; i++) {
+        if (arr[i] !== -1) {
+            gph.addDirectedEdge(arr[i], i)
+        } else {
+            source = i
+        }
+    }
+    visited[source] = true
+    heightArr[source] = 0
+    let maxHight = 0;
+    const que = new Queue();
+    que.add(source)
+
+    while (que.isEmpty() === false) {
+        curr = que.remove()
+        const height = heightArr[curr];
+        if (height > maxHight) {
+            maxHight = height
+        }
+        const adl = gph.Adj[curr];
+        for (let index = 0; index < adl.length; index++) {
+            const adn = adl[index];
+            if (visited[adn.dest] === false) {
+                visited[adn.dest] = true
+                que.add(adn.dest)
+                heightArr[adn.dest] = height + 1
+            }
+        }
+    }
+    return maxHight
+}
+
+function getHeight(arr, height, index){
+    if (arr[index] === -1) {
+        return 0
+    } else {
+        return getHeight(arr, height, arr[index]) + 1
+    }
+}
+
+function heightTreeParentArr2(arr ){
+    const count = arr.length;
+    const height = new Array(count).fill(0);
+    let maxHeight = -1;
+
+    for (let i = 0; i < count; i++) {
+        height[i] = getHeight(arr, height, i)
+        maxHeight = (maxHeight > height[i]) ? maxHeight : height[i]
+    }
+    return maxHeight
+}
+
+function test14(){
+    const parentArray = [-1, 0, 1, 2, 3];
+    console.log(heightTreeParentArr(parentArray))
+    console.log(heightTreeParentArr2(parentArray))
+}
+
+test14()
+
+function test15(){
+    const gph = new Graph(5);
+    gph.addDirectedEdge(1, 0, 1)
+    gph.addDirectedEdge(0, 2, 1)
+    gph.addDirectedEdge(2, 1, 1)
+    gph.addDirectedEdge(0, 3, 1)
+    gph.addDirectedEdge(3, 4, 1)
+    console.log(gph.isEulerian())
+}
+
+test15()
+
+function test16(){
+    const gph = new Graph(5);
+    gph.addDirectedEdge(0, 1, 1)
+    gph.addDirectedEdge(1, 2, 1)
+    gph.addDirectedEdge(2, 0, 1)
+    gph.addDirectedEdge(0, 4, 1)
+    gph.addDirectedEdge(4, 3, 1)
+    gph.addDirectedEdge(3, 0, 1)
+    console.log(gph.isEulerianCycle())
+}
+
+test16()

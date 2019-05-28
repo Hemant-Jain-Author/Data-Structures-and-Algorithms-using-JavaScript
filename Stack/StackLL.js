@@ -3,7 +3,8 @@ class StackNode {
         this.value = v;
         this.next = n;
     }
-}
+};
+
 class Stack {
     constructor() {
         this.head = null;
@@ -53,18 +54,17 @@ class Stack {
 
     print() {
         let temp = this.head;
-        while ((temp != null)) {
-            console.info(temp.value);
+        while (temp != null) {
+            console.log(temp.value);
             temp = temp.next;
         };
     }
 }
 
 const s = new Stack();
-for (var i = 1; i <= 100; i++) {
-    s.push(i);
-}
-for (var i = 1; i <= 50; i++) {
-    s.pop();
-}
-s.print();
+s.push(1);
+s.push(2);
+s.push(3);
+console.info(s.pop());
+console.info(s.pop());
+console.info(s.pop());

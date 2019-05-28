@@ -1,12 +1,8 @@
-class LinkedListNode {
-    constructor(v, n = null, p = null) {
-            this.value = v;
-            if(n === null && p === null) {
-                this.next = this.prev = this
-            } else {
-                this.next = n;
-                this.prev = p;
-            }
+class DCLLNode {
+    constructor(v, nxt, prv) {
+        this.value = v;
+        this.next = nxt;
+        this.prev = prv;
     }
 }
 
@@ -16,6 +12,7 @@ class DoublyCircularLinkedList {
         this.tail = null;
         this.length = 0;
     }
+
 
     size() {
         return this.length;
@@ -27,12 +24,12 @@ class DoublyCircularLinkedList {
 
     peekHead() {
         if (this.isEmpty())
-            throw new java.lang.IllegalStateError("EmptyListError");
+            throw new Error("EmptyListError");
         return this.head.value;
     }
 
     addHead(value) {
-        const newNode = new LinkedListNode(value, null, null);
+        const newNode = new DCLLNode(value, null, null);
         if (this.length === 0) {
             this.tail = this.head = newNode;
             newNode.next = newNode;
@@ -49,7 +46,7 @@ class DoublyCircularLinkedList {
     }
 
     addTail(value) {
-        const newNode = new LinkedListNode(value, null, null);
+        const newNode = new DCLLNode(value, null, null);
         if (this.length === 0) {
             this.head = this.tail = newNode;
             newNode.next = newNode;
@@ -67,7 +64,7 @@ class DoublyCircularLinkedList {
 
     removeHead() {
         if (this.length === 0)
-            throw new java.lang.IllegalStateError("EmptyListError");
+            throw new Error("EmptyListError");
         const value = this.head.value;
         this.length--;
         if (this.length === 0) {
@@ -84,7 +81,7 @@ class DoublyCircularLinkedList {
 
     removeTail() {
         if (this.length === 0)
-            throw new java.lang.IllegalStateError("EmptyListError");
+            throw new Error("EmptyListError");
         const value = this.tail.value;
         this.length--;
         if (this.length === 0) {
@@ -107,7 +104,7 @@ class DoublyCircularLinkedList {
             if (temp.value === key)
                 return true;
             temp = temp.next;
-        } while ((temp !== this.head));
+        } while (temp !== this.head);
         return false;
     }
 
@@ -122,14 +119,11 @@ class DoublyCircularLinkedList {
             return;
         }
         let temp = this.head;
-        let str = ""
-        while ((temp !== this.tail)) {
-            str += temp.value;
-            str += " "
+        while (temp !== this.tail) {
+            process.stdout.write(`${temp.value} `);
             temp = temp.next;
         };
-        str += temp.value
-        console.log(str);
+        process.stdout.write(`${temp.value}\n`);
     }
 }
 
@@ -137,7 +131,19 @@ const ll = new DoublyCircularLinkedList();
 ll.addHead(1);
 ll.addHead(2);
 ll.addHead(3);
-ll.addHead(11);
-ll.addHead(22);
-ll.addHead(33);
+ll.addTail(11);
+ll.addTail(22);
+ll.addTail(33);
 ll.print();
+console.log(ll.size())
+console.log(ll.isEmpty())
+console.log(ll.peekHead())
+console.log(ll.removeHead())
+console.log(ll.removeTail())
+ll.print();
+console.log(ll.find(22))
+console.log(ll.find(25))
+ll.free()
+ll.print();
+console.log(ll.size())
+console.log(ll.isEmpty())

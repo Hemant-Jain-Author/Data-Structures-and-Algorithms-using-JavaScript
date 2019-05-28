@@ -1,46 +1,82 @@
-const Node = { "EMPTY_NODE": 0, "LAZY_DELETED": 1, "FILLED_NODE": 2 };
-Object.freeze(Node)
+EMPTY_VALUE = -1;
+DELETED_VALUE = -2;
+FILLED_VALUE = 0;
 
 class HashTable {
-    constructor(tSize) {
-        this.tableSize = 0;
+    constructor(tSize, cmp, hashFun) {
+        if (cmp === undefined || cmp === null)
+            cmp = this.DefaultCompare;
+        
+        this.comp = cmp;
+
+        if (hashFun === undefined || hashFun === null)
+            hashFun = this.DefaultHashFun;
+        
+        this.HashFun = hashFun;
+        
         this.tableSize = tSize;
-        this.Arr = new Array(tSize + 1);
-        this.Flag = new Array(tSize + 1);
-        for (let i = 0; i <= tSize; i++) {
-            this.Flag[i] = Node.EMPTY_NODE;
-        }
+        this.KeyArr = new Array(tSize + 1);
+        this.DataArr = new Array(tSize + 1);
+        this.FlagArr = new Array(tSize + 1).fill(EMPTY_VALUE);
     }
 
     ComputeHash(key) {
-        return key % this.tableSize;
+        return this.HashFun(key) % this.tableSize;
     }
 
     resolverFun(index) {
         return index;
     }
 
-    InsertNode(value) {
-        let hashValue = this.ComputeHash(value);
+    DefaultCompare(first, second) {
+        return first - second;
+    }
+
+    DefaultHashFun(key) {
+        return key;
+    }
+
+    add(key, value) {
+        if (key === undefined || key === null)
+            return false;
+
+        if (value === undefined || value === null)
+            value = key;
+
+        let hashValue = this.ComputeHash(key);
         for (let i = 0; i < this.tableSize; i++) {
-            if (this.Flag[hashValue] === Node.EMPTY_NODE || this.Flag[hashValue] === Node.LAZY_DELETED) {
-                this.Arr[hashValue] = value;
-                this.Flag[hashValue] = Node.FILLED_NODE;
+            if ((this.FlagArr[hashValue] === EMPTY_VALUE) || 
+                (this.FlagArr[hashValue] === DELETED_VALUE))
+            {
+                this.DataArr[hashValue] = value;
+                this.KeyArr[hashValue] = key;
+                this.FlagArr[hashValue] = FILLED_VALUE;
+                return true;
+            } 
+            else if (this.FlagArr[hashValue] === FILLED_VALUE && 
+                this.KeyArr[hashValue] === key) 
+            {
+                this.DataArr[hashValue] = value;
                 return true;
             }
+
             hashValue += this.resolverFun(i);
             hashValue %= this.tableSize;
         }
         return false;
     }
 
-    FindNode(value) {
-        let hashValue = this.ComputeHash(value);
+    find(key) {
+        if (key === undefined || key === null)
+            return false;
+
+        let hashValue = this.ComputeHash(key);
         for (let i = 0; i < this.tableSize; i++) {
-            if (this.Flag[hashValue] === Node.EMPTY_NODE) {
+            if (this.FlagArr[hashValue] === EMPTY_VALUE) {
                 return false;
             }
-            if (this.Flag[hashValue] === Node.FILLED_NODE && this.Arr[hashValue] === value) {
+            if (this.FlagArr[hashValue] === FILLED_VALUE
+                && this.KeyArr[hashValue] === key) {
                 return true;
             }
             hashValue += this.resolverFun(i);
@@ -49,14 +85,37 @@ class HashTable {
         return false;
     }
 
-    DeleteNode(value) {
-        let hashValue = this.ComputeHash(value);
+    get(key) {
+        if (key === undefined || key === null)
+            return false;
+
+        let hashValue = this.ComputeHash(key);
         for (let i = 0; i < this.tableSize; i++) {
-            if (this.Flag[hashValue] === Node.EMPTY_NODE) {
+            if (this.FlagArr[hashValue] === EMPTY_VALUE) {
+                return 0;
+            }
+            if (this.FlagArr[hashValue] === FILLED_VALUE
+                && this.KeyArr[hashValue] === key) {
+                return this.DataArr[hashValue];
+            }
+            hashValue += this.resolverFun(i);
+            hashValue %= this.tableSize;
+        }
+        return 0;
+    }
+
+    delete(key) {
+        if (key === undefined || key === null)
+            return false;
+
+        let hashValue = this.ComputeHash(key);
+        for (let i = 0; i < this.tableSize; i++) {
+            if (this.FlagArr[hashValue] === EMPTY_VALUE) {
                 return false;
             }
-            if (this.Flag[hashValue] === Node.FILLED_NODE && this.Arr[hashValue] === value) {
-                this.Flag[hashValue] = Node.LAZY_DELETED;
+            if (this.FlagArr[hashValue] === FILLED_VALUE
+                && this.KeyArr[hashValue] === key) {
+                this.FlagArr[hashValue] = DELETED_VALUE;
                 return true;
             }
             hashValue += this.resolverFun(i);
@@ -65,18 +124,22 @@ class HashTable {
         return false;
     }
 
-    Print() {
+    print() {
         for (let i = 0; i < this.tableSize; i++) {
-            if (this.Flag[i] === Node.FILLED_NODE) {
-                console.log(`Node at index [${i} ] :: ${this.Arr[i]}`);
+            if (this.FlagArr[i] === FILLED_VALUE) {
+                console.log(`Node at index [${i} ] :: ${this.DataArr[i]}`);
             }
         }
     }
 }
 
 const ht = new HashTable(1000);
-ht.InsertNode(89);
-ht.InsertNode(18);
-ht.Print();
-ht.DeleteNode(89);
-ht.DeleteNode(18);
+ht.add(1);
+ht.add(2, 10);
+ht.add(3);
+ht.print();
+ht.find(2);
+console.log(ht.get(2))
+console.info(ht.delete(1));
+console.info(ht.delete(4));
+ht.print();

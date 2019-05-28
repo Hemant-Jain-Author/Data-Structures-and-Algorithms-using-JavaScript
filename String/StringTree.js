@@ -1,8 +1,8 @@
 class StringTreeNode {
     constructor() {
         this.count = 0;
-        this.left = null;
-        this.right = null;
+        this.lChild = null;
+        this.rChild = null;
     }
 }
 
@@ -16,16 +16,12 @@ class StringTree {
     }
 
     printUtil(curr) {
-        if (((curr != null && curr instanceof StringTreeNode) || curr === null)) {
-            if (curr != null) {
-                console.log(` value is ::${curr.value}`);
-                console.log(` count is :: ${curr.count}`);
-                this.printUtil(curr.left);
-                this.printUtil(curr.right);
-            }
+        if (curr != null) {
+            console.log(` value is ::${curr.value}`);
+            console.log(` count is :: ${curr.count}`);
+            this.printUtil(curr.lChild);
+            this.printUtil(curr.rChild);
         }
-        else
-            throw new Error('invalid overload');
     }
 
     insert(value) {
@@ -33,27 +29,23 @@ class StringTree {
     }
 
     insertUtil(value, curr) {
-        if ((typeof value === 'string') && ((curr != null && curr instanceof StringTreeNode) || curr === null)) {
-            let compare;
-            if (curr == null) {
-                curr = new StringTreeNode(this);
-                curr.value = value;
-                curr.left = curr.right = null;
-                curr.count = 1;
-            }
-            else {
-                compare = curr.value.localeCompare(value);
-                if (compare === 0)
-                    curr.count++;
-                else if (compare === 1)
-                    curr.left = this.insertUtil(value, curr.left);
-                else
-                    curr.right = this.insertUtil(value, curr.right);
-            }
-            return curr;
+        let compare;
+        if (curr == null) {
+            curr = new StringTreeNode(this);
+            curr.value = value;
+            curr.lChild = curr.rChild = null;
+            curr.count = 1;
         }
-        else
-            throw new Error('invalid overload');
+        else {
+            compare = curr.value.localeCompare(value);
+            if (compare === 0)
+                curr.count++;
+            else if (compare === 1)
+                curr.lChild = this.insertUtil(value, curr.lChild);
+            else
+                curr.rChild = this.insertUtil(value, curr.rChild);
+        }
+        return curr;
     }
 
     freeTree() {
@@ -67,22 +59,19 @@ class StringTree {
     }
 
     findUtil(curr, value) {
-        if (((curr != null && curr instanceof StringTreeNode) || curr === null) && (typeof value === 'string')) {
-            let compare;
-            if (curr == null)
-                return false;
-            compare = curr.value.localeCompare(value);
-            if (compare === 0)
-                return true;
-            else {
-                if (compare === 1)
-                    return this.findUtil(curr.left, value);
-                else
-                    return this.findUtil(curr.right, value);
-            }
+        let compare;
+        if (curr == null)
+            return false;
+
+        compare = curr.value.localeCompare(value);
+        if (compare === 0)
+            return true;
+        else {
+            if (compare === 1)
+                return this.findUtil(curr.lChild, value);
+            else
+                return this.findUtil(curr.rChild, value);
         }
-        else
-            throw new Error('invalid overload');
     }
 
     frequency(value) {
@@ -90,22 +79,19 @@ class StringTree {
     }
 
     frequencyUtil(curr, value) {
-        if (((curr != null && curr instanceof StringTreeNode) || curr === null) && (typeof value === 'string')) {
-            let compare;
-            if (curr == null)
-                return 0;
-            compare = curr.value.localeCompare(value);
-            if (compare === 0)
-                return curr.count;
-            else {
-                if (compare > 0)
-                    return this.frequencyUtil(curr.left, value);
-                else
-                    return this.frequencyUtil(curr.right, value);
-            }
+        let compare;
+        if (curr == null)
+            return 0;
+        
+        compare = curr.value.localeCompare(value);
+        if (compare === 0)
+            return curr.count;
+        else {
+            if (compare > 0)
+                return this.frequencyUtil(curr.lChild, value);
+            else
+                return this.frequencyUtil(curr.rChild, value);
         }
-        else
-            throw new Error('invalid overload');
     }
 }
 
@@ -113,9 +99,10 @@ const tt = new StringTree();
 tt.insert("banana");
 tt.insert("apple");
 tt.insert("mango");
-console.log("\nSearch results for apple, banana, grapes and mango :\n");
+
 tt.find("apple");
-tt.find("banana");
-tt.find("banan");
 tt.find("grapes");
-tt.find("mango");
+tt.find("banan");
+
+tt.insert("apple");
+tt.print()

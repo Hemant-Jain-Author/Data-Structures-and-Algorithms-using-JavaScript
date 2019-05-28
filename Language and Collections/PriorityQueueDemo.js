@@ -1,5 +1,3 @@
-defaultCmp = (x, y) => x - y;
-
 class PriorityQueue {
     constructor(array, cmp) {
         this.comp = (typeof cmp === 'function' && cmp != null) ? cmp : defaultCmp;
@@ -7,7 +5,7 @@ class PriorityQueue {
         if (array != null && array instanceof Array) {
             this.length = array.length;
             this.arr = [0].concat(array);
-            for (let i = Math.floor(this.length / 2) ; i > 0; i--) {
+            for (let i = Math.floor(this.length / 2); i > 0; i--) {
                 this.proclateDown(i);
             }
         }
@@ -16,7 +14,7 @@ class PriorityQueue {
             this.arr = [0];
         }
         else
-            throw new Error('invalid arguments');
+            throw new Error('Invalid arguments');
     }
 
     proclateDown(position) {
@@ -53,14 +51,14 @@ class PriorityQueue {
     }
 
     add(value) {
-        ++this.length;
+        this.length++;
         this.arr[this.length] = value;
         this.proclateUp(this.length);
     }
 
     remove() {
         if (this.isEmpty()) {
-            throw new Error();
+            throw new Error('Queue Empty');
         }
         const value = this.arr[1];
         this.arr[1] = this.arr[this.length];
@@ -85,15 +83,8 @@ class PriorityQueue {
 
     peek() {
         if (this.isEmpty()) {
-            throw new Error();
+            throw new Error('Queue Empty');
         }
         return this.arr[1];
-    }
-
-    HeapSort(array, cmp) {
-        const hp = new PriorityQueue(array, cmp);
-        for (let i = 0; i < array.length; i++) {
-            array[i] = hp.remove();
-        }
     }
 }

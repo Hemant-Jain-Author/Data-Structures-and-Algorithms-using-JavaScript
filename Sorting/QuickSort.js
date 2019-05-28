@@ -1,4 +1,9 @@
-function swap(arr, first, second) {
+
+less = (value1, value2) => value1 < value2;
+
+more = (value1, value2) => value1 > value2;
+
+swap = (arr, first, second) => {
     const temp = arr[first];
     arr[first] = arr[second];
     arr[second] = temp;
@@ -7,14 +12,15 @@ function swap(arr, first, second) {
 function quickSortUtil(arr, lower, upper) {
     if (upper <= lower)
         return;
+
     const pivot = arr[lower];
     const start = lower;
     const stop = upper;
-    while ((lower < upper)) {
-        while ((arr[lower] <= pivot && lower < upper)) {
+    while (lower < upper) {
+        while (arr[lower] <= pivot && lower < upper) {
             lower++;
         };
-        while ((arr[upper] > pivot && lower <= upper)) {
+        while (arr[upper] > pivot && lower <= upper) {
             upper--;
         };
         if (lower < upper) {
@@ -26,12 +32,11 @@ function quickSortUtil(arr, lower, upper) {
     quickSortUtil(arr, upper + 1, stop);
 };
 
-function QuickSort(arr) {
+function quickSort(arr) {
     const size = arr.length;
     quickSortUtil(arr, 0, size - 1);
 };
 
-//Testing code 
 const array = [3, 4, 2, 1, 6, 5, 7, 8, 1, 1];
-QuickSort(array);
+quickSort(array);
 console.log(array);
