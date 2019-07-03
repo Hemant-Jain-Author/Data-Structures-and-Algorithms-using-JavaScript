@@ -1,25 +1,18 @@
+const hm = {};
+hm["Apple"] = 150;
+hm["Mango"] = 70;
+hm["Banana"] = 40;
 
-function main1() {
-    const hm = {};
-    hm["Mason"] = 55;
-    hm["Jacob"] = 77;
-    hm["William"] = 99;
-    hm["Emma"] = 65;
+const keys = Object.keys(hm);
+const count = keys.length;
+console.info(`Fruits count :: ${count}`);
 
-    const keys = Object.keys(hm);
-    const count = keys.length;
-    console.info(`Students count :: ${count}`);
+for (let index = 0; index < count; index++) {
+    key = keys[index]
+    console.info(`${key} price :${hm[key]}`);
+}
+console.info(`Apple price available ::${hm.hasOwnProperty("Apple")}`);
+console.info(`Grapes price available :: ${hm.hasOwnProperty("Grapes")}`);
 
-    for (let index = 0; index < count; index++) {
-        key = keys[index]
-        console.info(`${key} score marks :${hm[key]}`);
-    }
-    console.info(`Emma score available ::${hm.hasOwnProperty("Emma")}`);
-    console.info(`John score available :: ${hm.hasOwnProperty("John")}`);
-
-    delete hm["Emma"]
-    console.info(`Emma score available ::${hm.hasOwnProperty("Emma")}`);
-};
-
-
-main1();
+delete hm["Apple"]
+console.info(`Apple price available ::${hm.hasOwnProperty("Apple")}`);

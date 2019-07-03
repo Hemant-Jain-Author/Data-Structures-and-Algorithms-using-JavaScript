@@ -4,11 +4,11 @@ class Queue {
         this.stk2 = [];
     }
 
-    length(value) {
+    length() {
         return (this.stk1.length + this.stk2.length);
     }
 
-    isEmpty(value) {
+    isEmpty() {
         return (this.stk1.length + this.stk2.length) === 0;
     }
 
@@ -33,6 +33,5 @@ const que = new Queue();
 que.add(1);
 que.add(2);
 que.add(3);
-console.log(que.remove());
-console.log(que.remove());
-console.log(que.remove());
+while (que.isEmpty() === false)
+    console.log(que.remove());

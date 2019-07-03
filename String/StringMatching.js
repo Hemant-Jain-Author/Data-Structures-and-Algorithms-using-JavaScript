@@ -131,6 +131,10 @@ function KMPFindCount(text, pattern) {
 
 const st1 = "hello, world!";
 const st2 = "world";
-console.log(`BruteForceSearch return : ${BruteForceSearch(st1, st2)}`);
-console.log(`RobinKarp return : ${RobinKarp(st1, st2)}`);
-console.log(`KMP return : ${KMP(st1, st2)}`);
+console.log(`Using BruteForceSearch pattern found at index : ${BruteForceSearch(st1, st2)}`);
+console.log(`Using RobinKarp  pattern found at index : ${RobinKarp(st1, st2)}`);
+console.log(`Using KMP  pattern found at index : ${KMP(st1, st2)}`);
+
+const str3 = "Only time will tell if we stand the test of time"
+console.log('Frequency of "time" is ', KMPFindCount(str3, "time"))
+

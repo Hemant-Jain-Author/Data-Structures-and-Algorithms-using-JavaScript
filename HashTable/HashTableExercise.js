@@ -56,6 +56,16 @@ function isAnagram(str1, str2){
     return (cm.size() === 0);
 }
 
+function test1(){
+    const first = "hello";
+    const second = "elloh";
+    const third = "world";
+    console.info(`isAnagram : ${isAnagram(first, second)}`);
+    console.info(`isAnagram : ${isAnagram(first, third)}`);
+}
+
+test1()
+
 function removeDuplicate(str){
     let str2 = "";
     const hs = new Set();
@@ -69,6 +79,13 @@ function removeDuplicate(str){
     return str2;
 };
 
+function test2(){
+    const first = "hello";
+    console.info(removeDuplicate(first));
+}
+
+test2()
+
 function findMissing(arr, start, end){
     const hs = new Set();
     for (let index = 0; index < arr.length; index++) {
@@ -80,6 +97,13 @@ function findMissing(arr, start, end){
     }
     return -1;
 };
+
+function test3(){
+    const arr = [1, 2, 3, 5, 6, 7, 8, 9, 10];
+    console.info("Missing element is : ", findMissing(arr, 1, 10));
+}
+
+test3()
 
 function printRepeating(arr) {
     const hs = new Set();
@@ -109,6 +133,14 @@ function printFirstRepeating(arr){
     }
 }
 
+function test4(){
+    const arr1 = [1, 2, 3, 4, 4, 5, 6, 7, 8, 9, 1];
+    printRepeating(arr1);
+    printFirstRepeating(arr1);
+}
+
+test4()
+
 function hornerHash(key, tableSize){
     const size = key.length;
     let h = 0;
@@ -117,21 +149,3 @@ function hornerHash(key, tableSize){
     }
     return h;
 }
-
-
-function test(){
-    const first = "hello";
-    const second = "elloh";
-    const third = "world";
-    console.info(`isAnagram : ${isAnagram(first, second)}`);
-    console.info(`isAnagram : ${isAnagram(first, third)}`);
-    console.info(removeDuplicate(first));
-    const arr = [1, 2, 3, 5, 6, 7, 8, 9, 10];
-    console.info(findMissing(arr, 1, 10));
-    const arr1 = [1, 2, 3, 4, 4, 5, 6, 7, 8, 9, 1];
-    printRepeating(arr1);
-    printFirstRepeating(arr1);
-}
-
-
-test()

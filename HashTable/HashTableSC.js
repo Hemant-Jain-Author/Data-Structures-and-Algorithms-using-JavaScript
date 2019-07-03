@@ -6,7 +6,6 @@ class HashTableNode {
     }
 }
 
-
 class HashTable {
     constructor(cmp, hashFun) {
         if (cmp === undefined || cmp === null)
@@ -25,10 +24,6 @@ class HashTable {
 
     ComputeHash(key) {
         return this.HashFun(key) % this.tableSize;
-    }
-
-    resolverFun(index) {
-        return index;
     }
 
     DefaultCompare(first, second) {
@@ -116,17 +111,12 @@ class HashTable {
 
 
 const ht = new HashTable();
-for (var i = 1; i < 110; i++) {
-    ht.add(i);
-}
-console.log(`search 100 :: ${ht.find(100)}`);
-console.log(`Value at key 100 :: ${ht.get(100)}`);
-console.log(`Remove 100 :: ${ht.delete(100)}`);
-console.log(`Search 100 :: ${ht.find(100)}`);
-console.log(`Remove 100 :: ${ht.delete(100)}`);
+ht.add(1, 10);
+ht.add(2, 20);
+ht.add(3, 30);
+ht.print();
 
-for (var i = 2; i < 190;) {
-    ht.delete(i);
-    i += 1
-}
+console.log("Find key 2 : ", ht.find(2));
+console.log("Value at key 2 : ",ht.get(2))
+ht.delete(1)
 ht.print()

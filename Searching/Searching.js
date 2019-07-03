@@ -101,53 +101,58 @@ function test2() {
 
 function printRepeating(arr) {
     const size = arr.length;
-    console.log(" Repeating elements are ");
+    let output = "Repeating elements are :";
     for (let i = 0; i < size; i++) {
         for (let j = i + 1; j < size; j++) {
             if (arr[i] === arr[j]) {
-                console.log(arr[i]);
+                output += " " + arr[i];
+                break
             }
         }
     }
+    console.log(output)
 };
 
 function printRepeating2(arr) {
     const size = arr.length;
-    arr.sort()
-    console.log(" Repeating elements are ");
+    arr.sort(function cmp(a, b) { return (a - b); })
+    let output = "Repeating elements are :";
     for (let i = 1; i < size; i++) {
         if (arr[i] === arr[i - 1]) {
-            console.log(` ${arr[i]}`);
+            output += " " + arr[i];
         }
     }
+    console.log(output)
 };
 
 function printRepeating3(arr) {
     const hs = {};
     const size = arr.length;
-    console.log(" Repeating elements are ");
+    let output = "Repeating elements are :";
     for (let i = 0; i < size; i++) {
         if (arr[i] in hs) {
-            console.log(` ${arr[i]}`);
+            output += " " + arr[i];
         }
         else {
             hs[arr[i]] = 1;
         }
     }
+    console.log(output)
 };
 
 function printRepeating4(arr) {
     const size = arr.length;
     const count = new Array(size).fill(0);
-    console.log(" Repeating elements are ");
+    let output = "Repeating elements are :";
     for (let i = 0; i < size; i++) {
         if (count[arr[i]] > 0) {
-            console.log(` ${arr[i]}`);
+            output += " " + arr[i];
         }
         else {
             count[arr[i]]++;
         }
     }
+    console.log(output)
 };
 
 function test3() {
@@ -263,7 +268,7 @@ function OddCount(arr, size) {
     console.info(`Odd count is :: ${count}`);
 };
 
-function OddCount2(arr, size) {
+function OddNumbers(arr, size) {
     let xorSum = 0;
     let first = 0;
     let second = 0;
@@ -283,7 +288,7 @@ function OddCount2(arr, size) {
 
 function SumDistinct(arr, size) {
     let sum = 0;
-    arr.sort();
+    arr.sort(function cmp(a, b) { return (a - b); });
     for (let i = 0; i < (size - 1); i++) {
         if (arr[i] !== arr[i + 1])
             sum += arr[i];
@@ -296,9 +301,10 @@ function test6() {
     const first = [1, 3, 2, 7, 2, 4, 3, 8, 9, 9, 4, 7, 1, 12];
     const size = first.length
     OddCount(first, size);
-    OddCount2(first, size);
+    OddNumbers(first, size);
     SumDistinct(first, size)
 }
+
 //test6();
 
 function minabsSumPair(arr) {
@@ -321,7 +327,7 @@ function minabsSumPair(arr) {
             }
         }
     }
-    console.log(` The two elements with minimum sum are : ${arr[minFirst]} , ${arr[minSecond]}`);
+    console.log(`Elements with minimum sum are : ${arr[minFirst]} , ${arr[minSecond]}`);
 };
 
 function minabsSumPair2(arr) {
@@ -352,7 +358,7 @@ function minabsSumPair2(arr) {
             break;
         }
     }
-    console.log(` The two elements with minimum sum are : ${arr[minFirst]} , ${arr[minSecond]}`);
+    console.log(`Elements with minimum sum are : ${arr[minFirst]} , ${arr[minSecond]}`);
 };
 
 function test7() {
@@ -413,7 +419,7 @@ function FindPair3(arr, value) {
 
 
 function test8() {
-    const first = [1, 3, 5, 7, 2, 4, 8, 9, 10];
+    const first = [1, 3, 5, 7, 3, 14, 8, 9, 10];
     console.log(FindPair(first, 9));
     console.log(FindPair2(first, 9));
     console.log(FindPair3(first, 9));
@@ -436,7 +442,7 @@ function FindDifference2(arr, size, value) {
     let first = 0;
     let second = 0;
     let diff;
-    arr.sort();
+    arr.sort(function cmp(a, b) { return (a - b); });
     while (first < size && second < size) {
         diff = Math.abs(arr[first] - arr[second]);
         if (diff === value) {
@@ -459,7 +465,7 @@ function test9() {
 //test9();
 
 function findMinDiff(arr, size) {
-    arr.sort();
+    arr.sort(function cmp(a, b) { return (a - b); });
     let diff = 9999999;
     for (let i = 0; i < (size - 1); i++) {
         if ((arr[i + 1] - arr[i]) < diff)
@@ -475,8 +481,8 @@ function MinDiffPair(arr1, size1, arr2, size2) {
     let out1 = 0;
     let out2 = 0;
     let diff;
-    arr1.sort();
-    arr2.sort();
+    arr1.sort(function cmp(a, b) { return (a - b); });
+    arr2.sort(function cmp(a, b) { return (a - b); });
     while (first < size1 && second < size2) {
         diff = Math.abs(arr1[first] - arr2[second]);
         if (minDiff > diff) {
@@ -489,7 +495,7 @@ function MinDiffPair(arr1, size1, arr2, size2) {
         else
             second += 1;
     }
-    console.info(`The pair is :: ${out1},${out2}`);
+    console.info(`The pair is :: ${out1}, ${out2}`);
     console.info(`Minimum difference is :: ${minDiff}`);
     return minDiff;
 };
@@ -518,7 +524,7 @@ function ClosestPair(arr, size, value) {
             }
         }
     }
-    console.info(`closest pair is ::${first}${second}`);
+    console.info(`closest pair is :: ${first}, ${second}`);
 };
 
 function ClosestPair2(arr, size, value) {
@@ -528,7 +534,7 @@ function ClosestPair2(arr, size, value) {
     let stop = size - 1;
     let diff;
     let curr;
-    arr.sort()
+    arr.sort(function cmp(a, b) { return (a - b); })
     diff = 9999999;
     while (start < stop) {
         curr = (value - (arr[start] + arr[stop]));
@@ -547,7 +553,7 @@ function ClosestPair2(arr, size, value) {
             stop -= 1;
         }
     }
-    console.info(`closest pair is :: ${first}${second}`);
+    console.info(`closest pair is :: ${first}, ${second}`);
 };
 
 function test11() {
@@ -560,7 +566,7 @@ function test11() {
 function SumPairRestArray(arr, size) {
     var total;
     let curr;
-    arr.sort();
+    arr.sort(function cmp(a, b) { return (a - b); });
     var total = 0;
     for (let i = 0; i < size; i++) {
         total += arr[i];
@@ -602,7 +608,7 @@ function ZeroSumTriplets(arr, size) {
 function ZeroSumTriplets2(arr, size) {
     let start;
     let stop;
-    arr.sort();
+    arr.sort(function cmp(a, b) { return (a - b); });
     for (let i = 0; i < (size - 2); i++) {
         start = i + 1;
         stop = size - 1;
@@ -623,8 +629,10 @@ function ZeroSumTriplets2(arr, size) {
 function test13() {
     const first = [1, 2, -4, 3, 7, -3];
     ZeroSumTriplets(first, first.length);
+    console.info()
     ZeroSumTriplets2(first, first.length);
 };
+
 //test13();
 
 function findTriplet(arr, size, value) {
@@ -643,7 +651,7 @@ function findTriplet(arr, size, value) {
 function findTriplet2(arr, size, value) {
     let start;
     let stop;
-    arr.sort();
+    arr.sort(function cmp(a, b) { return (a - b); });
     for (let i = 0; i < size - 2; i++) {
         start = i + 1;
         stop = size - 1;
@@ -666,18 +674,17 @@ function test14() {
     findTriplet(first, first.length, 6);
     findTriplet2(first, first.length, 6);
 };
+
 //test14();
 
 function ABCTriplet(arr, size) {
     let start;
     let stop;
-    arr.sort();
-    console.log(arr)
+    arr.sort(function cmp(a, b) { return (a - b); });
     for (let i = 0; i < (size - 1); i++) {
         start = 0;
         stop = size - 1;
         while (start < stop) {
-            console.log(i, start, stop)
             if (arr[i] === arr[start] + arr[stop]) {
                 console.info(`Triplet :: ${arr[i]}, ${arr[start]}, ${arr[stop]}`);
                 start += 1;
@@ -695,13 +702,14 @@ function test15() {
     const first = [1, 2, -4, 3, 8, -3];
     ABCTriplet(first, first.length);
 };
+
 //test15();
 
 function SmallerThenTripletCount(arr, size, value) {
     let start;
     let stop;
     let count = 0;
-    arr.sort();
+    arr.sort(function cmp(a, b) { return (a - b); });
     for (let i = 0; i < (size - 2); i++) {
         start = i + 1;
         stop = size - 1;
@@ -767,17 +775,17 @@ function test17() {
     const first = [1, 2, 3, 4, 9, 17, 23];
     APTriplets(first, first.length);
     GPTriplets(first, first.length);
-
 };
-test17();
+//test17();
 
 function numberOfTriangles(arr, size) {
     let count = 0;
-    for (let i = 0; i < (size - 2); i++) {
-        for (let j = i + 1; j < (size - 1); j++) {
-            for (let k = j + 1; k < size; k++) {
-                if (arr[i] + arr[j] > arr[k])
+    for (let i = 0; i <= (size - 3); i++) {
+        for (let j = i + 1; j <= (size - 2); j++) {
+            for (let k = j + 1; k <= size-1; k++) {
+                if ((arr[i] + arr[j] > arr[k]) && (arr[k] + arr[j] > arr[i]) && (arr[i] + arr[k] > arr[j])){
                     count += 1;
+                }
             }
         }
     }
@@ -787,7 +795,7 @@ function numberOfTriangles(arr, size) {
 function numberOfTriangles2(arr, size) {
     let k;
     let count = 0;
-    arr.sort();
+    arr.sort(function cmp(a, b) { return (a - b); });
     for (let i = 0; i < (size - 2); i++) {
         k = i + 2;
         for (let j = i + 1; j < (size - 1); j++) {
@@ -800,11 +808,10 @@ function numberOfTriangles2(arr, size) {
     return count;
 };
 
-
 function test18() {
-    const first = [1, 2, 5, 4, 9, 7, 3];
-    numberOfTriangles(first, first.length);
-    numberOfTriangles2(first, first.length);
+    const first = [1, 2, 5, 4, 3, 6];
+    console.log(numberOfTriangles(first, first.length));
+    console.log(numberOfTriangles2(first, first.length));
 
 };
 //test18();
@@ -954,13 +961,37 @@ function getMajority3(arr) {
     }
 };
 
+function isMajority(arr, size) {
+    const majority = arr[Math.floor(size / 2)];
+    const i = FirstIndex(arr, size, 0, size - 1, majority);
+    if (((i + size / 2) <= (size - 1)) && arr[i + Math.floor(size / 2)] === majority)
+        return true;
+    else
+        return false;
+};
+
 function test20() {
     const first = [1, 3, 5, 3, 1, 2, 4, 2, 2, 2, 2, 2, 2];
     console.log(getMajority(first));
     console.log(getMajority2(first));
     console.log(getMajority3(first, 10));
+    console.log(isMajority(first, first.length))
 }
 //test20();
+
+function getMedian(arr) {
+    const size = arr.length;
+    arr.sort(function cmp(a, b) { return (a - b); });
+    const mid = Math.floor(size / 2);
+    return arr[mid];
+};
+
+function test25() {
+    const first = [10, 10, 5, 7, 9, 11, 12, 8, 5, 3, 10];
+    console.log(`median value is :: ${getMedian(first)}`);
+}
+//test25();
+
 
 function SearchBotinicArrayMax(arr) {
     const size = arr.length;
@@ -1028,13 +1059,43 @@ function BinarySearch(arr, start, end, key, isInc) {
     }
 };
 
+function FindMaxBitonicArray(arr) {
+    const size = arr.length;
+    let start = 0;
+    let end = size - 1;
+    let mid;
+    if (size < 3) {
+        console.log("error");
+        return -1;
+    }
+    while (start <= end) {
+        mid = Math.floor((start + end) / 2);
+        if (arr[mid - 1] < arr[mid] && arr[mid + 1] < arr[mid]) {
+            return mid;
+        }
+        else if (arr[mid - 1] < arr[mid] && arr[mid] < arr[mid + 1]) {
+            start = mid + 1;
+        }
+        else if (arr[mid - 1] > arr[mid] && arr[mid] > arr[mid + 1]) {
+            end = mid - 1;
+        }
+        else {
+            break;
+        }
+    };
+    console.log("NoMaximaFound");
+    return -1;
+};
+
 function test22() {
     const first = [1, 3, 5, 7, 9, 11, 12, 8, 5, 3, 1];
     console.log(SearchBitonicArray(first, 8));
     console.log(SearchBitonicArray(first, 7));
     console.log(SearchBitonicArray(first, 12));
+    console.log(FindMaxBitonicArray(first));
 }
 //test22();
+
 
 function findKeyCount(arr, key) {
     const size = arr.length;
@@ -1099,21 +1160,11 @@ function FirstIndex(arr, size, low, high, value) {
 };
 
 function test23() {
-    const first = [1, 5, 10, 13, 20, 30, 8, 7, 6];
-    console.info(findKeyCount(first, first.length, 6));
-    console.info(findKeyCount2(first, first.length, 6));
+    const first = [1, 3, 5, 6, 6, 6, 6, 7, 9];
+    console.info(findKeyCount(first, 6));
+    console.info(findKeyCount2(first, 6));
 };
 //test23();
-
-function isMajority(arr, size) {
-    const majority = arr[Math.floor(size / 2)];
-    const i = FirstIndex(arr, size, 0, size - 1, majority);
-    if (((i + Math.flooor(size / 2)) <= (size - 1)) && 
-        arr[i + Math.floor(size / 2)] === majority)
-        return true;
-    else
-        return false;
-};
 
 function maxProfit(stocks) {
     const size = stocks.length;
@@ -1143,19 +1194,6 @@ function test24() {
     maxProfit(first);
 }
 //test24();
-
-function getMedian(arr) {
-    const size = arr.length;
-    arr.sort(function cmp(a, b) { return (a - b); });
-    const mid = Math.floor(size / 2);
-    return arr[mid];
-};
-
-function test25() {
-    const first = [10, 10, 5, 7, 9, 11, 12, 8, 5, 3, 10];
-    console.log(`median value is :: ${getMedian(first)}`);
-}
-//test25();
 
 function findMedian(arrFirst, arrSecond) {
     const sizeFirst = arrFirst.length;
@@ -1188,6 +1226,7 @@ function test26() {
     second.sort(function cmp(a, b) { return (a - b); });
     console.log(`median value is :: ${findMedian(first, second)}`);
 }
+
 //test26();
 
 function min(a, b) {
@@ -1234,44 +1273,6 @@ function test27() {
 }
 //test27();
 
-function RotationMaxUtil(arr, start, end) {
-    if (end <= start) {
-        return arr[start];
-    }
-    const mid = Math.floor((start + end) / 2);
-    if (arr[mid] > arr[mid + 1])
-        return arr[mid];
-    if (arr[start] <= arr[mid])
-        return RotationMaxUtil(arr, mid + 1, end);
-    else
-        return RotationMaxUtil(arr, start, mid - 1);
-};
-
-function RotationMax(arr, size) {
-    return RotationMaxUtil(arr, 0, size - 1);
-}
-
-function FindRotationMaxUtil(arr, start, end) {
-    if (end <= start)
-        return start;
-    const mid = Math.floor((start + end) / 2);
-    if (arr[mid] > arr[mid + 1])
-        return mid;
-    if (arr[start] <= arr[mid])
-        return FindRotationMaxUtil(arr, mid + 1, end);
-    else
-        return FindRotationMaxUtil(arr, start, mid - 1);
-};
-
-function FindRotationMax(arr, size) {
-    return FindRotationMaxUtil(arr, 0, size - 1);
-}
-
-function CountRotation(arr, size) {
-    const maxIndex = FindRotationMaxUtil(arr, 0, size - 1);
-    return (maxIndex + 1) % size;
-};
-
 function BinarySearchRotateArray(arr, key) {
     const size = arr.length;
     return BinarySearchRotateArrayUtil(arr, 0, size - 1, key);
@@ -1303,11 +1304,51 @@ function BinarySearchRotateArrayUtil(arr, start, end, key) {
     }
 };
 
+function RotationMaxUtil(arr, start, end) {
+    if (end <= start) {
+        return arr[start];
+    }
+    const mid = Math.floor((start + end) / 2);
+    if (arr[mid] > arr[mid + 1])
+        return arr[mid];
+    if (arr[start] <= arr[mid])
+        return RotationMaxUtil(arr, mid + 1, end);
+    else
+        return RotationMaxUtil(arr, start, mid - 1);
+};
+
+function RotationMax(arr, size) {
+    return RotationMaxUtil(arr, 0, size - 1);
+}
+
+function RotationMaxIndexUtil(arr, start, end) {
+    if (end <= start)
+        return start;
+    const mid = Math.floor((start + end) / 2);
+    if (arr[mid] > arr[mid + 1])
+        return mid;
+    if (arr[start] <= arr[mid])
+        return RotationMaxIndexUtil(arr, mid + 1, end);
+    else
+        return RotationMaxIndexUtil(arr, start, mid - 1);
+};
+
+function FindRotationMaxIndex(arr, size) {
+    return RotationMaxIndexUtil(arr, 0, size - 1);
+}
+
+function CountRotation(arr, size) {
+    const maxIndex = RotationMaxIndexUtil(arr, 0, size - 1);
+    return (maxIndex + 1) % size;
+};
+
 function test28() {
-    first = [7, 9, 10, 11, 3, 5, 7]
-    console.log(`BinarySearchRotateArray index is :: ${BinarySearchRotateArray(first, 8)}`);
+    first = [8, 9, 10, 11, 3, 5, 7]
     console.log(`BinarySearchRotateArray index is :: ${BinarySearchRotateArray(first, 7)}`);
     console.log(`BinarySearchRotateArray index is :: ${BinarySearchRotateArray(first, 6)}`);
+    console.log(`RotationMax is :: ${RotationMax(first, first.length)}`);
+    console.log(`CountRotation is :: ${CountRotation(first, first.length)}`);
+
 }
 //test28();
 
@@ -1358,10 +1399,8 @@ function checkPermutation(array1, array2) {
     if (size1 !== size2) {
         return false;
     }
-    console.log(array1)
-    array1.sort();
-    array2.sort();
-    console.log(array1)
+    array1.sort(function cmp(a, b) { return (a - b); });
+    array2.sort(function cmp(a, b) { return (a - b); });
     for (let i = 0; i < size1; i++) {
         if (array1[i] !== array2[i]) {
             return false;
@@ -1443,7 +1482,7 @@ function test32() {
 function isAP(arr, size) {
     if (size <= 1)
         return true;
-    arr.sort();
+    arr.sort(function cmp(a, b) { return (a - b); });
     const diff = arr[1] - arr[0];
     for (let i = 2; i < size; i++) {
         if (arr[i] - arr[i - 1] !== diff)
@@ -1484,7 +1523,7 @@ function isAP2(arr, size) {
 function isAP3(arr, size) {
     let first = 9999999;
     let second = 9999999;
-    const count = new Array(size);
+    const count = new Array(size).fill(0);
     let index = -1;
     for (var i = 0; i < size; i++) {
         if (arr[i] < first) {
@@ -1496,11 +1535,11 @@ function isAP3(arr, size) {
     }
     const diff = second - first;
     for (var i = 0; i < size; i++) {
-        index = ((arr[i] - first) / diff | 0);
+        index = (arr[i] - first) / diff ;
+        if (index > size - 1 || count[index] !== 0)
+            return false;
+        count[index] = 1;
     }
-    if (index > size - 1 || count[index] !== 0)
-        return false;
-    count[index] = 1;
     for (var i = 0; i < size; i++) {
         if (count[i] !== 1)
             return false;
@@ -1513,8 +1552,8 @@ function test33() {
     const size = first.length;
 
     console.log(`isAP ${isAP(first, size)}`)
-    console.log(`isAP2 ${isAP2(first, size)}`)
-    console.log(`isAP3 ${isAP3(first, size)}`)
+    console.log(`isAP ${isAP2(first, size)}`)
+    console.log(`isAP ${isAP3(first, size)}`)
 };
 //test33();
 
@@ -1526,7 +1565,6 @@ function findBalancedPoint(arr, size) {
     }
     for (var i = 0; i < size; i++) {
         if (first === second) {
-            console.info(i);
             return i;
         }
         if (i < size - 1)
@@ -1538,7 +1576,7 @@ function findBalancedPoint(arr, size) {
 
 function test34() {
     const arr = [-7, 1, 5, 2, -4, 3, 0];
-    console.info(findBalancedPoint(arr, arr.length));
+    console.info("BalancedPoint : " , findBalancedPoint(arr, arr.length));
 };
 //test34();
 
@@ -1549,13 +1587,14 @@ function findFloor(arr, size, value) {
     while (start <= stop) {
         mid = Math.floor((start + stop) / 2);
         if (arr[mid] === value || (arr[mid] < value && (mid === size - 1 || arr[mid + 1] > value)))
-            return mid;
+            return arr[mid];
         else if (arr[mid] < value)
             start = mid + 1;
         else
             stop = mid - 1;
     }
-    return -1;
+    console.log("Floor value not found.")
+    return -9999;
 };
 
 function findCeil(arr, size, value) {
@@ -1565,13 +1604,15 @@ function findCeil(arr, size, value) {
     while (start <= stop) {
         mid = Math.floor((start + stop) / 2);
         if (arr[mid] === value || (arr[mid] > value && (mid === 0 || arr[mid - 1] < value)))
-            return mid;
+            return arr[mid];
         else if (arr[mid] < value)
             start = mid + 1;
         else
             stop = mid - 1;
     }
-    return -1;
+    console.log("Ceil value not found.")
+
+    return 9999;
 };
 
 function ClosestNumber(arr, size, num) {
@@ -1596,6 +1637,15 @@ function ClosestNumber(arr, size, num) {
     return output;
 };
 
+function test34() {
+    const arr = [-7, 1, 2, 3, 6, 8, 10];
+    console.info("findFloor : " , findFloor(arr, arr.length, 4));        
+    console.info("findCeil : " , findCeil(arr, arr.length, 4));
+    console.info("ClosestNumber : " , ClosestNumber(arr, arr.length, 4));
+};
+//test34();
+
+
 function DuplicateKDistance(arr, size, k) {
     const hm = new Map();
 
@@ -1610,7 +1660,7 @@ function DuplicateKDistance(arr, size, k) {
 };
 
 function test35() {
-    const arr = [1, 2, 3, 1, 4, 5];
+    const arr = [2, 3, 1, 4, 2, 1];
     DuplicateKDistance(arr, arr.length, 3);
 };
 //test35();
@@ -1631,7 +1681,7 @@ function frequencyCounts(arr, size) {
         }
     }
     for (var i = 0; i < size; i++) {
-        console.info((i + 1) + Math.abs(arr[i]));
+        console.info((i + 1) , Math.abs(arr[i]));
     }
 };
 
@@ -1647,14 +1697,12 @@ function KLargestElements(arrIn, size, k) {
     for (var i = 0; i < size; i++) {
         arr[i] = arrIn[i];
     }
-    arr.sort();
+    arr.sort(function cmp(a, b) { return (a - b); });
     for (var i = 0; i < size; i++) {
-        if (arrIn[i] >= arr[size - k]) {
+        if (arrIn[i] > arr[size - k]) {
             console.info(arrIn[i]);
-            return arrIn[i];
         }
     }
-    return -1;
 };
 
 function QuickSelectUtil(arr, lower, upper, k) {
@@ -1667,13 +1715,11 @@ function QuickSelectUtil(arr, lower, upper, k) {
         while (arr[lower] <= pivot) {
             lower++;
         }
-        while (arr[upper] > pivot) {
-            {
-                upper--;
-            }
-            if (lower < upper) {
-                swap(arr, upper, lower);
-            }
+        while (arr[upper] > pivot) {    
+            upper--;
+        }
+        if (lower < upper) {
+            swap(arr, upper, lower);
         }
     }
     swap(arr, upper, start);
@@ -1690,18 +1736,16 @@ function KLargestElements2(arrIn, size, k) {
     }
     QuickSelectUtil(arr, 0, size - 1, size - k);
     for (var i = 0; i < size; i++) {
-        if (arrIn[i] >= arr[size - k]) {
+        if (arrIn[i] > arr[size - k]) {
             console.info(arrIn[i]);
-            return arrIn[i];
         }
     }
-    return -1;
 };
 
 function test37() {
     const arr = [1, 3, 4, 2, 2, 1, 5, 9, 3];
-    console.log(KLargestElements(arr, arr.length, 5));
-    console.log(KLargestElements2(arr, arr.length, 5));
+    KLargestElements(arr, arr.length, 4);
+    //KLargestElements2(arr, arr.length, 4);
 };
 //test37();
 
@@ -1730,7 +1774,7 @@ function FixPoint2(arr, size) {
 };
 
 function test38() {
-    const arr = [1, 3, 4, 4, 6, 7, 7, 8, 8];
+    const arr = [-1, 0, 2, 3, 6, 7, 9, 10, 18];
     console.log(FixPoint(arr, arr.length));
     console.log(FixPoint2(arr, arr.length));
 };
@@ -1741,8 +1785,10 @@ function subArraySums(arr, size, value) {
     let second = 0;
     let sum = arr[first];
     while (second < size && first < size) {
-        if (sum === value)
-            console.info(first + second);
+        if (sum === value){
+            console.info("values between index : ", first ,"&", second);
+            return true;
+        }
         if (sum < value) {
             second += 1;
             if (second < size)
@@ -1753,7 +1799,7 @@ function subArraySums(arr, size, value) {
             first += 1;
         }
     }
-    return sum;
+    return false;
 };
 
 function test39() {
@@ -1761,7 +1807,6 @@ function test39() {
     console.log(subArraySums(arr, arr.length, 17));
 };
 //test39();
-
 
 function MaxConSub(arr, size) {
     let currMax = 0;
@@ -1773,7 +1818,6 @@ function MaxConSub(arr, size) {
         if (maximum < currMax)
             maximum = currMax;
     }
-    console.info(maximum);
     return maximum;
 };
 
@@ -1789,29 +1833,46 @@ function MaxConSubArr(A, sizeA, B, sizeB) {
     const hs = new Set();
     for (var i = 0; i < sizeB; i++)
         hs.add(B[i]);
-
-    for (var i = 0; i < sizeA; i++)
+    for (var i = 0; i < sizeA; i++){
         if (hs.has(A[i]))
             currMax = 0;
         else
             currMax = Math.max(A[i], currMax + A[i]);
 
-    if (currMax < 0)
-        currMax = 0;
+        if (currMax < 0)
+            currMax = 0;
 
-    if (maximum < currMax)
-        maximum = currMax;
-    
+        if (maximum < currMax)
+            maximum = currMax;
+    }
+        
     console.info(maximum);
     return maximum;
 };
-
+function Binarysearch(arr, value) {
+    let low = 0;
+    let high = arr.length - 1;
+    let mid;
+    while (low <= high) {
+        mid = Math.floor((low + high) / 2);
+        if (arr[mid] === value) {
+            return true;
+        }
+        else if (arr[mid] < value) {
+            low = mid + 1;
+        }
+        else {
+            high = mid - 1;
+        }
+    };
+    return false;
+};
 function MaxConSubArr2(A, sizeA, B, sizeB) {
-    B.soret();
+    B.sort(function cmp(a, b) { return (a - b); });
     let currMax = 0;
     let maximum = 0;
     for (let i = 0; i < sizeA; i++) {
-        if (Binarysearch(B, sizeB, A[i]))
+        if (Binarysearch(B, A[i]))
             currMax = 0;
         else {
             currMax = Math.max(A[i], currMax + A[i]);
@@ -1827,7 +1888,7 @@ function MaxConSubArr2(A, sizeA, B, sizeB) {
 
 function test41() {
     const arr = [1, 2, 3, 4, 4, 6, 4, 8, 2];
-    const arr2 = [2,4, 8];
+    const arr2 = [2,4, 8, 18, 10];
     
     console.log(MaxConSubArr(arr, arr.length, arr2, arr2.length));
     console.log(MaxConSubArr2(arr, arr.length, arr2, arr2.length));
@@ -1890,10 +1951,10 @@ function RainWater2(arr, size) {
 
 function test42() {
     const arr = [4, 0, 1, 5];
-    console.log(RainWater(arr, arr.length));
-    console.log(RainWater2(arr, arr.length));
+    RainWater(arr, arr.length);
+    RainWater2(arr, arr.length);
 };
-//test42();
+test42();
 
 function seperateEvenAndOdd(arr) {
     const size = arr.length;

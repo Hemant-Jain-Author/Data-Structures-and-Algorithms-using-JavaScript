@@ -61,7 +61,6 @@ function test1() {
     const stk = ([]);
     stk.push(1);
     stk.push(2);
-    stk.push(3);
     stk.push(4);
     stk.push(5);
     sortedInsert(stk, 3)
@@ -85,7 +84,7 @@ function sortStack2(stk) {
     const stk2 = ([]);
     while (stk.length > 0) {
         temp = stk.pop();
-        while (stk.length > 0 && stk2[stk2.length - 1] < temp) {
+        while (stk2.length > 0 && stk2[stk2.length - 1] < temp) {
             stk.push(stk2.pop());
         };
         stk2.push(temp);
@@ -124,10 +123,9 @@ function test3() {
     stk.push(1);
     stk.push(2);
     stk.push(3);
-    bottomInsert(stk, 9)
+    bottomInsert(stk, 4)
     console.info(stk);
 };
-
 //test3()
 
 function reverseStack(stk) {
@@ -173,10 +171,10 @@ function test4() {
     stk.push(1);
     stk.push(2);
     stk.push(3);
-    reverseStack3(stk)
-    console.info(stk);
+    console.info("Stack before reversal", stk);
+    reverseStack(stk)
+    console.info("Stack after reversal", stk);
 };
-
 //test4()
 
 function reverseKElementInStack(stk, k) {
@@ -196,10 +194,10 @@ function test5() {
     stk.push(1);
     stk.push(2);
     stk.push(3);
+    stk.push(4);
     reverseKElementInStack(stk, 2)
     console.info(stk);
 };
-
 //test5()
 
 function reverseQueue(que) {
@@ -249,6 +247,7 @@ function test7() {
     que.add(1);
     que.add(2);
     que.add(3);
+    que.add(4);
     console.log(que)
     reverseKElementInQueue(que, 2)
     console.info(que);
@@ -296,46 +295,184 @@ function test8() {
 
 //test8()
 
-function postfixEvaluate(expn) {
-    const stk = [];
-    let temp;
-    const tokens = expn.split(" ");
-    for (const tok in tokens) {
-        temp = parseInt(tokens[tok]);
-        if (isNaN(temp) === false) {
-            stk.push(temp);
+
+function maxDepthParenthesis(expn, size) {
+    const stk = ([]);
+    let maxDepth = 0;
+    let depth = 0;
+    let ch;
+    for (let i = 0; i < size; i++) {
+        ch = expn[i];
+        if (ch == '(') {
+            stk.push(ch);
+            depth += 1;
         }
+        else if (ch == ')') {
+            stk.pop();
+            depth -= 1;
+        }
+        if (depth > maxDepth)
+            maxDepth = depth;
+    }
+    return maxDepth;
+}
+
+function maxDepthParenthesis2(expn, size) {
+    let maxDepth = 0;
+    let depth = 0;
+    let ch;
+    for (let i = 0; i < size; i++) {
+        ch = expn[i];
+        if (ch == '(')
+            depth += 1;
+        else if (ch == ')')
+            depth -= 1;
+        if (depth > maxDepth)
+            maxDepth = depth;
+    }
+    return maxDepth;
+}
+
+function test14() {
+    const expn = "((((A)))((((BBB()))))()()()())";
+    const size = expn.length;
+    const value = maxDepthParenthesis(expn, size);
+    const value2 = maxDepthParenthesis2(expn, size);
+    console.info(`Given expn ${expn}`);
+    console.info(`Max depth parenthesis is ${value}`);
+    console.info(`Max depth parenthesis is ${value2}`);
+};
+
+//test14()
+
+function longestContBalParen(string, size) {
+    const stk = ([]);
+    stk.push(-1);
+    let length = 0;
+    for (let i = 0; i < size; i++) {
+        if (string[i] == '(')
+            stk.push(i);
         else {
-            num1 = stk.pop();
-            num2 = stk.pop();
-            op = tokens[tok];
-            switch (op) {
-                case '+':
-                    stk.push(num1 + num2);
-                    break;
-                case '-':
-                    stk.push(num1 - num2);
-                    break;
-                case '*':
-                    stk.push(num1 * num2);
-                    break;
-                case '/':
-                    stk.push(num1 / num2);
-                    break;
-            }
+            stk.pop();
+            if (stk.length != 0)
+                length = Math.max(length, i - stk[stk.length - 1]);
+            else
+                stk.push(i);
         }
     }
-    return stk.pop();
+    return length;
 }
 
-function test9() {
-    expn = "6 5 2 3 + 8 * + 3 + *";
-    value = postfixEvaluate(expn);
-    console.log(`Given Postfix Expn: ${expn}`);
-    console.log(`Result after Evaluation: ${value}`);
+function test15() {
+    const expn = "())((()))(())()(()";
+    const size = expn.length;
+    const value = longestContBalParen(expn, size);
+    console.info(`longestContBalParen : ${value}`);
+};
+
+//test15()
+
+function reverseParenthesis(expn, size) {
+    const stk = ([]);
+    let openCount = 0;
+    let closeCount = 0;
+    let ch;
+    if (size % 2 === 1) {
+        console.info(`Invalid odd length ${size}`);
+        return -1;
+    }
+    for (let i = 0; i < size; i++) {
+        ch = expn[i];
+        if (ch == '(')
+            stk.push(ch);
+        else if (ch == ')')
+            if (stk.length !== 0 && stk[stk.length - 1] == '(')
+                stk.pop();
+            else
+                stk.push(')');
+    }
+    console.log(stk)
+    while (stk.length !== 0) {
+        if (stk.pop() == '(')
+            openCount += 1;
+        else
+            closeCount += 1;
+    }
+    console.log(openCount, closeCount)
+    const reversal = Math.ceil(openCount / 2.0) + Math.ceil(closeCount / 2.0);
+    return reversal;
 }
 
-//test9()
+function test16() {
+    const expn  = ")(())(((";
+    const size = expn.length;
+    const value = reverseParenthesis(expn, size);
+    console.info(`reverse Parenthesis is : ${value}`);
+};
+
+test16()
+
+function findDuplicateParenthesis(expn, size) {
+    const stk = ([]);
+    let ch;
+    let count;
+    for (let i = 0; i < size; i++) {
+        ch = expn[i];
+        if (ch == ')') {
+            count = 0;
+            while (stk.length !== 0 && stk[stk.length - 1] != '(') {
+                stk.pop();
+                count += 1;
+            }
+            if (count <= 1)
+                return true;
+        }
+        else
+            stk.push(ch);
+    }
+    return false;
+};
+
+function test17() {
+    const expn = "(((a+b))+c)";
+    const size = expn.length;
+    const value = findDuplicateParenthesis(expn, size);
+    console.info(`Duplicate Found : ${value}`);
+};
+
+//test17()
+
+function printParenthesisNumber(expn, size) {
+    let ch;
+    const stk = ([]);
+    let output = "";
+    let count = 1;
+    for (let i = 0; i < size; i++) {
+        ch = expn[i];
+        if (ch == '(') {
+            stk.push(count);
+            output += count;
+            count += 1;
+        }
+        else if (ch == ')')
+            output += stk.pop();
+    }
+    console.info("Parenthesis Count : ", output);
+}
+
+function test18() {
+    const expn1 = "(((a+(b))+(c+d)))";
+    const expn2 = "(((a+b))+c)(((";
+    let size = expn1.length;
+    console.info(`Given expn ${expn1}`);
+    printParenthesisNumber(expn1, size);
+    size = expn2.length;
+    console.info(`Given expn ${expn2}`);
+    printParenthesisNumber(expn2, size);
+};
+
+//test18()
+
 
 function precedence(x) {
     if (x === '(') {
@@ -451,6 +588,48 @@ function test11() {
 
 //test11()
 
+
+function postfixEvaluate(expn) {
+    const stk = [];
+    let temp;
+    const tokens = expn.split(" ");
+    for (const tok in tokens) {
+        temp = parseInt(tokens[tok]);
+        if (isNaN(temp) === false) {
+            stk.push(temp);
+        }
+        else {
+            num1 = stk.pop();
+            num2 = stk.pop();
+            op = tokens[tok];
+            switch (op) {
+                case '+':
+                    stk.push(num1 + num2);
+                    break;
+                case '-':
+                    stk.push(num1 - num2);
+                    break;
+                case '*':
+                    stk.push(num1 * num2);
+                    break;
+                case '/':
+                    stk.push(num1 / num2);
+                    break;
+            }
+        }
+    }
+    return stk.pop();
+}
+
+function test9() {
+    expn = "6 5 2 3 + 8 * + 3 + *";
+    value = postfixEvaluate(expn);
+    console.log(`Given Postfix Expn: ${expn}`);
+    console.log(`Result after Evaluation: ${value}`);
+}
+
+//test9()
+
 function StockSpanRange(arr) {
     const SR = new Array(arr.length);
     SR[0] = 1;
@@ -546,184 +725,6 @@ function test13() {
 
 //test13()
 
-function maxDepthParenthesis(expn, size) {
-    const stk = ([]);
-    let maxDepth = 0;
-    let depth = 0;
-    let ch;
-    for (let i = 0; i < size; i++) {
-        ch = expn[i];
-        if (ch == '(') {
-            stk.push(ch);
-            depth += 1;
-        }
-        else if (ch == ')') {
-            stk.pop();
-            depth -= 1;
-        }
-        if (depth > maxDepth)
-            maxDepth = depth;
-    }
-    return maxDepth;
-}
-
-function maxDepthParenthesis2(expn, size) {
-    let maxDepth = 0;
-    let depth = 0;
-    let ch;
-    for (let i = 0; i < size; i++) {
-        ch = expn[i];
-        if (ch == '(')
-            depth += 1;
-        else if (ch == ')')
-            depth -= 1;
-        if (depth > maxDepth)
-            maxDepth = depth;
-    }
-    return maxDepth;
-}
-
-function test14() {
-    const expn = "((((A)))((((BBB()))))()()()())";
-    const size = expn.length;
-    const value = maxDepthParenthesis(expn, size);
-    const value2 = maxDepthParenthesis2(expn, size);
-    console.info(`Given expn ${expn}`);
-    console.info(`Max depth parenthesis is ${value}`);
-    console.info(`Max depth parenthesis is ${value2}`);
-};
-
-//test14()
-
-function longestContBalParen(string, size) {
-    const stk = ([]);
-    stk.push(-1);
-    let length = 0;
-    for (let i = 0; i < size; i++) {
-        if (string[i] == '(')
-            stk.push(i);
-        else {
-            stk.pop();
-            if (stk.length != 0)
-                length = Math.max(length, i - stk[stk.length - 1]);
-            else
-                stk.push(i);
-        }
-    }
-    return length;
-}
-
-function test15() {
-    const expn = "())((()))(())()(()";
-    const size = expn.length;
-    const value = longestContBalParen(expn, size);
-    console.info(`longestContBalParen ${value}`);
-};
-
-//test15()
-
-function reverseParenthesis(expn, size) {
-    const stk = ([]);
-    let openCount = 0;
-    let closeCount = 0;
-    let ch;
-    if (size % 2 === 1) {
-        console.info(`Invalid odd length ${size}`);
-        return -1;
-    }
-    for (let i = 0; i < size; i++) {
-        ch = expn[i];
-        if (ch == '(')
-            stk.push(ch);
-        else if (ch == ')')
-            if (stk.length !== 0 && stk[stk.length - 1] == '(')
-                stk.pop();
-            else
-                stk.push(')');
-    }
-    while (stk.length !== 0) {
-        if (stk.pop() == '(')
-            openCount += 1;
-        else
-            closeCount += 1;
-    }
-    const reversal = Math.ceil(openCount / 2.0) + Math.ceil(closeCount / 2.0);
-    return reversal;
-}
-
-function test16() {
-    const expn = "())((()))(())()(()()()()))";
-    const expn2 = ")(())(((";
-    const size = expn2.length;
-    const value = reverseParenthesis(expn2, size);
-    console.info(`Given expn : ${expn2}`);
-    console.info(`reverse Parenthesis is : ${value}`);
-};
-
-//test16()
-
-function findDuplicateParenthesis(expn, size) {
-    const stk = ([]);
-    let ch;
-    let count;
-    for (let i = 0; i < size; i++) {
-        ch = expn[i];
-        if (ch == ')') {
-            count = 0;
-            while (stk.length !== 0 && stk[stk.length - 1] != '(') {
-                stk.pop();
-                count += 1;
-            }
-            if (count <= 1)
-                return true;
-        }
-        else
-            stk.push(ch);
-    }
-    return false;
-};
-
-function test17() {
-    const expn = "(((a+b))+c)";
-    console.info(`Given expn : ${expn}`);
-    const size = expn.length;
-    const value = findDuplicateParenthesis(expn, size);
-    console.info(`Duplicate Found : ${value}`);
-};
-
-//test17()
-
-function printParenthesisNumber(expn, size) {
-    let ch;
-    const stk = ([]);
-    let output = "";
-    let count = 1;
-    for (let i = 0; i < size; i++) {
-        ch = expn[i];
-        if (ch == '(') {
-            stk.push(count);
-            output += count;
-            count += 1;
-        }
-        else if (ch == ')')
-            output += stk.pop();
-    }
-    console.info("Parenthesis Count ");
-    console.info(output);
-}
-
-function test18() {
-    const expn1 = "(((a+(b))+(c+d)))";
-    const expn2 = "(((a+b))+c)(((";
-    let size = expn1.length;
-    console.info(`Given expn ${expn1}`);
-    printParenthesisNumber(expn1, size);
-    size = expn2.length;
-    console.info(`Given expn ${expn2}`);
-    printParenthesisNumber(expn2, size);
-};
-
-//test18()
 
 function nextLargerElement(arr, size) {
     const output = new Array(size);

@@ -54,7 +54,6 @@ class StringTree {
 
     find(value) {
         const ret = this.findUtil(this.root, value);
-        console.log(`Find ${value} Return ${ret}`);
         return ret;
     }
 
@@ -99,10 +98,7 @@ const tt = new StringTree();
 tt.insert("banana");
 tt.insert("apple");
 tt.insert("mango");
+console.log("Apple Found :", tt.find("apple"));
+console.log("Grapes Found :", tt.find("grapes"));
+console.log("Banana Found :", tt.find("banana"));
 
-tt.find("apple");
-tt.find("grapes");
-tt.find("banan");
-
-tt.insert("apple");
-tt.print()

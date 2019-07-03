@@ -48,10 +48,6 @@ class TST {
 
     find(word) {
         const ret = this.findUtil(this.root, word, 0);
-        if (ret)
-            console.log(`${word} ::  Found `);
-        else
-            console.log(`${word} :: Not Found `);
         return ret;
     }
 }
@@ -60,12 +56,9 @@ const tt = new TST();
 tt.insert("banana");
 tt.insert("apple");
 tt.insert("mango");
-tt.find("apple");
-tt.find("grapes");
-tt.find("banan");
 
-/*
-apple ::  Found 
-grapes :: Not Found 
-banan :: Not Found 
-*/
+console.log("Apple Found :", tt.find("apple"));
+console.log("Banana Found :", tt.find("banana"));
+console.log("Mango Found :", tt.find("mango"));
+console.log("Grapes Found :", tt.find("grapes"));
+

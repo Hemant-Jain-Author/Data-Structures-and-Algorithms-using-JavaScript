@@ -417,6 +417,13 @@ class LinkedList {
 }
 
 const ll = new LinkedList();
+ll.addHead(1);
+ll.addHead(2);
+ll.addHead(3);
+ll.print();
+
+
+/*
 for (let i = 0; i < 5; i++) {
     ll.addHead(i);
 }
@@ -482,3 +489,4 @@ ll.removeHead();
 ll.print()
 ll.freeList()
 ll.print();
+*/

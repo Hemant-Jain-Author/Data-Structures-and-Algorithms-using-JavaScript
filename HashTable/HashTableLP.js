@@ -13,12 +13,12 @@ class HashTable {
             hashFun = this.DefaultHashFun;
         
         this.HashFun = hashFun;
-        
         this.tableSize = tSize;
         this.KeyArr = new Array(tSize + 1);
         this.DataArr = new Array(tSize + 1);
         this.FlagArr = new Array(tSize + 1).fill(EMPTY_VALUE);
     }
+    /* Other methods */
 
     ComputeHash(key) {
         return this.HashFun(key) % this.tableSize;
@@ -134,12 +134,12 @@ class HashTable {
 }
 
 const ht = new HashTable(1000);
-ht.add(1);
-ht.add(2, 10);
-ht.add(3);
+ht.add(1, 10);
+ht.add(2, 20);
+ht.add(3, 30);
 ht.print();
-ht.find(2);
-console.log(ht.get(2))
-console.info(ht.delete(1));
-console.info(ht.delete(4));
-ht.print();
+
+console.log("Find key 2 : ", ht.find(2));
+console.log("Value at key 2 : ",ht.get(2))
+ht.delete(1)
+ht.print()

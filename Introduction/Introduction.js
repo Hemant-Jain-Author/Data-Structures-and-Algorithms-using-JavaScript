@@ -66,18 +66,25 @@ function BinarySearchRecursiveUtil(arr, low, high, value) {
     }
 };
 
-function test2() {
-    const numbers = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
+function test2a() {
+    const numbers = [1, 8, 5, 4, 3, 6, 9, 2, 7, 10];
     console.log(SequentialSearch(numbers, 7));
-    console.log(BinarySearch(numbers, 7));
-    console.log(BinarySearchRecursive(numbers, 7));
-
     console.log(SequentialSearch(numbers, 11));
+}
+
+function test2b() {
+    const numbers = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
+    console.log(BinarySearch(numbers, 7));
     console.log(BinarySearch(numbers, 11));
+ }
+
+function test2b() {
+    const numbers = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
+    console.log(BinarySearchRecursive(numbers, 7));
     console.log(BinarySearchRecursive(numbers, 11));
 }
 
-//test2()
+//test2b()
 
 function rotateArray(a, n, k) {
     reverseArray(a, 0, k - 1);
@@ -112,7 +119,7 @@ function test3() {
     rotateArray(numbers, numbers.length, 7)
     console.log(numbers);
     const numbers2 = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
-    rotateArray(numbers2, numbers2.length, 5)
+    rotateArray(numbers2, numbers2.length, 4)
     console.log(numbers2);
 
 }
@@ -521,6 +528,7 @@ function factorial(i) {
     return i * factorial(i - 1);
 };
 
+//console.info("factorial 5 is ::", factorial(5))
 
 function printHaxIntUtil(number, base, arr) {
     const conversion = "0123456789ABCDEF";
@@ -539,8 +547,7 @@ function printHaxInt(number, base) {
 };
 
 function test13() {
-    for (let i = 0; i < 20; i++)
-        console.log(printHaxInt(i, 16));
+    console.log(printHaxInt(100, 16));
 }
 
 //test13()
@@ -555,9 +562,8 @@ function towerOfHanoi(num, src, dst, temp) {
 };
 
 function test14() {
-    const num = 4;
-    console
-        .info("The sequence of moves involved in the Tower of Hanoi are :\n");
+    const num = 3;
+    console.info("The sequence of moves are :");
     towerOfHanoi(num, 'A', 'C', 'B');
     return 0;
 };
@@ -634,11 +640,8 @@ function permutation(arr, i, length) {
 };
 
 function test17() {
-    const arr = new Array(5);
-    for (let i = 0; i < 5; i++) {
-        arr[i] = i;
-    }
-    permutation(arr, 0, 5);
+    const arr = [1, 2, 3]
+    permutation(arr, 0, 3);
 };
 
 //test17()

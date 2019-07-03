@@ -26,11 +26,11 @@ function fibonacci2 (n) {
 }
 
 function test1 () {
-  console.log(fibonacci(10))
-  console.log(fibonacci2(10))
+  console.log(fibonacci(5))
+  console.log(fibonacci2(5))
 }
 
-test1()
+//test1()
 
 function Feasible (Q, k) {
   for (let i = 0; i < k; i++) {
@@ -59,8 +59,16 @@ function test2 () {
   const Q = [0, 0, 0, 0, 0, 0, 0, 0];
   NQueens(Q, 0, 8)
 }
+/*
+[ 0, 4, 7, 5, 2, 6, 1, 3 ]
+[ 0, 5, 7, 2, 6, 3, 1, 4 ]
+.
+.
+.
 
-test2()
+[ 7, 3, 0, 2, 5, 1, 6, 4 ]
+*/
+//test2()
 
 function TOHUtil (num, from, to, temp) {
   if (num < 1) {
@@ -80,7 +88,7 @@ function test3 () {
   TowersOfHanoi(3)
 }
 
-test3()
+//test3()
 
 function isPrime (n) {
   let answer = (n > 1) ? true : false;
@@ -100,4 +108,4 @@ function test4 () {
   console.log(isPrime(105))
 }
 
-test4()
+//test4()

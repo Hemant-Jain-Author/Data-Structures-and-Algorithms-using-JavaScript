@@ -53,6 +53,8 @@ function test1() {
     Partition012(arr2, arr2.length);
     console.log(arr2);
 };
+[ 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1 ]
+[ 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 2, 2 ]
 //test1();
 
 function RangePartition(arr, size, lower, higher) {
@@ -88,9 +90,9 @@ function minSwaps(arr, size, val) {
     let second = size - 1;
     let temp;
     while (first < second) {
-        if (arr[first] <= val)
+        if (arr[first] < val)
             first += 1;
-        else if (arr[second] > val)
+        else if (arr[second] >= val)
             second -= 1;
         else {
             temp = arr[first];
@@ -101,6 +103,13 @@ function minSwaps(arr, size, val) {
     }
     return swapCount;
 };
+
+function test2(){
+    let arr = [2,7,5,6,1,3,4,9,10,8]
+    let val = 5
+    console.log(minSwaps(arr, 10, val))
+}
+//test2()
 
 function seperateEvenAndOdd(data, size) {
     let left = 0;
@@ -117,6 +126,14 @@ function seperateEvenAndOdd(data, size) {
         }
     }
 };
+
+function test2(){
+    let arr = [2,7,5,6,1,3,4,9,10,8]
+    seperateEvenAndOdd(arr, 10)
+    console.log(arr)
+}
+//test2()
+
 
 function AbsMore(value1, value2, ref) {
     return (Math.abs(value1 - ref) > Math.abs(value2 - ref));
@@ -152,12 +169,12 @@ function ArrayReduction(arr, size) {
     let reduction = arr[0];
     for (let i = 0; i < size; i++) {
         if (arr[i] - reduction > 0) {
-            console.info(size - i);
             reduction = arr[i];
             count += 1;
         }
     }
     console.info(`Total number of reductions ${count}`);
+    return count
 };
 
 function test4() {
@@ -279,6 +296,13 @@ function checkReverse(arr, size) {
     return true;
 };
 
+function test5() {
+    const arr = [1, 3, 8, 5, 4, 3, 10, 11, 12, 18, 28];
+    console.log("checkReverse : ", checkReverse(arr, arr.length))
+};
+//test5();
+
+
 function min(X, Y) {
     if (X < Y) {
         return X;
@@ -289,8 +313,8 @@ function min(X, Y) {
 function UnionIntersectionSorted(arr1, size1, arr2, size2) {
     let first = 0;
     let second = 0;
-    const unionArr = new Array(size1 + size2);
-    const interArr = new Array(min(size1, size2));
+    const unionArr = new Array();
+    const interArr = new Array();
     let uIndex = 0;
     let iIndex = 0;
 
@@ -318,8 +342,8 @@ function UnionIntersectionSorted(arr1, size1, arr2, size2) {
         unionArr[uIndex++] = arr2[second];
         second += 1;
     }
-    console.log(unionArr);
-    console.log(interArr);
+    console.log("Union : ", unionArr);
+    console.log("Intersection : ", interArr);
 };
 
 function UnionIntersectionUnsorted(arr1, size1, arr2, size2) {

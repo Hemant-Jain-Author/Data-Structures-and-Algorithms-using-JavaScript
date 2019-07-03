@@ -35,4 +35,4 @@ function quickSelect(arr, k) {
 
 const array = [3, 4, 2, 1, 6, 5, 7, 8, 10, 9];
 quickSelect(array, 5);
-console.log(`value at index 5 is : ${array[4]}`);
+console.log(`Fifth value is : ${array[4]}`);

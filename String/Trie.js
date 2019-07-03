@@ -74,14 +74,15 @@ class Trie {
 }
 
 const t = new Trie();
-const a = "hemant";
-const b = "heman";
-const c = "hemantjain";
-const d = "jain";
-t.Insert(a);
-t.Insert(d);
+const a = "apple";
+const b = "app";
+const c = "appletree";
+const d = "tree";
+
+t.Insert(a)
+t.Insert(d)
+
 console.log(t.Find(a));
-t.Remove(a);
-console.log(t.Find(a));
+console.log(t.Find(b));
 console.log(t.Find(c));
 console.log(t.Find(d));

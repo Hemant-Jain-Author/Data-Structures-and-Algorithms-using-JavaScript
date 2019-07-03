@@ -26,7 +26,7 @@ class Queue {
     }
 }
 
-defaultCmp = (x, y) => x - y;
+defaultCmp = (x, y) => (x - y) > 0;
 
 class PriorityQueue {
     constructor(array, cmp) {
@@ -50,19 +50,19 @@ class PriorityQueue {
     proclateDown(position) {
         const lChild = 2 * position;
         const rChild = lChild + 1;
-        let small = -1;
+        let child = -1;
         let temp;
         if (lChild <= this.length) {
-            small = lChild;
+            child = lChild;
         }
-        if (rChild <= this.length && this.comp(this.arr[rChild], this.arr[lChild]) < 0) {
-            small = rChild;
+        if (rChild <= this.length && this.comp(this.arr[lChild], this.arr[rChild]) ) {
+            child = rChild;
         }
-        if (small !== -1 && this.comp(this.arr[small], this.arr[position]) < 0) {
+        if (child !== -1 && this.comp(this.arr[position], this.arr[child])) {
             temp = this.arr[position];
-            this.arr[position] = this.arr[small];
-            this.arr[small] = temp;
-            this.proclateDown(small);
+            this.arr[position] = this.arr[child];
+            this.arr[child] = temp;
+            this.proclateDown(child);
         }
     }
 
@@ -72,7 +72,7 @@ class PriorityQueue {
         if (parent === 0) {
             return;
         }
-        if (this.comp(this.arr[parent], this.arr[position]) < 0) {
+        if (this.comp(this.arr[parent], this.arr[position])) {
             temp = this.arr[position];
             this.arr[position] = this.arr[parent];
             this.arr[parent] = temp;
@@ -128,7 +128,7 @@ class GraphEdge {
     }
 }
 
-GraphEdgeComparator = (x, y) => x - y;
+GraphEdgeComparator = (x, y) => ( x.cost - y.cost ) > 0;
 
 class Graph {
     constructor(cnt) {
@@ -166,11 +166,13 @@ class Graph {
     print() {
         for (let i = 0; i < this.count; i++) {
             const ad = this.Adj[i];
-            console.log(`Vertex ${i} is connected to : `)
+            let output = ""
+            output += `Vertex ${i} is connected to : `
             for (let j = 0; j < ad.length; j++) {
                 const adn = ad[j];
-                console.log(`(${adn.dest}, ${adn.cost}) `)
+                output += `${adn.dest}(${adn.cost}) `
             }
+            console.log(output)
         }
     }
 
@@ -178,14 +180,15 @@ class Graph {
         const count = this.count;
         const visited = new Array(count).fill(false);
         const stk = ([]);
-
+        const path = [];
         stk.push(source)
         visited[source] = true
         
         while (stk.length != 0) {
             const curr = stk.pop();
+            path.push(curr);
             const adl = this.Adj[curr];
-            for (let index = 0; index < adl.length; index++) {
+            for (let index = adl.length - 1; index >=  0; index--) {
                 const adn = adl[index];
                 if (visited[adn.dest] === false) {
                     visited[adn.dest] = true
@@ -193,24 +196,27 @@ class Graph {
                 }
             }
         }
+        console.log("DFS Path is : ", path)
         return visited[target]
     }
 
     dfs(source, target) {
         const count = this.count;
         const visited = new Array(count).fill(false);
-        this.dfsUtil(source, visited)
-        return visited[target]
+        const path = []
+        this.dfsUtil(source, visited, path)
+        console.log("DFS Path is : ", path)
+            return visited[target]
     }
 
-    dfsUtil(index, visited) {
+    dfsUtil(index, visited, path) {
         visited[index] = true
         const adl = this.Adj[index];
-
+        path.push(index)
         for (var index = 0; index < adl.length; index++) {
             const adn = adl[index];
             if (visited[adn.dest] === false)
-                this.dfsUtil(adn.dest, visited)
+                this.dfsUtil(adn.dest, visited, path)
         }
     }
 
@@ -218,11 +224,13 @@ class Graph {
         const count = this.count;
         const visited = new Array(count).fill(false);
         const que = new Queue();
+        const path = []
         que.add(source)
         visited[source] = true
 
         while (que.isEmpty() === false) {
             const curr = que.remove();
+            path.push(curr)
             const adl = this.Adj[curr];
             for (let index = 0; index < adl.length; index++) {
                 const adn = adl[index];
@@ -232,6 +240,7 @@ class Graph {
                 }
             }
         }
+        console.log("BFS Path is : ", path)
         return visited[target]
     }
 
@@ -251,22 +260,33 @@ class Graph {
         const stk = ([]);
         const count = this.count;
         const visited = new Array(count).fill(false);
-
+        const output = []  
         for (let i = 0; i < count; i++) {
             if (visited[i] === false) {
                 this.dfsUtil2(i, visited, stk)
             }
         }
-        console.log('topologicalSort :: ')
+       
         while (stk.length != 0) {
-            console.log(stk.pop())
+            output.push(stk.pop())
+        }
+        console.log(output)
+    }
+
+    dfsUtil3(index, visited) {
+        visited[index] = true
+        const adl = this.Adj[index];
+        for (var index = 0; index < adl.length; index++) {
+            const adn = adl[index];
+            if (visited[adn.dest] === false)
+                this.dfsUtil3(adn.dest, visited)
         }
     }
 
     pathExist(source, dest) {
         const count = this.count;
         const visited = new Array(count).fill(false);
-        this.dfsUtil(source, visited)
+        this.dfsUtil3(source, visited)
         return visited[dest]
     }
 
@@ -328,7 +348,7 @@ class Graph {
         let retVal = -1;
         for (let i = 0; i < count; i++) {
             if (visited[i] === false) {
-                this.dfsUtil(i, visited)
+                this.dfsUtil3(i, visited)
                 retVal = i
             }
         }
@@ -522,7 +542,7 @@ class Graph {
         const count = this.count;
         const visited = new Array(count).fill(false);
 
-        this.dfsUtil(0, visited)
+        this.dfsUtil3(0, visited)
         for (let i = 0; i < count; i++) {
             if (visited[i] === false) {
                 return false
@@ -535,7 +555,7 @@ class Graph {
         const count = this.count;
         const visited = new Array(count).fill(false);
 
-        this.dfsUtil(0, visited)
+        this.dfsUtil3(0, visited)
         for (var i = 0; i < count; i++) {
             if (visited[i] === false) {
                 return false
@@ -544,7 +564,7 @@ class Graph {
         const gReversed = this.transposeGraph();
         visited.fill(false)
 
-        gReversed.dfsUtil(0, visited)
+        gReversed.dfsUtil3(0, visited)
         for (var i = 0; i < count; i++) {
             if (visited[i] === false) {
                 return false
@@ -577,84 +597,94 @@ class Graph {
         }
     }
 
-    prims() {
-        const count = this.count;
-        const previous = new Array(count).fill(-1);
-        const infi = 2147483647;
-        const dist = new Array(count).fill(infi);
-        const visited = new Array(count).fill(false);
-        let source = 1;
-        dist[source] = 0
+prims() {
+    const count = this.count;
+    const previous = new Array(count).fill(-1);
+    const infi = 2147483647;
+    const dist = new Array(count).fill(infi);
+    const visited = new Array(count).fill(false);
+    let source = 0;
+    dist[source] = 0
 
-        const queue = new PriorityQueue(null, GraphEdgeComparator);
-        let node = new GraphEdge(source, 0);
-        queue.add(node)
+    const queue = new PriorityQueue(null, GraphEdgeComparator);
+    let node = new GraphEdge(source, 0);
+    queue.add(node)
 
-        while (queue.isEmpty() === false) {
-            node = queue.remove()
-            visited[source] = true
-            source = node.dest
-            const adl = this.Adj[source];
-            for (let index = 0; index < adl.length; index++) {
-                const adn = adl[index];
-                const dest = adn.dest;
-                const alt = adn.cost;
-                if (dist[dest] > alt && visited[dest] === false) {
-                    dist[dest] = alt
-                    previous[dest] = source
-                    node = new GraphEdge(dest, alt)
-                    queue.add(node)
-                }
-            }
+    while (queue.isEmpty() === false) {
+        node = queue.remove()
+        source = node.dest
+        
+        if (visited[source] == true) {
+            continue
         }
-        for (let i = 0; i < count; i++) {
-            if (dist[i] === infi) {
-                console.log(` node id ${i}  prev ${previous[i]} distance : Unreachable`)
-            } else {
-                console.log(` node id ${i}  prev ${previous[i]} distance : ${dist[i]}`)
+        visited[source] = true
+        
+        const adl = this.Adj[source];
+        for (let index = 0; index < adl.length; index++) {
+            const adn = adl[index];
+            const dest = adn.dest;
+            const alt = adn.cost;
+            if (dist[dest] > alt && visited[dest] === false) {
+                dist[dest] = alt
+                previous[dest] = source
+                node = new GraphEdge(dest, alt)
+                queue.add(node)
             }
         }
     }
-
-    dijkstra(source) {
-        const count = this.count;
-        const previous = new Array(count).fill(-1);
-        const infi = 2147483647;
-        const dist = new Array(count).fill(infi);
-        const visited = new Array(count).fill(false);
-
-        dist[source] = 0
-        previous[source] = -1
-
-        const queue = new PriorityQueue(null, GraphEdgeComparator);
-        let node = new GraphEdge(source, 0);
-        queue.add(node)
-
-        while (queue.isEmpty() === false) {
-            node = queue.remove()
-            source = node.dest
-            visited[source] = true
-            const adl = this.Adj[source];
-            for (let index = 0; index < adl.length; index++) {
-                const adn = adl[index];
-                const dest = adn.dest;
-                const alt = adn.cost + dist[source];
-                if (dist[dest] > alt && visited[dest] === false) {
-                    dist[dest] = alt
-                    previous[dest] = source
-                    node = new GraphEdge(dest, alt)
-                    queue.add(node)
-                }
-            }
+    for (let i = 0; i < count; i++) {
+        if (dist[i] === infi) {
+            console.log(`Node id ${i} is Unreachable`)
+        } else {
+            console.log(`Node id ${i}, prev : ${previous[i]}, cost : ${dist[i]}`)
         }
-        for (let i = 0; i < count; i++) {
-            if (dist[i] === infi) {
-                console.log(` \n node id ${i}  prev ${previous[i]} distance : Unreachable`)
-            } else {
-                console.log(` node id ${i}  prev ${previous[i]} distance : ${dist[i]}`)
+    }
+}
+
+dijkstra(source) {
+    const count = this.count;
+    const previous = new Array(count).fill(-1);
+    const Infinity = 2147483647;
+    const dist = new Array(count).fill(Infinity);
+    const visited = new Array(count).fill(false);
+
+    dist[source] = 0
+    previous[source] = -1
+
+    const queue = new PriorityQueue(null, GraphEdgeComparator);
+    let node = new GraphEdge(source, 0);
+    queue.add(node)
+
+    while (queue.isEmpty() === false) {
+        node = queue.remove()
+        source = node.dest
+        
+        if (visited[source] == true) {
+            continue
+        }
+        visited[source] = true
+        
+        const adl = this.Adj[source];
+        for (let index = 0; index < adl.length; index++) {
+            const adn = adl[index];
+            const dest = adn.dest;
+            const alt = adn.cost + dist[source];
+            if (dist[dest] > alt && visited[dest] === false) {
+                dist[dest] = alt
+                previous[dest] = source
+                node = new GraphEdge(dest, alt)
+                queue.add(node)
             }
         }
     }
+    for (let i = 0; i < count; i++) {
+        if (dist[i] === Infinity) {
+            console.log(`Node id ${i} is Unreachable`)
+        } else {
+            console.log(`Node id ${i}, prev : ${previous[i]}, cost : ${dist[i]}`)
+        }
+    }
+}
 
     shortestPath(source) {
         let curr;
@@ -755,7 +785,7 @@ class Graph {
         for (var i = 0; i < count; i++) {
             adl = this.Adj[i]
             if (adl.length > 0) {
-                this.dfsUtil(i, visited)
+                this.dfsUtil3(i, visited)
                 break
             }
         }
@@ -816,7 +846,7 @@ class Graph {
                 break
         }
 
-        this.dfsUtil(index, visited)
+        this.dfsUtil3(index, visited)
         for (var i = 0; i < count; i++) {
             adl = this.Adj[i]
             if (visited[i] === false && adl.length > 0)
@@ -826,7 +856,7 @@ class Graph {
         const gReversed = this.transposeGraph();
         visited.fill(false)
 
-        gReversed.dfsUtil(index, visited)
+        gReversed.dfsUtil3(index, visited)
         for (var i = 0; i < count; i++) {
             adl = gReversed.Adj[i]
             if (visited[i] === false && adl.length > 0)
@@ -861,22 +891,34 @@ class Graph {
 }
 
 function test1(){
-    const gph = new Graph(5);
-    gph.addDirectedEdge(0, 1, 3)
-    gph.addDirectedEdge(0, 4, 2)
-    gph.addDirectedEdge(1, 2, 1)
-    gph.addDirectedEdge(2, 3, 1)
-    gph.addDirectedEdge(4, 1, 2)
-    gph.addDirectedEdge(4, 3, 1)
-    gph.print()
-    console.log(gph.dfs(0, 2))
-    console.log(gph.bfs(0, 2))
-    console.log(gph.dfsStack(0, 2))
-}
-
+    const graph = new Graph(4);
+    graph.addUndirectedEdge(0, 1, 1);
+    graph.addUndirectedEdge(0, 2, 1);
+    graph.addUndirectedEdge(1, 2, 1);
+    graph.addUndirectedEdge(2, 3, 1);
+    graph.print();
+};
 //test1()
 
 function test2(){
+    const gph = new Graph(8);
+    gph.ddUndirecbtedEdge(0, 1)
+    gph.addUndirectedEdge(0, 2)
+    gph.addUndirectedEdge(0, 3)
+    gph.addUndirectedEdge(1, 4)
+    gph.addUndirectedEdge(2, 5)
+    gph.addUndirectedEdge(3, 6)
+    gph.addUndirectedEdge(4, 7)
+    gph.addUndirectedEdge(5, 7)
+    gph.addUndirectedEdge(6, 7)
+    console.log("Path between 0 & 6 : ", gph.dfs(0, 6))
+    console.log("Path between 0 & 6 : ", gph.bfs(0, 6))
+    console.log("Path between 0 & 6 : ", gph.dfsStack(0, 6))
+}
+
+//test2()
+
+function test3(){
     const gph = new Graph(6);
     gph.addDirectedEdge(5, 2, 1)
     gph.addDirectedEdge(5, 0, 1)
@@ -884,13 +926,13 @@ function test2(){
     gph.addDirectedEdge(4, 1, 1)
     gph.addDirectedEdge(2, 3, 1)
     gph.addDirectedEdge(3, 1, 1)
-    gph.print()
+    //gph.print()
     gph.topologicalSort()
 }
 
-//test2()
+//test3()
 
-function test3(){
+function test4(){
     const gph = new Graph(5);
     gph.addDirectedEdge(0, 1, 1)
     gph.addDirectedEdge(0, 2, 1)
@@ -898,16 +940,14 @@ function test3(){
     gph.addDirectedEdge(1, 3, 1)
     gph.addDirectedEdge(3, 4, 1)
     gph.addDirectedEdge(1, 4, 1)
-    gph.print()
     console.log(`PathExist :: ${gph.pathExist(0, 4)}`)
-    console.log("Count All Path")
-    console.log(gph.countAllPath(0, 4))
+    console.log("Path Count :: " , gph.countAllPath(0, 4))
     gph.printAllPath(0, 4)
 }
 
-//test3()
+//test4()
 
-function test4(){
+function test5(){
     const gph = new Graph(7);
     gph.addDirectedEdge(0, 1, 1)
     gph.addDirectedEdge(0, 2, 1)
@@ -917,13 +957,12 @@ function test4(){
     gph.addDirectedEdge(5, 6, 1)
     gph.addDirectedEdge(5, 2, 1)
     gph.addDirectedEdge(6, 0, 1)
-    gph.print()
     gph.rootVertex()
 }
 
-//test4()
+//test5()
 
-function test5(){
+function test6(){
     const gph = new Graph(4);
     gph.addDirectedEdge(0, 1, 1)
     gph.addDirectedEdge(0, 2, 1)
@@ -937,9 +976,9 @@ function test5(){
     }
 }
 
-//test5()
+//test6()
 
-function test6(){
+function test7(){
     const gph = new Graph(7);
     gph.addUndirectedEdge(0, 1, 1)
     gph.addUndirectedEdge(0, 2, 1)
@@ -949,14 +988,13 @@ function test6(){
     gph.addUndirectedEdge(3, 4, 1)
     gph.addUndirectedEdge(4, 5, 1)
     gph.addUndirectedEdge(4, 6, 1)
-    gph.print()
-    gph.bfsLevelNode(1)
-    console.log(gph.bfsDistance(1, 6))
+    //gph.bfsLevelNode(1)
+    console.log("BfsDistance :: " , gph.bfsDistance(1, 6))
 }
 
-//test6()
+//test7()
 
-function test7(){
+function test8(){
     const gph = new Graph(6);
     gph.addUndirectedEdge(0, 1, 1)
     gph.addUndirectedEdge(1, 2, 1)
@@ -965,19 +1003,7 @@ function test7(){
     gph.addUndirectedEdge(2, 5, 1)
     gph.addUndirectedEdge(3, 5, 1)
     console.log(gph.isCyclePresentUndirected())
-}
-
-//test7()
-
-function test8(){
-    const gph = new Graph(5);
-    gph.addDirectedEdge(0, 1, 1)
-    gph.addDirectedEdge(0, 2, 1)
-    gph.addDirectedEdge(2, 3, 1)
-    gph.addDirectedEdge(1, 3, 1)
-    gph.addDirectedEdge(3, 4, 1)
-    gph.addDirectedEdge(4, 1, 1)
-    console.log(gph.isCyclePresentColor())
+    console.log("IsConnectedUndirected : ", gph.isConnectedUndirected())
 }
 
 //test8()
@@ -985,17 +1011,42 @@ function test8(){
 function test9(){
     const gph = new Graph(5);
     gph.addDirectedEdge(0, 1, 1)
+    gph.addDirectedEdge(0, 2, 1)
+    gph.addDirectedEdge(2, 3, 1)
+    gph.addDirectedEdge(1, 3, 1)
+    gph.addDirectedEdge(3, 4, 1)
+    gph.addDirectedEdge(4, 1, 1)
+    console.log(gph.isCyclePresent())
+    console.log(gph.isCyclePresentColor())
+}
+//test9()
+
+function test10(){
+    const graph = new Graph(4);
+    graph.addDirectedEdge(0, 1);
+    graph.addDirectedEdge(0, 2);
+    graph.addDirectedEdge(1, 2);
+    graph.addDirectedEdge(2, 3);
+    const g = graph.transposeGraph()
+    g.print();
+};
+
+//test10()
+
+function test11(){
+    const gph = new Graph(5);
+    gph.addDirectedEdge(0, 1, 1)
     gph.addDirectedEdge(1, 2, 1)
     gph.addDirectedEdge(2, 3, 1)
     gph.addDirectedEdge(3, 0, 1)
     gph.addDirectedEdge(2, 4, 1)
     gph.addDirectedEdge(4, 2, 1)
-    console.log(` IsStronglyConnected:: ${gph.isStronglyConnected()}`)
+    console.log(`IsStronglyConnected:: ${gph.isStronglyConnected()}`)
 }
 
-//test9()
+//test11()
 
-function test10(){
+function test12(){
     const gph = new Graph(7);
     gph.addDirectedEdge(0, 1, 1)
     gph.addDirectedEdge(1, 2, 1)
@@ -1008,9 +1059,9 @@ function test10(){
     gph.stronglyConnectedComponent()
 }
 
-//test10()
+//test12()
 
-function test11(){
+function test13(){
     const gph = new Graph(9);
     gph.addUndirectedEdge(0, 1, 4)
     gph.addUndirectedEdge(0, 7, 8)
@@ -1026,13 +1077,58 @@ function test11(){
     gph.addUndirectedEdge(6, 7, 1)
     gph.addUndirectedEdge(6, 8, 6)
     gph.addUndirectedEdge(7, 8, 7)
-    gph.prims()
-    gph.dijkstra(0)
+    //gph.prims()
+    gph.dijkstra(1)
+}
+test13()
+
+/*
+Node id 0, prev : 1, cost : 4
+Node id 1, prev : -1, cost : 0
+Node id 2, prev : 1, cost : 8
+Node id 3, prev : 2, cost : 15
+Node id 4, prev : 5, cost : 22
+Node id 5, prev : 2, cost : 12
+Node id 6, prev : 7, cost : 12
+Node id 7, prev : 1, cost : 11
+Node id 8, prev : 2, cost : 10
+
+
+Node id 0, prev : -1, cost : 0
+Node id 1, prev : 0, cost : 4
+Node id 2, prev : 5, cost : 4
+Node id 3, prev : 2, cost : 7
+Node id 4, prev : 3, cost : 9
+Node id 5, prev : 6, cost : 2
+Node id 6, prev : 7, cost : 1
+Node id 7, prev : 0, cost : 8
+Node id 8, prev : 2, cost : 2
+*/
+
+function test14(){
+    const gph = new Graph(9);
+    gph.addDirectedEdge(0, 1, 4)
+    gph.addDirectedEdge(0, 7, 8)
+    gph.addDirectedEdge(1, 2, 8)
+    gph.addDirectedEdge(1, 7, 11)
+    gph.addDirectedEdge(2, 3, 7)
+    gph.addDirectedEdge(2, 8, 2)
+    gph.addDirectedEdge(2, 5, 4)
+    gph.addDirectedEdge(3, 4, 9)
+    gph.addDirectedEdge(3, 5, 14)
+    gph.addDirectedEdge(4, 5, 10)
+    gph.addDirectedEdge(5, 6, 2)
+    gph.addDirectedEdge(6, 7, 1)
+    gph.addDirectedEdge(6, 8, 6)
+    gph.addDirectedEdge(7, 8, 7)
+    //gph.dijkstra(0)
+    gph.shortestPath(0)
+
 }
 
-test11()
+//test14()
 
-function test12(){
+function test15(){
     const gph = new Graph(9);
     gph.addUndirectedEdge(0, 2, 1)
     gph.addUndirectedEdge(1, 2, 5)
@@ -1049,9 +1145,9 @@ function test12(){
     console.log(`isConnectedUndirected :: ${gph.isConnectedUndirected()}`)
 }
 
-test12()
+//test15()
 
-function test13(){
+function test16(){
     const gph = new Graph(5);
     gph.addDirectedEdge(0, 1, 3)
     gph.addDirectedEdge(0, 4, 2)
@@ -1062,7 +1158,7 @@ function test13(){
     gph.bellmanFordshortestPath(0)
 }
 
-test13()
+//test16()
 
 function heightTreeParentArr(arr){
     const count = arr.length;
@@ -1123,15 +1219,15 @@ function heightTreeParentArr2(arr ){
     return maxHeight
 }
 
-function test14(){
+function test17(){
     const parentArray = [-1, 0, 1, 2, 3];
     console.log(heightTreeParentArr(parentArray))
     console.log(heightTreeParentArr2(parentArray))
 }
 
-test14()
+//test17()
 
-function test15(){
+function test18(){
     const gph = new Graph(5);
     gph.addDirectedEdge(1, 0, 1)
     gph.addDirectedEdge(0, 2, 1)
@@ -1141,9 +1237,9 @@ function test15(){
     console.log(gph.isEulerian())
 }
 
-test15()
+//test18()
 
-function test16(){
+function test19(){
     const gph = new Graph(5);
     gph.addDirectedEdge(0, 1, 1)
     gph.addDirectedEdge(1, 2, 1)
@@ -1154,4 +1250,4 @@ function test16(){
     console.log(gph.isEulerianCycle())
 }
 
-test16()
+//test19()

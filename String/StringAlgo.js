@@ -26,9 +26,9 @@ function test1() {
     console.log(matchExp("hello*", "helloworld"));
     console.log(matchExp("hello?d", "hellowd"));
     console.log(matchExp("hello*hemant", "helloworldfsdfsdfdsfhemant"));
-    console.log()
+    console.log(matchExp("*hemantj", "helloworldfsdfsdfdsfhemant"));
 };
-test1();
+//test1();
 
 function match(source, pattern) {
     let iSource = 0;
@@ -52,7 +52,8 @@ function test2() {
     console.log(match("hello*xxxxxxxxxxhemantxxxxxxxxxxxx", "hellnt"));
     console.log()
 };
-test2();
+
+//test2();
 
 function isPrime(n) {
     let answer = (n > 1) ? true : false;
@@ -73,7 +74,7 @@ function test3() {
     }
     console.log()
 };
-test3();
+//test3();
 
 function isUniqueChar(str) {
     const bitarr = new Array(26).fill(0);
@@ -90,24 +91,25 @@ function isUniqueChar(str) {
         } else if ((small <= c) && (small + 26 >= c)) {
             c = (c - small);
         } else {
-            console.log("Unknown Char!");
+            console.log("Unknown Char.");
             return false;
         }
         if (bitarr[c] !== 0) {
-            console.log("Duplicate detected!");
+            console.log("Duplicate detected.");
             return false;
         }
         bitarr[c] = 1;
     }
-    console.log("No duplicate detected!");
+    console.log("No duplicate detected.");
     return true;
 };
 
 function test5() {
-    console.info("isUniqueChar", isUniqueChar("aple"));
-    console.info("isUniqueChar", isUniqueChar("apple"));
+    isUniqueChar("aple");
+    isUniqueChar("apple");
 };
-test5();
+
+//test5();
 
 function ToUpper(s) {
     ascii = s.charCodeAt(0)
@@ -142,13 +144,12 @@ function test6() {
     console.info(LowerUpper('s'));
     console.info(LowerUpper('S'));
 };
-test6();
+//test6();
 
 function isPermutation(s1, s2) {
     const count = new Array(256).fill(0);
     const length = s1.length;
     if (s2.length !== length) {
-        console.info("is permutation return false");
         return false;
     }
 
@@ -159,20 +160,19 @@ function isPermutation(s1, s2) {
 
     for (var i = 0; i < length; i++) {
         if (count[s1.charCodeAt(i)] !== 0) {
-            console.info("is permutation return false");
             return false;
         }
     }
 
-    console.info("is permutation return true");
     return true;
 };
 
 function test7() {
-    console.info(isPermutation("apple", "plepa"));
-    console.info(isPermutation("appleb", "plepaa"));
+    console.info("isPermutation :", isPermutation("apple", "plepa"));
+    console.info("isPermutation :", isPermutation("appleb", "plepaa"));
 };
-test7();
+
+//test7();
 
 function isPalindrome(str) {
     let i = 0;
@@ -183,20 +183,21 @@ function isPalindrome(str) {
     }
 
     if (i < j) {
-        console.info("String is not a Palindrome");
+        console.info(str, "is not a Palindrome");
         return false;
     }
     else {
-        console.info("String is a Palindrome");
+        console.info(str, "is a Palindrome");
         return true;
     }
 };
 
 function test8() {
-    console.info(isPalindrome("hello"));
-    console.info(isPalindrome("eoloe"));
+    isPalindrome("hello");
+    isPalindrome("eoloe");
 };
-test8();
+
+//test8();
 
 function pow(x, n) {
     let value;
@@ -216,7 +217,7 @@ function pow(x, n) {
 function test9() {
     console.info(pow(5, 2));
 };
-test9();
+//test9();
 
 function myStrcmp(a, b) {
     let index = 0;
@@ -245,9 +246,10 @@ function myStrcmp(a, b) {
 };
 
 function test10() {
-    console.info(myStrcmp("aba", "aas"));
+    console.info("StrCmp returns :", myStrcmp("aba", "aas"));
 };
-test10();
+
+//test10();
 
 function reverseString(str) {
     const a = (str).split('');
@@ -306,7 +308,8 @@ function test11() {
     console.info(reverseString("apple"));
     console.info(reverseWords("hello world"));
 };
-test11();
+
+//test11();
 
 function printAnagram(str) {
     const a = str.split('');
@@ -337,7 +340,8 @@ function printAnagramUtil(a, max, n) {
 function test12() {
     printAnagram("123");
 };
-test12();
+
+//test12();
 
 function shuffle(str) {
     const ar = str.split('');
@@ -367,6 +371,7 @@ function shuffle(str) {
 function test13() {
     console.log(shuffle("ABCDE12345"));
 };
+A1B2C3D4E5
 test13();
 
 function addBinary(first, second) {
@@ -404,4 +409,4 @@ function addBinary(first, second) {
 function test14() {
     console.info(addBinary("1000", "11111111"));
 };
-test14();
+//test14();

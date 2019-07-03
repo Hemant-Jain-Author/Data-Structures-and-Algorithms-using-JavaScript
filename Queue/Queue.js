@@ -44,9 +44,9 @@ class Queue {
 }
 
 const que = new Queue();
-for (var i = 0; i < 10; i++) {
-    que.add(i);
-}
-for (var i = 0; i < 10; i++) {
-    process.stdout.write(`${que.remove()} `);
+que.add(1);
+que.add(2);
+que.add(3);
+while (que.isEmpty() === false) {
+    console.log(que.remove());
 }

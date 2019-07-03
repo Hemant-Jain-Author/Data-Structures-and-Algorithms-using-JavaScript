@@ -38,6 +38,8 @@ class Queue {
         this.size++;
     }
 
+    
+
     remove() {
         if (this.isEmpty())
             throw new Error("StackEmptyError");
@@ -56,11 +58,10 @@ class Queue {
     }
 }
 
-const q = new Queue();
-for (var i = 1; i <= 100; i++) {
-    q.add(i);
+const que = new Queue();
+que.add(1);
+que.add(2);
+que.add(3);
+while (que.isEmpty() === false) {
+    console.log(que.remove());
 }
-for (var i = 1; i <= 50; i++) {
-    q.remove();
-}
-q.print();

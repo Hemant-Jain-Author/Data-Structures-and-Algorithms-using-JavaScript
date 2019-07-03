@@ -96,7 +96,7 @@ function test1() {
     const tour = [[8, 6], [1, 4], [7, 6]];
     console.info(`Circular Tour : ${CircularTour(tour, 3)}`);
 };
-test1()
+//test1()
 /*
 Circular Tour : 2
 */
@@ -114,7 +114,7 @@ function convertXY(src, dst) {
             for (let i = 0; i < index; i++) {
                 process.stdout.write(`${arr[i]} `);
             }
-            console.info(`Steps countr :: ${steps}`);
+            console.info(`Steps count :: ${steps}`);
             return steps;
         }
         steps++;
@@ -129,9 +129,9 @@ function convertXY(src, dst) {
 function test2() {
     convertXY(2, 7);
 };
-test2()
+//test2()
 /*
-2 4 8 7 Steps countr :: 3
+2 4 8 7 Steps count :: 3
 */
 function maxSlidingWindows(arr, size, k) {
     const que = new Deque();
@@ -154,7 +154,7 @@ function test3() {
     maxSlidingWindows(arr, 7, 3);
     console.log()
 };
-test3()
+//test3()
 /*
 Max Sliding Windows : 75 92 92 92 90 
 */
@@ -180,7 +180,7 @@ function test4() {
     const k = 3;
     minOfMaxSlidingWindows(arr, 7, 3);
 };
-test4()
+//test4()
 /*
 Min of max is :: 75
 */
@@ -205,7 +205,7 @@ function test5() {
     const k = 3;
     maxOfMinSlidingWindows(arr, 7, 3);
 };
-test5()
+//test5()
 /*
 Max of min is :: 59
 */
