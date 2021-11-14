@@ -45,12 +45,12 @@ function isAnagram(str1, str2){
         return false;
 
     const cm = new CountMap();
-    for (var index = 0; index < str1.length; index++) {
-        var ch = str1[index];
+    for (let index = 0; index < str1.length; index++) {
+        let ch = str1[index];
         cm.insert(ch);
     }
-    for (var index = 0; index < str2.length; index++) {
-        var ch = str2[index];
+    for (let index = 0; index < str2.length; index++) {
+        let ch = str2[index];
         cm.remove(ch);
     }
     return (cm.size() === 0);
@@ -121,10 +121,10 @@ function printRepeating(arr) {
 function printFirstRepeating(arr){
     const size = arr.length;
     const hs = new CountMap();
-    for (var i = 0; i < size; i++) {
+    for (let i = 0; i < size; i++) {
         hs.insert(arr[i]);
     }
- for (var i = 0; i < size; i++) {
+ for (let i = 0; i < size; i++) {
         hs.remove(arr[i]);
         if (hs.find(arr[i])) {
             console.log(`First Repeating number is : ${arr[i]}`);

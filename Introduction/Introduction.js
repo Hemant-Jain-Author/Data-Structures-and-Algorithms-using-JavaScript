@@ -285,11 +285,11 @@ function SmallestPositiveMissingNumber(arr, size) {
 
 function SmallestPositiveMissingNumber2(arr, size) {
     const hs = new Set();
-    for (var i = 0; i < size; i++) {
+    for (let i = 0; i < size; i++) {
         hs.add(arr[i]);
     }
 
-    for (var i = 1; i < size + 1; i++) {
+    for (let i = 1; i < size + 1; i++) {
         if (hs.has(i) === false)
             return i;
     }
@@ -299,13 +299,13 @@ function SmallestPositiveMissingNumber2(arr, size) {
 function SmallestPositiveMissingNumber3(arr, size) {
     const aux = new Array(size).fill(-1);
 
-    for (var i = 0; i < size; i++) {
+    for (let i = 0; i < size; i++) {
         if (arr[i] > 0 && arr[i] <= size) {
             aux[arr[i] - 1] = arr[i];
         }
     }
     
-    for (var i = 0; i < size; i++) {
+    for (let i = 0; i < size; i++) {
         if (aux[i] !== i + 1) {
             return i + 1;
         }
@@ -315,7 +315,7 @@ function SmallestPositiveMissingNumber3(arr, size) {
 
 function SmallestPositiveMissingNumber4(arr, size) {
     let temp;
-    for (var i = 0; i < size; i++) {
+    for (let i = 0; i < size; i++) {
         while (arr[i] !== i + 1 && arr[i] > 0 && arr[i] <= size) {
             temp = arr[i];
             arr[i] = arr[temp - 1];
@@ -323,7 +323,7 @@ function SmallestPositiveMissingNumber4(arr, size) {
         }
     }
     
-    for (var i = 0; i < size; i++) {
+    for (let i = 0; i < size; i++) {
         if (arr[i] !== i + 1) {
             return i + 1;
         }
@@ -390,13 +390,13 @@ function maxCircularSum(arr, size) {
     let sumAll = 0;
     let currVal = 0;
     let maxVal;
-    for (var i = 0; i < size; i++) {
+    for (let i = 0; i < size; i++) {
         sumAll += arr[i];
         currVal += (i * arr[i]);
     }
     
     maxVal = currVal;
-    for (var i = 1; i < size; i++) {
+    for (let i = 1; i < size; i++) {
         currVal = (currVal + sumAll) - (size * arr[size - i]);
         if (currVal > maxVal) {
             maxVal = currVal;

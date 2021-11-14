@@ -44,7 +44,7 @@ Tree.prototype.printPreOrderUtil = function(node) {
     }
 };
 
-var t = new Tree();
+let t = new Tree();
 t.insertNode(5)
 t.insertNode(3)
 t.insertNode(1)

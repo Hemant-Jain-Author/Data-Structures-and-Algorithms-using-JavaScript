@@ -146,12 +146,12 @@ class Graph {
     addDirectedEdge(source, dest, cost) {
         if ((typeof source === 'number') && (typeof dest === 'number') && 
             (typeof cost === 'number')) {
-            var edge = new GraphEdge(dest, cost)
+            let edge = new GraphEdge(dest, cost)
             this.Adj[source].push(edge)
         }
         else if ((typeof source === 'number') && (typeof dest === 'number') && 
             cost === undefined) {
-            var edge = new GraphEdge(dest, 1)
+            let edge = new GraphEdge(dest, 1)
             this.Adj[source].push(edge)
         }
         else
@@ -213,7 +213,7 @@ class Graph {
         visited[index] = true
         const adl = this.Adj[index];
         path.push(index)
-        for (var index = 0; index < adl.length; index++) {
+        for (let index = 0; index < adl.length; index++) {
             const adn = adl[index];
             if (visited[adn.dest] === false)
                 this.dfsUtil(adn.dest, visited, path)
@@ -276,7 +276,7 @@ class Graph {
     dfsUtil3(index, visited) {
         visited[index] = true
         const adl = this.Adj[index];
-        for (var index = 0; index < adl.length; index++) {
+        for (let index = 0; index < adl.length; index++) {
             const adn = adl[index];
             if (visited[adn.dest] === false)
                 this.dfsUtil3(adn.dest, visited)
@@ -369,11 +369,11 @@ class Graph {
     transitiveClosure() {
         const count = this.count;
         const tc = new Array(count);
-        for (var i = 0; i < count; i++) {
+        for (let i = 0; i < count; i++) {
             tc[i] = new Array(count).fill(0);
         }
 
-        for (var i = 0; i < count; i++) {
+        for (let i = 0; i < count; i++) {
             this.transitiveClosureUtil(i, i, tc)
         }
         return tc
@@ -469,7 +469,7 @@ class Graph {
         visited[index] = true
         marked[index] = 1
         const adl = this.Adj[index];
-        for (var index = 0; index < adl.length; index++) {
+        for (let index = 0; index < adl.length; index++) {
             const adn = adl[index];
             const dest = adn.dest;
             if (marked[dest] === 1)
@@ -499,7 +499,7 @@ class Graph {
         visited[index] = 1
         let dest;
         const adl = this.Adj[index];
-        for (var index = 0; index < adl.length; index++) {
+        for (let index = 0; index < adl.length; index++) {
             const adn = adl[index];
             dest = adn.dest
             if (visited[dest] === 1)
@@ -556,7 +556,7 @@ class Graph {
         const visited = new Array(count).fill(false);
 
         this.dfsUtil3(0, visited)
-        for (var i = 0; i < count; i++) {
+        for (let i = 0; i < count; i++) {
             if (visited[i] === false) {
                 return false
             }
@@ -565,7 +565,7 @@ class Graph {
         visited.fill(false)
 
         gReversed.dfsUtil3(0, visited)
-        for (var i = 0; i < count; i++) {
+        for (let i = 0; i < count; i++) {
             if (visited[i] === false) {
                 return false
             }
@@ -722,7 +722,7 @@ dijkstra(source) {
         const distance = new Array(count).fill(infi);
 
         distance[source] = 0
-        for (var i = 0; i < count - 1; i++) {
+        for (let i = 0; i < count - 1; i++) {
             for (let j = 0; j < count; j++) {
                 const adl = this.Adj[j];
                 for (let index = 0; index < adl.length; index++) {
@@ -735,7 +735,7 @@ dijkstra(source) {
                 }
             }
         }
-        for (var i = 0; i < count; i++) {
+        for (let i = 0; i < count; i++) {
             console.log(`${path[i]} to ${i} weight ${distance[i]}`)
         }
     }
@@ -782,14 +782,14 @@ dijkstra(source) {
         const count = this.count;
         const visited = new Array(count).fill(false);
         let adl;
-        for (var i = 0; i < count; i++) {
+        for (let i = 0; i < count; i++) {
             adl = this.Adj[i]
             if (adl.length > 0) {
                 this.dfsUtil3(i, visited)
                 break
             }
         }
-        for (var i = 0; i < count; i++) {
+        for (let i = 0; i < count; i++) {
             adl = this.Adj[i]
             if (adl.length > 0)
                 if (visited[i] === false)
@@ -809,7 +809,7 @@ dijkstra(source) {
         const inDegree = new Array(count).fill(0);
         const outDegree = new Array(count).fill(0);
 
-        for (var i = 0; i < count; i++) {
+        for (let i = 0; i < count; i++) {
             let adl = this.Adj[i]
             for (let index = 0; index < adl.length; index++) {
                 const adn = adl[index];
@@ -817,7 +817,7 @@ dijkstra(source) {
                 inDegree[adn.dest] += 1
             }
         }
-        for (var i = 0; i < count; i++) {
+        for (let i = 0; i < count; i++) {
             if ((inDegree[i] + outDegree[i]) % 2 !== 0) {
                 odd += 1
             }
@@ -840,14 +840,14 @@ dijkstra(source) {
         const visited = new Array(count).fill(false);
         let adl;
 
-        for (var index = 0; index < count; index++) {
+        for (let index = 0; index < count; index++) {
             adl = this.Adj[index]
             if (adl.length > 0)
                 break
         }
 
         this.dfsUtil3(index, visited)
-        for (var i = 0; i < count; i++) {
+        for (let i = 0; i < count; i++) {
             adl = this.Adj[i]
             if (visited[i] === false && adl.length > 0)
                 return false
@@ -857,7 +857,7 @@ dijkstra(source) {
         visited.fill(false)
 
         gReversed.dfsUtil3(index, visited)
-        for (var i = 0; i < count; i++) {
+        for (let i = 0; i < count; i++) {
             adl = gReversed.Adj[i]
             if (visited[i] === false && adl.length > 0)
                 return false
@@ -873,7 +873,7 @@ dijkstra(source) {
         if (!this.isStronglyConnected2())
             return false
 
-        for (var i = 0; i < count; i++) {
+        for (let i = 0; i < count; i++) {
             const adl = this.Adj[i];
             for (let index = 0; index < adl.length; index++) {
                 const adn = adl[index];
@@ -882,7 +882,7 @@ dijkstra(source) {
             }
         }
 
-        for (var i = 0; i < count; i++) {
+        for (let i = 0; i < count; i++) {
             if (inDegree[i] !== outDegree[i])
                 return false
         }

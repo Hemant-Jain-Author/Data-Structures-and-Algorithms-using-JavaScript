@@ -277,7 +277,7 @@ function OddNumbers(arr, size) {
         xorSum = xorSum ^ arr[i];
     }
     setBit = xorSum & ~(xorSum - 1);
-    for (var i = 0; i < size; i++) {
+    for (let i = 0; i < size; i++) {
         if ((arr[i] & setBit) !== 0)
             first ^= arr[i];
         else
@@ -564,10 +564,10 @@ function test11() {
 //test11();
 
 function SumPairRestArray(arr, size) {
-    var total;
+    let total;
     let curr;
     arr.sort(function cmp(a, b) { return (a - b); });
-    var total = 0;
+    let total = 0;
     for (let i = 0; i < size; i++) {
         total += arr[i];
     }
@@ -1497,7 +1497,7 @@ function isAP2(arr, size) {
     let value;
     let diff;
     const hs = new Set();
-    for (var i = 0; i < size; i++) {
+    for (let i = 0; i < size; i++) {
         if (arr[i] < first) {
             second = first;
             first = arr[i];
@@ -1506,13 +1506,13 @@ function isAP2(arr, size) {
     }
     diff = second - first;
 
-    for (var i = 0; i < size; i++) {
+    for (let i = 0; i < size; i++) {
         if (hs.has(arr[i]))
             return false;
         hs.add(arr[i]);
     }
 
-    for (var i = 0; i < size; i++) {
+    for (let i = 0; i < size; i++) {
         value = first + i * diff;
         if (!hs.has(value))
             return false;
@@ -1525,7 +1525,7 @@ function isAP3(arr, size) {
     let second = 9999999;
     const count = new Array(size).fill(0);
     let index = -1;
-    for (var i = 0; i < size; i++) {
+    for (let i = 0; i < size; i++) {
         if (arr[i] < first) {
             second = first;
             first = arr[i];
@@ -1534,13 +1534,13 @@ function isAP3(arr, size) {
             second = arr[i];
     }
     const diff = second - first;
-    for (var i = 0; i < size; i++) {
+    for (let i = 0; i < size; i++) {
         index = (arr[i] - first) / diff ;
         if (index > size - 1 || count[index] !== 0)
             return false;
         count[index] = 1;
     }
-    for (var i = 0; i < size; i++) {
+    for (let i = 0; i < size; i++) {
         if (count[i] !== 1)
             return false;
     }
@@ -1560,10 +1560,10 @@ function test33() {
 function findBalancedPoint(arr, size) {
     let first = 0;
     let second = 0;
-    for (var i = 1; i < size; i++) {
+    for (let i = 1; i < size; i++) {
         second += arr[i];
     }
-    for (var i = 0; i < size; i++) {
+    for (let i = 0; i < size; i++) {
         if (first === second) {
             return i;
         }
@@ -1667,7 +1667,7 @@ function test35() {
 
 function frequencyCounts(arr, size) {
     let index;
-    for (var i = 0; i < size; i++) {
+    for (let i = 0; i < size; i++) {
         while (arr[i] > 0) {
             index = arr[i] - 1;
             if (arr[index] > 0) {
@@ -1680,7 +1680,7 @@ function frequencyCounts(arr, size) {
             }
         }
     }
-    for (var i = 0; i < size; i++) {
+    for (let i = 0; i < size; i++) {
         console.info((i + 1) , Math.abs(arr[i]));
     }
 };
@@ -1694,11 +1694,11 @@ function test36() {
 
 function KLargestElements(arrIn, size, k) {
     const arr = new Array(size);
-    for (var i = 0; i < size; i++) {
+    for (let i = 0; i < size; i++) {
         arr[i] = arrIn[i];
     }
     arr.sort(function cmp(a, b) { return (a - b); });
-    for (var i = 0; i < size; i++) {
+    for (let i = 0; i < size; i++) {
         if (arrIn[i] > arr[size - k]) {
             console.info(arrIn[i]);
         }
@@ -1731,11 +1731,11 @@ function QuickSelectUtil(arr, lower, upper, k) {
 
 function KLargestElements2(arrIn, size, k) {
     const arr = new Array(size);
-    for (var i = 0; i < size; i++) {
+    for (let i = 0; i < size; i++) {
         arr[i] = arrIn[i];
     }
     QuickSelectUtil(arr, 0, size - 1, size - k);
-    for (var i = 0; i < size; i++) {
+    for (let i = 0; i < size; i++) {
         if (arrIn[i] > arr[size - k]) {
             console.info(arrIn[i]);
         }
@@ -1831,9 +1831,9 @@ function MaxConSubArr(A, sizeA, B, sizeB) {
     let currMax = 0;
     let maximum = 0;
     const hs = new Set();
-    for (var i = 0; i < sizeB; i++)
+    for (let i = 0; i < sizeB; i++)
         hs.add(B[i]);
-    for (var i = 0; i < sizeA; i++){
+    for (let i = 0; i < sizeA; i++){
         if (hs.has(A[i]))
             currMax = 0;
         else
@@ -1902,20 +1902,20 @@ function RainWater(arr, size) {
     let max = arr[0];
     leftHigh[0] = arr[0];
     
-    for (var i = 1; i < size; i++) {
+    for (let i = 1; i < size; i++) {
         if (max < arr[i])
             max = arr[i];
         leftHigh[i] = max;
     }
     max = arr[size - 1];
     rightHigh[size - 1] = arr[size - 1];
-    for (var i = (size - 2); i >= 0; i--) {
+    for (let i = (size - 2); i >= 0; i--) {
         if (max < arr[i])
             max = arr[i];
         rightHigh[i] = max;
     }
     let water = 0;
-    for (var i = 0; i < size; i++) {
+    for (let i = 0; i < size; i++) {
         water += Math.min(leftHigh[i], rightHigh[i]) - arr[i];
     }
     console.info(`Water : ${water}`);

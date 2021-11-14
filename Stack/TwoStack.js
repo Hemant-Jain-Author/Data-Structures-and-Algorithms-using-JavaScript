@@ -48,13 +48,13 @@ class TwoStack {
 }
 
 const st = new TwoStack();
-for (var i = 0; i < 10; i++) {
+for (let i = 0; i < 10; i++) {
     st.StackPush1(i);
 }
 for (let j = 0; j < 10; j++) {
     st.StackPush2(j + 10);
 }
-for (var i = 0; i < 10; i++) {
+for (let i = 0; i < 10; i++) {
     console.log(`stack one pop value is : ${st.StackPop1()}`);
     console.log(`stack two pop value is : ${st.StackPop2()}`);
 }

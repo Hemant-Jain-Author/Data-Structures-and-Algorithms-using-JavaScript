@@ -189,7 +189,7 @@ function SortByOrder(arr, size, arr2, size2) {
     let retIndex = 0;
 
     let value;
-    for (var i = 0; i < size; i++) {
+    for (let i = 0; i < size; i++) {
         if (ht.has(arr[i])) {
             value = ht.get(arr[i]);
             ht.set(arr[i], value + 1);
@@ -200,23 +200,23 @@ function SortByOrder(arr, size, arr2, size2) {
     for (let j = 0; j < size2; j++) {
         if (ht.has(arr2[j])) {
             value = ht.get(arr2[j]);
-            for (var k = 0; k < value; k++) {
+            for (let k = 0; k < value; k++) {
                 ret[retIndex++] = arr2[j];
             }
             ht.delete(arr2[j]);
         }
     }
 
-    for (var i = 0; i < size; i++) {
+    for (let i = 0; i < size; i++) {
         if (ht.has(arr[i])) {
             value = ht.get(arr[i]);
-            for (var k = 0; k < value; k++) {
+            for (let k = 0; k < value; k++) {
                 ret[retIndex++] = arr[i];
             }
             ht.delete(arr[i]);
         }
     }
-    for (var i = 0; i < size; i++) {
+    for (let i = 0; i < size; i++) {
         arr[i] = ret[i];
     }
 };
@@ -268,7 +268,7 @@ function test6() {
 function checkReverse(arr, size) {
     let start = -1;
     let stop = -1;
-    for (var i = 0; i < (size - 1); i++) {
+    for (let i = 0; i < (size - 1); i++) {
         if (arr[i] > arr[i + 1]) {
             start = i;
             break;
@@ -277,7 +277,7 @@ function checkReverse(arr, size) {
     if (start === -1)
         return true;
 
-    for (var i = start; i < (size - 1); i++) {
+    for (let i = start; i < (size - 1); i++) {
         if (arr[i] < arr[i + 1]) {
             stop = i;
             break;
@@ -288,7 +288,7 @@ function checkReverse(arr, size) {
     if (arr[start - 1] > arr[stop] || arr[stop + 1] < arr[start])
         return false;
 
-    for (var i = stop + 1; i < size - 1; i++) {
+    for (let i = stop + 1; i < size - 1; i++) {
         if (arr[i] > arr[i + 1]) {
             return false;
         }

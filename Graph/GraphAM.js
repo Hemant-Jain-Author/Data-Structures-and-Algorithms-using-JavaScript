@@ -387,8 +387,8 @@ function test4(){
         [1, 1, 0, 0, 1],
         [0, 1, 1, 1, 0]];
 
-    for (var i = 0; i < count; i++) {
-        for (var j = 0; j < count; j++) {
+    for (let i = 0; i < count; i++) {
+        for (let j = 0; j < count; j++) {
             if (adj[i][j] === 1)
                 graph.addDirectedEdge(i, j, 1);
         }
@@ -404,8 +404,8 @@ function test4(){
         [1, 1, 0, 0, 0],
         [0, 1, 1, 0, 0]];
 
-    for (var i = 0; i < count; i++) {
-        for (var j = 0; j < count; j++) {
+    for (let i = 0; i < count; i++) {
+        for (let j = 0; j < count; j++) {
             if (adj2[i][j] === 1)
                 graph2.addDirectedEdge(i, j, 1);
         }
@@ -425,8 +425,8 @@ function test5(){
         [1, 1, 0, 0, 1],
         [0, 1, 1, 1, 0]];
 
-    for (var i = 0; i < count; i++) {
-        for (var j = 0; j < count; j++) {
+    for (let i = 0; i < count; i++) {
+        for (let j = 0; j < count; j++) {
             if (adj[i][j] === 1)
                 graph.addDirectedEdge(i, j, 1);
         }
@@ -442,8 +442,8 @@ function test5(){
         [1, 1, 0, 0, 0],
         [0, 1, 1, 0, 0]];
 
-    for (var i = 0; i < count; i++) {
-        for (var j = 0; j < count; j++) {
+    for (let i = 0; i < count; i++) {
+        for (let j = 0; j < count; j++) {
             if (adj2[i][j] === 1)
                 graph2.addDirectedEdge(i, j, 1);
         }

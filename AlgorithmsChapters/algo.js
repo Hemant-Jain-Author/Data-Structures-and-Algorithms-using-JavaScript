@@ -30,7 +30,7 @@ function test1 () {
   console.log(fibonacci2(5))
 }
 
-//test1()
+test1()
 
 function Feasible (Q, k) {
   for (let i = 0; i < k; i++) {
@@ -68,7 +68,7 @@ function test2 () {
 
 [ 7, 3, 0, 2, 5, 1, 6, 4 ]
 */
-//test2()
+test2()
 
 function TOHUtil (num, from, to, temp) {
   if (num < 1) {
@@ -88,7 +88,7 @@ function test3 () {
   TowersOfHanoi(3)
 }
 
-//test3()
+test3()
 
 function isPrime (n) {
   let answer = (n > 1) ? true : false;
@@ -108,4 +108,4 @@ function test4 () {
   console.log(isPrime(105))
 }
 
-//test4()
+test4()

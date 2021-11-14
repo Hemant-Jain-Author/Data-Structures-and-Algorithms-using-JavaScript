@@ -28,9 +28,9 @@ class Queue {
 }
 
 const que = new Queue();
-for (var i = 0; i < 20; i++) {
+for (let i = 0; i < 20; i++) {
 	que.add(i);
 }
-for (var i = 0; i < 22; i++) {
+for (let i = 0; i < 22; i++) {
 	console.log(que.remove());
 }

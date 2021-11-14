@@ -79,11 +79,11 @@ function test3() {
 function isUniqueChar(str) {
     const bitarr = new Array(26).fill(0);
     let index;
-    var size = str.length;
+    let size = str.length;
     const small = "a".charCodeAt(0);
     const big = "A".charCodeAt(0);
 
-    var size = str.length;
+    let size = str.length;
     for (let i = 0; i < size; i++) {
         let c = str.charCodeAt(i);
         if ((big <= c) && (big + 26 >= c)) {
@@ -153,12 +153,12 @@ function isPermutation(s1, s2) {
         return false;
     }
 
-    for (var i = 0; i < length; i++) {
+    for (let i = 0; i < length; i++) {
         count[s1.charCodeAt(i)]++;
         count[s2.charCodeAt(i)]--;
     }
 
-    for (var i = 0; i < length; i++) {
+    for (let i = 0; i < length; i++) {
         if (count[s1.charCodeAt(i)] !== 0) {
             return false;
         }

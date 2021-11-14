@@ -841,20 +841,20 @@ const Max_Int = 2147483647
 
 function RottenFruit(arr, maxCol, maxRow) {
     const traversed = Array(maxRow);
-    for (var i = 0; i < maxRow; i++) {
+    for (let i = 0; i < maxRow; i++) {
         traversed[i] = Array(maxCol).fill(Max_Int)
     }
 
-    for (var i = 0; i < maxCol - 1; i++) {
-        for (var j = 0; j < maxRow - 1; j++) {
+    for (let i = 0; i < maxCol - 1; i++) {
+        for (let j = 0; j < maxRow - 1; j++) {
             if (arr[i][j] === 2)
                 RottenFruitUtil(arr, maxCol, maxRow, i, j, traversed, 0);
         }
     }
 
     let maxDay = 0;
-    for (var i = 0; i < maxCol - 1; i++) {
-        for (var j = 0; j < maxRow - 1; j++) {
+    for (let i = 0; i < maxCol - 1; i++) {
+        for (let j = 0; j < maxRow - 1; j++) {
             if (arr[i][j] === 1) {
                 if (traversed[i][j] === Max_Int)
                     return -1;
@@ -926,18 +926,18 @@ function DistNearestFillUtil(arr, maxCol, maxRow, currCol, currRow, traversed, d
 
 function DistNearestFill(arr, maxCol, maxRow) {
     const traversed = Array(maxRow);
-    for (var i = 0; i < maxRow; i++) {
+    for (let i = 0; i < maxRow; i++) {
         traversed[i] = Array(maxCol).fill(Max_Int)
     }
 
-    for (var i = 0; i < maxCol; i++) {
+    for (let i = 0; i < maxCol; i++) {
         for (let j = 0; j < maxRow; j++) {
             if (arr[i][j] === 1)
                 DistNearestFillUtil(arr, maxCol, maxRow, i, j, traversed, 0);
         }
     }
 
-    for (var i = 0; i < maxCol; i++) {
+    for (let i = 0; i < maxCol; i++) {
         console.info(traversed[i]);
     }
 }
@@ -968,11 +968,11 @@ function findLargestIsland(arr, maxCol, maxRow) {
     let currVal = 0;
     const traversed = Array(maxRow);
     
-    for (var i = 0; i < maxRow; i++) {
+    for (let i = 0; i < maxRow; i++) {
         traversed[i] = Array(maxCol).fill(Max_Int)
     }
 
-    for (var i = 0; i < maxCol; i++) {
+    for (let i = 0; i < maxCol; i++) {
         for (let j = 0; j < maxRow; j++) {
             currVal = findLargestIslandUtil(arr, maxCol, maxRow, i, j, arr[i][j], traversed);
             if (currVal > maxVal)
@@ -1004,7 +1004,7 @@ function findCelebrity(relation, count) {
     const stk = ([]);
     let first = 0;
     let second = 0;
-    for (var i = 0; i < count; i++) {
+    for (let i = 0; i < count; i++) {
         stk.push(i);
     }
     first = stk.pop();
@@ -1015,7 +1015,7 @@ function findCelebrity(relation, count) {
             first = second;
     }
     
-    for (var i = 0; i < count; i++) {
+    for (let i = 0; i < count; i++) {
         if (first !== i && isKnown(relation, first, i))
             return -1;
         if (first !== i && isKnown(relation, i, first) === false)
@@ -1028,13 +1028,13 @@ function findCelebrity2(relation, count) {
     let first = 0;
     let second = 1;
     
-    for (var i = 0; i < (count - 1); i++) {
+    for (let i = 0; i < (count - 1); i++) {
         if (isKnown(relation, first, second))
             first = second;
         second = second + 1;
     }
     
-    for (var i = 0; i < count; i++) {
+    for (let i = 0; i < count; i++) {
         if (first !== i && isKnown(relation, first, i))
             return -1;
         if (first !== i && isKnown(relation, i, first) === false)
