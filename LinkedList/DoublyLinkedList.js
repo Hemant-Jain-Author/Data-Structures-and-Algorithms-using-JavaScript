@@ -93,7 +93,7 @@ class DoublyLinkedList {
                 return true;
             }
             curr = curr.next;
-        };
+        }
         return false;
     }
 
@@ -103,7 +103,7 @@ class DoublyLinkedList {
             if (temp.value === key)
                 return true;
             temp = temp.next;
-        };
+        }
         return false;
     }
 
@@ -118,7 +118,7 @@ class DoublyLinkedList {
         while (temp != null) {
             process.stdout.write(`${temp.value} `);
             temp = temp.next;
-        };
+        }
         process.stdout.write("\n");
     }
 
@@ -141,7 +141,7 @@ class DoublyLinkedList {
         
         while (curr.next != null && curr.next.value > value) {
             curr = curr.next;
-        };
+        }
 
         if (curr.next == null) { // Last node
             this.tail = temp;
@@ -169,7 +169,7 @@ class DoublyLinkedList {
                 return;
             }
             curr = curr.prev;
-        };
+        }
     }
 
     removeDuplicate() {
@@ -187,7 +187,7 @@ class DoublyLinkedList {
             else {
                 curr = curr.next;
             }
-        };
+        }
     }
 
     copyListReversed() {
@@ -196,7 +196,7 @@ class DoublyLinkedList {
         while (curr != null) {
             dll.addHead(curr.value);
             curr = curr.next;
-        };
+        }
         return dll;
     }
 
@@ -206,7 +206,7 @@ class DoublyLinkedList {
         while (curr != null) {
             dll.addTail(curr.value);
             curr = curr.next;
-        };
+        }
         return dll;
     }
 }

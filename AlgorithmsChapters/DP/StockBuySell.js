@@ -1,9 +1,7 @@
 function maxProfit(arr)
 {
-	let buyProfit = -arr[0];
-	// Buy stock profit
-	let sellProfit = 0;
-	// Sell stock profit
+	let buyProfit = -arr[0]; // Buy stock profit
+	let sellProfit = 0; // Sell stock profit
 	let n = arr.length;
 	for (let i = 1; i < n; i++)
 	{
@@ -14,6 +12,7 @@ function maxProfit(arr)
 	}
 	return sellProfit;
 }
+
 function maxProfitTC(arr, t)
 {
 	let buyProfit = -arr[0];
@@ -28,14 +27,13 @@ function maxProfitTC(arr, t)
 	}
 	return sellProfit;
 }
+
 function maxProfit2(arr)
 {
 	let n = arr.length;
 	let dp = Array(n).fill(0).map(() => new Array(2).fill(0));
-	dp[0][0] = -arr[0];
-	// Buy stock profit
-	dp[0][1] = 0;
-	// Sell stock profit
+	dp[0][0] = -arr[0]; // Buy stock profit
+	dp[0][1] = 0; // Sell stock profit
 	for (let i = 1; i < n; i++)
 	{
 		dp[i][0] = (dp[i - 1][1] - arr[i] > dp[i - 1][0]) ? dp[i - 1][1] - arr[i] : dp[i - 1][0];
@@ -43,6 +41,7 @@ function maxProfit2(arr)
 	}
 	return dp[n - 1][1];
 }
+
 function maxProfitTC2(arr, t)
 {
 	let n = arr.length;
@@ -62,3 +61,10 @@ console.log("Total profit: " + maxProfit(arr));
 console.log("Total profit: " + maxProfit2(arr));
 console.log("Total profit: " + maxProfitTC(arr, 2));
 console.log("Total profit: " + maxProfitTC2(arr, 2));
+
+/*
+Total profit: 69
+Total profit: 69
+Total profit: 63
+Total profit: 63
+*/

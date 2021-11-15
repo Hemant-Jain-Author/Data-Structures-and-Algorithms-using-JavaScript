@@ -6,7 +6,7 @@ class PriorityQueue {
             this.length = array.length;
             this.arr = [0].concat(array);
             for (let i = Math.floor(this.length / 2); i > 0; i--) {
-                this.proclateDown(i);
+                this.percolateDown(i);
             }
         }
         else if (array === undefined || array === null) {
@@ -17,7 +17,7 @@ class PriorityQueue {
             throw new Error('Invalid arguments');
     }
 
-    proclateDown(position) {
+    percolateDown(position) {
         const lChild = 2 * position;
         const rChild = lChild + 1;
         let small = -1;
@@ -32,11 +32,11 @@ class PriorityQueue {
             temp = this.arr[position];
             this.arr[position] = this.arr[small];
             this.arr[small] = temp;
-            this.proclateDown(small);
+            this.percolateDown(small);
         }
     }
 
-    proclateUp(position) {
+    percolateUp(position) {
         const parent = Math.floor(position / 2);
         let temp;
         if (parent === 0) {
@@ -46,14 +46,14 @@ class PriorityQueue {
             temp = this.arr[position];
             this.arr[position] = this.arr[parent];
             this.arr[parent] = temp;
-            this.proclateUp(parent);
+            this.percolateUp(parent);
         }
     }
 
     add(value) {
         this.length++;
         this.arr[this.length] = value;
-        this.proclateUp(this.length);
+        this.percolateUp(this.length);
     }
 
     remove() {
@@ -63,7 +63,7 @@ class PriorityQueue {
         const value = this.arr[1];
         this.arr[1] = this.arr[this.length];
         this.length--;
-        this.proclateDown(1);
+        this.percolateDown(1);
         return value;
     }
 

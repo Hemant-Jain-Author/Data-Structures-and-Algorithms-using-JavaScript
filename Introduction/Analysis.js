@@ -4,7 +4,7 @@ function fun1(n) {
         m += 1;
     }
     return m;
-};
+}
 
 console.log(`Number of instructions O(n):: ${fun1(100)}`);
 
@@ -18,7 +18,7 @@ function fun2(n) {
         }
     }
     return m;
-};
+}
 
 console.log(`Number of instructions O(n^2):: ${fun2(100)}`);
 
@@ -32,7 +32,7 @@ function fun3(n) {
         }
     }
     return m;
-};
+}
 
 console.log(`Number of instructions O(n^2):: ${fun3(100)}`);
 
@@ -44,9 +44,9 @@ function fun4(n) {
     while (i < n) {
         m += 1;
         i = i * 2;
-    };
+    }
     return m;
-};
+}
 
 console.log(`Number of instructions O(log(n)):: ${fun4(100)}`);
 
@@ -58,9 +58,9 @@ function fun5(n) {
     while (i > 0) {
         m += 1;
         i = Math.floor(i / 2);
-    };
+    }
     return m;
-};
+}
 
 console.log(`Number of instructions O(log(n)):: ${fun5(100)}`);
 
@@ -76,7 +76,7 @@ function fun6(n) {
         }
     }
     return m;
-};
+}
 
 console.log(`Number of instructions O(n^3):: ${fun6(100)}`);
 
@@ -98,7 +98,7 @@ function fun7(n) {
         }
     }
     return m;
-};
+}
 
 console.log(`Number of instructions O(n^2):: ${fun7(100)}`);
 
@@ -112,7 +112,7 @@ function fun8(n) {
         }
     }
     return m;
-};
+}
 
 console.log(`Number of instructions O(n^(3/2)):: ${fun8(100)}`);
 
@@ -126,7 +126,7 @@ function fun9(n) {
         }
     }
     return m;
-};
+}
 
 console.log(`Number of instructions O(n):: ${fun9(100)}`);
 
@@ -140,7 +140,7 @@ function fun10(n) {
         }
     }
     return m;
-};
+}
 
 console.log(`Number of instructions O(n^2):: ${fun10(100)}`);
 
@@ -156,7 +156,7 @@ function fun11(n) {
         }
     }
     return m;
-};
+}
 
 console.log(`Number of instructions O(n^3):: ${fun11(100)}`);
 
@@ -171,7 +171,7 @@ function fun12(n) {
         }
     }
     return m;
-};
+}
 
 console.log(`Number of instructions O(n):: ${fun12(100)}`);
 
@@ -185,7 +185,7 @@ function fun13(n) {
         }
     }
     return m;
-};
+}
 
 console.log(`Number of instructions O(n):: ${fun13(100)}`);
 

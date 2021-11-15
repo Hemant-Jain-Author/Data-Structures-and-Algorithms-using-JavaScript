@@ -22,17 +22,20 @@ function MatrixChainMulBruteForceUtil(p, i, j)
 	// Return minimum count
 	return min;
 }
+
 function MatrixChainMulBruteForce(p, n)
 {
 	let i = 1;
 	let j = n - 1;
 	return MatrixChainMulBruteForceUtil(p, i, j);
 }
+
 function MatrixChainMulTD(p, n)
 {
 	let dp = Array(n).fill(0).map(() => new Array(n).fill(Number.MAX_VALUE));
 	return MatrixChainMulTDUtil(dp, p, 1, n - 1);
 }
+
 // Function for matrix chain multiplication
 function MatrixChainMulTDUtil(dp, p, i, j)
 {
@@ -52,6 +55,7 @@ function MatrixChainMulTDUtil(dp, p, i, j)
 	}
 	return dp[i][j];
 }
+
 function MatrixChainMulBU(p, n)
 {
 	let dp = Array(n).fill(0).map(() => new Array(n).fill(Number.MAX_VALUE));
@@ -73,9 +77,16 @@ function MatrixChainMulBU(p, n)
 	}
 	return dp[1][n - 1];
 }
+
 // Driver Code
 let arr = [1, 2, 3, 4];
 let n = arr.length;
-console.log("Matrix Chain Multiplication is: " + MatrixChainMulBruteForce(arr, n));
-console.log("Matrix Chain Multiplication is: " + MatrixChainMulTD(arr, n));
-console.log("Matrix Chain Multiplication is: " + MatrixChainMulBU(arr, n));
+console.log("Matrix Chain Multiplication is:" + MatrixChainMulBruteForce(arr, n));
+console.log("Matrix Chain Multiplication is:" + MatrixChainMulTD(arr, n));
+console.log("Matrix Chain Multiplication is:" + MatrixChainMulBU(arr, n));
+
+/*
+Matrix Chain Multiplication is:18
+Matrix Chain Multiplication is:18
+Matrix Chain Multiplication is:18
+*/

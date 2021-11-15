@@ -17,7 +17,7 @@ class Queue {
         while (this.stk1.length > 0) {
             value = this.stk1.pop();
             this.stk2.push(value);
-        };
+        }
         return this.stk2.pop();
     }
 
@@ -897,7 +897,7 @@ function test1(){
     graph.addUndirectedEdge(1, 2, 1);
     graph.addUndirectedEdge(2, 3, 1);
     graph.print();
-};
+}
 //test1()
 
 function test2(){
@@ -1029,7 +1029,7 @@ function test10(){
     graph.addDirectedEdge(2, 3);
     const g = graph.transposeGraph()
     g.print();
-};
+}
 
 //test10()
 

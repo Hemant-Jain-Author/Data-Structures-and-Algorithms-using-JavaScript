@@ -9,6 +9,6 @@ function main() {
     console.info(`Stack pop : ${stack.pop()}`);
     console.info(`Stack top : ${stack[stack.length - 1]}`);
     console.info(`Stack isEmpty : ${stack.length == 0}`);
-};
+}
 
 main();

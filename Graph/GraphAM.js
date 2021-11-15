@@ -18,7 +18,7 @@ class Queue {
         while (this.stk1.length > 0) {
             value = this.stk1.pop();
             this.stk2.push(value);
-        };
+        }
         return this.stk2.pop();
     }
 
@@ -326,7 +326,7 @@ function test1(){
     graph.addUndirectedEdge(1, 2, 1);
     graph.addUndirectedEdge(2, 3, 1);
     graph.print2();
-};
+}
 
 //test1()
 
@@ -351,7 +351,7 @@ function test2(){
     gph.prims();
     console.log("")
 //    gph.dijkstra(0);
-};
+}
 
 //test2()
 
@@ -373,7 +373,7 @@ function test3(){
     gph.addUndirectedEdge(7, 8, 7)
     //gph.prims()
     gph.dijkstra(1);
-};
+}
 
 //test3()
 
@@ -411,7 +411,7 @@ function test4(){
         }
     }
     console.info(`hamiltonianPath :  ${graph2.hamiltonianPath()}`);
-};
+}
 
 test4()
 
@@ -449,6 +449,6 @@ function test5(){
         }
     }
     console.info(`hamiltonianCycle :  ${graph2.hamiltonianCycle()}`);
-};
+}
 
 test5()

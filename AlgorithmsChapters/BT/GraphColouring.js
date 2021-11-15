@@ -1,8 +1,3 @@
-function printSolution(colour, V)
-{
-	console.log("Assigned colours are :", colour);
-}
-
 // Check if the whole graph is coloured properly.
 function isSafe2(graph, colour, V)
 {
@@ -25,7 +20,7 @@ function graphColouring2Util(graph, V, m, colour, i)
 	{
 		if (isSafe2(graph, colour, V))
 		{
-			printSolution(colour, V);
+			console.log("Assigned colours are :", colour);
 			return true;
 		}
 		return false;
@@ -69,7 +64,7 @@ function graphColouringUtil(graph, V, m, colour, i)
 {
 	if (i == V)
 	{
-		printSolution(colour, V);
+		console.log("Assigned colours are :", colour);
 		return true;
 	}
 	for (let j = 1; j <= m; j++)

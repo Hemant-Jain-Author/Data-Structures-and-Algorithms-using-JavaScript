@@ -17,7 +17,7 @@ function selectionSort(arr, compare) {
         arr[size - 1 - i] = arr[max];
         arr[max] = temp;
     }
-};
+}
 
 function selectionSort2(arr, compare) {
     const size = arr.length;
@@ -34,7 +34,7 @@ function selectionSort2(arr, compare) {
         arr[i] = arr[min];
         arr[min] = temp;
     }
-};
+}
 
 //let array = [9, 1, 8, 2, 7, 3, 6, 4, 5];
 const array = [4, 5, 3, 2, 6, 7, 1, 8, 9, 10];

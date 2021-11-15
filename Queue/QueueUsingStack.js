@@ -24,7 +24,7 @@ class Queue {
         while (this.stk1.length > 0) {
             value = this.stk1.pop();
             this.stk2.push(value);
-        };
+        }
         return this.stk2.pop();
     }
 }

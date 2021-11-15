@@ -78,10 +78,10 @@ peek() {
 function joinRopes(ropes, size)
 {
 	ropes.sort(function(a, b) { return b - a; });
-	var total = 0;
-	var value = 0;
-	var index = 0;
-	var length = size;
+	let total = 0;
+	let value = 0;
+	let index = 0;
+	let length = size;
 	while (length >= 2)
 	{
 		value = ropes[length - 1] + ropes[length - 2];
@@ -100,14 +100,14 @@ function joinRopes(ropes, size)
 }
 function joinRopes2(ropes, size)
 {
-	var pq = new PriorityQueue(function(a, b) { return (a - b) > 0});
-	var i = 0;
+	let pq = new PriorityQueue(function(a, b) { return (a - b) > 0});
+	let i = 0;
 	for (i = 0; i < size; i++)
 	{
 		pq.add(ropes[i]);
 	}
-	var total = 0;
-	var value = 0;
+	let total = 0;
+	let value = 0;
 	while (pq.size() > 1)
 	{
 		value = pq.remove();
@@ -119,7 +119,7 @@ function joinRopes2(ropes, size)
 	return total;
 }
 
-var ropes = [4, 3, 2, 6];
+let ropes = [4, 3, 2, 6];
 joinRopes(ropes, ropes.length);
-var rope2 = [4, 3, 2, 6];
+let rope2 = [4, 3, 2, 6];
 joinRopes2(rope2, rope2.length);

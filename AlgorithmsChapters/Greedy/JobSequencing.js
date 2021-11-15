@@ -15,14 +15,14 @@ class JobSequencing
 		this.jobs = Array(n).fill(null);
 		this.n = n;
 		this.maxDL = deadlines[0];
-		for (var i = 1; i < n; i++)
+		for (let i = 1; i < n; i++)
 		{
 			if (deadlines[i] > this.maxDL)
 			{
 				this.maxDL = deadlines[i];
 			}
 		}
-		for (var i = 0; i < n; i++)
+		for (let i = 0; i < n; i++)
 		{
 			this.jobs[i] = new Job(ids[i], deadlines[i], profits[i]);
 		}
@@ -31,13 +31,13 @@ class JobSequencing
 	print()
 	{
 		this.jobs.sort(function (a, b){return b.profit - a.profit});
-		var result = Array(this.maxDL).fill(false);
-		var job = Array(this.maxDL).fill(' ');
-		var profit = 0;
+		let result = Array(this.maxDL).fill(false);
+		let job = Array(this.maxDL).fill(' ');
+		let profit = 0;
 		// Iterate through all given jobs
-		for (var i = 0; i < this.n; i++)
+		for (let i = 0; i < this.n; i++)
 		{
-			for (var j = this.jobs[i].deadline - 1; j >= 0; j--)
+			for (let j = this.jobs[i].deadline - 1; j >= 0; j--)
 			{
 				if (result[j] == false)
 				{
@@ -50,8 +50,8 @@ class JobSequencing
 		}
 		console.log("Profit is :: " + profit);
 		
-		var output = "Jobs selected are::";
-		for (var i = 0; i < this.maxDL; i++)
+		let output = "Jobs selected are::";
+		for (let i = 0; i < this.maxDL; i++)
 		{
 			if (job[i] != '')
 			{
@@ -61,10 +61,10 @@ class JobSequencing
 		console.log(output);
 	}
 }
-var id = ['a', 'b', 'c', 'd', 'e'];
-var deadline = [3, 1, 2, 4, 4];
-var profit = [50, 40, 27, 31, 30];
-var js =  new JobSequencing(id, deadline, profit, 5);
+let id = ['a', 'b', 'c', 'd', 'e'];
+let deadline = [3, 1, 2, 4, 4];
+let profit = [50, 40, 27, 31, 30];
+let js =  new JobSequencing(id, deadline, profit, 5);
 js.print();
 
 /*

@@ -90,20 +90,20 @@ class HuffmanTree
 {
 	constructor(arr, freq)
 	{
-		var n = arr.length;
-		var que = new PriorityQueue(function(a, b){return  (a.freq - b.freq) > 0 });
+		let n = arr.length;
+		let que = new PriorityQueue(function(a, b){return  (a.freq - b.freq) > 0 });
 		
-		for (var i = 0; i < n; i++)
+		for (let i = 0; i < n; i++)
 		{
-			var node = new Node(arr[i], freq[i], null, null);
+			let node = new Node(arr[i], freq[i], null, null);
 			que.add(node);
 		}
 
 		while (que.size() > 1)
 		{
-			var lt = que.remove();
-			var rt = que.remove();
-			var nd = new Node('+', lt.freq + rt.freq, lt, rt);
+			let lt = que.remove();
+			let rt = que.remove();
+			let nd = new Node('+', lt.freq + rt.freq, lt, rt);
 			que.add(nd);
 		}
 		this.root = que.peek();
@@ -127,9 +127,9 @@ class HuffmanTree
 	}
 }
 
-var ar = ['A', 'B', 'C', 'D', 'E'];
-var fr = [30, 25, 21, 14, 10];
-var hf = new HuffmanTree(ar, fr);
+let ar = ['A', 'B', 'C', 'D', 'E'];
+let fr = [30, 25, 21, 14, 10];
+let hf = new HuffmanTree(ar, fr);
 hf.print();
 
 /*

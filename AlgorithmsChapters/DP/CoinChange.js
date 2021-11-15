@@ -1,6 +1,5 @@
-function minCoins(coins, n, val)
+function minCoins(coins, n, val) // Greedy may be wrong.
 {
-	// Greedy may be wrong.
 	if (val <= 0)
 	{
 		return 0;
@@ -21,9 +20,8 @@ function minCoins(coins, n, val)
 	}
 	return (val == 0) ? count : -1;
 }
-function minCoins2(coins, n, val)
+function minCoins2(coins, n, val) // Brute force.
 {
-	// Brute force.
 	if (val == 0)
 	{
 		return 0;
@@ -77,9 +75,8 @@ function minCoinsTDUtil(dp, coins, n, val)
 	return dp[val];
 }
 
-function minCoinsBU(coins, n, val)
+function minCoinsBU(coins, n, val) // DP bottom up approach.
 {
-	// DP bottom up approach.
 	let dp = new Array(val + 1);
 	dp.fill(Number.MAX_VALUE);
 	dp[0] = 0;

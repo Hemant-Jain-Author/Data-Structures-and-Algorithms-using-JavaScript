@@ -15,9 +15,8 @@ function lis(arr)
 				lis[i] = lis[j] + 1;
 			}
 		}
-		if (max < lis[i])
+		if (max < lis[i]) // Max LIS values.
 		{
-			// Max LIS values.
 			max = lis[i];
 		}
 	}
@@ -26,3 +25,7 @@ function lis(arr)
 
 let arr = [10, 12, 9, 23, 25, 55, 49, 70];
 console.log("Length of lis is " + lis(arr));
+
+/*
+Length of lis is 6
+*/

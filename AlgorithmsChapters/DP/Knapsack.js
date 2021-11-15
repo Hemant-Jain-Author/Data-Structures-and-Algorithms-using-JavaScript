@@ -22,12 +22,14 @@ function getMaxCost01Util(wt, cost, n, capacity)
 	let second = getMaxCost01Util(wt, cost, n - 1, capacity);
 	return Math.max(first, second);
 }
+
 function getMaxCost01TD(wt, cost, capacity)
 {
 	let n = wt.length;
 	let dp = Array(capacity + 1).fill(0).map(() => new Array(n + 1).fill(0));
 	return getMaxCost01TDUtil(dp, wt, cost, n, capacity);
 }
+
 function getMaxCost01TDUtil(dp, wt, cost, i, w)
 {
 	if (w == 0 || i == 0)
@@ -49,6 +51,7 @@ function getMaxCost01TDUtil(dp, wt, cost, i, w)
 	let second = getMaxCost01TDUtil(dp, wt, cost, i - 1, w);
 	return dp[w][i] = Math.max(first, second);
 }
+
 function getMaxCost01BU(wt, cost, capacity)
 {
 	let n = wt.length;
@@ -74,6 +77,7 @@ function getMaxCost01BU(wt, cost, capacity)
 	//printItems(dp, wt, cost, n, capacity);
 	return dp[capacity][n];
 }
+
 function printItems(dp, wt, cost, n, capacity)
 {
 	let totalCost = dp[capacity][n];
@@ -88,6 +92,7 @@ function printItems(dp, wt, cost, n, capacity)
 		}
 	}
 }
+
 function KS01UnboundBU(wt, cost, capacity)
 {
 	let n = wt.length;
@@ -120,3 +125,9 @@ maxCost = getMaxCost01BU(wt, cost, capacity);
 console.log("Maximum cost obtained = " + maxCost);
 maxCost = getMaxCost01TD(wt, cost, capacity);
 console.log("Maximum cost obtained = " + maxCost);
+
+/*
+Maximum cost obtained = 210
+Maximum cost obtained = 210
+Maximum cost obtained = 210
+*/

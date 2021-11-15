@@ -3,7 +3,7 @@ function swap(arr, x, y) {
     arr[x] = arr[y];
     arr[y] = temp;
     return;
-};
+}
 
 function Partition01(arr, size) {
     let left = 0;
@@ -23,8 +23,44 @@ function Partition01(arr, size) {
         }
     }
     return count;
-};
-
+}
+function partition012_(arr, size)
+{
+	let zero = 0;
+	let one = 0;
+	let two = 0;
+	for (let i = 0; i < size; i++)
+	{
+		if (arr[i] == 0)
+		{
+			zero += 1;
+		}
+		else if (arr[i] == 1)
+		{
+			one += 1;
+		}
+		else
+		{
+			two += 1;
+		}
+	}
+	let index = 0;
+	while (zero > 0)
+	{
+		arr[index++] = 0;
+		zero -= 1;
+	}
+	while (one > 0)
+	{
+		arr[index++] = 1;
+		one -= 1;
+	}
+	while (two > 0)
+	{
+		arr[index++] = 2;
+		two -= 1;
+	}
+}
 function Partition012(arr, size) {
     let left = 0;
     let right = size - 1;
@@ -43,7 +79,7 @@ function Partition012(arr, size) {
             i += 1;
         }
     }
-};
+}
 
 function test1() {
     const arr = [0, 1, 1, 0, 1, 0, 1, 1, 0, 0, 0, 1];
@@ -52,7 +88,7 @@ function test1() {
     const arr2 = [0, 1, 1, 0, 1, 2, 1, 2, 0, 0, 0, 1];
     Partition012(arr2, arr2.length);
     console.log(arr2);
-};
+}
 [ 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1 ]
 [ 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 2, 2 ]
 //test1();
@@ -75,13 +111,13 @@ function RangePartition(arr, size, lower, higher) {
             i += 1;
         }
     }
-};
+}
 
 function test2() {
     const arr = [1, 21, 2, 20, 3, 19, 4, 18, 5, 17, 6, 16, 7, 15, 8, 14, 9, 13, 10, 12, 11];
     RangePartition(arr, arr.length, 9, 12);
     console.log(arr);
-};
+}
 //test2();
 
 function minSwaps(arr, size, val) {
@@ -102,7 +138,7 @@ function minSwaps(arr, size, val) {
         }
     }
     return swapCount;
-};
+}
 
 function test2(){
     let arr = [2,7,5,6,1,3,4,9,10,8]
@@ -111,7 +147,31 @@ function test2(){
 }
 //test2()
 
-function seperateEvenAndOdd(data, size) {
+function separateEvenAndOdd(data, size)
+{
+	let left = 0;
+	let right = size - 1;
+	let aux = Array(size).fill(0);
+	for (let i = 0; i < size; i++)
+	{
+		if (data[i] % 2 == 0)
+		{
+			aux[left] = data[i];
+			left++;
+		}
+		else if (data[i] % 2 == 1)
+		{
+			aux[right] = data[i];
+			right--;
+		}
+	}
+	for (let i = 0; i < size; i++)
+	{
+		data[i] = aux[i];
+	}
+}
+
+function separateEvenAndOdd2(data, size) {
     let left = 0;
     let right = size - 1;
     while (left < right) {
@@ -125,19 +185,22 @@ function seperateEvenAndOdd(data, size) {
             right--;
         }
     }
-};
+}
 
 function test2(){
-    let arr = [2,7,5,6,1,3,4,9,10,8]
-    seperateEvenAndOdd(arr, 10)
-    console.log(arr)
+	let array = [9, 1, 8, 2, 7, 3, 6, 4, 5];
+	SortingEx.separateEvenAndOdd(array, array.length);
+	SortingEx.printArray(array, array.length);
+	let array2 = [9, 1, 8, 2, 7, 3, 6, 4, 5];
+	SortingEx.separateEvenAndOdd2(array2, array2.length);
+	SortingEx.printArray(array2, array2.length);
 }
 //test2()
 
 
 function AbsMore(value1, value2, ref) {
     return (Math.abs(value1 - ref) > Math.abs(value2 - ref));
-};
+}
 
 function AbsBubbleSort(arr, size, ref) {
     for (let i = 0; i < (size - 1); i++) {
@@ -147,21 +210,21 @@ function AbsBubbleSort(arr, size, ref) {
             }
         }
     }
-};
+}
 
 function test3() {
     const array = [9, 1, 8, 2, 7, 3, 6, 4, 5];
     const ref = 5;
     AbsBubbleSort(array, array.length, ref);
     console.log(array);
-};
+}
 //test3();
 
 function EqMore(value1, value2, A) {
     value1 = A * value1 * value1;
     value2 = A * value2 * value2;
     return value1 > value2;
-};
+}
 
 function ArrayReduction(arr, size) {
     arr.sort(function cmp(a, b) { return (a - b); });
@@ -175,12 +238,12 @@ function ArrayReduction(arr, size) {
     }
     console.info(`Total number of reductions ${count}`);
     return count
-};
+}
 
 function test4() {
     const arr = [5, 1, 1, 1, 2, 3, 5];
     ArrayReduction(arr, arr.length);
-};
+}
 //test4();
 
 function SortByOrder(arr, size, arr2, size2) {
@@ -219,7 +282,7 @@ function SortByOrder(arr, size, arr2, size2) {
     for (let i = 0; i < size; i++) {
         arr[i] = ret[i];
     }
-};
+}
 
 
 function test5() {
@@ -227,7 +290,7 @@ function test5() {
     const arr2 = [2, 1, 8, 3];
     SortByOrder(arr, arr.length, arr2, arr2.length);
     console.log("SortByOrder", arr)
-};
+}
 //test5();
 
 function merge(arr1, size1, arr2, size2) {
@@ -254,7 +317,7 @@ function merge(arr1, size1, arr2, size2) {
             }
         }
     }
-};
+}
 
 function test6() {
     const arr1 = [1, 5, 9, 10, 15, 20];
@@ -262,7 +325,7 @@ function test6() {
     merge(arr1, arr1.length, arr2, arr2.length);
     console.log(arr1);
     console.log(arr2);
-};
+}
 //test6();
 
 function checkReverse(arr, size) {
@@ -294,21 +357,13 @@ function checkReverse(arr, size) {
         }
     }
     return true;
-};
+}
 
 function test5() {
     const arr = [1, 3, 8, 5, 4, 3, 10, 11, 12, 18, 28];
     console.log("checkReverse : ", checkReverse(arr, arr.length))
-};
+}
 //test5();
-
-
-function min(X, Y) {
-    if (X < Y) {
-        return X;
-    }
-    return Y;
-};
 
 function UnionIntersectionSorted(arr1, size1, arr2, size2) {
     let first = 0;
@@ -344,18 +399,18 @@ function UnionIntersectionSorted(arr1, size1, arr2, size2) {
     }
     console.log("Union : ", unionArr);
     console.log("Intersection : ", interArr);
-};
+}
 
 function UnionIntersectionUnsorted(arr1, size1, arr2, size2) {
     arr1.sort(function cmp(a, b) { return (a - b); });
     arr2.sort(function cmp(a, b) { return (a - b); });
    
     UnionIntersectionSorted(arr1, size1, arr2, size2);
-};
+}
 
 function test7() {
     const arr1 = [1, 11, 2, 3, 14, 5, 6, 8, 9];
     const arr2 = [2, 4, 5, 12, 7, 8, 13, 10];
     UnionIntersectionUnsorted(arr1, arr1.length, arr2, arr2.length);
-};
+}
 test7();

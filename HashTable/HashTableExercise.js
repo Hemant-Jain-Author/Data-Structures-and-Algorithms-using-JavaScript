@@ -77,7 +77,7 @@ function removeDuplicate(str){
         }
     }
     return str2;
-};
+}
 
 function test2(){
     const first = "hello";
@@ -96,7 +96,7 @@ function findMissing(arr, start, end){
             return curr;
     }
     return -1;
-};
+}
 
 function test3(){
     const arr = [1, 2, 3, 5, 6, 7, 8, 9, 10];

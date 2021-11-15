@@ -46,9 +46,8 @@ function fastestWayTD(a, t, e, x, n)
 function fastestWayTDUtil(f, a, t, i)
 {
 	if (i == 0)
-	{
 		return;
-	}
+
 	fastestWayTDUtil(f, a, t, i - 1);
 	// Fill the tables f1[] and f2[] using top-down approach.
 	f[0][i] = Math.min(f[0][i - 1] + a[0][i], f[1][i - 1] + t[1][i - 1] + a[0][i]);
@@ -56,9 +55,9 @@ function fastestWayTDUtil(f, a, t, i)
 }
 // Driver code
 let a = [[7, 9, 3, 4, 8, 4],
-	[8, 5, 6, 4, 5, 7]];
+		[8, 5, 6, 4, 5, 7]];
 let t = [[2, 3, 1, 3, 4],
-	[2, 1, 2, 2, 1]];
+		[2, 1, 2, 2, 1]];
 let e = [2, 4];
 let x = [3, 2];
 let n = 6;

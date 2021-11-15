@@ -1,5 +1,4 @@
 // Also known as Activity Selection Weighted.
-//implements java.lang.ComparableJob
 class Job 
 {
 	constructor(s, f, v)
@@ -7,10 +6,6 @@ class Job
 		this.start = s;
 		this.stop = f;
 		this.value = v;
-	}
-	compareTo(j2)
-	{
-		return this.stop - j2.stop;
 	}
 }
 
@@ -85,11 +80,7 @@ function maxValueJobsTD(s, f, v, n)
 	{
 		act[i] = new Job(s[i], f[i], v[i]);
 	}
-	act.sort(function(a, b)
-	{
-		return a.stop - b.stop;
-	});
-	// sort according to finish time.
+	act.sort(function(a, b)	{return a.stop - b.stop;});	// sort according to finish time.
 	let dp = Array(n).fill(0);
 	return maxValueJobUtilTD(dp, act, n);
 }
@@ -101,11 +92,7 @@ function maxValueJobsBU(s, f, v, n)
 	{
 		act[i] = new Job(s[i], f[i], v[i]);
 	}
-	act.sort(function(a, b)
-	{
-		return a.stop - b.stop;
-	});
-	// sort according to finish time.
+	act.sort(function(a, b)	{return a.stop - b.stop;});	// sort according to finish time.
 	let dp = Array(n).fill(0);
 	dp[0] = act[0].value;;
 	for (let i = 1; i < n; i++)

@@ -92,7 +92,7 @@ class CircularLinkedList {
             }
             prev = curr;
             curr = curr.next;
-        };
+        }
         return false;
     }
 
@@ -108,7 +108,7 @@ class CircularLinkedList {
         while (curr !== head) {
             cl.addHead(curr.value);
             curr = curr.next;
-        };
+        }
         return cl;
     }
 
@@ -124,7 +124,7 @@ class CircularLinkedList {
         while (curr !== head) {
             cl.addTail(curr.value);
             curr = curr.next;
-        };
+        }
         return cl;
     }
 
@@ -142,7 +142,7 @@ class CircularLinkedList {
         while (temp !== this.tail) {
             process.stdout.write(`${temp.value} `);
             temp = temp.next;
-        };
+        }
         process.stdout.write(`${temp.value}\n`);
     }
 

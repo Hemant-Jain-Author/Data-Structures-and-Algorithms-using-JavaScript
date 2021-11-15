@@ -53,3 +53,7 @@ let cost = [
 console.log(minCost(cost, 3, 3));
 console.log(minCostBU(cost, 3, 3));
 
+/*
+11
+11
+*/

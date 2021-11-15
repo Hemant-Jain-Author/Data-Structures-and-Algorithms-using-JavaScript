@@ -15,7 +15,7 @@ Tree.prototype.insertNode = function(value) {
         this.root = this.insertNodeUtil(value, this.root);
     else
         throw new Error('invalid input arguments');
-};
+}
 
 Tree.prototype.insertNodeUtil = function(value, node) {
     if (node == null) {
@@ -30,11 +30,11 @@ Tree.prototype.insertNodeUtil = function(value, node) {
         }
     }
     return node;
-};
+}
 
 Tree.prototype.printPreOrder = function() {
     this.printPreOrderUtil(this.root);
-};
+}
 
 Tree.prototype.printPreOrderUtil = function(node) {
     if (node != null) {
@@ -42,7 +42,7 @@ Tree.prototype.printPreOrderUtil = function(node) {
         this.printPreOrderUtil(node.lChild);
         this.printPreOrderUtil(node.rChild);
     }
-};
+}
 
 let t = new Tree();
 t.insertNode(5)

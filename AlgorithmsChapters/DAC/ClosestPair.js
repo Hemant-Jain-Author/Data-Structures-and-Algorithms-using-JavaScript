@@ -7,16 +7,6 @@ class Point
 	}
 }
 
-function xComp(s1, s2)
-{
-	return (s1.x - s2.x);
-}
-
-function yComp(s1, s2)
-{
-	return (s1.y - s2.y);
-}
-
 function closestPairBF(arr)
 {
 	let n = arr.length;
@@ -103,10 +93,10 @@ function closestPairDC(arr)
 		p[i] = new Point(arr[i][0], arr[i][1]);
 	}
 	// Sort according to x axis.
-	p.sort(xComp);
+	p.sort(function xComp(s1, s2){	return (s1.x - s2.x);});
 	let q = [...p];
 	// Sort according to y axis.
-	q.sort(yComp);
+	q.sort(function yComp(s1, s2){	return (s1.y - s2.y);});
 	return closestPairUtil(p, 0, n - 1, q, n);
 }
 

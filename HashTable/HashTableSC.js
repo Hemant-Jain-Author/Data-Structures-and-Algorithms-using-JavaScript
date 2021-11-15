@@ -64,7 +64,7 @@ class HashTable {
             else {
                 head = nextNode;
             }
-        };
+        }
         return false;
     }
 
@@ -92,7 +92,7 @@ class HashTable {
                 return true;
             }
             head = head.next;
-        };
+        }
         return false;
     }
 
@@ -104,7 +104,7 @@ class HashTable {
                 return head.value;
             }
             head = head.next;
-        };
+        }
         return 0;
     }
 }

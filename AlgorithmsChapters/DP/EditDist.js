@@ -14,9 +14,9 @@ function editDist(str1, str2)
 
 function editDistUtil(str1, str2, m, n)
 {
-	if (m == 0 || n == 0)
+	// If any one string is empty, then empty the other string.
+	if (m == 0 || n == 0) 
 	{
-		// If any one string is empty, then empty the other string.
 		return m + n;
 	}
 	// If last characters of both strings are same, ignore last characters.
@@ -24,8 +24,7 @@ function editDistUtil(str1, str2, m, n)
 	{
 		return editDistUtil(str1, str2, m - 1, n - 1);
 	}
-	// If last characters are not same, 
-	// consider all three operations:
+	// If last characters are not same, consider all three operations:
 	// Insert last char of second into first.
 	// Remove last char of first.
 	// Replace last char of first with second.

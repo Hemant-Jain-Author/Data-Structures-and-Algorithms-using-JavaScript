@@ -6,6 +6,7 @@ function LCSubStr(st1, st2)
 	let n = st2.length;
 	let dp = Array(m + 1).fill(0).map(() => new Array(n + 1).fill(0)); // Dynamic programming array.
 	let p = Array(m + 1).fill(0).map(() => new Array(n + 1).fill(0)); // For printing the substring.
+	
 	// Fill dp array in bottom up fashion.
 	for (let i = 1; i <= m; i++)
 	{
@@ -50,4 +51,15 @@ function PrintLCS(p, X, i, j)
 
 let X = "carpenter";
 let Y = "sharpener";
-console.log(LCSubStr(X, Y));
+console.log("LCSubStr : " + LCSubStr(X, Y));
+
+/*
+a
+r
+p
+e
+n
+e
+r
+LCSubStr : 7
+*/

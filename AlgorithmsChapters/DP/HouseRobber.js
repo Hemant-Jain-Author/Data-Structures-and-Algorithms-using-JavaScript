@@ -11,6 +11,7 @@ function maxRobbery(house)
 	}
 	return Math.max(dp[n - 1], dp[n - 2]);
 }
+
 function maxRobbery2(house)
 {
 	let n = house.length;
@@ -28,3 +29,8 @@ function maxRobbery2(house)
 let arr = [10, 12, 9, 23, 25, 55, 49, 70];
 console.log("Total cash: " + maxRobbery(arr));
 console.log("Total cash: " + maxRobbery2(arr));
+
+/*
+Total cash: 160
+Total cash: 160
+*/

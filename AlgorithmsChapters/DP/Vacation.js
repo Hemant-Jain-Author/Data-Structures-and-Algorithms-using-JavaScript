@@ -27,3 +27,7 @@ function minCostVacation(days, costs)
 let days = [1, 3, 5, 7, 12, 20, 30];
 let costs = [2, 7, 20];
 console.log("Min cost is:" + minCostVacation(days, costs));
+
+/*
+Min cost is:13
+*/

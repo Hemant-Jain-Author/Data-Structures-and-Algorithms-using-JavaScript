@@ -17,7 +17,7 @@ class Queue {
         while (this.stk1.length > 0) {
             value = this.stk1.pop();
             this.stk2.push(value);
-        };
+        }
         return this.stk2.pop();
     }
 
@@ -323,7 +323,7 @@ Find2(value) {
     let curr = this.root;
     while (curr != null && curr.value !== value) {
         curr = (curr.value > value) ? curr.lChild : curr.rChild;
-    };
+    }
     return curr != null;
 }
 
@@ -833,7 +833,7 @@ printDLL() {
     while (curr !== tail) {
         process.stdout.write(`${curr.value} `);
         curr = curr.rChild;
-    };
+    }
     process.stdout.write(`${curr.value}\n`);
 }
 
@@ -1052,7 +1052,7 @@ function isBSTArray(preorder, size) {
         // Last popped value will be the root.
         while (stk.length > 0 && stk[stk.length - 1] < value) {
             root = stk.pop();
-        };
+        }
         // add current value to the stack.
         stk.push(value);
     }

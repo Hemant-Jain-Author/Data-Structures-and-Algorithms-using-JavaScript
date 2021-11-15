@@ -100,7 +100,7 @@ class DeQueue {
         while (temp != null) {
             process.stdout.write(`${temp.value} `)
             temp = temp.next;
-       };
+       }
        console.log()
     }
 }

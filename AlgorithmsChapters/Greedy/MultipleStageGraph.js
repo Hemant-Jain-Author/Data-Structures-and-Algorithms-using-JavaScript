@@ -1,20 +1,20 @@
 
-var INF = Number.MAX_VALUE;
+let INF = Number.MAX_VALUE;
 // Returns shortest distance from 0 to N-1.
 function shortestDist(graph, n)
 {
 	// dist[i] is going to store shortest
 	// distance from node i to node n-1.
-	var dist = Array(n).fill(INF);
-	var path = Array(n).fill(0);
-	var value = 0;
+	let dist = Array(n).fill(INF);
+	let path = Array(n).fill(0);
+	let value = 0;
 	dist[0] = 0;
 	path[0] = -1;
 	// Calculating shortest path for the nodes
-	for (var i = 0; i < n; i++)
+	for (let i = 0; i < n; i++)
 	{
 		// Check all nodes of next 
-		for (var j = i; j < n; j++)
+		for (let j = i; j < n; j++)
 		{
 			// Reject if no edge exists
 			if (graph[i][j] == INF)
@@ -30,7 +30,7 @@ function shortestDist(graph, n)
 		}
 	}
 	value = n - 1;
-	var pathOut = "";
+	let pathOut = "";
 	while (value != -1)
 	{
 		pathOut = " " + value + pathOut;
@@ -43,7 +43,7 @@ function shortestDist(graph, n)
 // Driver code
 
 // Graph stored in the form of an adjacency Matrix
-var graph = [
+let graph = [
 	[INF, 1, 2, 5, INF, INF, INF, INF],
 	[INF, INF, INF, INF, 4, 11, INF, INF],
 	[INF, INF, INF, INF, 9, 5, 16, INF],

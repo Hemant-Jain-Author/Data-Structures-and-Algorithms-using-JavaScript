@@ -12,17 +12,17 @@ function merge(arr, tempArray, lowerIndex, middleIndex, upperIndex, compare) {
         else {
             tempArray[count++] = arr[upperStart++];
         }
-    };
+    }
     while (lowerStart <= lowerStop) {
         tempArray[count++] = arr[lowerStart++];
-    };
+    }
     while (upperStart <= upperStop) {
         tempArray[count++] = arr[upperStart++];
-    };
+    }
     for (let i = lowerIndex; i <= upperIndex; i++) {
         arr[i] = tempArray[i];
     }
-};
+}
 
 function mergeSortUtil(arr, tempArray, lowerIndex, upperIndex, compare) {
     if (lowerIndex >= upperIndex) {
@@ -32,13 +32,13 @@ function mergeSortUtil(arr, tempArray, lowerIndex, upperIndex, compare) {
     mergeSortUtil(arr, tempArray, lowerIndex, middleIndex, compare);
     mergeSortUtil(arr, tempArray, middleIndex + 1, upperIndex, compare);
     merge(arr, tempArray, lowerIndex, middleIndex, upperIndex, compare);
-};
+}
 
 function mergeSort(arr, compare) {
     const size = arr.length;
     const tempArray = new Array(size);
     mergeSortUtil(arr, tempArray, 0, size - 1, compare);
-};
+}
 
 less = (value1, value2) => value1 < value2;
 

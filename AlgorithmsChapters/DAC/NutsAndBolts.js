@@ -24,6 +24,7 @@ function swap(arr, first, second)
 	arr[first] = arr[second];
 	arr[second] = temp;
 }
+
 // Partition method similar to quick sort algorithm.
 function partition(arr, low, high, pivot)
 {

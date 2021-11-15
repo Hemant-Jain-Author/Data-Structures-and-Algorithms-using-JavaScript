@@ -36,3 +36,6 @@ function lbs(arr)
 let arr = [1, 6, 3, 11, 1, 9, 5, 12, 3, 14, 6, 17, 3, 19, 2, 19];
 console.log("Length of lis is " + lbs(arr));
 
+/*
+Length of lis is 8
+*/

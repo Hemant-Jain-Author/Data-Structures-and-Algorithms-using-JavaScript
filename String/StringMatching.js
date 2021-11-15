@@ -8,17 +8,17 @@ function BruteForceSearch(text, pattern) {
             j = 0;
             while (j < m && pattern[j] === text[i + j]) {
                 j++;
-            };
+            }
             if (j === m) {
                 return (i);
             }
             i++;
-        };
+        }
         return -1;
     }
     else
         throw new Error('invalid arguments');
-};
+}
 
 function RobinKarp(text, pattern) {
 
@@ -26,7 +26,7 @@ function RobinKarp(text, pattern) {
         return RobinKarpUtil(text, pattern);
     } else
         throw new Error('invalid overload');
-};
+}
 
 function RobinKarpUtil(text, pattern) {
     const n = text.length;
@@ -64,7 +64,7 @@ function RobinKarpUtil(text, pattern) {
         }
     }
     return -1;
-};
+}
 
 function KMPPreprocess(pattern, ShiftArr) {
     const m = pattern.length;
@@ -74,19 +74,19 @@ function KMPPreprocess(pattern, ShiftArr) {
     while (i < m) {
         while (j >= 0 && pattern[i] !== pattern[j]) {
             j = ShiftArr[j];
-        };
+        }
         i++;
         j++;
         ShiftArr[i] = j;
-    };
-};
+    }
+}
 
 function KMP(text, pattern) {
     if ((typeof text === 'string') && (typeof pattern === 'string')) {
         return KMPUtil(text, pattern);
     } else
         throw new Error('invalid overload');
-};
+}
 
 function KMPUtil(text, pattern) {
     let i = 0;
@@ -103,9 +103,9 @@ function KMPUtil(text, pattern) {
         if (j === m) {
             return (i - m);
         }
-    };
+    }
     return -1;
-};
+}
 
 function KMPFindCount(text, pattern) {
     let i = 0;
@@ -118,16 +118,16 @@ function KMPFindCount(text, pattern) {
     while (i < n) {
         while (j >= 0 && text[i] !== pattern[j]) {
             j = ShiftArr[j];
-        };
+        }
         i++;
         j++;
         if (j === m) {
             count++;
             j = ShiftArr[j];
         }
-    };
+    }
     return count;
-};
+}
 
 const st1 = "hello, world!";
 const st2 = "world";

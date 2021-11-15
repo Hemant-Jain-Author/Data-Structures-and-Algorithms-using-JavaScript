@@ -5,7 +5,7 @@ function SumArray(arr) {
         total = total + arr[index];
     }
     return total;
-};
+}
 
 function test1() {
     const numbers = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
@@ -23,7 +23,7 @@ function SequentialSearch(arr, value) {
         }
     }
     return -1;
-};
+}
 
 function BinarySearch(arr, value) {
     const size = arr.length;
@@ -41,9 +41,9 @@ function BinarySearch(arr, value) {
                 high = mid - 1;
             }
         }
-    };
+    }
     return -1;
-};
+}
 
 
 function BinarySearchRecursive(arr, value) {
@@ -64,7 +64,7 @@ function BinarySearchRecursiveUtil(arr, low, high, value) {
     } else {
         return BinarySearchRecursiveUtil(arr, low, mid - 1, value);
     }
-};
+}
 
 function test2a() {
     const numbers = [1, 8, 5, 4, 3, 6, 9, 2, 7, 10];
@@ -90,7 +90,7 @@ function rotateArray(a, n, k) {
     reverseArray(a, 0, k - 1);
     reverseArray(a, k, n - 1);
     reverseArray(a, 0, n - 1);
-};
+}
 
 function reverseArray(a, start, end) {
     if ((a != null && a instanceof Array) && (typeof start === 'number')
@@ -102,7 +102,7 @@ function reverseArray(a, start, end) {
         }
     } else
         throw new Error('invalid overload');
-};
+}
 
 function reverseArray2(a) {
     const start = 0;
@@ -112,7 +112,7 @@ function reverseArray2(a) {
         a[i] = a[j];
         a[j] = temp;
     }
-};
+}
 
 function test3() {
     const numbers = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
@@ -141,7 +141,7 @@ function maxSubArraySum(a) {
         }
     }
     return maxSoFar;
-};
+}
 
 function test4() {
     const arr = [1, -2, 3, 4, -4, 6, -4, 8, 2];
@@ -160,7 +160,7 @@ function WaveArray2(arr) {
             swap(arr, i, i + 1);
         }
     }
-};
+}
 
 function WaveArray(arr) {
     const size = arr.length;
@@ -168,7 +168,7 @@ function WaveArray(arr) {
     for (let i = 0; i < size - 1; i += 2) {
         swap(arr, i, i + 1);
     }
-};
+}
 
 function test5() {
     const arr = [8, 1, 2, 3, 4, 5, 6, 4, 2];
@@ -178,7 +178,7 @@ function test5() {
     const arr2 = [8, 1, 2, 3, 4, 5, 6, 4, 2];
     WaveArray2(arr2);
     console.log(arr2);
-};
+}
 
 //test5()
 
@@ -197,7 +197,7 @@ function indexArray(arr, size) {
             arr[curr] = value;
         }
     }
-};
+}
 
 function indexArray2(arr, size) {
     let temp;
@@ -208,7 +208,7 @@ function indexArray2(arr, size) {
             arr[temp] = temp;
         }
     }
-};
+}
 
 function test6() {
     const arr = [8, -1, 6, 1, 9, 3, 2, 7, 4, -1];
@@ -220,7 +220,7 @@ function test6() {
     size = arr2.length;
     indexArray(arr2, size);
     console.log(arr);
-};
+}
 
 //test6()
 
@@ -239,7 +239,7 @@ function Sort1toN(arr, size) {
             curr = next - 1;
         }
     }
-};
+}
 
 function Sort1toN2(arr, size) {
     let temp;
@@ -250,7 +250,7 @@ function Sort1toN2(arr, size) {
             arr[temp - 1] = temp;
         }
     }
-};
+}
 
 function test7() {
     const arr = [8, 5, 6, 1, 9, 3, 2, 7, 4, 10];
@@ -262,7 +262,7 @@ function test7() {
     size = arr2.length;
     Sort1toN(arr2, size);
     console.log(arr);
-};
+}
 
 //test7()
 
@@ -281,7 +281,7 @@ function SmallestPositiveMissingNumber(arr, size) {
         }
     }
     return -1;
-};
+}
 
 function SmallestPositiveMissingNumber2(arr, size) {
     const hs = new Set();
@@ -294,7 +294,7 @@ function SmallestPositiveMissingNumber2(arr, size) {
             return i;
     }
     return -1;
-};
+}
 
 function SmallestPositiveMissingNumber3(arr, size) {
     const aux = new Array(size).fill(-1);
@@ -311,7 +311,7 @@ function SmallestPositiveMissingNumber3(arr, size) {
         }
     }
     return -1;
-};
+}
 
 function SmallestPositiveMissingNumber4(arr, size) {
     let temp;
@@ -329,7 +329,7 @@ function SmallestPositiveMissingNumber4(arr, size) {
         }
     }
     return -1;
-};
+}
 
 function test8() {
     const arr = [8, 5, 6, 1, 9, 11, 2, 7, 4, 10];
@@ -338,7 +338,7 @@ function test8() {
     console.info(`Smallest Positive Missing Number :${SmallestPositiveMissingNumber2(arr, size)}`);
     console.info(`Smallest Positive Missing Number :${SmallestPositiveMissingNumber3(arr, size)}`);
     console.info(`Smallest Positive Missing Number :${SmallestPositiveMissingNumber4(arr, size)}`);
-};
+}
 
 //test8()
 
@@ -356,7 +356,7 @@ function MaxMinArr(arr, size) {
             start += 1;
         }
     }
-};
+}
 
 function ReverseArr(arr, start, stop) {
     while (start < stop) {
@@ -364,13 +364,13 @@ function ReverseArr(arr, start, stop) {
         start += 1;
         stop -= 1;
     }
-};
+}
 
 function MaxMinArr2(arr, size) {
     for (let i = 0; i < (size - 1); i++) {
         ReverseArr(arr, i, size - 1);
     }
-};
+}
 
 function test9() {
     const arr = [1, 2, 3, 4, 5, 6, 7];
@@ -382,7 +382,7 @@ function test9() {
     const size2 = arr.length;
     MaxMinArr2(arr2, size2);
     console.log(arr);
-};
+}
 
 //test9()
 
@@ -403,12 +403,12 @@ function maxCircularSum(arr, size) {
         }
     }
     return maxVal;
-};
+}
 
 function test10() {
     const arr = [10, 9, 8, 7, 6, 5, 4, 3, 2, 1];
     console.info(`Max Circulr Sum: ${maxCircularSum(arr, arr.length)}`);
-};
+}
 
 //test10()
 
@@ -426,7 +426,7 @@ function ArrayIndexMaxDiff(arr, size) {
         }
     }
     return maxDiff;
-};
+}
 
 function ArrayIndexMaxDiff2(arr, size) {
     const leftMin = new Array(size);
@@ -467,13 +467,13 @@ function ArrayIndexMaxDiff2(arr, size) {
         }
     }
     return maxDiff;
-};
+}
 
 function test11() {
     const arr = [33, 9, 10, 3, 2, 60, 30, 33, 1];
     console.info(`ArrayIndexMaxDiff : ${ArrayIndexMaxDiff(arr, arr.length)}`);
     console.info(`ArrayIndexMaxDiff : ${ArrayIndexMaxDiff2(arr, arr.length)}`);
-};
+}
 
 //test11()
 
@@ -511,13 +511,13 @@ function maxPathSum(arr1, size1, arr2, size2) {
     }
     result += Math.max(sum1, sum2);
     return result;
-};
+}
 
 function test12() {
     const arr1 = [12, 13, 18, 20, 22, 26, 70];
     const arr2 = [11, 15, 18, 19, 20, 26, 30, 31];
     console.info(`Max Path Sum :: ${maxPathSum(arr1, arr1.length, arr2, arr2.length)}`);
-};
+}
 
 //test12()
 
@@ -526,7 +526,7 @@ function factorial(i) {
         return 1;
     }
     return i * factorial(i - 1);
-};
+}
 
 //console.info("factorial 5 is ::", factorial(5))
 
@@ -538,13 +538,13 @@ function printHaxIntUtil(number, base, arr) {
         printHaxIntUtil(number, base, arr);
     }
     arr.push(conversion[digit]);
-};
+}
 
 function printHaxInt(number, base) {
     const arr = new Array();
     printHaxIntUtil(number, base, arr);
     return arr.join("");
-};
+}
 
 function test13() {
     console.log(printHaxInt(100, 16));
@@ -559,14 +559,14 @@ function towerOfHanoi(num, src, dst, temp) {
     towerOfHanoi(num - 1, src, temp, dst);
     console.log(`Move ${num} disk  from peg ${src} to peg ${dst}`);
     towerOfHanoi(num - 1, temp, dst, src);
-};
+}
 
 function test14() {
     const num = 3;
     console.info("The sequence of moves are :");
     towerOfHanoi(num, 'A', 'C', 'B');
     return 0;
-};
+}
 
 //test14()
 
@@ -578,11 +578,11 @@ function GCD(m, n) {
         return (n);
     }
     return (GCD(n, m % n));
-};
+}
 
 function test15() {
     console.log(GCD(15, 7));
-};
+}
 
 //test15()
 
@@ -591,7 +591,7 @@ function fibonacci(n) {
         return n;
     }
     return fibonacci(n - 1) + fibonacci(n - 2);
-};
+}
 
 function fibonacci2(n) {
     let first = 0;
@@ -623,7 +623,7 @@ function swap(arr, x, y) {
     const temp = arr[x];
     arr[x] = arr[y];
     arr[y] = temp;
-};
+}
 
 function permutation(arr, i, length) {
     if (length === i) {
@@ -637,11 +637,11 @@ function permutation(arr, i, length) {
         permutation(arr, i + 1, length);
         swap(arr, i, j);
     }
-};
+}
 
 function test17() {
     const arr = [1, 2, 3]
     permutation(arr, 0, 3);
-};
+}
 
 //test17()

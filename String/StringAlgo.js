@@ -16,18 +16,18 @@ function matchExpUtil(exp, str, i, j) {
             || matchExpUtil(exp, str, i + 1, j + 1);
     }
     return false;
-};
+}
 
 function matchExp(exp, str) {
     return matchExpUtil(exp, str, 0, 0);
-};
+}
 
 function test1() {
     console.log(matchExp("hello*", "helloworld"));
     console.log(matchExp("hello?d", "hellowd"));
     console.log(matchExp("hello*hemant", "helloworldfsdfsdfdsfhemant"));
     console.log(matchExp("*hemantj", "helloworldfsdfsdfdsfhemant"));
-};
+}
 //test1();
 
 function match(source, pattern) {
@@ -44,14 +44,14 @@ function match(source, pattern) {
         }
     }
     return false;
-};
+}
 
 function test2() {
     console.log(match("hellofskdlfjsdlfjsldjflksdworld", "helloworld"));
     console.log(match("hellod", "hellowd"));
     console.log(match("hello*xxxxxxxxxxhemantxxxxxxxxxxxx", "hellnt"));
     console.log()
-};
+}
 
 //test2();
 
@@ -64,7 +64,7 @@ function isPrime(n) {
         }
     }
     return answer;
-};
+}
 
 function test3() {
     process.stdout.write("Prime numbers under 100 :: ");
@@ -73,7 +73,7 @@ function test3() {
             process.stdout.write(`${i} `);
     }
     console.log()
-};
+}
 //test3();
 
 function isUniqueChar(str) {
@@ -102,12 +102,12 @@ function isUniqueChar(str) {
     }
     console.log("No duplicate detected.");
     return true;
-};
+}
 
 function test5() {
     isUniqueChar("aple");
     isUniqueChar("apple");
-};
+}
 
 //test5();
 
@@ -117,7 +117,7 @@ function ToUpper(s) {
         s = String.fromCharCode(ascii - 32);
     }
     return s;
-};
+}
 
 function ToLower(s) {
     ascii = s.charCodeAt(0)
@@ -125,7 +125,7 @@ function ToLower(s) {
         s = String.fromCharCode(ascii + 32);
     }
     return s;
-};
+}
 
 function LowerUpper(s) {
     ascii = s.charCodeAt(0)
@@ -136,14 +136,14 @@ function LowerUpper(s) {
         s = String.fromCharCode(ascii + 32);
     }
     return s;
-};
+}
 
 function test6() {
     console.info(ToLower('A'));
     console.info(ToUpper('a'));
     console.info(LowerUpper('s'));
     console.info(LowerUpper('S'));
-};
+}
 //test6();
 
 function isPermutation(s1, s2) {
@@ -165,12 +165,12 @@ function isPermutation(s1, s2) {
     }
 
     return true;
-};
+}
 
 function test7() {
     console.info("isPermutation :", isPermutation("apple", "plepa"));
     console.info("isPermutation :", isPermutation("appleb", "plepaa"));
-};
+}
 
 //test7();
 
@@ -190,12 +190,12 @@ function isPalindrome(str) {
         console.info(str, "is a Palindrome");
         return true;
     }
-};
+}
 
 function test8() {
     isPalindrome("hello");
     isPalindrome("eoloe");
-};
+}
 
 //test8();
 
@@ -212,11 +212,11 @@ function pow(x, n) {
         value = pow(x, Math.floor(n / 2));
         return (x * value * value);
     }
-};
+}
 
 function test9() {
     console.info(pow(5, 2));
-};
+}
 //test9();
 
 function myStrcmp(a, b) {
@@ -243,11 +243,11 @@ function myStrcmp(a, b) {
     else {
         return (a.charCodeAt(index) - b.charCodeAt(index));
     }
-};
+}
 
 function test10() {
     console.info("StrCmp returns :", myStrcmp("aba", "aas"));
-};
+}
 
 //test10();
 
@@ -256,7 +256,7 @@ function reverseString(str) {
     reverseStringUtil(a);
     const expn = a.join('');
     return expn;
-};
+}
 
 function reverseStringUtil(a) {
     let lower = 0;
@@ -270,7 +270,7 @@ function reverseStringUtil(a) {
         lower++;
         upper--;
     }
-};
+}
 
 function reverseStringUtil2(a, lower, upper) {
     let tempChar;
@@ -282,7 +282,7 @@ function reverseStringUtil2(a, lower, upper) {
         lower++;
         upper--;
     }
-};
+}
 
 function reverseWords(str) {
     const a = str.split("");
@@ -302,12 +302,12 @@ function reverseWords(str) {
     reverseStringUtil2(a, lower, upper - 1);
     reverseStringUtil2(a, 0, length - 1);
     return a.join("");
-};
+}
 
 function test11() {
     console.info(reverseString("apple"));
     console.info(reverseWords("hello world"));
-};
+}
 
 //test11();
 
@@ -315,7 +315,7 @@ function printAnagram(str) {
     const a = str.split('');
     const n = a.length;
     printAnagramUtil(a, n, n);
-};
+}
 
 function printAnagramUtil(a, max, n) {
     if (max === 1) {
@@ -335,11 +335,11 @@ function printAnagramUtil(a, max, n) {
             a[max - 1] = temp;
         }
     }
-};
+}
 
 function test12() {
     printAnagram("123");
-};
+}
 
 //test12();
 
@@ -366,11 +366,11 @@ function shuffle(str) {
         }
     }
     return ar.join("")
-};
+}
 
 function test13() {
     console.log(shuffle("ABCDE12345"));
-};
+}
 A1B2C3D4E5
 test13();
 
@@ -404,9 +404,9 @@ function addBinary(first, second) {
     }
     total[totalIndex] = (carry === 0) ? '0' : '1';
     return total.join("");
-};
+}
 
 function test14() {
     console.info(addBinary("1000", "11111111"));
-};
+}
 //test14();

@@ -4,9 +4,8 @@ function optCostUtil(freq, i, j)
 	{
 		return 0;
 	}
-	if (j == i)
+	if (j == i) // one element in this subarray
 	{
-		// one element in this subarray
 		return freq[i];
 	}
 	let min = Number.MAX_VALUE;
@@ -16,11 +15,13 @@ function optCostUtil(freq, i, j)
 	}
 	return min + sum(freq, i, j);
 }
+
 function optCost(keys, freq)
 {
 	let n = freq.length;
 	return optCostUtil(freq, 0, n - 1);
 }
+
 function optCostTD(keys, freq)
 {
 	let n = freq.length;
@@ -31,6 +32,7 @@ function optCostTD(keys, freq)
 	}
 	return optCostTDUtil(freq, cost, 0, n - 1);
 }
+
 function optCostTDUtil(freq, cost, i, j)
 {
 	if (i > j)
@@ -66,6 +68,7 @@ function sumInit(freq, n)
 		sum[i] = sum[i - 1] + freq[i];
 	return sum;
 }
+
 function sumRange(sum, i, j)
 {
 	if (i == 0)
@@ -82,9 +85,8 @@ function optCostBU(keys, freq)
 		cost[i][i] = freq[i];
 	}
 	let sm = 0;
-	for (let l = 1; l < n; l++)
+	for (let l = 1; l < n; l++) // l is length of range.
 	{
-		// l is length of range.
 		for (let i = 0, j = i + l; j < n; i++, j++)
 		{
 			sm = sum(freq, i, j);
@@ -107,9 +109,8 @@ function optCostBU2(keys, freq)
 		cost[i][i] = freq[i];
 	}
 	let sm = 0;
-	for (let l = 1; l < n; l++)
+	for (let l = 1; l < n; l++) // l is length of range.
 	{
-		// l is length of range.
 		for (let i = 0, j = i + l; j < n; i++, j++)
 		{
 			sm = sumRange(sumArr, i, j);
@@ -128,3 +129,10 @@ console.log("OBST cost:" + optCost(keys, freq));
 console.log("OBST cost:" + optCostTD(keys, freq));
 console.log("OBST cost:" + optCostBU(keys, freq));
 console.log("OBST cost:" + optCostBU2(keys, freq));
+
+/*
+OBST cost:130
+OBST cost:130
+OBST cost:130
+OBST cost:130
+*/

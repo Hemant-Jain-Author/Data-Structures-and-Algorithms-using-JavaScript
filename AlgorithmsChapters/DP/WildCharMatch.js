@@ -2,6 +2,7 @@ function wildCharMatchExp(exp, str)
 {
 	return wildCharMatchExpUtil(exp.split(''), str.split(''), 0, 0);
 }
+
 function wildCharMatchExpUtil(exp, str, m, n)
 {
 	if (m == exp.length && (n == str.length || exp[m - 1] == '*'))
@@ -22,11 +23,13 @@ function wildCharMatchExpUtil(exp, str, m, n)
 	}
 	return false;
 }
+
 function wildCharMatchExpDP(exp, str)
 {
-	return wildCharMatchExpUtilDP(exp.split(''), str.split(''), exp.length, str.length);
+	return wildCharMatchExpDPUtil(exp.split(''), str.split(''), exp.length, str.length);
 }
-function wildCharMatchExpUtilDP(exp, str, m, n)
+
+function wildCharMatchExpDPUtil(exp, str, m, n)
 {
 	let lookup = Array(m + 1).fill(false).map(() => new Array(n + 1).fill(false));
 	lookup[0][0] = true;
@@ -74,4 +77,7 @@ function wildCharMatchExpUtilDP(exp, str, m, n)
 console.log(wildCharMatchExp("*llo,?World?", "Hello, World!"));
 console.log(wildCharMatchExpDP("*llo,?World?", "Hello, World!"));
 
-
+/*
+true
+true
+*/

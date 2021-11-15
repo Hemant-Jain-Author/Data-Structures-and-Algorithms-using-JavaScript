@@ -15,7 +15,7 @@ class Heap {
             this.size = array.length;
             this.arr = array;
             for (let i = Math.floor(this.size / 2); i >= 0; i--) {
-                this.proclateDown(i);
+                this.percolateDown(i);
             }
         } else {
             throw new Error('invalid arguments');
@@ -24,7 +24,7 @@ class Heap {
     
     /* Other methods */
 
-    proclateDown(parent) {
+    percolateDown(parent) {
         const lChild = 2 * parent + 1;
         const rChild = lChild + 1;
         let child = -1;
@@ -39,11 +39,11 @@ class Heap {
             temp = this.arr[parent];
             this.arr[parent] = this.arr[child];
             this.arr[child] = temp;
-            this.proclateDown(child);
+            this.percolateDown(child);
         }
     }
 
-    proclateUp(child) {
+    percolateUp(child) {
         const parent = Math.floor((child - 1) / 2);
         if (parent < 0) {
             return;
@@ -52,14 +52,14 @@ class Heap {
             const temp = this.arr[child];
             this.arr[child] = this.arr[parent];
             this.arr[parent] = temp;
-            this.proclateUp(parent);
+            this.percolateUp(parent);
         }
     }
 
     add(value) {
         this.arr[this.size] = value;
         this.size++;
-        this.proclateUp(this.size - 1);
+        this.percolateUp(this.size - 1);
     }
 
     remove() {
@@ -69,7 +69,7 @@ class Heap {
         const value = this.arr[0];
         this.arr[0] = this.arr[this.size - 1];
         this.size--;
-        this.proclateDown(0);
+        this.percolateDown(0);
         return value;
     }
 
@@ -98,7 +98,7 @@ function HeapSort(array, cmp) {
     for (let i = 0; i < array.length; i++) {
         array[array.length - i - 1] = hp.remove();
     }
-};
+}
 
 function test1() {
     const hp1 = new Heap()
@@ -146,7 +146,7 @@ function test4() {
 function KthSmallest(arr, size, k) {
     arr = arr.sort();
     return arr[k - 1];
-};
+}
 
 function KthSmallest2(arr, size, k) {
     let value = 0;
@@ -157,14 +157,14 @@ function KthSmallest2(arr, size, k) {
         i += 1;
     }
     return value;
-};
+}
 
 function test5() {
     const arr = [8, 7, 6, 5, 7, 5, 2, 1];
     console.info(`Kth Smallest :: ${KthSmallest(arr, arr.length, 3)}`);
     const arr2 = [8, 7, 6, 5, 7, 5, 2, 1];
     console.info(`Kth Smallest :: ${KthSmallest2(arr2, arr2.length, 3)}`);
-};
+}
 
 function isMinHeap(arr) {
     const size = arr.length;
@@ -203,7 +203,7 @@ function test6() {
     console.info(`isMaxHeap :: ${isMaxHeap(arr3, arr3.length)}`);
     const arr4 = [1, 2, 3, 4, 5, 6, 7, 8];
     console.info(`isMinHeap :: ${isMinHeap(arr4, arr4.length)}`);
-};
+}
 
 //test6()
 
@@ -214,13 +214,13 @@ function KSmallestProduct(arr, size, k) {
         product *= arr[i];
     }
     return product;
-};
+}
 
 function swap(arr, i, j) {
     const temp = arr[i];
     arr[i] = arr[j];
     arr[j] = temp;
-};
+}
 
 function QuickSelectUtil(arr, lower, upper, k) {
     if (upper <= lower)
@@ -246,7 +246,7 @@ function QuickSelectUtil(arr, lower, upper, k) {
         QuickSelectUtil(arr, start, upper - 1, k);
     if (k > upper)
         QuickSelectUtil(arr, upper + 1, stop, k);
-};
+}
 
 function KSmallestProduct3(arr, size, k) {
     QuickSelectUtil(arr, 0, size - 1, k);
@@ -255,7 +255,7 @@ function KSmallestProduct3(arr, size, k) {
         product *= arr[i];
     }
     return product;
-};
+}
 
 function KSmallestProduct2(arr, size, k) {
     const pq = new Heap(arr);
@@ -266,7 +266,7 @@ function KSmallestProduct2(arr, size, k) {
         i += 1;
     }
     return product;
-};
+}
 
 function test7() {
     const arr = [8, 7, 6, 5, 7, 5, 2, 1];
@@ -275,7 +275,7 @@ function test7() {
     console.info(`Kth Smallest product:: ${KSmallestProduct2(arr2, 8, 3)}`);
     const arr3 = [8, 7, 6, 5, 7, 5, 2, 1];
     console.info(`Kth Smallest product:: ${KSmallestProduct3(arr3, 8, 3)}`);
-};
+}
 
 //test7()
 
@@ -285,7 +285,7 @@ function PrintLargerHalf(arr, size) {
         process.stdout.write(`${arr[i]} `);
     }
     console.info();
-};
+}
 
 function PrintLargerHalf2(arr, size) {
     const pq = new Heap(arr);
@@ -296,7 +296,7 @@ function PrintLargerHalf2(arr, size) {
             process.stdout.write(`${pq.remove()} `);
     }
     console.info();
-};
+}
 
 function PrintLargerHalf3(arr, size) {
     QuickSelectUtil(arr, 0, size - 1, (size / 2));
@@ -304,7 +304,7 @@ function PrintLargerHalf3(arr, size) {
         process.stdout.write(`${arr[i]} `);
     }
     console.info();
-};
+}
 
 function test8() {
     const arr = [8, 7, 6, 4, 7, 5, 2, 1];
@@ -313,7 +313,7 @@ function test8() {
     PrintLargerHalf2(arr2, 8);
     const arr3 = [8, 7, 6, 4, 7, 5, 2, 1];
     PrintLargerHalf3(arr3, 8);
-};
+}
 
 //test8()
 
@@ -322,7 +322,7 @@ function sortK(arr, size, k) {
     let i = 0;
     for (i = 0; i < k; i++) {
         pq.add(arr[i]);
-    };
+    }
     const output = new Array(size);
     let index = 0;
     for (i = k; i < size; i++) {
@@ -332,19 +332,19 @@ function sortK(arr, size, k) {
 
     while (pq.isEmpty() === false) {
         output[index++] = pq.remove();
-    };
+    }
     for (i = 0; i < size; i++) {
         arr[i] = output[i];
     }
     console.info(arr);
-};
+}
 
 function test9() {
     const k = 3;
     const arr = [1, 5, 4, 10, 50, 9];
     const size = arr.length;
     sortK(arr, size, k);
-};
+}
 
 //test9()
 
@@ -369,7 +369,7 @@ function ChotaBhim(cups, size){
     }
     console.info(`Total : ${total}`);
     return total;
-};
+}
 
 function ChotaBhim2(cups, size){
     let time = 60;
@@ -394,7 +394,7 @@ function ChotaBhim2(cups, size){
     }
     console.info(`Total : ${total}`);
     return total;
-};
+}
 
 function ChotaBhim3(cups, size){
     let time = 60;
@@ -411,7 +411,7 @@ function ChotaBhim3(cups, size){
     }
     console.info(`Total : ${total}`);
     return total;
-};
+}
 
 function test10(){
     const cups = [2, 1, 7, 4, 2];
@@ -420,7 +420,7 @@ function test10(){
     ChotaBhim2(cups2, cups.length);
     const cups3 = [2, 1, 7, 4, 2];
     ChotaBhim3(cups3, cups.length);
-};
+}
 
 //test10()
 
@@ -445,7 +445,7 @@ function JoinRopes(ropes, size) {
     }
     console.info(`Total : ${total}`);
     return total;
-};
+}
 
 function JoinRopes2(ropes, size) {
     const pq = new Heap(ropes);
@@ -460,14 +460,14 @@ function JoinRopes2(ropes, size) {
     }
     console.info(`Total : ${total}`);
     return total;
-};
+}
 
 function test11(){
     const ropes = [2, 1, 7, 4, 2];
     JoinRopes(ropes, ropes.length);
     const rope2 = [2, 1, 7, 4, 2];
     JoinRopes2(rope2, rope2.length);
-};
+}
 
 //test11()
 
@@ -513,6 +513,6 @@ function test12(){
         hp.insert(arr[i]);
         console.log(`Median after insertion of ${arr[i]} is  ${hp.getMedian()}`);
     }
-};
+}
 
 //test12()

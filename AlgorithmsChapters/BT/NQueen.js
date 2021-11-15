@@ -1,8 +1,3 @@
-function print(Q, n)
-{
-	console.log(Q);
-}
-
 function feasible(Q, k)
 {
 	for (let i = 0; i < k; i++)
@@ -19,7 +14,7 @@ function nQueens(Q, k, n)
 {
 	if (k == n)
 	{
-		print(Q, n);
+		console.log(Q);
 		return;
 	}
 	for (let i = 0; i < n; i++)

@@ -22,6 +22,7 @@ function uniqueWays(m, n)
 	}
 	return dp[m - 1][n - 1];
 }
+
 // Diagonal movement allowed.
 function unique3Ways(m, n)
 {
@@ -49,3 +50,8 @@ function unique3Ways(m, n)
 
 console.log(uniqueWays(3, 3));
 console.log(unique3Ways(3, 3));
+
+/*
+6
+13
+*/

@@ -1,12 +1,9 @@
 function diffUniqueWaysBU(n)
 {
 	if (n <= 2)
-	{
 		return n;
-	}
-	let first = 1;
-	let second = 2;
-	let temp = 0;
+
+	let first = 1, second = 2, temp = 0;
 	for (let i = 3; i <= n; i++)
 	{
 		temp = first + second;
@@ -34,3 +31,8 @@ function diffUniqueWaysBU2(n)
 
 console.log("Unique way to reach top:: " + diffUniqueWaysBU(4));
 console.log("Unique way to reach top:: " + diffUniqueWaysBU2(4));
+
+/*
+Unique way to reach top:: 5
+Unique way to reach top:: 5
+*/

@@ -14,20 +14,15 @@ class Activity
 
 function maxActivities(s, f, n)
 {
-	var act = Array(n).fill(null);
-	for (var i = 0; i < n; i++)
-	{
+	let act = Array(n).fill(0);
+	for (let i = 0; i < n; i++)
 		act[i] = new Activity(s[i], f[i]);
-	}
-	act.sort(function(a, b)
-	{
-		return a.stop - b.stop;
-	});
-	// sort according to finish time.
-	var i = 0;
+
+	act.sort(function(a, b)	{return a.stop - b.stop;});	// sort according to finish time.
+	let i = 0;
 	// The first activity at index 0 is always gets selected.
-	var output = "Activities are : (" + act[i].start + "," + act[i].stop + ")";
-	for (var j = 1; j < n; j++)
+	let output = "Activities are : (" + act[i].start + "," + act[i].stop + ")";
+	for (let j = 1; j < n; j++)
 	{
 		// Find next activity whose start time is greater than or equal
 		// to the finish time of previous activity.
@@ -40,9 +35,9 @@ function maxActivities(s, f, n)
 	console.log(output)
 }
 
-var s = [1, 5, 0, 3, 5, 6, 8];
-var f = [2, 6, 5, 4, 9, 7, 9];
-var n = s.length;
+let s = [1, 5, 0, 3, 5, 6, 8];
+let f = [2, 6, 5, 4, 9, 7, 9];
+let n = s.length;
 maxActivities(s, f, n);
 
 /*

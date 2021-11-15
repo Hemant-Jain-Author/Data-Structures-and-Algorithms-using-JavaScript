@@ -54,7 +54,7 @@ class Queue {
         while (temp != null) {
             process.stdout.write(`${temp.value} `)
             temp = temp.next;
-       };
+       }
     }
 }
 

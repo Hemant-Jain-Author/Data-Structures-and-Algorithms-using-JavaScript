@@ -77,15 +77,10 @@ class PriorityQueue {
 
 function chotaBhim(cups)
 {
-	var size = cups.length;
-	var time = 60;
-	cups.sort(function(a, b)
-	{
-		return b - a;
-	});
-	var total = 0;
-	var index = 0;
-	var temp = 0;
+	let size = cups.length;
+	let time = 60;
+	cups.sort(function(a, b){return b - a;});
+	let total = 0, index = 0, temp = 0;
 	while (time > 0)
 	{
 		total += cups[0];
@@ -106,15 +101,15 @@ function chotaBhim(cups)
 
 function chotaBhim2(cups)
 {
-	var size = cups.length;
-	var time = 60;
-	var pq = new PriorityQueue(function(a, b) {return (a - b) < 0;});
-	for (var i = 0; i < size; i++)
+	let size = cups.length;
+	let time = 60;
+	let pq = new PriorityQueue(function(a, b) {return (a - b) < 0;});
+	for (let i = 0; i < size; i++)
 	{
 		pq.add(cups[i]);
 	}
-	var total = 0;
-	var value = 0;
+	let total = 0;
+	let value = 0;
 	while (time > 0)
 	{
 		value = pq.remove();
@@ -127,7 +122,12 @@ function chotaBhim2(cups)
 	return total;
 }
 
-var cups = [2, 1, 7, 4, 2];
+let cups = [2, 1, 7, 4, 2];
 chotaBhim(cups);
-var cups2 = [2, 1, 7, 4, 2];
+let cups2 = [2, 1, 7, 4, 2];
 chotaBhim2(cups2);
+
+/*
+Total : 76
+Total : 76
+*/

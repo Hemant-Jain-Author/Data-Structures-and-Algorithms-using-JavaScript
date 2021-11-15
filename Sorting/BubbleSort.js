@@ -10,7 +10,7 @@ function bubbleSort(arr, compare) {
             }
         }
     }
-};
+}
 
 function bubbleSort2(arr, compare) {
     const size = arr.length;
@@ -27,7 +27,7 @@ function bubbleSort2(arr, compare) {
             }
         }
     }
-};
+}
 
 less = (value1, value2) => value1 < value2;
 

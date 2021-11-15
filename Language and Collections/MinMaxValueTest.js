@@ -17,6 +17,6 @@ function main() {
     console.info(`Range of long :: ${minLong} to ${maxLong}.`);
     console.info(`Range of float :: ${minFloat} to ${maxFloat}.`);
     console.info(`Range of double :: ${minDouble} to ${maxDouble}.`);
-};
+}
 
 main();

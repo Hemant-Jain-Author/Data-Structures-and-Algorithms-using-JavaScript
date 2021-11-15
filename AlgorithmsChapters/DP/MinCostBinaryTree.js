@@ -69,3 +69,8 @@ function findSumBU(arr)
 let arr = [6, 2, 4];
 console.log("Total cost: " + findSumTD(arr));
 console.log("Total cost: " + findSumBU(arr));
+
+/*
+Total cost: 32
+Total cost: 32
+*/

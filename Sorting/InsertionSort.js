@@ -1,5 +1,3 @@
-more = (value1, value2) => value1 > value2;
-
 function insertionSort(arr, compare) {
     const size = arr.length;
     let temp;
@@ -10,7 +8,9 @@ function insertionSort(arr, compare) {
         }
         arr[j] = temp;
     }
-};
+}
+
+more = (value1, value2) => value1 > value2;
 
 const array = [9, 1, 8, 2, 7, 3, 6, 4, 5];
 insertionSort(array, more);

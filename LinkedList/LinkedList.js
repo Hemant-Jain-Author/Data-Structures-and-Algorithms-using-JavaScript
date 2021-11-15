@@ -37,7 +37,7 @@ class LinkedList {
         }
         while (curr.next != null) {
             curr = curr.next;
-        };
+        }
         curr.next = newNode;
     }
 
@@ -57,7 +57,7 @@ class LinkedList {
             if (temp.value === data)
                 return true;
             temp = temp.next;
-        };
+        }
         return false;
     }
 
@@ -79,7 +79,7 @@ class LinkedList {
                 return true;
             }
             temp = temp.next;
-        };
+        }
         return false;
     }
 
@@ -89,7 +89,7 @@ class LinkedList {
         while (currNode != null && currNode.value === delValue) {
             this.head = currNode.next;
             currNode = this.head;
-        };
+        }
         
         while (currNode != null) {
             nextNode = currNode.next;
@@ -99,7 +99,7 @@ class LinkedList {
             else {
                 currNode = nextNode;
             }
-        };
+        }
     }
 
     reverseRecurseUtil(currentNode, nextNode) {
@@ -141,7 +141,7 @@ class LinkedList {
             tempNode2 = new LinkedListNode(curr.value, tempNode);
             curr = curr.next;
             tempNode = tempNode2;
-        };
+        }
         const ll2 = new LinkedList();
         ll2.head = tempNode;
         return ll2;
@@ -162,7 +162,7 @@ class LinkedList {
             tailNode.next = tempNode;
             tailNode = tempNode;
             curr = curr.next;
-        };
+        }
         const ll2 = new LinkedList();
         ll2.head = headNode;
         return ll2;
@@ -203,11 +203,11 @@ class LinkedList {
         while (curr != null) {
             count++;
             curr = curr.next;
-        };
+        }
         return count;
     }
 
-    nthNodeFromBegining(index) {
+    nthNodeFromBeginning(index) {
         if (index > this.size() || index < 1)
             throw new Error('TooFewNodes');;
         let count = 0;
@@ -215,7 +215,7 @@ class LinkedList {
         while (curr != null && count < index - 1) {
             count++;
             curr = curr.next;
-        };
+        }
         return curr.value;
     }
 
@@ -226,7 +226,7 @@ class LinkedList {
             throw new Error('TooFewNodes');
         }
         startIndex = size - index + 1;
-        return this.nthNodeFromBegining(startIndex);
+        return this.nthNodeFromBeginning(startIndex);
     }
 
     nthNodeFromEnd2(index) {
@@ -236,14 +236,14 @@ class LinkedList {
         while (forward != null && count <= index) {
             count++;
             forward = forward.next;
-        };
+        }
         if (forward == null)
             throw new Error('invalid arguments');
         
         while (forward != null) {
             forward = forward.next;
             curr = curr.next;
-        };
+        }
         return curr.value;
     }
 
@@ -255,12 +255,12 @@ class LinkedList {
         while (tempHead != null) {
             l1++;
             tempHead = tempHead.next;
-        };
+        }
         
         while (tempHead2 != null) {
             l2++;
             tempHead2 = tempHead2.next;
-        };
+        }
         let diff;
         if (l1 < 12) {
             const temp = head;
@@ -277,7 +277,7 @@ class LinkedList {
         while (head !== head2) {
             head = head.next;
             head2 = head2.next;
-        };
+        }
         return head;
     }
 
@@ -291,7 +291,7 @@ class LinkedList {
         while (temp != null) {
             process.stdout.write(`${temp.value} `);
             temp = temp.next;
-        };
+        }
         process.stdout.write("\n");
     }
 
@@ -305,7 +305,7 @@ class LinkedList {
         }
         while (curr.next != null && curr.next.value < value) {
             curr = curr.next;
-        };
+        }
         newNode.next = curr.next;
         curr.next = newNode;
     }
@@ -319,7 +319,7 @@ class LinkedList {
             else {
                 curr = curr.next;
             }
-        };
+        }
     }
 
     makeLoop() {
@@ -330,7 +330,7 @@ class LinkedList {
                 return;
             }
             temp = temp.next;
-        };
+        }
     }
 
     loopDetect() {
@@ -344,7 +344,7 @@ class LinkedList {
                 console.log("loop found");
                 return true;
             }
-        };
+        }
         console.log("loop not found");
         return false;
     }
@@ -378,7 +378,7 @@ class LinkedList {
                 console.log("loop found");
                 return 1;
             }
-        };
+        }
         console.log("loop not found");
         return 0;
     }
@@ -392,7 +392,7 @@ class LinkedList {
             if (slowPtr === fastPtr) {
                 return slowPtr;
             }
-        };
+        }
         return null;
     }
 
@@ -411,7 +411,7 @@ class LinkedList {
         while (firstPtr.next !== secondPtr.next) {
             firstPtr = firstPtr.next;
             secondPtr = secondPtr.next;
-        };
+        }
         secondPtr.next = null;
     }
 }
@@ -445,7 +445,7 @@ ll.print();
 ll.reverseRecurse()
 ll.print();
 
-console.log(ll.nthNodeFromBegining(2));
+console.log(ll.nthNodeFromBeginning(2));
 console.log(ll.nthNodeFromEnd(2));
 console.log(ll.nthNodeFromEnd2(2));
 console.log(ll.findLength())

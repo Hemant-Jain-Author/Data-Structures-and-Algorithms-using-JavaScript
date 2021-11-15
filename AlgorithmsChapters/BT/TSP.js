@@ -25,11 +25,9 @@ function tsp(graph, n)
 {
 	let visited = Array(n).fill(false);
 	let path = Array(n).fill(0);
-	path[0] = 0;
 	visited[0] = true;
 	let ans = Number.MAX_VALUE;
 	ans = tspUtil(graph, n, path, 1, 0, visited, ans);
-	console.log(ans);
 	return ans;
 }
 
@@ -40,4 +38,4 @@ let graph = [
 	[15, 35, 0, 30],
 	[20, 25, 30, 0]
 ];
-tsp(graph, n);
+console.log(tsp(graph, n));

@@ -35,3 +35,8 @@ function palindromicSubstring(str)
 
 let str = "ABCAUCBCxxCBA";
 console.log("Max Palindromic Substrings len: " + palindromicSubstring(str));
+
+/*
+Max Length Palindromic Substrings : BCxxCB
+Max Palindromic Substrings len: 6
+*/

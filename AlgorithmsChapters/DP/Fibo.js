@@ -1,9 +1,7 @@
 function fibonacci(n)
 {
 	if (n <= 2)
-	{
 		return n - 1;
-	}
 	return fibonacci(n - 1) + fibonacci(n - 2);
 }
 
@@ -54,9 +52,7 @@ function fibonacciSeriesBU(n)
 function fibonacciSeriesTD(n)
 {
 	if (n < 1)
-	{
 		return;
-	}
 	let dp = Array(n).fill(0);
 	fibonacciSeriesTDUtil(n - 1, dp);
 	console.log(dp);
@@ -76,12 +72,11 @@ function fibonacciSeriesTDUtil(n, dp)
 	return dp[n];
 }
 
-for (let i = 6; i < 7; i++)
-{
-	fibonacciSeries(i);
-	fibonacciSeriesBU(i);
-	fibonacciSeriesTD(i);
-}
+
+
+fibonacciSeries(6);
+fibonacciSeriesBU(6);
+fibonacciSeriesTD(6);
 console.log(fibonacci(6));
 console.log(fibonacciBU(6));
 

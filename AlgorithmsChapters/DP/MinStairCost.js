@@ -1,6 +1,8 @@
 
-function minStairCost(cost, n)
+function minStairCost(cost)
 {
+	let n = a.length;
+
 	// base case
 	if (n == 1)
 		return cost[0];
@@ -16,5 +18,8 @@ function minStairCost(cost, n)
 }
 
 let a = [1, 5, 6, 3, 4, 7, 9, 1, 2, 11];
-let n = a.length;
-console.log(minStairCost(a, n));
+console.log(minStairCost(a));
+
+/*
+18
+*/

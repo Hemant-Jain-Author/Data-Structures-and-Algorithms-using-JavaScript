@@ -122,7 +122,7 @@ class DoublyCircularLinkedList {
         while (temp !== this.tail) {
             process.stdout.write(`${temp.value} `);
             temp = temp.next;
-        };
+        }
         process.stdout.write(`${temp.value}\n`);
     }
 }
