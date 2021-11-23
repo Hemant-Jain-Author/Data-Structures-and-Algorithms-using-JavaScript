@@ -9,7 +9,7 @@ class Point
 
 function closestPairBF(arr)
 {
-	let n = arr.length;
+	const n = arr.length;
 	let dmin = 9999999;
 	let d = 0.0;
 	for (let i = 0; i < n - 1; i++)
@@ -86,8 +86,8 @@ function closestPairUtil(p, start, stop, q, n)
 
 function closestPairDC(arr)
 {
-	let n = arr.length;
-	let p = Array(n).fill(null);
+	const n = arr.length;
+	const p = Array(n).fill(null);
 	for (let i = 0; i < n; i++)
 	{
 		p[i] = new Point(arr[i][0], arr[i][1]);
@@ -100,7 +100,7 @@ function closestPairDC(arr)
 	return closestPairUtil(p, 0, n - 1, q, n);
 }
 
-let arr = [
+const arr = [
 	[648, 896],
 	[269, 879],
 	[250, 922],
@@ -109,3 +109,8 @@ let arr = [
 ];
 console.log("Smallest distance is:" + closestPairBF(arr));
 console.log("Smallest distance is:" + closestPairDC(arr));
+
+/*
+Smallest distance is:47.01063709417264
+Smallest distance is:47.01063709417264
+*/

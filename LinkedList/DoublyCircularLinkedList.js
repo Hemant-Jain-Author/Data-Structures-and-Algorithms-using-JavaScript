@@ -51,8 +51,7 @@ class DoublyCircularLinkedList {
             this.head = this.tail = newNode;
             newNode.next = newNode;
             newNode.prev = newNode;
-        }
-        else {
+        } else {
             newNode.next = this.tail.next;
             newNode.prev = this.tail;
             this.tail.next = newNode;

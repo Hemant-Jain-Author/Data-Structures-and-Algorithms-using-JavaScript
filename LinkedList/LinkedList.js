@@ -95,8 +95,7 @@ class LinkedList {
             nextNode = currNode.next;
             if (nextNode != null && nextNode.value === delValue) {
                 currNode.next = nextNode.next;
-            }
-            else {
+            } else {
                 currNode = nextNode;
             }
         }
@@ -129,7 +128,6 @@ class LinkedList {
             prev = curr;
             curr = next;
         }
-        ;
         this.head = prev;
     }
 
@@ -154,6 +152,7 @@ class LinkedList {
         let curr = this.head;
         if (curr == null)
             return null;
+        
         headNode = new LinkedListNode(curr.value, null);
         tailNode = headNode;
         curr = curr.next;
@@ -267,8 +266,7 @@ class LinkedList {
             head = head2;
             head2 = temp;
             diff = l2 - l1;
-        }
-        else {
+        } else {
             diff = l1 - l2;
         }
         for (; diff > 0; diff--) {
@@ -315,8 +313,7 @@ class LinkedList {
         while (curr != null) {
             if (curr.next != null && curr.value === curr.next.value) {
                 curr.next = curr.next.next;
-            }
-            else {
+            } else {
                 curr = curr.next;
             }
         }
@@ -356,8 +353,7 @@ class LinkedList {
             this.reverse();
             console.log("loop found");
             return true;
-        }
-        else {
+        } else {
             this.reverse();
             console.log("loop not found");
             return false;

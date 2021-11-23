@@ -65,6 +65,10 @@ function test1(){
 }
 
 test1()
+/*
+isAnagram : true
+isAnagram : false
+*/
 
 function removeDuplicate(str){
     let str2 = "";
@@ -85,6 +89,9 @@ function test2(){
 }
 
 test2()
+/*
+helo
+*/
 
 function findMissing(arr, start, end){
     const hs = new Set();
@@ -104,6 +111,9 @@ function test3(){
 }
 
 test3()
+/*
+Missing element is :  4
+*/
 
 function printRepeating(arr) {
     const hs = new Set();
@@ -140,6 +150,12 @@ function test4(){
 }
 
 test4()
+/*
+Repeating elements are:
+4
+1
+First Repeating number is : 1
+*/
 
 function hornerHash(key, tableSize){
     const size = key.length;

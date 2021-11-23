@@ -39,7 +39,7 @@ function graphColouring2Util(graph, V, m, colour, i)
 
 function graphColouring2(graph, V, m)
 {
-	let colour = new Array(V);
+	const colour = new Array(V);
 	if (graphColouring2Util(graph, V, m, colour, 0))
 	{
 		return true;
@@ -83,7 +83,7 @@ function graphColouringUtil(graph, V, m, colour, i)
 
 function graphColouring(graph, V, m)
 {
-	let colour = Array(V).fill(0);
+	const colour = Array(V).fill(0);
 	if (graphColouringUtil(graph, V, m, colour, 0))
 	{
 		return true;
@@ -92,15 +92,15 @@ function graphColouring(graph, V, m)
 }
 
 
-let graph = [
+const graph = [
 	[false, true, false, false, true],
 	[true, false, true, false, true],
 	[false, true, false, true, true],
 	[false, false, true, false, true],
 	[true, true, true, true, false]
 ];
-let V = 5; // Number of vertices
-let m = 4; // Number of colours
+const V = 5; // Number of vertices
+const m = 4; // Number of colours
 if (! graphColouring2(graph, V, m))
 {
 	console.log("Solution does not exist");
@@ -109,3 +109,8 @@ if (! graphColouring(graph, V, m))
 {
 	console.log("Solution does not exist");
 }
+
+/*
+Assigned colours are : [ 1, 2, 1, 2, 3 ]
+Assigned colours are : [ 1, 2, 1, 2, 3 ]
+*/

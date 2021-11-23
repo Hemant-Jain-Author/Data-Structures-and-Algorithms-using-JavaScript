@@ -25,21 +25,19 @@ function getMaxCost01Util(wt, cost, n, capacity)
 
 function getMaxCost01TD(wt, cost, capacity)
 {
-	let n = wt.length;
-	let dp = Array(capacity + 1).fill(0).map(() => new Array(n + 1).fill(0));
+	const n = wt.length;
+	const dp = Array(capacity + 1).fill(0).map(() => new Array(n + 1).fill(0));
 	return getMaxCost01TDUtil(dp, wt, cost, n, capacity);
 }
 
 function getMaxCost01TDUtil(dp, wt, cost, i, w)
 {
 	if (w == 0 || i == 0)
-	{
 		return 0;
-	}
+	
 	if (dp[w][i] != 0)
-	{
 		return dp[w][i];
-	}
+	
 	// Their are two cases:
 	// (1) ith item is included
 	// (2) ith item is not included
@@ -54,8 +52,8 @@ function getMaxCost01TDUtil(dp, wt, cost, i, w)
 
 function getMaxCost01BU(wt, cost, capacity)
 {
-	let n = wt.length;
-	let dp = Array(capacity + 1).fill(0).map(() => new Array(n + 1).fill(0));
+	const n = wt.length;
+	const dp = Array(capacity + 1).fill(0).map(() => new Array(n + 1).fill(0));
 	// Build table dp[][] in bottom up approach.
 	// Weights considered against capacity.
 	for (let w = 1; w <= capacity; w++)
@@ -95,8 +93,8 @@ function printItems(dp, wt, cost, n, capacity)
 
 function KS01UnboundBU(wt, cost, capacity)
 {
-	let n = wt.length;
-	let dp = Array(capacity + 1).fill(0);
+	const n = wt.length;
+	const dp = Array(capacity + 1).fill(0);
 	// Build table dp[] in bottom up approach.
 	// Weights considered against capacity.
 	for (let w = 1; w <= capacity; w++)
@@ -116,9 +114,10 @@ function KS01UnboundBU(wt, cost, capacity)
 	return dp[capacity];
 }
 
-let wt = [10, 40, 20, 30];
-let cost = [60, 40, 90, 120];
-let capacity = 50;
+/* Testing Code */
+const wt = [10, 40, 20, 30];
+const cost = [60, 40, 90, 120];
+const capacity = 50;
 let maxCost = getMaxCost01(wt, cost, capacity);
 console.log("Maximum cost obtained = " + maxCost);
 maxCost = getMaxCost01BU(wt, cost, capacity);

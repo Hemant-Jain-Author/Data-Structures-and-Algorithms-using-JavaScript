@@ -13,7 +13,7 @@ function test1() {
     console.log(`Sum is :: ${sum}`);
 }
 
-//test1()
+test1()
 
 function SequentialSearch(arr, value) {
     const size = arr.length;
@@ -84,7 +84,7 @@ function test2b() {
     console.log(BinarySearchRecursive(numbers, 11));
 }
 
-//test2b()
+test2b()
 
 function rotateArray(a, n, k) {
     reverseArray(a, 0, k - 1);
@@ -124,7 +124,7 @@ function test3() {
 
 }
 
-//test3()
+test3()
 
 function maxSubArraySum(a) {
     const size = a.length;
@@ -148,7 +148,7 @@ function test4() {
     console.log(maxSubArraySum(arr));
 }
 
-//test4()
+test4()
 
 function WaveArray2(arr) {
     const size = arr.length;
@@ -180,7 +180,7 @@ function test5() {
     console.log(arr2);
 }
 
-//test5()
+test5()
 
 function indexArray(arr, size) {
     for (let i = 0; i < size; i++) {
@@ -222,7 +222,7 @@ function test6() {
     console.log(arr);
 }
 
-//test6()
+test6()
 
 function Sort1toN(arr, size) {
     let curr;
@@ -264,7 +264,7 @@ function test7() {
     console.log(arr);
 }
 
-//test7()
+test7()
 
 function SmallestPositiveMissingNumber(arr, size) {
     let found;
@@ -340,7 +340,7 @@ function test8() {
     console.info(`Smallest Positive Missing Number :${SmallestPositiveMissingNumber4(arr, size)}`);
 }
 
-//test8()
+test8()
 
 function MaxMinArr(arr, size) {
     const aux = arr.slice(0, size);
@@ -384,7 +384,7 @@ function test9() {
     console.log(arr);
 }
 
-//test9()
+test9()
 
 function maxCircularSum(arr, size) {
     let sumAll = 0;
@@ -410,7 +410,7 @@ function test10() {
     console.info(`Max Circulr Sum: ${maxCircularSum(arr, arr.length)}`);
 }
 
-//test10()
+test10()
 
 function ArrayIndexMaxDiff(arr, size) {
     let maxDiff = -1;
@@ -475,7 +475,7 @@ function test11() {
     console.info(`ArrayIndexMaxDiff : ${ArrayIndexMaxDiff2(arr, arr.length)}`);
 }
 
-//test11()
+test11()
 
 function maxPathSum(arr1, size1, arr2, size2) {
     let i = 0;
@@ -519,7 +519,7 @@ function test12() {
     console.info(`Max Path Sum :: ${maxPathSum(arr1, arr1.length, arr2, arr2.length)}`);
 }
 
-//test12()
+test12()
 
 function factorial(i) {
     if (i <= 1) {
@@ -550,7 +550,7 @@ function test13() {
     console.log(printHaxInt(100, 16));
 }
 
-//test13()
+test13()
 
 function towerOfHanoi(num, src, dst, temp) {
     if (num < 1) {
@@ -568,7 +568,7 @@ function test14() {
     return 0;
 }
 
-//test14()
+test14()
 
 function GCD(m, n) {
     if (m < n) {
@@ -584,7 +584,7 @@ function test15() {
     console.log(GCD(15, 7));
 }
 
-//test15()
+test15()
 
 function fibonacci(n) {
     if (n <= 1) {
@@ -617,7 +617,7 @@ function test16() {
     console.log(fibonacci2(8));
 }
 
-//test16()
+test16()
 
 function swap(arr, x, y) {
     const temp = arr[x];
@@ -644,4 +644,4 @@ function test17() {
     permutation(arr, 0, 3);
 }
 
-//test17()
+test17()

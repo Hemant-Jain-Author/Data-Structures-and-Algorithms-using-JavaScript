@@ -1,6 +1,6 @@
 function printSubset(flags, arr, size)
 {
-	let out = [];
+	const out = [];
 	for (let i = 0; i < size; i++)
 		if (flags[i])
 			out.push(arr[i]);
@@ -9,7 +9,7 @@ function printSubset(flags, arr, size)
 
 function subsetSum(arr, n, target)
 {
-	let flags = Array(n).fill(false);
+	const flags = Array(n).fill(false);
 	subsetSumUtil(arr, n, flags, 0, 0, target);
 }
 
@@ -34,7 +34,12 @@ function subsetSumUtil(arr, n, flags, sum, curr, target)
 	subsetSumUtil(arr, n, flags, sum, curr + 1, target);
 }
 
-let arr = [15, 22, 14, 26, 32, 9, 16, 8];
-let target = 53;
-let n = arr.length;
-subsetSum(arr, n, target);
+const arr = [15, 22, 14, 26, 32, 9, 16, 8];
+const target = 53;
+subsetSum(arr, arr.length, target);
+
+/*
+[ 15, 22, 16 ]
+[ 15, 14, 16, 8 ]
+[ 22, 14, 9, 8 ]
+*/

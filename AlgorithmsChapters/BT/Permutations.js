@@ -78,7 +78,7 @@ function permutation3(arr, i, length)
 	return;
 }
 /* Testing code */
-let arr = Array(4).fill(0);
+const arr = Array(4).fill(0);
 for (let i = 0; i < 4; i++)
 {
 	arr[i] = i + 1;

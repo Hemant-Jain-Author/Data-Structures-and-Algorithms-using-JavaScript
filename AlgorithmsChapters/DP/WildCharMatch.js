@@ -6,21 +6,17 @@ function wildCharMatchExp(exp, str)
 function wildCharMatchExpUtil(exp, str, m, n)
 {
 	if (m == exp.length && (n == str.length || exp[m - 1] == '*'))
-	{
 		return true;
-	}
+
 	if ((m == exp.length && n != str.length) || (m != exp.length && n == str.length))
-	{
 		return false;
-	}
+	
 	if (exp[m] == '?' || exp[m] == str[n])
-	{
 		return wildCharMatchExpUtil(exp, str, m + 1, n + 1);
-	}
+	
 	if (exp[m] == '*')
-	{
 		return wildCharMatchExpUtil(exp, str, m + 1, n) || wildCharMatchExpUtil(exp, str, m, n + 1);
-	}
+	
 	return false;
 }
 
@@ -31,7 +27,7 @@ function wildCharMatchExpDP(exp, str)
 
 function wildCharMatchExpDPUtil(exp, str, m, n)
 {
-	let lookup = Array(m + 1).fill(false).map(() => new Array(n + 1).fill(false));
+	const lookup = Array(m + 1).fill(false).map(() => new Array(n + 1).fill(false));
 	lookup[0][0] = true;
 	// empty exp and empty str match.
 	// 0 row will remain all false. empty exp can't match any str.
@@ -39,13 +35,9 @@ function wildCharMatchExpDPUtil(exp, str, m, n)
 	for (let i = 1; i <= m; i++)
 	{
 		if (exp[i - 1] == '*')
-		{
 			lookup[i][0] = lookup[i - 1][0];
-		}
 		else
-		{
 			break;
-		}
 	}
 	// Fill the table in bottom-up fashion
 	for (let i = 1; i <= m; i++)
@@ -58,22 +50,17 @@ function wildCharMatchExpDPUtil(exp, str, m, n)
 			// 2) We ignore one character in the input str
 			// and consider next character.
 			if (exp[i - 1] == '*')
-			{
 				lookup[i][j] = lookup[i - 1][j] || lookup[i][j - 1];
-			}
 			else if (exp[i - 1] == '?' || str[j - 1] == exp[i - 1])
-			{
 				lookup[i][j] = lookup[i - 1][j - 1];
-			}
 			else
-			{
 				lookup[i][j] = false;
-			}
 		}
 	}
 	return lookup[m][n];
 }
 
+/* Testing Code */
 console.log(wildCharMatchExp("*llo,?World?", "Hello, World!"));
 console.log(wildCharMatchExpDP("*llo,?World?", "Hello, World!"));
 

@@ -83,9 +83,7 @@ console.log(`Number of instructions O(n^3):: ${fun6(100)}`);
 //Output: Number of instructions O(n^3):: 1000000
 
 function fun7(n) {
-    let i;
-    let j;
-    let k;
+    let i, j, k;
     let m = 0;
     for (i = 0; i < n; i++) {
         for (j = 0; j < n; j++) {

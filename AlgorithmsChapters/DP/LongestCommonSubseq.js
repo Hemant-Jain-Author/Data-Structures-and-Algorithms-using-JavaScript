@@ -2,10 +2,10 @@ function LCSubStr(st1, st2)
 {
 	let X = st1.split('');
 	let Y = st2.split('');
-	let m = st1.length;
-	let n = st2.length;
-	let dp = Array(m + 1).fill(0).map(() => new Array(n + 1).fill(0)); // Dynamic programming array.
-	let p = Array(m + 1).fill(0).map(() => new Array(n + 1).fill(0)); // For printing the substring.
+	const m = st1.length;
+	const n = st2.length;
+	const dp = Array(m + 1).fill(0).map(() => new Array(n + 1).fill(0)); // Dynamic programming array.
+	const p = Array(m + 1).fill(0).map(() => new Array(n + 1).fill(0)); // For printing the substring.
 	
 	// Fill dp array in bottom up fashion.
 	for (let i = 1; i <= m; i++)
@@ -31,9 +31,8 @@ function LCSubStr(st1, st2)
 function PrintLCS(p, X, i, j)
 {
 	if (i == 0 || j == 0)
-	{
 		return;
-	}
+	
 	if (p[i][j] == 0)
 	{
 		PrintLCS(p, X, i - 1, j - 1);
@@ -49,8 +48,9 @@ function PrintLCS(p, X, i, j)
 	}
 }
 
-let X = "carpenter";
-let Y = "sharpener";
+/* Testing Code */
+const X = "carpenter";
+const Y = "sharpener";
 console.log("LCSubStr : " + LCSubStr(X, Y));
 
 /*

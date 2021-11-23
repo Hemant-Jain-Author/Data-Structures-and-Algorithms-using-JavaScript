@@ -14,10 +14,7 @@ function MatrixChainMulBruteForceUtil(p, i, j)
 	{
 		let count = MatrixChainMulBruteForceUtil(p, i, k) + 
 		MatrixChainMulBruteForceUtil(p, k + 1, j) + p[i - 1] * p[k] * p[j];
-		if (count < min)
-		{
-			min = count;
-		}
+		min = Math.min(min, count);
 	}
 	// Return minimum count
 	return min;
@@ -32,7 +29,7 @@ function MatrixChainMulBruteForce(p, n)
 
 function MatrixChainMulTD(p, n)
 {
-	let dp = Array(n).fill(0).map(() => new Array(n).fill(Number.MAX_VALUE));
+	const dp = Array(n).fill(0).map(() => new Array(n).fill(Number.MAX_VALUE));
 	return MatrixChainMulTDUtil(dp, p, 1, n - 1);
 }
 
@@ -58,7 +55,7 @@ function MatrixChainMulTDUtil(dp, p, i, j)
 
 function MatrixChainMulBU(p, n)
 {
-	let dp = Array(n).fill(0).map(() => new Array(n).fill(Number.MAX_VALUE));
+	const dp = Array(n).fill(0).map(() => new Array(n).fill(Number.MAX_VALUE));
 
 	for (let i = 1; i < n; i++)
 	{
@@ -78,9 +75,9 @@ function MatrixChainMulBU(p, n)
 	return dp[1][n - 1];
 }
 
-// Driver Code
-let arr = [1, 2, 3, 4];
-let n = arr.length;
+/* Testing Code */
+const arr = [1, 2, 3, 4];
+const n = arr.length;
 console.log("Matrix Chain Multiplication is:" + MatrixChainMulBruteForce(arr, n));
 console.log("Matrix Chain Multiplication is:" + MatrixChainMulTD(arr, n));
 console.log("Matrix Chain Multiplication is:" + MatrixChainMulBU(arr, n));

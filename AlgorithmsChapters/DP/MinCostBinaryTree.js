@@ -31,25 +31,23 @@ function findSumTDUtil(dp, max, i, j, arr)
 
 function findSumTD(arr)
 {
-	let n = arr.length;
-	let dp = Array(n).fill(0).map(() => new Array(n).fill(Number.MAX_VALUE));
-	let max = Array(n).fill(0).map(() => new Array(n).fill(Number.MIN_VALUE));
+	const n = arr.length;
+	const dp = Array(n).fill(0).map(() => new Array(n).fill(Number.MAX_VALUE));
+	const max = Array(n).fill(0).map(() => new Array(n).fill(Number.MIN_VALUE));
 	for (let i = 0; i < n; i++)
-	{
 		max[i][i] = arr[i];
-	}
+	
 	return findSumTDUtil(dp, max, 0, n - 1, arr);
 }
 
 function findSumBU(arr)
 {
-	let n = arr.length;
-	let dp = Array(n).fill(0).map(() => new Array(n).fill(0));
-	let max = Array(n).fill(0).map(() => new Array(n).fill(0));
+	const n = arr.length;
+	const dp = Array(n).fill(0).map(() => new Array(n).fill(0));
+	const max = Array(n).fill(0).map(() => new Array(n).fill(0));
 	for (let i = 0; i < n; i++)
-	{
 		max[i][i] = arr[i];
-	}
+	
 	for (let l = 1; l < n; l++)
 	{
 		// l is length of range.
@@ -66,7 +64,8 @@ function findSumBU(arr)
 	return dp[0][n - 1];
 }
 
-let arr = [6, 2, 4];
+/* Testing Code */
+const arr = [6, 2, 4];
 console.log("Total cost: " + findSumTD(arr));
 console.log("Total cost: " + findSumBU(arr));
 

@@ -6,7 +6,6 @@ class DLLNode {
     }
 }
 
-
 class DoublyLinkedList {
     constructor() {
         this.head = null;
@@ -32,8 +31,7 @@ class DoublyLinkedList {
         const newNode = new DLLNode(value, null, null);
         if (this.length === 0) {
             this.tail = this.head = newNode;
-        }
-        else {
+        } else {
             this.head.prev = newNode;
             newNode.next = this.head;
             this.head = newNode;
@@ -45,8 +43,7 @@ class DoublyLinkedList {
         const newNode = new DLLNode(value, null, null);
         if (this.length === 0) {
             this.head = this.tail = newNode;
-        }
-        else {
+        } else {
             newNode.prev = this.tail;
             this.tail.next = newNode;
             this.tail = newNode;
@@ -147,8 +144,7 @@ class DoublyLinkedList {
             this.tail = temp;
             temp.prev = curr;
             curr.next = temp;
-        }
-        else {
+        } else {
             temp.next = curr.next;
             temp.prev = curr;
             curr.next = temp;
@@ -183,8 +179,7 @@ class DoublyLinkedList {
                 if (deleteMe === this.tail) {
                     this.tail = curr;
                 }
-            }
-            else {
+            } else {
                 curr = curr.next;
             }
         }

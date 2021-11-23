@@ -1,57 +1,62 @@
+
+
+greater = (x, y) => (x > y);
+less = (x, y) => (x < y);
+
 class PriorityQueue {
     constructor(cmp) {
 		this.comp = cmp;
-        this.length = 0;
-        this.arr = [0];
+        this.size = 0;
+        this.arr = [];
     }
-
-	proclateDown(parent) {
+    
+    /* Other methods */
+    percolateDown(parent) {
         const lChild = 2 * parent + 1;
         const rChild = lChild + 1;
         let child = -1;
         let temp;
-        if (lChild < this.length) {
+        if (lChild <= this.size) {
             child = lChild;
         }
-        if (rChild < this.length && this.comp(this.arr[lChild], this.arr[rChild]) ) {
+        if (rChild <= this.size && this.comp(this.arr[lChild], this.arr[rChild])) {
             child = rChild;
         }
         if (child !== -1 && this.comp(this.arr[parent], this.arr[child])) {
             temp = this.arr[parent];
             this.arr[parent] = this.arr[child];
             this.arr[child] = temp;
-            this.proclateDown(child);
+            this.percolateDown(child);
         }
     }
 
-    proclateUp(child) {
-        const parent = Math.floor(child -1 / 2);
-        let temp;
+    percolateUp(child) {
+        const parent = Math.floor((child - 1) / 2);
         if (parent < 0) {
             return;
         }
         if (this.comp(this.arr[parent], this.arr[child])) {
-            temp = this.arr[child];
+            const temp = this.arr[child];
             this.arr[child] = this.arr[parent];
             this.arr[parent] = temp;
-            this.proclateUp(parent);
+            this.percolateUp(parent);
         }
     }
 
     add(value) {
-        this.arr[this.length] = value;
-		this.length++;
-        this.proclateUp(this.length-1);
+        this.arr[this.size] = value;
+        this.size += 1;
+        this.percolateUp(this.size - 1);
     }
 
     remove() {
         if (this.isEmpty()) {
-            throw new Error('Queue Empty');
+            throw new Error("IllegalStateException");
         }
         const value = this.arr[0];
-        this.arr[0] = this.arr[this.length-1];
-        this.length--;
-        this.proclateDown(0);
+        this.arr[0] = this.arr[this.size - 1];
+        this.size--;
+        this.percolateDown(0);
         return value;
     }
 
@@ -60,24 +65,24 @@ class PriorityQueue {
     }
 
     isEmpty() {
-        return (this.length === 0);
+        return (this.size === 0);
     }
 
-    size() {
-        return this.length;
+    length() {
+        return this.size;
     }
 
     peek() {
         if (this.isEmpty()) {
-            throw new Error('Queue Empty');
+            throw new Error("IllegalStateException");
         }
-        return this.arr[0];
+        return this.arr[0]
     }
 }
 
 function chotaBhim(cups)
 {
-	let size = cups.length;
+	const size = cups.length;
 	let time = 60;
 	cups.sort(function(a, b){return b - a;});
 	let total = 0, index = 0, temp = 0;
@@ -101,9 +106,9 @@ function chotaBhim(cups)
 
 function chotaBhim2(cups)
 {
-	let size = cups.length;
+	const size = cups.length;
 	let time = 60;
-	let pq = new PriorityQueue(function(a, b) {return (a - b) < 0;});
+	let pq = new PriorityQueue(less);
 	for (let i = 0; i < size; i++)
 	{
 		pq.add(cups[i]);
@@ -122,9 +127,10 @@ function chotaBhim2(cups)
 	return total;
 }
 
-let cups = [2, 1, 7, 4, 2];
+/* Testing Code */
+const cups = [2, 1, 7, 4, 2];
 chotaBhim(cups);
-let cups2 = [2, 1, 7, 4, 2];
+const cups2 = [2, 1, 7, 4, 2];
 chotaBhim2(cups2);
 
 /*

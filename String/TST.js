@@ -56,9 +56,12 @@ const tt = new TST();
 tt.insert("banana");
 tt.insert("apple");
 tt.insert("mango");
-
 console.log("Apple Found :", tt.find("apple"));
-console.log("Banana Found :", tt.find("banana"));
-console.log("Mango Found :", tt.find("mango"));
 console.log("Grapes Found :", tt.find("grapes"));
+console.log("Banana Found :", tt.find("banana"));
 
+/*
+Apple Found : true
+Grapes Found : false
+Banana Found : true
+*/

@@ -46,8 +46,8 @@ function partition(arr, low, high, pivot)
 	return i;
 }
 
-let nuts = [1, 2, 6, 5, 4, 3];
-let bolts = [6, 4, 5, 1, 3, 2];
+const nuts = [1, 2, 6, 5, 4, 3];
+const bolts = [6, 4, 5, 1, 3, 2];
 makePairs(nuts, bolts);
 
 /*

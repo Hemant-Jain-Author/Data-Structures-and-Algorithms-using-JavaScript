@@ -1,29 +1,23 @@
-less = (x, y) => (x - y) > 0;
-
-
-more = (x, y) => (y - x) > 0;
-
+greater = (x, y) => (x > y);
+less = (x, y) => (x < y);
 
 class Heap {
-    constructor(array, cmp) {
-        this.comp = (typeof cmp === 'function') ? cmp : less;
-
-        if (array === undefined || array === null) {
-            this.size = 0;
-            this.arr = [];
-        } else if (array != null && array instanceof Array) {
-            this.size = array.length;
-            this.arr = array;
-            for (let i = Math.floor(this.size / 2); i >= 0; i--) {
-                this.percolateDown(i);
-            }
-        } else {
-            throw new Error('invalid arguments');
+    /* Allowed arguments (), (array) , (array, comparator), (comparator) */
+    constructor(first = [], second = greater) {
+        if (first instanceof Function) {
+            second = first;
+            first = []
         }
+        this.arr = first;
+        this.size = first.length;
+        this.comp = second; 
+        //Creating heap from input array.
+        for (let i = Math.floor(this.size / 2); i >= 0; i--) {
+                this.percolateDown(i);
+        } 
     }
     
     /* Other methods */
-
     percolateDown(parent) {
         const lChild = 2 * parent + 1;
         const rChild = lChild + 1;
@@ -101,21 +95,50 @@ function HeapSort(array, cmp) {
 }
 
 function test1() {
-    const hp1 = new Heap()
+    const hp1 = new Heap() // default is minheap.
     hp1.add(1)
-    hp1.add(9)
-    hp1.add(6)
-    hp1.add(7)
+    hp1.add(4)
+    hp1.add(2)
+    hp1.add(3)
+    hp1.print()
+    while (hp1.isEmpty() == false) {
+        console.log(hp1.remove())
+    }
+
+    hp1 = new Heap(less) // default is maxheap.
+    hp1.add(1)
+    hp1.add(4)
+    hp1.add(2)
+    hp1.add(3)
+    hp1.print()
+    while (hp1.isEmpty() == false) {
+        console.log(hp1.remove())
+    }
+
+    hp1 = new Heap(greater) // default is minheap.
+    hp1.add(1)
+    hp1.add(4)
+    hp1.add(2)
+    hp1.add(3)
     hp1.print()
     while (hp1.isEmpty() == false) {
         console.log(hp1.remove())
     }
 }
 
-//test1()
+ test1()
+
+/*
+[ 1, 3, 2, 4 ]
+1
+2
+3
+4
+*/
+
 
 function test2() {
-    const a = [1, 0, 2, 4, 5, 3];
+    const a = [1, 2, 4, 5, 3];
     const hp = new Heap(a); // Min Heap
     hp.print();
     while (hp.isEmpty() == false) {
@@ -123,25 +146,50 @@ function test2() {
     }
 }
 
-//test2()
+test2()
+
+/*
+[ 1, 2, 4, 5, 3 ]
+1
+2
+3
+4
+5
+*/
 
 function test3() {
-    const a = [1, 0, 2, 4, 5, 3];
-    const hp = new Heap(a, more); // Min Heap
+    const a = [1, 2, 4, 5, 3];
+    const hp = new Heap(a, less); // Max Heap
     hp.print();
     while (hp.isEmpty() == false) {
         console.log(hp.remove())
     }
 }
 //test3() 
+/*
+[ 5, 3, 4, 2, 1 ]
+5
+4
+3
+2
+1
+*/
+
 
 function test4() {
     const b = [6, 5, 3, 4, 1, 2];
-    HeapSort(b, more); // Increasing Order
+    HeapSort(b, less); // Increasing Order
+    console.log(b);
+
+    HeapSort(b, greater); // Decreasing Order
     console.log(b);
 }
 
 //test4()
+/*
+[ 1, 2, 3, 4, 5, 6 ]
+[ 6, 5, 4, 3, 2, 1 ]
+*/
 
 function KthSmallest(arr, size, k) {
     arr = arr.sort();
@@ -159,12 +207,59 @@ function KthSmallest2(arr, size, k) {
     return value;
 }
 
+function swap(arr, i, j) {
+    const temp = arr[i];
+    arr[i] = arr[j];
+    arr[j] = temp;
+}
+
+function QuickSelectUtil(arr, lower, upper, k) {
+    if (upper <= lower)
+        return;
+    const pivot = arr[lower];
+    const start = lower;
+    const stop = upper;
+    
+    while (lower < upper) {
+        while (lower < upper && arr[lower] <= pivot) {
+            lower++;
+        }
+        while (lower <= upper && arr[upper] > pivot) {
+            upper--;
+        }
+        if (lower < upper) {
+            swap(arr, upper, lower);
+        }
+    }
+    
+    swap(arr, upper, start);
+    if (k < upper)
+        QuickSelectUtil(arr, start, upper - 1, k);
+    if (k > upper)
+        QuickSelectUtil(arr, upper + 1, stop, k);
+}
+
+function KthSmallest3(arr, size, k) {
+    QuickSelectUtil(arr, 0, size - 1, k);
+    return arr[k-1];
+}
+
 function test5() {
     const arr = [8, 7, 6, 5, 7, 5, 2, 1];
     console.info(`Kth Smallest :: ${KthSmallest(arr, arr.length, 3)}`);
     const arr2 = [8, 7, 6, 5, 7, 5, 2, 1];
     console.info(`Kth Smallest :: ${KthSmallest2(arr2, arr2.length, 3)}`);
+    const arr3 = [8, 7, 6, 5, 7, 5, 2, 1];
+    console.info(`Kth Smallest :: ${KthSmallest3(arr3, arr3.length, 3)}`);
 }
+
+//test5();
+
+/*
+Kth Smallest :: 5
+Kth Smallest :: 5
+Kth Smallest :: 5
+*/
 
 function isMinHeap(arr) {
     const size = arr.length;
@@ -206,6 +301,11 @@ function test6() {
 }
 
 //test6()
+/*
+isMaxHeap :: true
+isMinHeap :: true
+*/
+
 
 function KSmallestProduct(arr, size, k) {
     arr = arr.sort();
@@ -216,37 +316,6 @@ function KSmallestProduct(arr, size, k) {
     return product;
 }
 
-function swap(arr, i, j) {
-    const temp = arr[i];
-    arr[i] = arr[j];
-    arr[j] = temp;
-}
-
-function QuickSelectUtil(arr, lower, upper, k) {
-    if (upper <= lower)
-        return;
-    const pivot = arr[lower];
-    const start = lower;
-    const stop = upper;
-    
-    while (lower < upper) {
-        while (lower < upper && arr[lower] <= pivot) {
-            lower++;
-        }
-        while (lower <= upper && arr[upper] > pivot) {
-            upper--;
-        }
-        if (lower < upper) {
-            swap(arr, upper, lower);
-        }
-    }
-    
-    swap(arr, upper, start);
-    if (k < upper)
-        QuickSelectUtil(arr, start, upper - 1, k);
-    if (k > upper)
-        QuickSelectUtil(arr, upper + 1, stop, k);
-}
 
 function KSmallestProduct3(arr, size, k) {
     QuickSelectUtil(arr, 0, size - 1, k);
@@ -270,14 +339,20 @@ function KSmallestProduct2(arr, size, k) {
 
 function test7() {
     const arr = [8, 7, 6, 5, 7, 5, 2, 1];
-    console.info(`Kth Smallest product:: ${KSmallestProduct(arr, 8, 3)}`);
+    console.info(`Kth Smallest product:: ${KSmallestProduct(arr, 8, 4)}`);
     const arr2 = [8, 7, 6, 5, 7, 5, 2, 1];
-    console.info(`Kth Smallest product:: ${KSmallestProduct2(arr2, 8, 3)}`);
+    console.info(`Kth Smallest product:: ${KSmallestProduct2(arr2, 8, 4)}`);
     const arr3 = [8, 7, 6, 5, 7, 5, 2, 1];
-    console.info(`Kth Smallest product:: ${KSmallestProduct3(arr3, 8, 3)}`);
+    console.info(`Kth Smallest product:: ${KSmallestProduct3(arr3, 8, 4)}`);
 }
 
 //test7()
+/*
+Kth Smallest product:: 50
+Kth Smallest product:: 50
+Kth Smallest product:: 50
+*/
+
 
 function PrintLargerHalf(arr, size) {
     arr = arr.sort();
@@ -316,6 +391,12 @@ function test8() {
 }
 
 //test8()
+/*
+6 7 7 8 
+6 7 7 8 
+6 7 7 8 
+*/
+
 
 function sortK(arr, size, k) {
     const pq = new Heap();
@@ -347,14 +428,17 @@ function test9() {
 }
 
 //test9()
+/*
+[ 1, 4, 5, 9, 10, 50 ]
+*/
 
 function ChotaBhim(cups, size){
     let time = 60;
     let total = 0;
     let index;
     let temp;
-    cups.sort();
-    
+    cups.sort(function (a, b) { return a < b});
+
     while (time > 0) {
         total += cups[0];
         cups[0] = Math.ceil(cups[0] / 2.0);
@@ -374,33 +458,8 @@ function ChotaBhim(cups, size){
 function ChotaBhim2(cups, size){
     let time = 60;
     let total = 0;
-    let i;
-    let temp;
-    cups.sort();
-
-    while (time > 0) {
-        total += cups[0];
-        cups[0] = Math.ceil(cups[0] / 2.0);
-        i = 0;
-        while (i < size - 1) {
-            if (cups[i] > cups[i + 1])
-                break;
-            temp = cups[i];
-            cups[i] = cups[i + 1];
-            cups[i + 1] = temp;
-            i += 1;
-        }
-        time -= 1;
-    }
-    console.info(`Total : ${total}`);
-    return total;
-}
-
-function ChotaBhim3(cups, size){
-    let time = 60;
-    let total = 0;
     let value;
-    const pq = new Heap(cups, more);
+    const pq = new Heap(cups, less);
 
     while (time > 0) {
         value = pq.remove();
@@ -418,17 +477,19 @@ function test10(){
     ChotaBhim(cups, cups.length);
     const cups2 = [2, 1, 7, 4, 2];
     ChotaBhim2(cups2, cups.length);
-    const cups3 = [2, 1, 7, 4, 2];
-    ChotaBhim3(cups3, cups.length);
 }
 
 //test10()
+/*
+Total : 76
+Total : 76
+*/
+
 
 function JoinRopes(ropes, size) {
-    ropes.sort().reverse();
+    ropes.sort(function (a, b) {return a < b});
     let total = 0;
     let value = 0;
-    let temp;
     let index;
     let length = size;
 
@@ -470,11 +531,15 @@ function test11(){
 }
 
 //test11()
+/*
+Total : 33
+Total : 33
+*/
 
 class MedianHeap {
     constructor() {
-        this.minHeap = new Heap([], less);
-        this.maxHeap = new Heap([], more);
+        this.minHeap = new Heap([], greater);
+        this.maxHeap = new Heap([], less);
     }
 
     insert(value) {
@@ -507,12 +572,21 @@ class MedianHeap {
 }
 
 function test12(){
-    const arr = [1, 9, 2, 8, 3, 7, 4, 6, 5, 1, 9];
+    const arr = [1, 9, 2, 8, 3, 7];
     const hp = new MedianHeap();
-    for (let i = 0; i < 10; i++) {
+    for (let i = 0; i < arr.length; i++) {
         hp.insert(arr[i]);
         console.log(`Median after insertion of ${arr[i]} is  ${hp.getMedian()}`);
     }
 }
 
 //test12()
+
+/*
+Median after insertion of 1 is  1
+Median after insertion of 9 is  5
+Median after insertion of 2 is  2
+Median after insertion of 8 is  5
+Median after insertion of 3 is  3
+Median after insertion of 7 is  5
+*/

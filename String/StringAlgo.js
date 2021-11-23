@@ -1,4 +1,3 @@
-
 function matchExpUtil(exp, str, i, j) {
     if (i === exp.length && j === str.length) {
         return true;
@@ -28,7 +27,14 @@ function test1() {
     console.log(matchExp("hello*hemant", "helloworldfsdfsdfdsfhemant"));
     console.log(matchExp("*hemantj", "helloworldfsdfsdfdsfhemant"));
 }
-//test1();
+
+test1();
+/*
+true
+true
+true
+false
+*/
 
 function match(source, pattern) {
     let iSource = 0;
@@ -53,11 +59,16 @@ function test2() {
     console.log()
 }
 
-//test2();
+test2();
+/*
+true
+false
+true
+*/
 
 function isPrime(n) {
     let answer = (n > 1) ? true : false;
-    for (let i = 2; i * i < n; ++i) {
+    for (let i = 2; i * i <= n; ++i) {
         if (n % i === 0) {
             answer = false;
             break;
@@ -74,16 +85,18 @@ function test3() {
     }
     console.log()
 }
-//test3();
+
+test3();
+/*
+Prime numbers under 100 :: 2 3 5 7 11 13 17 19 23 29 31 37 41 43 47 53 59 61 67 71 73 79 83 89 97 
+*/
 
 function isUniqueChar(str) {
     const bitarr = new Array(26).fill(0);
-    let index;
-    let size = str.length;
+    const size = str.length;
     const small = "a".charCodeAt(0);
     const big = "A".charCodeAt(0);
 
-    let size = str.length;
     for (let i = 0; i < size; i++) {
         let c = str.charCodeAt(i);
         if ((big <= c) && (big + 26 >= c)) {
@@ -109,7 +122,11 @@ function test5() {
     isUniqueChar("apple");
 }
 
-//test5();
+test5();
+/*
+No duplicate detected.
+Duplicate detected.
+*/
 
 function ToUpper(s) {
     ascii = s.charCodeAt(0)
@@ -144,7 +161,14 @@ function test6() {
     console.info(LowerUpper('s'));
     console.info(LowerUpper('S'));
 }
-//test6();
+
+test6();
+/*
+a
+A
+S
+s
+*/
 
 function isPermutation(s1, s2) {
     const count = new Array(256).fill(0);
@@ -172,7 +196,11 @@ function test7() {
     console.info("isPermutation :", isPermutation("appleb", "plepaa"));
 }
 
-//test7();
+test7();
+/*
+isPermutation : true
+isPermutation : false
+*/
 
 function isPalindrome(str) {
     let i = 0;
@@ -197,7 +225,11 @@ function test8() {
     isPalindrome("eoloe");
 }
 
-//test8();
+test8();
+/*
+hello is not a Palindrome
+eoloe is a Palindrome
+*/
 
 function pow(x, n) {
     let value;
@@ -217,7 +249,9 @@ function pow(x, n) {
 function test9() {
     console.info(pow(5, 2));
 }
-//test9();
+
+test9();
+// 25
 
 function myStrcmp(a, b) {
     let index = 0;
@@ -249,7 +283,9 @@ function test10() {
     console.info("StrCmp returns :", myStrcmp("aba", "aas"));
 }
 
-//test10();
+test10();
+// StrCmp returns : 1
+
 
 function reverseString(str) {
     const a = (str).split('');
@@ -309,39 +345,50 @@ function test11() {
     console.info(reverseWords("hello world"));
 }
 
-//test11();
+test11();
+/*
+elppa
+world hello
+*/
 
 function printAnagram(str) {
-    const a = str.split('');
-    const n = a.length;
-    printAnagramUtil(a, n, n);
+    const size = str.length;
+    const arr = str.split('');
+    printAnagramUtil(arr, 0, size);
 }
 
-function printAnagramUtil(a, max, n) {
-    if (max === 1) {
-        console.info(a.join(""));
-    }
-    let temp;
-    for (let i = -1; i < max - 1; i++) {
-        if (i !== -1) {
-            temp = a[i];
-            a[i] = a[max - 1];
-            a[max - 1] = temp;
-        }
-        printAnagramUtil(a, max - 1, n);
-        if (i !== -1) {
-            temp = a[i];
-            a[i] = a[max - 1];
-            a[max - 1] = temp;
-        }
-    }
+function swapch(a, x, y) {
+    let temp = a[x];
+    a[x] = a[y];
+    a[y] = temp;
 }
 
+function printAnagramUtil(arr, i, size) {
+    if (i == size) {
+        console.log(arr.join(""));
+        return;
+    }
+
+    for (let j = i; j < size; j++) {
+        swapch(arr, i, j);
+        printAnagramUtil(arr, i + 1, size);
+        swapch(arr, i, j);
+    }
+}
+    
 function test12() {
     printAnagram("123");
 }
 
-//test12();
+test12();
+/*
+123
+132
+213
+231
+321
+312
+*/
 
 function shuffle(str) {
     const ar = str.split('');
@@ -371,8 +418,9 @@ function shuffle(str) {
 function test13() {
     console.log(shuffle("ABCDE12345"));
 }
-A1B2C3D4E5
+
 test13();
+//A1B2C3D4E5
 
 function addBinary(first, second) {
     let size1 = first.length;
@@ -409,4 +457,5 @@ function addBinary(first, second) {
 function test14() {
     console.info(addBinary("1000", "11111111"));
 }
-//test14();
+test14();
+//100000111

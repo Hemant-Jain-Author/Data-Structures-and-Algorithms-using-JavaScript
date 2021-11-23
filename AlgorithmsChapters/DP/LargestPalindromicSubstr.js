@@ -1,12 +1,11 @@
 
 function palindromicSubstring(str)
 {
-	let n = str.length;
-	let dp = Array(n).fill(0).map(() => new Array(n).fill(0));
+	const n = str.length;
+	const dp = Array(n).fill(0).map(() => new Array(n).fill(0));
 	for (let i = 0; i < n; i++)
-	{
 		dp[i][i] = 1;
-	}
+	
 	let max = 1;
 	let start = 0;
 	for (let l = 1; l < n; l++)
@@ -18,8 +17,7 @@ function palindromicSubstring(str)
 				dp[i][j] = dp[i + 1][j - 1] + 2;
 				if (dp[i][j] > max)
 				{
-					max = dp[i][j];
-					// Keeping track of max length and 
+					max = dp[i][j]; // Keeping track of max length 
 					start = i;
 				}
 			}
@@ -33,7 +31,8 @@ function palindromicSubstring(str)
 	return max;
 }
 
-let str = "ABCAUCBCxxCBA";
+/* Testing Code */
+const str = "ABCAUCBCxxCBA";
 console.log("Max Palindromic Substrings len: " + palindromicSubstring(str));
 
 /*

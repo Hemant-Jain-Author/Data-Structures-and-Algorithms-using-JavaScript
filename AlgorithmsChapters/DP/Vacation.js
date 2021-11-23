@@ -2,9 +2,9 @@
 // days are must travel days, costs are cost of tickets.
 function minCostVacation(days, costs)
 {
-	let n = days.length;
+	const n = days.length;
 	let max = days[n - 1];
-	let dp = Array(max + 1).fill(0);
+	const dp = Array(max + 1).fill(0);
 	let j = 0;
 	for (let i = 1; i <= max; i++)
 	{
@@ -24,8 +24,9 @@ function minCostVacation(days, costs)
 	return dp[max];
 }
 
-let days = [1, 3, 5, 7, 12, 20, 30];
-let costs = [2, 7, 20];
+/* Testing Code */
+const days = [1, 3, 5, 7, 12, 20, 30];
+const costs = [2, 7, 20];
 console.log("Min cost is:" + minCostVacation(days, costs));
 
 /*

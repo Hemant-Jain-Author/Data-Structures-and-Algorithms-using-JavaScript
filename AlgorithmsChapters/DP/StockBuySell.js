@@ -2,7 +2,7 @@ function maxProfit(arr)
 {
 	let buyProfit = -arr[0]; // Buy stock profit
 	let sellProfit = 0; // Sell stock profit
-	let n = arr.length;
+	const n = arr.length;
 	for (let i = 1; i < n; i++)
 	{
 		let newBuyProfit = (sellProfit - arr[i] > buyProfit) ? sellProfit - arr[i] : buyProfit;
@@ -17,7 +17,7 @@ function maxProfitTC(arr, t)
 {
 	let buyProfit = -arr[0];
 	let sellProfit = 0;
-	let n = arr.length;
+	const n = arr.length;
 	for (let i = 1; i < n; i++)
 	{
 		let newBuyProfit = ((sellProfit - arr[i]) > buyProfit) ? (sellProfit - arr[i]) : buyProfit;
@@ -30,8 +30,8 @@ function maxProfitTC(arr, t)
 
 function maxProfit2(arr)
 {
-	let n = arr.length;
-	let dp = Array(n).fill(0).map(() => new Array(2).fill(0));
+	const n = arr.length;
+	const dp = Array(n).fill(0).map(() => new Array(2).fill(0));
 	dp[0][0] = -arr[0]; // Buy stock profit
 	dp[0][1] = 0; // Sell stock profit
 	for (let i = 1; i < n; i++)
@@ -44,8 +44,8 @@ function maxProfit2(arr)
 
 function maxProfitTC2(arr, t)
 {
-	let n = arr.length;
-	let dp = Array(n).fill(0).map(() => new Array(2).fill(0));
+	const n = arr.length;
+	const dp = Array(n).fill(0).map(() => new Array(2).fill(0));
 	dp[0][0] = -arr[0];
 	dp[0][1] = 0;
 	for (let i = 1; i < n; i++)
@@ -56,7 +56,8 @@ function maxProfitTC2(arr, t)
 	return dp[n - 1][1];
 }
 
-let arr = [10, 12, 9, 23, 25, 55, 49, 70];
+/* Testing Code */
+const arr = [10, 12, 9, 23, 25, 55, 49, 70];
 console.log("Total profit: " + maxProfit(arr));
 console.log("Total profit: " + maxProfit2(arr));
 console.log("Total profit: " + maxProfitTC(arr, 2));

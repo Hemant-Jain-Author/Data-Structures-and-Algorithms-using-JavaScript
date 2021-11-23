@@ -1,13 +1,11 @@
 function optCostUtil(freq, i, j)
 {
 	if (i > j)
-	{
 		return 0;
-	}
+
 	if (j == i) // one element in this subarray
-	{
 		return freq[i];
-	}
+	
 	let min = Number.MAX_VALUE;
 	for (let r = i; r <= j; r++)
 	{
@@ -18,14 +16,14 @@ function optCostUtil(freq, i, j)
 
 function optCost(keys, freq)
 {
-	let n = freq.length;
+	const n = freq.length;
 	return optCostUtil(freq, 0, n - 1);
 }
 
 function optCostTD(keys, freq)
 {
-	let n = freq.length;
-	let cost = Array(n).fill(0).map(() => new Array(n).fill(Number.MAX_VALUE));
+	const n = freq.length;
+	const cost = Array(n).fill(0).map(() => new Array(n).fill(Number.MAX_VALUE));
 	for (let i = 0; i < n; i++)
 	{
 		cost[i][i] = freq[i];
@@ -36,13 +34,11 @@ function optCostTD(keys, freq)
 function optCostTDUtil(freq, cost, i, j)
 {
 	if (i > j)
-	{
 		return 0;
-	}
+
 	if (cost[i][j] != Number.MAX_VALUE)
-	{
 		return cost[i][j];
-	}
+
 	let s = sum(freq, i, j);
 	for (let r = i; r <= j; r++)
 	{
@@ -62,7 +58,7 @@ function sum(freq, i, j)
 
 function sumInit(freq, n)
 {
-	let sum = Array(n).fill(0);
+	const sum = Array(n).fill(0);
 	sum[0] = freq[0];
 	for (let i = 1; i < n; i++)
 		sum[i] = sum[i - 1] + freq[i];
@@ -78,12 +74,11 @@ function sumRange(sum, i, j)
 
 function optCostBU(keys, freq)
 {
-	let n = freq.length;
-	let cost = Array(n).fill(0).map(() => new Array(n).fill(Number.MAX_VALUE));
+	const n = freq.length;
+	const cost = Array(n).fill(0).map(() => new Array(n).fill(Number.MAX_VALUE));
 	for (let i = 0; i < n; i++)
-	{
 		cost[i][i] = freq[i];
-	}
+
 	let sm = 0;
 	for (let l = 1; l < n; l++) // l is length of range.
 	{
@@ -101,13 +96,12 @@ function optCostBU(keys, freq)
 
 function optCostBU2(keys, freq)
 {
-	let n = freq.length;
-	let cost = Array(n).fill(0).map(() => new Array(n).fill(Number.MAX_VALUE));
+	const n = freq.length;
+	const cost = Array(n).fill(0).map(() => new Array(n).fill(Number.MAX_VALUE));
 	let sumArr = sumInit(freq, n);
 	for (let i = 0; i < n; i++)
-	{
 		cost[i][i] = freq[i];
-	}
+
 	let sm = 0;
 	for (let l = 1; l < n; l++) // l is length of range.
 	{
@@ -123,8 +117,9 @@ function optCostBU2(keys, freq)
 	return cost[0][n - 1];
 }
 
-let keys = [9, 15, 25];
-let freq = [30, 10, 40];
+/* Testing Code */
+const keys = [9, 15, 25];
+const freq = [30, 10, 40];
 console.log("OBST cost:" + optCost(keys, freq));
 console.log("OBST cost:" + optCostTD(keys, freq));
 console.log("OBST cost:" + optCostBU(keys, freq));

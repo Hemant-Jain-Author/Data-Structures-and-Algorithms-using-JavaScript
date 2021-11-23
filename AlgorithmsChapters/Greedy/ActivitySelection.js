@@ -14,7 +14,7 @@ class Activity
 
 function maxActivities(s, f, n)
 {
-	let act = Array(n).fill(0);
+	const act = Array(n).fill(0);
 	for (let i = 0; i < n; i++)
 		act[i] = new Activity(s[i], f[i]);
 
@@ -35,9 +35,10 @@ function maxActivities(s, f, n)
 	console.log(output)
 }
 
-let s = [1, 5, 0, 3, 5, 6, 8];
-let f = [2, 6, 5, 4, 9, 7, 9];
-let n = s.length;
+/* Testing Code */
+const s = [1, 5, 0, 3, 5, 6, 8];
+const f = [2, 6, 5, 4, 9, 7, 9];
+const n = s.length;
 maxActivities(s, f, n);
 
 /*

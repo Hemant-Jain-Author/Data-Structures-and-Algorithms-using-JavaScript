@@ -31,8 +31,8 @@ class JobSequencing
 	print()
 	{
 		this.jobs.sort(function (a, b){return b.profit - a.profit});
-		let result = Array(this.maxDL).fill(false);
-		let job = Array(this.maxDL).fill(' ');
+		const result = Array(this.maxDL).fill(false);
+		const job = Array(this.maxDL).fill(' ');
 		let profit = 0;
 		// Iterate through all given jobs
 		for (let i = 0; i < this.n; i++)
@@ -61,9 +61,11 @@ class JobSequencing
 		console.log(output);
 	}
 }
-let id = ['a', 'b', 'c', 'd', 'e'];
-let deadline = [3, 1, 2, 4, 4];
-let profit = [50, 40, 27, 31, 30];
+
+/* Testing Code */
+const id = ['a', 'b', 'c', 'd', 'e'];
+const deadline = [3, 1, 2, 4, 4];
+const profit = [50, 40, 27, 31, 30];
 let js =  new JobSequencing(id, deadline, profit, 5);
 js.print();
 

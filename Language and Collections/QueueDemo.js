@@ -1,4 +1,4 @@
-class Queue {
+class Queue2 {
     constructor() {
         this.stk1 = [];
         this.stk2 = [];
@@ -40,6 +40,34 @@ class Queue {
     }
 }
 
+class Queue {
+    constructor() {
+        this.arr = [];
+    }
+
+    add(value) {
+        this.arr.push(value);
+    }
+
+    remove() {
+        let value = this.arr[0];
+        this.arr.shift();
+        return value;
+    }
+
+    front() {
+        return this.arr[0];
+    }
+
+    isEmpty() {
+        return this.arr.length === 0
+    }
+
+    size() {
+        return this.arr.length
+    }
+}
+
 function main() {
     const que = new Queue();
     que.add(1);
@@ -47,10 +75,19 @@ function main() {
     que.add(3);
     console.info(que);
     console.info(`Queue size : ${que.size()}`);
-    console.info(`Queue fornt : ${que.front()}`);
+    console.info(`Queue front : ${que.front()}`);
     console.info(`Queue remove : ${que.remove()}`);
     console.info(`Queue size : ${que.size()}`);
     console.info(`Queue isEmpty : ${que.isEmpty()}`);
 };
 
 main();
+
+/*
+Queue { arr: [ 1, 2, 3 ] }
+Queue size : 3
+Queue front : 1
+Queue remove : 1
+Queue size : 2
+Queue isEmpty : false
+*/

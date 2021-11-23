@@ -1,7 +1,7 @@
 function fastestWayBU2(a, t, e, x, n)
 {
-	let f1 = Array(n).fill(0);
-	let f2 = Array(n).fill(0);
+	const f1 = Array(n).fill(0);
+	const f2 = Array(n).fill(0);
 	// Time taken to leave first station.
 	f1[0] = e[0] + a[0][0];
 	f2[0] = e[1] + a[1][0];
@@ -18,7 +18,7 @@ function fastestWayBU2(a, t, e, x, n)
 
 function fastestWayBU(a, t, e, x, n)
 {
-	let f = Array(2).fill(0).map(() => new Array(n).fill(0));
+	const f = Array(2).fill(0).map(() => new Array(n).fill(0));
 	// Time taken to leave first station.
 	f[0][0] = e[0] + a[0][0];
 	f[1][0] = e[1] + a[1][0];
@@ -35,7 +35,7 @@ function fastestWayBU(a, t, e, x, n)
 
 function fastestWayTD(a, t, e, x, n)
 {
-	let f = Array(2).fill(0).map(() => new Array(n).fill(0));
+	const f = Array(2).fill(0).map(() => new Array(n).fill(0));
 	// Time taken to leave first station.
 	f[0][0] = e[0] + a[0][0];
 	f[1][0] = e[1] + a[1][0];
@@ -53,20 +53,21 @@ function fastestWayTDUtil(f, a, t, i)
 	f[0][i] = Math.min(f[0][i - 1] + a[0][i], f[1][i - 1] + t[1][i - 1] + a[0][i]);
 	f[1][i] = Math.min(f[1][i - 1] + a[1][i], f[0][i - 1] + t[0][i - 1] + a[1][i]);
 }
-// Driver code
-let a = [[7, 9, 3, 4, 8, 4],
+
+/* Testing Code */
+const a = [[7, 9, 3, 4, 8, 4],
 		[8, 5, 6, 4, 5, 7]];
-let t = [[2, 3, 1, 3, 4],
+const t = [[2, 3, 1, 3, 4],
 		[2, 1, 2, 2, 1]];
-let e = [2, 4];
-let x = [3, 2];
-let n = 6;
-console.log(fastestWayBU2(a, t, e, x, n));
-console.log(fastestWayBU(a, t, e, x, n));
-console.log(fastestWayTD(a, t, e, x, n));
+const e = [2, 4];
+const x = [3, 2];
+const n = 6;
+console.log("Fastest way :", fastestWayBU2(a, t, e, x, n));
+console.log("Fastest way :", fastestWayBU(a, t, e, x, n));
+console.log("Fastest way :", fastestWayTD(a, t, e, x, n));
 
 /*
-38
-38
-38
+Fastest way : 38
+Fastest way : 38
+Fastest way : 38
 */

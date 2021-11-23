@@ -1,3 +1,50 @@
+
+class Deque {
+    constructor() {
+        this.data = [];
+    }
+
+    size() {
+        return this.data.length;
+    }
+
+    isEmpty() {
+        return (this.data.length === 0);
+    }
+
+    addLast(val) {
+        this.data.push(val);
+    }
+
+    peekLast() {
+        return this.data[this.data.length - 1]
+    }
+
+    peekFirst() {
+        return this.data[0]
+    }
+
+    removeLast() {
+        return this.data.pop()
+    }
+
+    removeFirst() {
+        return this.data.shift();
+    }
+}
+
+const que = new Deque();
+que.addLast(1);
+que.addLast(2);
+que.addLast(3);
+que.addLast(4);
+while (que.isEmpty() === false) {
+    console.log(que.removeLast());
+    console.log(que.removeFirst());
+}
+
+
+/*
 class DeQueueNode {
     constructor(v) {
         this.value = 0;
@@ -7,7 +54,7 @@ class DeQueueNode {
     }
 }
 
-class DeQueue {
+class DeQueue2 {
     constructor() {
         this.head = null;
         this.tail = null;
@@ -54,11 +101,10 @@ class DeQueue {
         const value = this.head.value;
         this.head = this.head.next;
         
-        if(this.head !== null){
+        if(this.head !== null)
             this.head.prev = null
-        } else {
+        else 
             this.tail = null
-        }
            
         return value;
     }
@@ -86,11 +132,11 @@ class DeQueue {
         const value = this.tail.value;
         this.tail = this.tail.prev
 
-        if(this.tail !== null){
+        if(this.tail !== null)
             this.tail.next = null
-        } else {
+        else
             this.head = null
-        }
+
         return value;
     }
 
@@ -105,11 +151,4 @@ class DeQueue {
     }
 }
 
-const que = new DeQueue();
-que.addFirst(1);
-que.addFirst(1);
-que.addLast(2);
-que.addLast(2);
-while (que.isEmpty() === false) {
-    console.log(que.removeLast());
-}
+*/

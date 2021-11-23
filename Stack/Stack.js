@@ -1,45 +1,38 @@
 class Stack {
     constructor(capacity) {
-        if (capacity === undefined) { capacity = 1000; }
-        this.top = -1;
-        this.data = new Array(capacity);
+        this.data = [];
     }
     /* other methods */
 
-size() {
-    return (this.top + 1);
-}
-
-isEmpty() {
-    return (this.top === -1);
-}
-
-push(value) {
-    this.top++;
-    this.data[this.top] = value;
-}
-
-top() {
-    if (this.isEmpty()) {
-        throw new Error("StackEmptyException");
+    size() {
+        return this.data.length;
     }
-    return this.data[this.top];
-}
 
-pop() {
-    if (this.isEmpty()) {
-        throw new Error("StackEmptyException");
+    isEmpty() {
+        return (this.data.length === 0);
     }
-    const topVal = this.data[this.top];
-    this.top--;
-    return topVal;
-}
 
-print() {
-    for (let i = this.top; i >= 0; i--) {
-        console.log(this.data[i]);
+    push(value) {
+        this.data.push(value);
     }
-}
+
+    top() {
+        if (this.isEmpty()) {
+            throw new Error("Stack Empty Exception");
+        }
+        return this.data[this.data.length-1];
+    }
+
+    pop() {
+        if (this.isEmpty()) {
+            throw new Error("Stack Empty Exception");
+        }
+        return this.data.pop();
+    }
+
+    print() {
+            console.log(this.data);
+    }
 }
 
 const s = new Stack();

@@ -38,8 +38,6 @@ class Queue {
         this.size++;
     }
 
-    
-
     remove() {
         if (this.isEmpty())
             throw new Error("StackEmptyError");

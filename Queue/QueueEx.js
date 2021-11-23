@@ -15,11 +15,11 @@ class Deque {
         return this.data.shift();
     }
 
-    peek() {
+    front() {
         return this.data[0]
     }
 
-    peekLast() {
+    back() {
         return this.data[this.data.length - 1]
     }
 
@@ -30,39 +30,33 @@ class Deque {
 
 class Queue {
     constructor() {
-        this.frontIndex = 0;
-        this.data = [];
+        this.arr = [];
     }
 
     add(value) {
-        this.data.push(value);
+        this.arr.push(value);
     }
 
     remove() {
-        const value = this.data[this.frontIndex];
-        this.frontIndex++;
-        if (this.data.length > 0 && this.frontIndex * 2 >= this.data.length) {
-            this.data = this.data.slice(this.frontIndex);
-            this.frontIndex = 0;
-        }
+        const value = this.arr[0];
+        this.arr.shift();
         return value;
     }
 
-    peek() {
-        const value = this.data[this.frontIndex];
-        return value;
+    front() {
+        return this.arr[0];
+    }
+
+    back() {
+        return this.arr[this.arr.length - 1]
     }
 
     isEmpty() {
-        return (this.data.length - this.frontIndex) === 0;
+        return this.arr.length === 0
     }
 
     size() {
-        return (this.data.length - this.frontIndex);
-    }
-
-    peekLast() {
-        return this.data[this.data.length - 1]
+        return this.arr.length
     }
 }
 
@@ -96,7 +90,9 @@ function test1() {
     const tour = [[8, 6], [1, 4], [7, 6]];
     console.info(`Circular Tour : ${CircularTour(tour, 3)}`);
 }
-//test1()
+
+test1()
+
 /*
 Circular Tour : 2
 */
@@ -129,21 +125,24 @@ function convertXY(src, dst) {
 function test2() {
     convertXY(2, 7);
 }
-//test2()
+
+test2()
+
 /*
 2 4 8 7 Steps count :: 3
 */
+
 function maxSlidingWindows(arr, size, k) {
     const que = new Deque();
     for (let i = 0; i < size; i++) {
-        if (que.size() > 0 && que.peek() <= i - k)
+        if (que.size() > 0 && que.front() <= i - k)
             que.remove();
-        while (que.size() > 0 && arr[que.peekLast()] <= arr[i]) {
+        while (que.size() > 0 && arr[que.back()] <= arr[i]) {
             que.removeLast();
         }
         que.add(i);
         if (i >= (k - 1))
-            process.stdout.write(`${arr[que.peek()]} `);
+            process.stdout.write(`${arr[que.front()]} `);
     }
 }
 
@@ -154,22 +153,25 @@ function test3() {
     maxSlidingWindows(arr, 7, 3);
     console.log()
 }
-//test3()
+
+test3()
+
 /*
 Max Sliding Windows : 75 92 92 92 90 
 */
+
 function minOfMaxSlidingWindows(arr, size, k) {
     const que = new Queue();
     let minVal = 999999;
     for (let i = 0; i < size; i++) {
-        if (que.size() > 0 && que.peek() <= i - k)
+        if (que.size() > 0 && que.front() <= i - k)
             que.remove();
-        while (que.size() > 0 && arr[que.peekLast()] <= arr[i]) {
+        while (que.size() > 0 && arr[que.back()] <= arr[i]) {
             que.remove();
         }
         que.add(i);
-        if (i >= (k - 1) && minVal > arr[que.peek()])
-            minVal = arr[que.peek()];
+        if (i >= (k - 1) && minVal > arr[que.front()])
+            minVal = arr[que.front()];
     }
     console.info(`Min of max is :: ${minVal}`);
     return minVal;
@@ -180,22 +182,25 @@ function test4() {
     const k = 3;
     minOfMaxSlidingWindows(arr, 7, 3);
 }
-//test4()
+
+test4()
+
 /*
 Min of max is :: 75
 */
+
 function maxOfMinSlidingWindows(arr, size, k) {
     const que = new Queue();
     let maxVal = -999999;
     for (let i = 0; i < size; i++) {
-        if (que.size() > 0 && que.peek() <= i - k)
+        if (que.size() > 0 && que.front() <= i - k)
             que.remove();
-        while (que.size() > 0 && arr[que.peekLast()] >= arr[i]) {
+        while (que.size() > 0 && arr[que.back()] >= arr[i])
             que.remove();
-        }
+
         que.add(i);
-        if (i >= (k - 1) && maxVal < arr[que.peek()])
-            maxVal = arr[que.peek()];
+        if (i >= (k - 1) && maxVal < arr[que.front()])
+            maxVal = arr[que.front()];
     }
     console.info(`Max of min is :: ${maxVal}`);
 }
@@ -205,20 +210,23 @@ function test5() {
     const k = 3;
     maxOfMinSlidingWindows(arr, 7, 3);
 }
-//test5()
+
+test5()
+
 /*
 Max of min is :: 59
 */
+
 function firstNegSlidingWindows(arr, size, k) {
     const que = new Queue();
     for (let i = 0; i < size; i++) {
-        if (que.size() > 0 && que.peek() <= i - k)
+        if (que.size() > 0 && que.front() <= i - k)
             que.remove();
         if (arr[i] < 0)
             que.add(i);
         if (i >= (k - 1)) {
             if (que.size() > 0)
-                process.stdout.write(`${arr[que.peek()]} `);
+                process.stdout.write(`${arr[que.front()]} `);
             else
                 process.stdout.write("NAN ");
         }

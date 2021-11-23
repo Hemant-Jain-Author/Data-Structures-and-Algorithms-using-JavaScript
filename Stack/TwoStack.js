@@ -1,3 +1,4 @@
+/* REMOVE FROM BOOK */
 class TwoStack {
     constructor() {
         this.MAX_SIZE = 1000;

@@ -102,3 +102,8 @@ console.log("Apple Found :", tt.find("apple"));
 console.log("Grapes Found :", tt.find("grapes"));
 console.log("Banana Found :", tt.find("banana"));
 
+/*
+Apple Found : true
+Grapes Found : false
+Banana Found : true
+*/

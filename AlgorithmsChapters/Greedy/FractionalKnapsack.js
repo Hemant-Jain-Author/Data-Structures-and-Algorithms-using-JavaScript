@@ -12,8 +12,9 @@ class Items
 function getMaxCostFractional(wt, cost, capacity)
 {
 	let totalCost = 0;
-	let n = wt.length;
-	let itemList = Array(n).fill(null);
+	const n = wt.length;
+	const itemList = Array(n).fill(null);
+
 	for (let i = 0; i < n; i++)
 	{
 		itemList[i] = new Items(wt[i], cost[i]);
@@ -35,9 +36,10 @@ function getMaxCostFractional(wt, cost, capacity)
 	return totalCost;
 }
 
-let wt = [10, 40, 20, 30];
-let cost = [60, 40, 90, 120];
-let capacity = 50;
+/* Testing Code */
+const wt = [10, 40, 20, 30];
+const cost = [60, 40, 90, 120];
+const capacity = 50;
 let maxCost = getMaxCostFractional(wt, cost, capacity);
 console.log("Maximum cost obtained = " + maxCost);
 

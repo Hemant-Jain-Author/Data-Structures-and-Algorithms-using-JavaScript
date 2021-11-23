@@ -138,3 +138,9 @@ console.log(`Using KMP  pattern found at index : ${KMP(st1, st2)}`);
 const str3 = "Only time will tell if we stand the test of time"
 console.log('Frequency of "time" is ', KMPFindCount(str3, "time"))
 
+/*
+Using BruteForceSearch pattern found at index : 7
+Using RobinKarp  pattern found at index : 7
+Using KMP  pattern found at index : 7
+Frequency of "time" is  2
+*/

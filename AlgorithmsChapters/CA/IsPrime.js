@@ -5,7 +5,7 @@ function isPrime(n)
 	{
 		if (n % i == 0)
 		{
-			answer = true;
+			answer = false;
 			break;
 		}
 	}
@@ -13,3 +13,7 @@ function isPrime(n)
 }
 
 console.log(isPrime(7));
+
+/*
+true
+*/

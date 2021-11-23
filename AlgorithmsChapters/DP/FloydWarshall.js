@@ -1,8 +1,8 @@
 
-let INF = Number.MAX_VALUE;
+const INF = Number.MAX_VALUE;
 function floydWarshall(graph, V)
 {
-	let dist = Array(V).fill(0).map(() => new Array(V).fill(0));
+	const dist = Array(V).fill(0).map(() => new Array(V).fill(0));
 	for (let i = 0; i < V; i++)
 	{
 		for (let j = 0; j < V; j++)
@@ -32,7 +32,8 @@ function floydWarshall(graph, V)
 	console.log(dist);
 }
 
-let graph = [
+/* Testing Code */
+const graph = [
 	[0, 2, 4, INF, INF, INF, INF],
 	[2, 0, 4, 1, INF, INF, INF],
 	[4, 4, 0, 2, 8, 4, INF],

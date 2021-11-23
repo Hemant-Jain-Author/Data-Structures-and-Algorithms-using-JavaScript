@@ -13,9 +13,8 @@ function maxValueJobUtil(arr, n)
 {
 	// Base case
 	if (n == 1)
-	{
 		return arr[0].value;
-	}
+	
 	// Find Value when current job is included
 	let incl = arr[n - 1].value;
 	for (let j = n - 1; j >= 0; j--)
@@ -33,16 +32,13 @@ function maxValueJobUtil(arr, n)
 
 function maxValueJobs(s, f, v, n)
 {
-	let act = Array(n).fill(null);
+	const act = Array(n).fill(null);
 	for (let i = 0; i < n; i++)
-	{
 		act[i] = new Job(s[i], f[i], v[i]);
-	}
-	act.sort(function(a, b)
-	{
-		return a.stop - b.stop;
-	});
+	
 	// sort according to finish time.
+	act.sort(function(a, b) { return a.stop - b.stop; });
+	
 	return maxValueJobUtil(act, n);
 }
 
@@ -50,13 +46,11 @@ function maxValueJobUtilTD(dp, arr, n)
 {
 	// Base case
 	if (n == 0)
-	{
 		return 0;
-	}
+	
 	if (dp[n - 1] != 0)
-	{
 		return dp[n - 1];
-	}
+	
 	// Find Value when current job is included
 	let incl = arr[n - 1].value;
 	for (let j = n - 2; j >= 0; j--)
@@ -75,25 +69,23 @@ function maxValueJobUtilTD(dp, arr, n)
 
 function maxValueJobsTD(s, f, v, n)
 {
-	let act = Array(n).fill(null);
+	const act = Array(n).fill(null);
 	for (let i = 0; i < n; i++)
-	{
 		act[i] = new Job(s[i], f[i], v[i]);
-	}
-	act.sort(function(a, b)	{return a.stop - b.stop;});	// sort according to finish time.
-	let dp = Array(n).fill(0);
+	
+	act.sort(function(a, b)	{return a.stop - b.stop;} ); // sort according to finish time.
+	const dp = Array(n).fill(0);
 	return maxValueJobUtilTD(dp, act, n);
 }
 
 function maxValueJobsBU(s, f, v, n)
 {
-	let act = Array(n).fill(null);
+	const act = Array(n).fill(null);
 	for (let i = 0; i < n; i++)
-	{
 		act[i] = new Job(s[i], f[i], v[i]);
-	}
+	
 	act.sort(function(a, b)	{return a.stop - b.stop;});	// sort according to finish time.
-	let dp = Array(n).fill(0);
+	const dp = Array(n).fill(0);
 	dp[0] = act[0].value;;
 	for (let i = 1; i < n; i++)
 	{
@@ -111,10 +103,11 @@ function maxValueJobsBU(s, f, v, n)
 	return dp[n - 1];
 }
 
-let start = [1, 5, 0, 3, 5, 6, 8];
-let finish = [2, 6, 5, 4, 9, 7, 9];
-let value = [2, 2, 4, 3, 10, 2, 8];
-let n = start.length;
+/* Testing Code */
+const start = [1, 5, 0, 3, 5, 6, 8];
+const finish = [2, 6, 5, 4, 9, 7, 9];
+const value = [2, 2, 4, 3, 10, 2, 8];
+const n = start.length;
 console.log(maxValueJobs(start, finish, value, n));
 console.log(maxValueJobsTD(start, finish, value, n));
 console.log(maxValueJobsBU(start, finish, value, n));

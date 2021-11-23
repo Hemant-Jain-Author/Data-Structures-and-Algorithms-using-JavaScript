@@ -1,57 +1,60 @@
+greater = (x, y) => (x > y);
+less = (x, y) => (x < y);
+
 class PriorityQueue {
     constructor(cmp) {
 		this.comp = cmp;
-        this.length = 0;
-        this.arr = [0];
+        this.size = 0;
+        this.arr = [];
     }
-
-	proclateDown(parent) {
+    
+    /* Other methods */
+    percolateDown(parent) {
         const lChild = 2 * parent + 1;
         const rChild = lChild + 1;
         let child = -1;
         let temp;
-        if (lChild < this.length) {
+        if (lChild <= this.size) {
             child = lChild;
         }
-        if (rChild < this.length && this.comp(this.arr[lChild], this.arr[rChild]) ) {
+        if (rChild <= this.size && this.comp(this.arr[lChild], this.arr[rChild])) {
             child = rChild;
         }
         if (child !== -1 && this.comp(this.arr[parent], this.arr[child])) {
             temp = this.arr[parent];
             this.arr[parent] = this.arr[child];
             this.arr[child] = temp;
-            this.proclateDown(child);
+            this.percolateDown(child);
         }
     }
 
-    proclateUp(child) {
-        const parent = Math.floor(child -1 / 2);
-        let temp;
+    percolateUp(child) {
+        const parent = Math.floor((child - 1) / 2);
         if (parent < 0) {
             return;
         }
         if (this.comp(this.arr[parent], this.arr[child])) {
-            temp = this.arr[child];
+            const temp = this.arr[child];
             this.arr[child] = this.arr[parent];
             this.arr[parent] = temp;
-            this.proclateUp(parent);
+            this.percolateUp(parent);
         }
     }
 
     add(value) {
-        this.arr[this.length] = value;
-		this.length++;
-        this.proclateUp(this.length-1);
+        this.arr[this.size] = value;
+        this.size += 1;
+        this.percolateUp(this.size - 1);
     }
 
     remove() {
         if (this.isEmpty()) {
-            throw new Error('Queue Empty');
+            throw new Error("IllegalStateException");
         }
         const value = this.arr[0];
-        this.arr[0] = this.arr[this.length-1];
-        this.length--;
-        this.proclateDown(0);
+        this.arr[0] = this.arr[this.size - 1];
+        this.size--;
+        this.percolateDown(0);
         return value;
     }
 
@@ -60,18 +63,18 @@ class PriorityQueue {
     }
 
     isEmpty() {
-        return (this.length === 0);
+        return (this.size === 0);
     }
 
-    size() {
-        return this.length;
+    length() {
+        return this.size;
     }
 
     peek() {
         if (this.isEmpty()) {
-            throw new Error('Queue Empty');
+            throw new Error("IllegalStateException");
         }
-        return this.arr[0];
+        return this.arr[0]
     }
 }
 
@@ -90,8 +93,8 @@ class HuffmanTree
 {
 	constructor(arr, freq)
 	{
-		let n = arr.length;
-		let que = new PriorityQueue(function(a, b){return  (a.freq - b.freq) > 0 });
+		const n = arr.length;
+		const que = new PriorityQueue(function(a, b){return  (a.freq - b.freq) > 0 });
 		
 		for (let i = 0; i < n; i++)
 		{
@@ -99,7 +102,7 @@ class HuffmanTree
 			que.add(node);
 		}
 
-		while (que.size() > 1)
+		while (que.length() > 1)
 		{
 			let lt = que.remove();
 			let rt = que.remove();
@@ -127,9 +130,10 @@ class HuffmanTree
 	}
 }
 
-let ar = ['A', 'B', 'C', 'D', 'E'];
-let fr = [30, 25, 21, 14, 10];
-let hf = new HuffmanTree(ar, fr);
+/* Testing Code */
+const ar = ['A', 'B', 'C', 'D', 'E'];
+const fr = [30, 25, 21, 14, 10];
+const hf = new HuffmanTree(ar, fr);
 hf.print();
 
 /*

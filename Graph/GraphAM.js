@@ -1,122 +1,107 @@
-
 class Queue {
     constructor() {
-        this.stk1 = [];
-        this.stk2 = [];
+        this.arr = [];
     }
 
     add(value) {
-        this.stk1.push(value);
+        this.arr.push(value);
     }
 
     remove() {
-        let value;
+        const value = this.arr[0];
+        this.arr.shift();
+        return value;
+    }
 
-        if (this.stk2.length > 0) {
-            return this.stk2.pop();
-        }
-        while (this.stk1.length > 0) {
-            value = this.stk1.pop();
-            this.stk2.push(value);
-        }
-        return this.stk2.pop();
+    front() {
+        return this.arr[0];
     }
 
     isEmpty() {
-        return (this.stk1.length + this.stk2.length) === 0
+        return this.arr.length === 0
+    }
+
+    size() {
+        return this.arr.length
     }
 }
 
 defaultCmp = (x, y) => (x - y) > 0;
 
 class PriorityQueue {
-    constructor(array, cmp) {
-        this.comp = (typeof cmp === 'function' && cmp != null) ? cmp : defaultCmp;
-
-        if (array != null && array instanceof Array) {
-            this.length = array.length;
-            this.arr = [0].concat(array);
-            for (let i = Math.floor(this.length / 2); i > 0; i--) {
-                this.proclateDown(i);
-            }
-        }
-        else if (array === undefined || array === null) {
-            this.length = 0;
-            this.arr = [0];
-        }
-        else
-            throw new Error('Invalid arguments');
+    constructor(cmp) {
+		this.comp = cmp;
+        this.size = 0;
+        this.arr = [];
     }
-
-proclateDown(position) {
-        const lChild = 2 * position;
+    
+    /* Other methods */
+    percolateDown(parent) {
+        const lChild = 2 * parent + 1;
         const rChild = lChild + 1;
         let child = -1;
         let temp;
-        if (lChild <= this.length) {
+        if (lChild <= this.size) {
             child = lChild;
         }
-        if (rChild <= this.length && this.comp(this.arr[lChild], this.arr[rChild]) ) {
+        if (rChild <= this.size && this.comp(this.arr[lChild], this.arr[rChild])) {
             child = rChild;
         }
-        if (child !== -1 && this.comp(this.arr[position], this.arr[child])) {
-            temp = this.arr[position];
-            this.arr[position] = this.arr[child];
+        if (child !== -1 && this.comp(this.arr[parent], this.arr[child])) {
+            temp = this.arr[parent];
+            this.arr[parent] = this.arr[child];
             this.arr[child] = temp;
-            this.proclateDown(child);
+            this.percolateDown(child);
         }
     }
 
-    proclateUp(position) {
-        const parent = Math.floor(position / 2);
-        let temp;
-        if (parent === 0) {
+    percolateUp(child) {
+        const parent = Math.floor((child - 1) / 2);
+        if (parent < 0) {
             return;
         }
-        if (this.comp(this.arr[parent], this.arr[position])) {
-            temp = this.arr[position];
-            this.arr[position] = this.arr[parent];
+        if (this.comp(this.arr[parent], this.arr[child])) {
+            const temp = this.arr[child];
+            this.arr[child] = this.arr[parent];
             this.arr[parent] = temp;
-            this.proclateUp(parent);
+            this.percolateUp(parent);
         }
     }
 
     add(value) {
-        this.length++;
-        this.arr[this.length] = value;
-        this.proclateUp(this.length);
+        this.arr[this.size] = value;
+        this.size += 1;
+        this.percolateUp(this.size - 1);
     }
 
     remove() {
         if (this.isEmpty()) {
-            throw new Error('Queue Empty');
+            throw new Error("IllegalStateException");
         }
-        const value = this.arr[1];
-        this.arr[1] = this.arr[this.length];
-        this.length--;
-        this.proclateDown(1);
+        const value = this.arr[0];
+        this.arr[0] = this.arr[this.size - 1];
+        this.size--;
+        this.percolateDown(0);
         return value;
     }
 
     print() {
-        for (let i = 1; i <= this.length; i++) {
-            console.log(` ${this.arr[i]}`);
-        }
+        console.log(this.arr);
     }
 
     isEmpty() {
-        return (this.length === 0);
+        return (this.size === 0);
     }
 
-    size() {
-        return this.length;
+    length() {
+        return this.size;
     }
 
     peek() {
         if (this.isEmpty()) {
-            throw new Error('Queue Empty');
+            throw new Error("IllegalStateException");
         }
-        return this.arr[1];
+        return this.arr[0]
     }
 }
 
@@ -167,156 +152,156 @@ class Graph {
         }
     }
 
-dijkstra(source) {
-    const count = this.count
-    const previous = new Array(count).fill(-1);
-    const dist = new Array(count).fill(Infinity);
-    const visited = new Array(count).fill(false);
+    dijkstra(source) {
+        const count = this.count
+        const previous = new Array(count).fill(-1);
+        const dist = new Array(count).fill(Infinity);
+        const visited = new Array(count).fill(false);
 
-    dist[source] = 0
-    previous[source] = -1
+        dist[source] = 0
+        previous[source] = -1
 
-    const queue = new PriorityQueue(null, GraphEdgeComparator);
-    let node = new GraphEdge(source, 0);
-    queue.add(node)
+        const queue = new PriorityQueue(GraphEdgeComparator);
+        let node = new GraphEdge(source, 0);
+        queue.add(node)
 
-    while (queue.isEmpty() === false) {
-        node = queue.remove();
-        source = node.dest;
-        visited[source] = true;
-        for (let dest = 0; dest < count; dest++) {
-            const cost = this.adj[source][dest];
-            if (cost !== 0) {
-                const alt = cost + dist[source];
-                if (dist[dest] > alt && visited[dest] === false) {
-                    dist[dest] = alt;
-                    previous[dest] = source;
-                    node = new GraphEdge(dest, alt);
-                    queue.add(node);
+        while (queue.isEmpty() === false) {
+            node = queue.remove();
+            source = node.dest;
+            visited[source] = true;
+            for (let dest = 0; dest < count; dest++) {
+                const cost = this.adj[source][dest];
+                if (cost !== 0) {
+                    const alt = cost + dist[source];
+                    if (dist[dest] > alt && visited[dest] === false) {
+                        dist[dest] = alt;
+                        previous[dest] = source;
+                        node = new GraphEdge(dest, alt);
+                        queue.add(node);
+                    }
                 }
             }
         }
-    }
-    for (let i = 0; i < count; i++) {
-        if (dist[i] === Infinity) {
-            console.log(`Node id ${i} is Unreachable`)
-        } else {
-            console.log(`Node id ${i}, prev : ${previous[i]}, cost : ${dist[i]}`)
-        }
-    }
-}
-
-prims(gph) {
-    const count = this.count;
-    const previous = new Array(count).fill(-1);
-    const dist = new Array(count).fill(Infinity);
-    const visited = new Array(count).fill(false);
-
-    let source = 0;
-    dist[source] = 0
-    previous[source] = -1
-
-    const queue = new PriorityQueue(null, GraphEdgeComparator);
-    let node = new GraphEdge(source, 0);
-    queue.add(node)
-
-    while (queue.isEmpty() === false) {
-        node = queue.remove();
-        source = node.dest;
-        visited[source] = true;
-
-        for (let dest = 0; dest < count; dest++) {
-            const cost = this.adj[source][dest];
-            if (cost !== 0) {
-                const alt = cost;
-                if (dist[dest] > alt && visited[dest] === false) {
-                    dist[dest] = alt;
-                    previous[dest] = source;
-                    node = new GraphEdge(dest, alt);
-                    queue.add(node);
-                }
+        for (let i = 0; i < count; i++) {
+            if (dist[i] === Infinity) {
+                console.log(`Node id ${i} is Unreachable`)
+            } else {
+                console.log(`Node id ${i}, prev : ${previous[i]}, cost : ${dist[i]}`)
             }
         }
     }
-    for (let i = 0; i < count; i++) {
-        if (dist[i] === Infinity) {
-            console.info(`Node id ${i},  prev : ${previous[i]}, cost : Unreachable`);
+
+    primsMST(gph) {
+        const count = this.count;
+        const previous = new Array(count).fill(-1);
+        const dist = new Array(count).fill(Infinity);
+        const visited = new Array(count).fill(false);
+
+        let source = 0;
+        dist[source] = 0
+        previous[source] = -1
+
+        const queue = new PriorityQueue(GraphEdgeComparator);
+        let node = new GraphEdge(source, 0);
+        queue.add(node)
+
+        while (queue.isEmpty() === false) {
+            node = queue.remove();
+            source = node.dest;
+            visited[source] = true;
+
+            for (let dest = 0; dest < count; dest++) {
+                const cost = this.adj[source][dest];
+                if (cost !== 0) {
+                    const alt = cost;
+                    if (dist[dest] > alt && visited[dest] === false) {
+                        dist[dest] = alt;
+                        previous[dest] = source;
+                        node = new GraphEdge(dest, alt);
+                        queue.add(node);
+                    }
+                }
+            }
         }
-        else {
-            console.info(`Node id ${i},  prev : ${previous[i]}, cost : ${dist[i]}`);
+        for (let i = 0; i < count; i++) {
+            if (dist[i] === Infinity) {
+                console.info(`Node id ${i},  prev : ${previous[i]}, cost : Unreachable`);
+            }
+            else {
+                console.info(`Node id ${i},  prev : ${previous[i]}, cost : ${dist[i]}`);
+            }
         }
     }
-}
 
-hamiltonianPathUtil(path, pSize, added) {
-    if (pSize === this.count)
-        return true;
+    hamiltonianPathUtil(path, pSize, added) {
+        if (pSize === this.count)
+            return true;
 
-    for (let vertex = 0; vertex < this.count; vertex++) {
-        if (pSize === 0 || (this.adj[path[pSize - 1]][vertex] === 1 && added[vertex] === 0)) {
-            path[pSize++] = vertex;
-            added[vertex] = 1;
-            
-            if (this.hamiltonianPathUtil(path, pSize, added))
-                return true;
-            
-            pSize--;
-            added[vertex] = 0;
+        for (let vertex = 0; vertex < this.count; vertex++) {
+            if (pSize === 0 || (this.adj[path[pSize - 1]][vertex] === 1 && added[vertex] === 0)) {
+                path[pSize++] = vertex;
+                added[vertex] = 1;
+                
+                if (this.hamiltonianPathUtil(path, pSize, added))
+                    return true;
+                
+                pSize--;
+                added[vertex] = 0;
+            }
         }
+        return false;
     }
-    return false;
-}
 
-hamiltonianPath() {
-    const count = this.count;
-    const path = new Array(count).fill(0);
-    const added = new Array(count).fill(0);
+    hamiltonianPath() {
+        const count = this.count;
+        const path = new Array(count).fill(0);
+        const added = new Array(count).fill(0);
 
-    if (this.hamiltonianPathUtil(path, 0, added)) {
-        console.info("Hamiltonian Path found :: " , path);
-        return true;
-    }
-    console.info("Hamiltonian Path not found");
-    return false;
-}
-
-hamiltonianCycleUtil(path, pSize, added) {
-    const count = this.count;
-    if (pSize === count) {
-        if (this.adj[path[pSize - 1]][path[0]] === 1) {
-            path[pSize] = path[0];
+        if (this.hamiltonianPathUtil(path, 0, added)) {
+            console.info("Hamiltonian Path found :: " , path);
             return true;
         }
-        else
-            return false;
+        console.info("Hamiltonian Path not found");
+        return false;
     }
 
-    for (let vertex = 0; vertex < count; vertex++) {
-        if (pSize === 0 || (this.adj[path[pSize - 1]][vertex] === 1 && added[vertex] === 0)) {
-            path[pSize++] = vertex;
-            added[vertex] = 1;
-            if (this.hamiltonianCycleUtil(path, pSize, added))
+    hamiltonianCycleUtil(path, pSize, added) {
+        const count = this.count;
+        if (pSize === count) {
+            if (this.adj[path[pSize - 1]][path[0]] === 1) {
+                path[pSize] = path[0];
                 return true;
-            pSize--;
-            added[vertex] = 0;
+            }
+            else
+                return false;
         }
 
-    }
-    return false;
-}
+        for (let vertex = 0; vertex < count; vertex++) {
+            if (pSize === 0 || (this.adj[path[pSize - 1]][vertex] === 1 && added[vertex] === 0)) {
+                path[pSize++] = vertex;
+                added[vertex] = 1;
+                if (this.hamiltonianCycleUtil(path, pSize, added))
+                    return true;
+                pSize--;
+                added[vertex] = 0;
+            }
 
-hamiltonianCycle() {
-    const count = this.count;
-    const path = new Array(count + 1).fill(0);
-    const added = new Array(count).fill(0);
-
-    if (this.hamiltonianCycleUtil(path, 0, added)) {
-        console.info("Hamiltonian Cycle found :: ", path);
-        return true;
+        }
+        return false;
     }
-    console.info("Hamiltonian Cycle not found");
-    return false;
-}
+
+    hamiltonianCycle() {
+        const count = this.count;
+        const path = new Array(count + 1).fill(0);
+        const added = new Array(count).fill(0);
+
+        if (this.hamiltonianCycleUtil(path, 0, added)) {
+            console.info("Hamiltonian Cycle found :: ", path);
+            return true;
+        }
+        console.info("Hamiltonian Cycle not found");
+        return false;
+    }
 }
 
 function test1(){
@@ -348,7 +333,7 @@ function test2(){
     gph.addUndirectedEdge(7, 8, 7);
     gph.print2();
     console.log("")
-    gph.prims();
+    gph.primsMST();
     console.log("")
 //    gph.dijkstra(0);
 }
@@ -371,7 +356,7 @@ function test3(){
     gph.addUndirectedEdge(6, 7, 1)
     gph.addUndirectedEdge(6, 8, 6)
     gph.addUndirectedEdge(7, 8, 7)
-    //gph.prims()
+    //gph.primsMST()
     gph.dijkstra(1);
 }
 
