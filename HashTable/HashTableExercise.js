@@ -56,6 +56,7 @@ function isAnagram(str1, str2){
     return (cm.size() === 0);
 }
 
+// Testing code.
 function test1(){
     const first = "hello";
     const second = "elloh";
@@ -83,6 +84,7 @@ function removeDuplicate(str){
     return str2;
 }
 
+// Testing code.
 function test2(){
     const first = "hello";
     console.info(removeDuplicate(first));
@@ -105,6 +107,7 @@ function findMissing(arr, start, end){
     return -1;
 }
 
+// Testing code.
 function test3(){
     const arr = [1, 2, 3, 5, 6, 7, 8, 9, 10];
     console.info("Missing element is : ", findMissing(arr, 1, 10));
@@ -143,6 +146,7 @@ function printFirstRepeating(arr){
     }
 }
 
+// Testing code.
 function test4(){
     const arr1 = [1, 2, 3, 4, 4, 5, 6, 7, 8, 9, 1];
     printRepeating(arr1);

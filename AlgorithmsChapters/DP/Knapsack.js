@@ -72,23 +72,24 @@ function getMaxCost01BU(wt, cost, capacity)
 			dp[w][i] = Math.max(first, second);
 		}
 	}
-	//printItems(dp, wt, cost, n, capacity);
+	printItems(dp, wt, cost, n, capacity);
 	return dp[capacity][n];
 }
 
 function printItems(dp, wt, cost, n, capacity)
 {
 	let totalCost = dp[capacity][n];
-	console.log("Selected items are:");
+	var output = "";
 	for (let i = n - 1; i > 0; i--)
 	{
 		if (totalCost != dp[capacity][i - 1])
 		{
-			console.log(" (" + wt[i] + "," + cost[i] + ")");
+			output += " (wt:" + wt[i] + ", cost:" + cost[i] + ")";
 			capacity -= wt[i];
 			totalCost -= cost[i];
 		}
 	}
+	console.log("Selected items are:" + output);
 }
 
 function KS01UnboundBU(wt, cost, capacity)
@@ -110,7 +111,7 @@ function KS01UnboundBU(wt, cost, capacity)
 			}
 		}
 	}
-	//printItems(dp, wt, cost, n, capacity);
+	printItems(dp, wt, cost, n, capacity);
 	return dp[capacity];
 }
 
@@ -127,6 +128,7 @@ console.log("Maximum cost obtained = " + maxCost);
 
 /*
 Maximum cost obtained = 210
+Selected items are: (wt:30, cost:120) (wt:20, cost:90)
 Maximum cost obtained = 210
 Maximum cost obtained = 210
 */

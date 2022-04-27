@@ -33,6 +33,7 @@ class Deque {
     }
 }
 
+// Testing code.
 const que = new Deque();
 que.addLast(1);
 que.addLast(2);

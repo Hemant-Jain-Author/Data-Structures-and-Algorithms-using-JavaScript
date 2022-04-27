@@ -236,6 +236,7 @@ class AVLTree
 	}
 }
 
+// Testing code.
 let t = new AVLTree();
 t.insert(1);
 t.insert(2);

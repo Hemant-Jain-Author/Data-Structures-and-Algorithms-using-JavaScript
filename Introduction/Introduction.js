@@ -7,6 +7,7 @@ function SumArray(arr) {
     return total;
 }
 
+// Testing code.
 function test1() {
     const numbers = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
     const sum = SumArray(numbers);
@@ -66,25 +67,30 @@ function BinarySearchRecursiveUtil(arr, low, high, value) {
     }
 }
 
+// Testing code.
 function test2a() {
     const numbers = [1, 8, 5, 4, 3, 6, 9, 2, 7, 10];
     console.log(SequentialSearch(numbers, 7));
     console.log(SequentialSearch(numbers, 11));
 }
 
+// Testing code.
 function test2b() {
     const numbers = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
     console.log(BinarySearch(numbers, 7));
     console.log(BinarySearch(numbers, 11));
  }
 
-function test2b() {
+// Testing code.
+function test2C() {
     const numbers = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
     console.log(BinarySearchRecursive(numbers, 7));
     console.log(BinarySearchRecursive(numbers, 11));
 }
 
+test2a()
 test2b()
+test2c()
 
 function rotateArray(a, n, k) {
     reverseArray(a, 0, k - 1);
@@ -114,6 +120,7 @@ function reverseArray2(a) {
     }
 }
 
+// Testing code.
 function test3() {
     const numbers = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
     rotateArray(numbers, numbers.length, 7)
@@ -143,6 +150,7 @@ function maxSubArraySum(a) {
     return maxSoFar;
 }
 
+// Testing code.
 function test4() {
     const arr = [1, -2, 3, 4, -4, 6, -4, 8, 2];
     console.log(maxSubArraySum(arr));
@@ -170,6 +178,7 @@ function WaveArray(arr) {
     }
 }
 
+// Testing code.
 function test5() {
     const arr = [8, 1, 2, 3, 4, 5, 6, 4, 2];
     WaveArray(arr);
@@ -210,6 +219,7 @@ function indexArray2(arr, size) {
     }
 }
 
+// Testing code.
 function test6() {
     const arr = [8, -1, 6, 1, 9, 3, 2, 7, 4, -1];
     let size = arr.length;
@@ -252,6 +262,7 @@ function Sort1toN2(arr, size) {
     }
 }
 
+// Testing code.
 function test7() {
     const arr = [8, 5, 6, 1, 9, 3, 2, 7, 4, 10];
     let size = arr.length;
@@ -331,6 +342,7 @@ function SmallestPositiveMissingNumber4(arr, size) {
     return -1;
 }
 
+// Testing code.
 function test8() {
     const arr = [8, 5, 6, 1, 9, 11, 2, 7, 4, 10];
     const size = arr.length;
@@ -372,6 +384,7 @@ function MaxMinArr2(arr, size) {
     }
 }
 
+// Testing code.
 function test9() {
     const arr = [1, 2, 3, 4, 5, 6, 7];
     const size = arr.length;
@@ -405,6 +418,7 @@ function maxCircularSum(arr, size) {
     return maxVal;
 }
 
+// Testing code.
 function test10() {
     const arr = [10, 9, 8, 7, 6, 5, 4, 3, 2, 1];
     console.info(`Max Circulr Sum: ${maxCircularSum(arr, arr.length)}`);
@@ -469,6 +483,7 @@ function ArrayIndexMaxDiff2(arr, size) {
     return maxDiff;
 }
 
+// Testing code.
 function test11() {
     const arr = [33, 9, 10, 3, 2, 60, 30, 33, 1];
     console.info(`ArrayIndexMaxDiff : ${ArrayIndexMaxDiff(arr, arr.length)}`);
@@ -513,6 +528,7 @@ function maxPathSum(arr1, size1, arr2, size2) {
     return result;
 }
 
+// Testing code.
 function test12() {
     const arr1 = [12, 13, 18, 20, 22, 26, 70];
     const arr2 = [11, 15, 18, 19, 20, 26, 30, 31];
@@ -546,6 +562,7 @@ function printHaxInt(number, base) {
     return arr.join("");
 }
 
+// Testing code.
 function test13() {
     console.log(printHaxInt(100, 16));
 }
@@ -561,6 +578,7 @@ function towerOfHanoi(num, src, dst, temp) {
     towerOfHanoi(num - 1, temp, dst, src);
 }
 
+// Testing code.
 function test14() {
     const num = 3;
     console.info("The sequence of moves are :");
@@ -580,6 +598,7 @@ function GCD(m, n) {
     return (GCD(n, m % n));
 }
 
+// Testing code.
 function test15() {
     console.log(GCD(15, 7));
 }
@@ -612,6 +631,7 @@ function fibonacci2(n) {
     return temp;
 }
 
+// Testing code.
 function test16() {
     console.log(fibonacci(8));
     console.log(fibonacci2(8));
@@ -639,6 +659,7 @@ function permutation(arr, i, length) {
     }
 }
 
+// Testing code.
 function test17() {
     const arr = [1, 2, 3]
     permutation(arr, 0, 3);

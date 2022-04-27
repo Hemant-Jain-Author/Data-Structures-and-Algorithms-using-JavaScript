@@ -34,6 +34,7 @@ class CountMap {
     }
 }
 
+// Testing code.
 const cm = new CountMap();
 cm.insert(2);
 cm.insert(2);

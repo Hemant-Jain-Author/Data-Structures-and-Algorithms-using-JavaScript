@@ -98,6 +98,7 @@ class rmqST
 	}
 }
 
+// Testing code.
 let arr = [2, 3, 1, 7, 12, 5];
 let tree = new rmqST(arr);
 console.log("Min value in the range(1, 5): " + tree.getMin(1, 5));

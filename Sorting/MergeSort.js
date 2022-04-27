@@ -41,9 +41,9 @@ function mergeSort(arr, compare) {
 }
 
 less = (value1, value2) => value1 < value2;
-
 more = (value1, value2) => value1 > value2;
 
+// Testing code.
 const array = [3, 4, 2, 1, 6, 5, 7, 8, 1, 1];
 mergeSort(array, less);
 console.log(array);

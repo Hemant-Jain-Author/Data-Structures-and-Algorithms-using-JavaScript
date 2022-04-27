@@ -28,24 +28,29 @@ function LCSubStr(st1, st2)
 	return dp[m][n];
 }
 
-function PrintLCS(p, X, i, j)
+function PrintLCS(p, X, i, j) {
+	console.log(PrintLCSUtil(p, X, i, j))
+}
+
+function PrintLCSUtil(p, X, i, j)
 {
 	if (i == 0 || j == 0)
-		return;
-	
+		return "";
+	var output = "";
 	if (p[i][j] == 0)
 	{
-		PrintLCS(p, X, i - 1, j - 1);
-		console.log(X[i - 1]);
+		output = PrintLCSUtil(p, X, i - 1, j - 1);
+		output += X[i - 1];
 	}
 	else if (p[i][j] == 1)
 	{
-		PrintLCS(p, X, i - 1, j);
+		output = PrintLCSUtil(p, X, i - 1, j);
 	}
 	else
 	{
-		PrintLCS(p, X, i, j - 1);
+		output = PrintLCSUtil(p, X, i, j - 1);
 	}
+	return output;
 }
 
 /* Testing Code */
@@ -54,12 +59,6 @@ const Y = "sharpener";
 console.log("LCSubStr : " + LCSubStr(X, Y));
 
 /*
-a
-r
-p
-e
-n
-e
-r
+arpener
 LCSubStr : 7
 */

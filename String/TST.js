@@ -52,6 +52,7 @@ class TST {
     }
 }
 
+// Testing code.
 const tt = new TST();
 tt.insert("banana");
 tt.insert("apple");

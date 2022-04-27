@@ -48,6 +48,7 @@ class TwoStack {
     }
 }
 
+// Testing code.
 const st = new TwoStack();
 for (let i = 0; i < 10; i++) {
     st.StackPush1(i);

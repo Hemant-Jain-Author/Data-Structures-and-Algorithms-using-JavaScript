@@ -464,6 +464,7 @@ class BTree
 	}
 }
 
+// Testing code.
 let t = new BTree(3); // A B-Tree with max key 3
 t.insert(1);
 t.insert(2);

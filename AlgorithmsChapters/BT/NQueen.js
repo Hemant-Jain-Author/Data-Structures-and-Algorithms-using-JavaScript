@@ -27,6 +27,7 @@ function nQueens(Q, k, n)
 	}
 }
 
+// Testing code.
 const Q = new Array(8);
 nQueens(Q, 0, 8);
 

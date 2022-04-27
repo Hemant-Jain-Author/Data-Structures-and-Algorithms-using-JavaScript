@@ -56,6 +56,7 @@ class Queue {
     }
 }
 
+// Testing code.
 const que = new Queue();
 que.add(1);
 que.add(2);

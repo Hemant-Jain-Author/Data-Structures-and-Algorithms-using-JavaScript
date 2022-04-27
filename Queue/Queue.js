@@ -27,6 +27,7 @@ class Queue {
     }
 }
 
+// Testing code.
 const que = new Queue();
 que.add(1);
 que.add(2);
@@ -66,6 +67,7 @@ class Queue2 {
     }
 }
 
+// Testing code.
 const que2 = new Queue2();
 for(let i=0;i<20;i++)
     que2.add(i);
@@ -73,49 +75,3 @@ for(let i=0;i<20;i++)
 while (que2.isEmpty() === false) {
     console.log(que2.remove());
 }
-
-
-/*
-class Queue2 {
-    constructor() {
-        this.Capacity = 1000;
-        this.front = 0;
-        this.back = 0;
-        this.size = 0;
-        this.data = new Array(this.Capacity);
-    }
-
-    add(value) {
-        if (this.size >= this.Capacity) {
-            console.log("Queue is full.");
-            return false;
-        } else {
-            this.size++;
-            this.data[this.back] = value;
-            this.back = (++this.back) % (this.Capacity - 1);
-        }
-        return true;
-    }
-
-    remove() {
-        let value;
-        if (this.size <= 0) {
-            console.log("Queue is empty.");
-            return 0;
-        } else {
-            this.size--;
-            value = this.data[this.front];
-            this.front = (++this.front) % (this.Capacity - 1);
-        }
-        return value;
-    }
-
-    isEmpty() {
-        return this.size === 0;
-    }
-
-    length() {
-        return this.size;
-    }
-}
-*/

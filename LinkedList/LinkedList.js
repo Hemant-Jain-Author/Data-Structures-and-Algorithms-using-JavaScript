@@ -412,6 +412,7 @@ class LinkedList {
     }
 }
 
+// Testing code.
 const ll = new LinkedList();
 ll.addHead(1);
 ll.addHead(2);

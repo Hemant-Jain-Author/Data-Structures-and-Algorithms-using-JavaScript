@@ -158,6 +158,7 @@ class CircularLinkedList {
     }
 }
 
+// Testing code.
 const ll = new CircularLinkedList();
 ll.addHead(1);
 ll.addHead(2);

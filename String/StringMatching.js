@@ -129,6 +129,7 @@ function KMPFindCount(text, pattern) {
     return count;
 }
 
+// Testing code.
 const st1 = "hello, world!";
 const st2 = "world";
 console.log(`Using BruteForceSearch pattern found at index : ${BruteForceSearch(st1, st2)}`);

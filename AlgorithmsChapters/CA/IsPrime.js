@@ -12,8 +12,11 @@ function isPrime(n)
 	return answer;
 }
 
+// Testing code.
 console.log(isPrime(7));
+console.log(isPrime(8));
 
 /*
 true
+false
 */

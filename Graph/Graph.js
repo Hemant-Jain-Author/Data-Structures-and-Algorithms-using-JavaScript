@@ -198,7 +198,7 @@ class Graph {
             output += `Vertex ${i} is connected to : `
             for (let j = 0; j < ad.length; j++) {
                 const adn = ad[j];
-                output += `${adn.dest}(${adn.cost}) `
+                output += `${adn.dest}(cost: ${adn.cost}) `
             }
             console.log(output)
         }
@@ -698,144 +698,169 @@ class Graph {
         }
     }
 
-primsMST() {
-    const count = this.count;
-    const previous = new Array(count).fill(-1);
-    const infi = 2147483647;
-    const dist = new Array(count).fill(infi);
-    const visited = new Array(count).fill(false);
-    let source = 0;
-    dist[source] = 0
-
-    const queue = new PriorityQueue(GraphEdgeComparator);
-    let node = new GraphEdge(source, source, 0);
-    queue.add(node)
-
-    while (queue.isEmpty() === false) {
-        node = queue.remove()
-        source = node.dest
+    primsMST() {
+        const count = this.count;
+        const previous = new Array(count).fill(-1);
+        const infi = 2147483647;
+        const dist = new Array(count).fill(infi);
+        const visited = new Array(count).fill(false);
         
-        if (visited[source] == true) {
-            continue
-        }
-        visited[source] = true
-        
-        const adl = this.Adj[source];
-        for (let index = 0; index < adl.length; index++) {
-            const adn = adl[index];
-            const dest = adn.dest;
-            const alt = adn.cost;
-            if (dist[dest] > alt && visited[dest] === false) {
-                dist[dest] = alt
-                previous[dest] = source
-                node = new GraphEdge(source, dest, alt)
-                queue.add(node)
+        let source = 0;
+        dist[source] = 0;
+        previous[source] = 0;
+
+        const queue = new PriorityQueue(GraphEdgeComparator);
+        let node = new GraphEdge(source, source, 0);
+        queue.add(node)
+
+        while (queue.isEmpty() === false) {
+            node = queue.remove()
+            source = node.dest
+            
+            if (visited[source] == true) {
+                continue
+            }
+            visited[source] = true
+            
+            const adl = this.Adj[source];
+            for (let index = 0; index < adl.length; index++) {
+                const adn = adl[index];
+                const dest = adn.dest;
+                const alt = adn.cost;
+                if (dist[dest] > alt && visited[dest] === false) {
+                    dist[dest] = alt
+                    previous[dest] = source
+                    node = new GraphEdge(source, dest, alt)
+                    queue.add(node)
+                }
             }
         }
-    }
-    let total = 0;
-    let output = "Edges are " ;
-    for (let i = 0; i < count; i++) {
-        if (dist[i] === infi) {
-            output += `( ${i},  Unreachable)`
-        } else if (previous[i] != -1) {
-            output += `(${previous[i]}, ${i}, ${dist[i]})`
-            total += dist[i];
-        }
-    }
-    console.log(output);
-    console.log(`Total MST cost : ${total}`)
-}
-
-kruskalMST()
-{
-    const count = this.count;
-    //Different subsets are created.
-    const sets = new Array(count);
-    for (let i = 0; i < count; i++)
-    {
-        sets[i] = new Sets(i, 0);
-    }
-    // Edges are added to array and sorted.
-    let E = 0;
-    let edge = [];
-    for (let i = 0; i < count; i++)
-    {
-        let ad = this.Adj[i];
-        for (const adn of ad)
-        {
-            edge.push(adn);
-            E++
-        }
-    }
-    edge.sort(function (a, b){	return (a.cost - b.cost);});
-    let sum = 0;
-    let output = "Edges are "
-    for (let i = 0; i < E; i++)
-    {
-        let x = find(sets, edge[i].src);
-        let y = find(sets, edge[i].dest);
-        if (x != y)
-        {
-            output += ("(" + edge[i].src + ", " + edge[i].dest + ", " + edge[i].cost + ")");
-            sum += edge[i].cost;
-            union(sets, x, y);
-        }
-    }
-    console.log(output);
-    console.log(`Total MST cost : ${sum}`)
-}
-
-dijkstra(source) {
-    const count = this.count;
-    const previous = new Array(count).fill(-1);
-    const Infinity = 2147483647;
-    const dist = new Array(count).fill(Infinity);
-    const visited = new Array(count).fill(false);
-
-    dist[source] = 0
-    previous[source] = -1
-
-    const queue = new PriorityQueue(GraphEdgeComparator);
-    let node = new GraphEdge(source, source, 0);
-    queue.add(node)
-
-    while (queue.isEmpty() === false) {
-        node = queue.remove()
-        source = node.dest
-        
-        if (visited[source] == true) {
-            continue
-        }
-        visited[source] = true
-        
-        const adl = this.Adj[source];
-        for (let index = 0; index < adl.length; index++) {
-            const adn = adl[index];
-            const dest = adn.dest;
-            const alt = adn.cost + dist[source];
-            if (dist[dest] > alt && visited[dest] === false) {
-                dist[dest] = alt
-                previous[dest] = source
-                node = new GraphEdge(source, dest, alt)
-                queue.add(node)
+        let total = 0;
+        let output = "Edges are " ;
+        for (let i = 0; i < count; i++) {
+            if (dist[i] === infi) {
+                output += `( ${i},  Unreachable)`
+            } else if (previous[i] != i) {
+                output += `(${previous[i]}, ${i}, ${dist[i]})`
+                total += dist[i];
             }
         }
+        console.log(output);
+        console.log(`Total MST cost : ${total}`)
     }
-    for (let i = 0; i < count; i++) {
-        if (dist[i] === Infinity) {
-            console.log(`Node id ${i} is Unreachable`)
-        } else {
-            console.log(`Node id ${i}, prev : ${previous[i]}, cost : ${dist[i]}`)
+
+    kruskalMST()
+    {
+        const count = this.count;
+        //Different subsets are created.
+        const sets = new Array(count);
+        for (let i = 0; i < count; i++)
+        {
+            sets[i] = new Sets(i, 0);
         }
+        // Edges are added to array and sorted.
+        let E = 0;
+        let edge = [];
+        for (let i = 0; i < count; i++)
+        {
+            let ad = this.Adj[i];
+            for (const adn of ad)
+            {
+                edge.push(adn);
+                E++
+            }
+        }
+        edge.sort(function (a, b){	return (a.cost - b.cost);});
+        let sum = 0;
+        let output = "Edges are "
+        for (let i = 0; i < E; i++)
+        {
+            let x = find(sets, edge[i].src);
+            let y = find(sets, edge[i].dest);
+            if (x != y)
+            {
+                output += ("(" + edge[i].src + ", " + edge[i].dest + ", " + edge[i].cost + ")");
+                sum += edge[i].cost;
+                union(sets, x, y);
+            }
+        }
+        console.log(output);
+        console.log(`Total MST cost : ${sum}`)
     }
-}
+
+
+	printPathUtil(previous, source, dest) {
+		var path = "";
+		if (dest == source)
+			path += source;
+		else {
+			path += this.printPathUtil(previous, source, previous[dest]);
+			path += ("->" + dest);
+		}
+		return path;
+	}
+
+	printPath(previous, dist, count, source) {
+		var output = "Shortest Paths: ";
+		for (var i = 0; i < count; i++) {
+			if (dist[i] == 99999)
+				output += ("(" + source + "->" + i + " @ Unreachable) ");
+			else if (i != previous[i]) {
+				output += "(";
+				output += this.printPathUtil(previous, source, i);
+				output += (" @ " + dist[i] + ") ");
+			}
+		}
+		console.log(output);
+	}
+
+
+    dijkstra(source) {
+        const count = this.count;
+        
+        const previous = new Array(count).fill(-1);
+        const Infinity = 999999;
+        const dist = new Array(count).fill(Infinity);
+        const visited = new Array(count).fill(false);
+
+        dist[source] = 0
+        previous[source] = source
+
+        const queue = new PriorityQueue(GraphEdgeComparator);
+        let node = new GraphEdge(source, source, 0);
+        queue.add(node)
+        var curr;
+
+        while (queue.isEmpty() === false) {
+            node = queue.remove()
+            curr = node.dest
+            
+            if (visited[curr] == true) {
+                continue
+            }
+            visited[curr] = true
+            
+            const adl = this.Adj[curr];
+            for (let index = 0; index < adl.length; index++) {
+                const adn = adl[index];
+                const dest = adn.dest;
+                const alt = adn.cost + dist[curr];
+                if (dist[dest] > alt && visited[dest] === false) {
+                    dist[dest] = alt
+                    previous[dest] = curr
+                    node = new GraphEdge(curr, dest, alt)
+                    queue.add(node)
+                }
+            }
+        }
+        this.printPath(previous, dist, count, source);
+    }
 
     shortestPath(source) {
         const count = this.count;
         const infi = 2147483647;
         const distance = new Array(count).fill(infi);
-        const path = new Array(count).fill(0);
+        const previous = new Array(count).fill(0);
 
         const que = new Queue();
         que.add(source)
@@ -848,24 +873,22 @@ dijkstra(source) {
                 const adn = adl[index];
                 if (distance[adn.dest] === infi) {
                     distance[adn.dest] = distance[curr] + 1
-                    path[adn.dest] = curr
+                    previous[adn.dest] = curr
                     que.add(adn.dest)
                 }
             }
         }
-
-        for (let i = 0; i < count; i++) {
-            console.log(`${path[i]} to ${i} weight ${distance[i]}`)
-        }
+        this.printPath(previous, distance, count, source);
     }
 
     bellmanFordshortestPath(source) {
         const count = this.count;
-        const path = new Array(count).fill(-1);
+        const previous = new Array(count).fill(-1);
         const infi = 2147483647;
         const distance = new Array(count).fill(infi);
 
         distance[source] = 0
+        previous[source] = source
         for (let i = 0; i < count - 1; i++) {
             for (let j = 0; j < count; j++) {
                 const adl = this.Adj[j];
@@ -874,14 +897,12 @@ dijkstra(source) {
                     const newDistance = distance[j] + adn.cost;
                     if (distance[adn.dest] > newDistance) {
                         distance[adn.dest] = newDistance
-                        path[adn.dest] = j
+                        previous[adn.dest] = j
                     }
                 }
             }
         }
-        for (let i = 0; i < count; i++) {
-            console.log(`${path[i]} to ${i} weight ${distance[i]}`)
-        }
+        this.printPath(previous, distance, count, source);
     }
 
     bestFirstSearchPQ(source, dest) {
@@ -1038,20 +1059,10 @@ dijkstra(source) {
 		const V = this.count;
         const INF = Number.MAX_VALUE;
 		const dist = Array(V).fill(0).map(() => new Array(V).fill(INF));
-		const path = Array(V).fill(0).map(() => new Array(V).fill(0));
+		const path = Array(V).fill(0).map(() => new Array(V).fill(-1));
 		for (let i = 0; i < V; i++)
 		{
-			for (let j = 0; j < V; j++)
-			{
-				if (i == j)
-				{
-					path[i][j] = 0;
-				}
-				else
-				{
-					path[i][j] = -1;
-				}
-			}
+			path[i][i] = 0;
 		}
 
 		for (let i = 0; i < V; i++)
@@ -1087,39 +1098,40 @@ dijkstra(source) {
 				}
 			}
 		}
-        //console.log(path, dist);
-
 		Graph.printSolution(dist, path, V);
 	}
 
 	static 	printSolution(cost, path, V)
-	{
+    {
+        var output = "Shortest Paths : ";
 		for (let u = 0; u < V; u++)
 		{
 			for (let v = 0; v < V; v++)
 			{
 				if (u != v && path[u][v] != -1)
-				{
-					console.info("Shortest Path from %d to %d Cost: %d", u, v, cost[u][v],
-                    "Path:", Graph.printPath(path, u, v));
+                {
+                    output += "(";
+                    output += Graph.printPath(path, u, v);
+                    output += " @ " + cost[u][v] + ") "
 				}
 			}
-		}
-	}
+        }
+        console.log(output);
+    }
+    
 	static printPath(path, u, v)
 	{
 		if (path[u][v] == u)
 		{
-			return (u + " " + v + " ");
+			return (u + "->" + v );
 		}
         let output = Graph.printPath(path, u, path[u][v]);
-		output += (v + " ");
+		output += ("->" + v);
         return output;
 	}
-
-
 }
 
+/* Testing Code */
 function test1(){
     const graph = new Graph(4);
     graph.addUndirectedEdge(0, 1, 1);
@@ -1136,6 +1148,7 @@ Vertex 2 is connected to : 0(1) 1(1) 3(1)
 Vertex 3 is connected to : 2(1) 
 */
 
+/* Testing Code */
 function test2(){
     const gph = new Graph(8);
     gph.addUndirectedEdge(0, 1)
@@ -1153,7 +1166,6 @@ function test2(){
 }
 
 /*
-
 DFS Path is :  [ 0, 1, 4, 7, 5, 2, 6, 3 ]
 Path between 0 & 6 :  true
 BFS Path is :  [ 0, 1, 2, 3, 4, 5, 6, 7 ]
@@ -1162,6 +1174,7 @@ DFS Path is :  [ 0, 1, 4, 7, 5, 6, 2, 3 ]
 Path between 0 & 6 :  true
 */
 
+/* Testing Code */
 function test3(){
     const gph = new Graph(9);
     gph.addDirectedEdge(0, 2);
@@ -1182,6 +1195,7 @@ function test3(){
 [ 1, 4, 6, 3, 5, 7, 8, 0, 2 ]
 */
 
+/* Testing Code */
 function test4(){
     const gph = new Graph(5);
     gph.addDirectedEdge(0, 1, 1)
@@ -1203,6 +1217,7 @@ Path Count :: 3
 [ 0, 2, 3, 4 ]
 */
 
+/* Testing Code */
 function test5(){
     const gph = new Graph(7);
     gph.addDirectedEdge(0, 1, 1)
@@ -1220,6 +1235,7 @@ function test5(){
 Root vertex is :: 5
 */
 
+/* Testing Code */
 function test6(){
     const gph = new Graph(4);
     gph.addDirectedEdge(0, 1, 1)
@@ -1241,6 +1257,7 @@ function test6(){
 ]
 */
 
+/* Testing Code */
 function test7(){
     const gph = new Graph(7);
     gph.addUndirectedEdge(0, 1, 1)
@@ -1268,6 +1285,7 @@ Node  - Level
 BfsDistance :: 3
 */
 
+/* Testing Code */
 function test8(){
     const gph = new Graph(6);
     gph.addUndirectedEdge(0, 1, 1)
@@ -1289,6 +1307,7 @@ true
 IsConnectedUndirected : true
 */
 
+/* Testing Code */
 function test9(){
     const gph = new Graph(5);
     gph.addDirectedEdge(0, 1, 1)
@@ -1306,6 +1325,7 @@ true
 true
 */
 
+/* Testing Code */
 function test10(){
     const graph = new Graph(4);
     graph.addDirectedEdge(0, 1);
@@ -1323,6 +1343,7 @@ Vertex 2 is connected to : 0(1) 1(1)
 Vertex 3 is connected to : 2(1) 
 */
 
+/* Testing Code */
 function test11(){
     const gph = new Graph(5);
     gph.addDirectedEdge(0, 1)
@@ -1338,6 +1359,7 @@ function test11(){
 IsStronglyConnected:: true
 */
 
+/* Testing Code */
 function test12(){
     const gph = new Graph(7);
     gph.addDirectedEdge(0, 1)
@@ -1357,6 +1379,7 @@ function test12(){
 [ 6 ]
 */
 
+/* Testing Code */
 function test13(){
     const gph = new Graph(9);
     gph.addUndirectedEdge(0, 1, 4)
@@ -1386,17 +1409,11 @@ Total MST cost : 37
 Edges are (7, 6, 1)(8, 2, 2)(6, 5, 2)(5, 2, 4)(0, 1, 4)(3, 2, 7)(7, 0, 8)(4, 3, 9)
 Total MST cost : 37
 
-Node id 0, prev : -1, cost : 0
-Node id 1, prev : 0, cost : 4
-Node id 2, prev : 1, cost : 12
-Node id 3, prev : 2, cost : 19
-Node id 4, prev : 5, cost : 21
-Node id 5, prev : 6, cost : 11
-Node id 6, prev : 7, cost : 9
-Node id 7, prev : 0, cost : 8
-Node id 8, prev : 2, cost : 14
+Shortest Paths: (0->1 @ 4) (0->1->2 @ 12) (0->1->2->3 @ 19) (0->7->6->5->4 @ 21) (0->7->6->5 @ 11) (0->7->6 @ 9) (0->7 @ 8) (0->1->2->8 @ 14) 
+
 */
 
+/* Testing Code */
 function test14(){
     const gph = new Graph(9);
     gph.addDirectedEdge(0, 1)
@@ -1418,17 +1435,11 @@ function test14(){
 }
 
 /*
-0 to 0 weight 0
-0 to 1 weight 1
-1 to 2 weight 2
-2 to 3 weight 3
-3 to 4 weight 4
-2 to 5 weight 3
-5 to 6 weight 4
-0 to 7 weight 1
-7 to 8 weight 2
+Shortest Paths: (0->1 @ 1) (0->1->2 @ 2) (0->1->2->3 @ 3) (0->1->2->3->4 @ 4) (0->1->2->5 @ 3) (0->1->2->5->6 @ 4) (0->7 @ 1) (0->7->8 @ 2) 
+
 */
 
+/* Testing Code */
 function test15(){
     const gph = new Graph(9);
     gph.addUndirectedEdge(0, 2, 1)
@@ -1447,19 +1458,12 @@ function test15(){
 }
 
 /*
-2 to 0 weight 6
--1 to 1 weight 0
-1 to 2 weight 5
-1 to 3 weight 7
-1 to 4 weight 9
-3 to 5 weight 11
-4 to 6 weight 12
-5 to 7 weight 12
-7 to 8 weight 29
+Shortest Paths: (1->2->0 @ 6) (1->2 @ 5) (1->3 @ 7) (1->4 @ 9) (1->3->5 @ 11) (1->4->6 @ 12) (1->3->5->7 @ 12) (1->3->5->7->8 @ 29) 
 
 isConnectedUndirected :: true
 */
 
+/* Testing Code */
 function test16(){
     const gph = new Graph(5);
     gph.addDirectedEdge(0, 1, 3)
@@ -1472,11 +1476,8 @@ function test16(){
 }
 
 /*
--1 to 0 weight 0
-4 to 1 weight 0
-1 to 2 weight 1
-2 to 3 weight 2
-0 to 4 weight 2
+Shortest Paths: (0->4->1 @ 0) (0->4->1->2 @ 1) (0->4->1->2->3 @ 2) (0->4 @ 2) 
+
 */
 
 function heightTreeParentArr(arr){
@@ -1537,6 +1538,7 @@ function heightTreeParentArr2(arr ){
     return maxHeight
 }
 
+/* Testing Code */
 function test17(){
     const parentArray = [-1, 0, 1, 2, 3];
     console.log(heightTreeParentArr(parentArray))
@@ -1548,6 +1550,7 @@ function test17(){
 4
 */
 
+/* Testing Code */
 function test18(){
     const gph = new Graph(5);
     gph.addDirectedEdge(1, 0, 1)
@@ -1563,6 +1566,7 @@ graph is Semi-Eulerian
 1
 */
 
+/* Testing Code */
 function test19(){
     const gph = new Graph(5);
     gph.addDirectedEdge(0, 1)
@@ -1578,6 +1582,7 @@ function test19(){
 true
 */
 
+/* Testing Code */
 function test20()
 {
     const gph = new Graph(4);
@@ -1593,12 +1598,7 @@ function test20()
 }
 
 /*
-Shortest Path from 0 to 1 Cost: 5 Path: 0 1 
-Shortest Path from 0 to 2 Cost: 8 Path: 0 1 2 
-Shortest Path from 0 to 3 Cost: 9 Path: 0 1 2 3 
-Shortest Path from 1 to 2 Cost: 3 Path: 1 2 
-Shortest Path from 1 to 3 Cost: 4 Path: 1 2 3 
-Shortest Path from 2 to 3 Cost: 1 Path: 2 3 
+Shortest Paths : (0->1 @ 5) (0->1->2 @ 8) (0->1->2->3 @ 9) (1->2 @ 3) (1->2->3 @ 4) (2->3 @ 1) 
 */
 
 test1()

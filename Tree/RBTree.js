@@ -447,6 +447,7 @@ class RBTree
 	}
 }
 
+// Testing code.
 let tree = new RBTree();
 tree.insert(1);
 tree.insert(2);

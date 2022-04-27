@@ -91,7 +91,7 @@ function graphColouring(graph, V, m)
 	return false;
 }
 
-
+// Testing code.
 const graph = [
 	[false, true, false, false, true],
 	[true, false, true, false, true],

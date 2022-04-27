@@ -94,6 +94,7 @@ class StringTree {
     }
 }
 
+// Testing code.
 const tt = new StringTree();
 tt.insert("banana");
 tt.insert("apple");

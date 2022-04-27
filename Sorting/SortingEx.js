@@ -83,6 +83,7 @@ function partition012(arr, size) {
     }
 }
 
+// Testing code.
 function test1() {
     const arr = [0, 1, 1, 0, 1, 0, 1, 1, 0, 0, 0, 1];
     partition01(arr, arr.length);
@@ -126,6 +127,7 @@ function RangePartition(arr, size, lower, higher) {
     }
 }
 
+// Testing code.
 function test2() {
     const arr = [1, 21, 2, 20, 3, 19, 4, 18, 5, 17, 6, 16, 7, 15, 8, 14, 9, 13, 10, 12, 11];
     RangePartition(arr, arr.length, 9, 15);
@@ -157,6 +159,7 @@ function minSwaps(arr, size, val) {
     return swapCount;
 }
 
+// Testing code.
 function test3(){
     let arr = [2,7,5,6,1,3,4,9,10,8]
     let val = 5
@@ -206,6 +209,7 @@ function separateEvenAndOdd2(data, size) {
     }
 }
 
+// Testing code.
 function test4(){
 	let array = [9, 1, 8, 2, 7, 3, 6, 4, 5];
 	separateEvenAndOdd(array, array.length);
@@ -235,6 +239,7 @@ function AbsBubbleSort(arr, size, ref) {
     }
 }
 
+// Testing code.
 function test5() {
     const array = [9, 1, 8, 2, 7, 3, 6, 4, 5];
     const ref = 5;
@@ -267,6 +272,7 @@ function ArrayReduction(arr, size) {
     return count
 }
 
+// Testing code.
 function test6() {
     const arr = [5, 1, 1, 1, 2, 3, 5];
     ArrayReduction(arr, arr.length);
@@ -315,6 +321,7 @@ function SortByOrder(arr, size, arr2, size2) {
     }
 }
 
+// Testing code.
 function test7() {
     const arr = [2, 1, 2, 5, 7, 1, 9, 3, 6, 8, 8];
     const order = [2, 1, 8, 3];
@@ -353,6 +360,7 @@ function merge(arr1, size1, arr2, size2) {
     }
 }
 
+// Testing code.
 function test8() {
     const arr1 = [1, 5, 9, 10, 15, 20];
     const arr2 = [2, 3, 8, 13];
@@ -398,6 +406,7 @@ function checkReverse(arr, size) {
     return true;
 }
 
+// Testing code.
 function test9() {
     const arr = [1, 3, 8, 5, 4, 3, 10, 11, 12, 18, 28];
     console.log("checkReverse : ", checkReverse(arr, arr.length))
@@ -451,6 +460,7 @@ function UnionIntersectionUnsorted(arr1, size1, arr2, size2) {
     UnionIntersectionSorted(arr1, size1, arr2, size2);
 }
 
+// Testing code.
 function test10() {
     const arr1 = [1, 11, 2, 3, 14, 5, 6, 8, 9];
     const arr2 = [2, 4, 5, 12, 7, 8, 13, 10];

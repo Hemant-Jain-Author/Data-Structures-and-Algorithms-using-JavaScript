@@ -206,6 +206,7 @@ class DoublyLinkedList {
     }
 }
 
+// Testing code.
 const ll = new DoublyLinkedList();
 ll.addHead(1);
 ll.addHead(2);

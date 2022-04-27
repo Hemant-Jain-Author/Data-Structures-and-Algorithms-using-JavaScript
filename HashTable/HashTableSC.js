@@ -69,19 +69,15 @@ class HashTable {
     }
 
     print() {
+        let output = "Hash Table contains ::";
         for (let i = 0; i < this.tableSize; i++) {
             let head = this.listArray[i];
-            let data = "";
-
             while (head != null) {
-                data += (`${head.value} `)
+                output += "(" + head.key + "=>" +head.value + ") "
                 head = head.next;
             }
-
-            if (data != "") {
-                console.log(`Index value :: ${i} Data :: ${data}`);
-            }
         }
+        console.log(output);
     }
 
     find(key) {
@@ -110,6 +106,7 @@ class HashTable {
 }
 
 
+// Testing code.
 const ht = new HashTable();
 ht.add(1, 10);
 ht.add(2, 20);

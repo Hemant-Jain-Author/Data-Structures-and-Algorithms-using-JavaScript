@@ -27,6 +27,7 @@ class Queue {
     }
 }
 
+// Testing code.
 const que = new Queue();
 for (let i = 0; i < 20; i++) {
 	que.add(i);

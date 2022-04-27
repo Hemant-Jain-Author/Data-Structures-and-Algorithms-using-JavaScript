@@ -313,6 +313,7 @@ class SPLAYTree
 	}
 }
 
+// Testing code.
 let tree = new SPLAYTree();
 tree.insert(5);
 tree.insert(4);

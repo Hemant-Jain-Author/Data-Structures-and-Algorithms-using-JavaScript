@@ -12,6 +12,7 @@ function insertionSort(arr, compare) {
 
 more = (value1, value2) => value1 > value2;
 
+// Testing code.
 const array = [9, 1, 8, 2, 7, 3, 6, 4, 5];
 insertionSort(array, more);
 console.log(array);

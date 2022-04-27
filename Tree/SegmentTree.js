@@ -99,6 +99,8 @@ class SegmentTree
 		return diff;
 	}
 }
+
+// Testing code.
 let arr = [1, 2, 4, 8, 16, 32, 64];
 let tree = new SegmentTree(arr);
 console.log("Sum of values in the range(0, 3): " + tree.getSum(1, 3));

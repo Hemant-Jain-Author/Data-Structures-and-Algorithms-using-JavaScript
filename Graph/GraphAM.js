@@ -128,11 +128,11 @@ class Graph {
         }
     }
 
-    addDirectedEdge(src, dst, cost) {
+    addDirectedEdge(src, dst, cost = 1) {
         this.adj[src][dst] = cost;
     }
 
-    addUndirectedEdge(src, dst, cost) {
+    addUndirectedEdge(src, dst, cost = 1) {
         this.addDirectedEdge(src, dst, cost);
         this.addDirectedEdge(dst, src, cost);
     }
@@ -159,36 +159,31 @@ class Graph {
         const visited = new Array(count).fill(false);
 
         dist[source] = 0
-        previous[source] = -1
+        previous[source] = source
 
         const queue = new PriorityQueue(GraphEdgeComparator);
         let node = new GraphEdge(source, 0);
         queue.add(node)
+        let curr;
 
         while (queue.isEmpty() === false) {
             node = queue.remove();
-            source = node.dest;
-            visited[source] = true;
+            curr = node.dest;
+            visited[curr] = true;
             for (let dest = 0; dest < count; dest++) {
-                const cost = this.adj[source][dest];
+                const cost = this.adj[curr][dest];
                 if (cost !== 0) {
-                    const alt = cost + dist[source];
+                    const alt = cost + dist[curr];
                     if (dist[dest] > alt && visited[dest] === false) {
                         dist[dest] = alt;
-                        previous[dest] = source;
+                        previous[dest] = curr;
                         node = new GraphEdge(dest, alt);
                         queue.add(node);
                     }
                 }
             }
         }
-        for (let i = 0; i < count; i++) {
-            if (dist[i] === Infinity) {
-                console.log(`Node id ${i} is Unreachable`)
-            } else {
-                console.log(`Node id ${i}, prev : ${previous[i]}, cost : ${dist[i]}`)
-            }
-        }
+        this.printPath(previous, dist, count, source)
     }
 
     primsMST(gph) {
@@ -199,39 +194,69 @@ class Graph {
 
         let source = 0;
         dist[source] = 0
-        previous[source] = -1
+        previous[source] = source
 
         const queue = new PriorityQueue(GraphEdgeComparator);
         let node = new GraphEdge(source, 0);
         queue.add(node)
+        let curr;
 
         while (queue.isEmpty() === false) {
             node = queue.remove();
-            source = node.dest;
-            visited[source] = true;
+            curr = node.dest;
+            visited[curr] = true;
 
             for (let dest = 0; dest < count; dest++) {
-                const cost = this.adj[source][dest];
+                const cost = this.adj[curr][dest];
                 if (cost !== 0) {
                     const alt = cost;
                     if (dist[dest] > alt && visited[dest] === false) {
                         dist[dest] = alt;
-                        previous[dest] = source;
+                        previous[dest] = curr;
                         node = new GraphEdge(dest, alt);
                         queue.add(node);
                     }
                 }
             }
         }
+        let total = 0;
+        let output = "Edges are " ;
         for (let i = 0; i < count; i++) {
             if (dist[i] === Infinity) {
-                console.info(`Node id ${i},  prev : ${previous[i]}, cost : Unreachable`);
-            }
-            else {
-                console.info(`Node id ${i},  prev : ${previous[i]}, cost : ${dist[i]}`);
+                output += `( ${i},  Unreachable)`
+            } else if (previous[i] != i) {
+                output += `(${previous[i]}, ${i}, ${dist[i]})`
+                total += dist[i];
             }
         }
-    }
+        console.log(output);
+        console.log(`Total MST cost : ${total}`)    }
+
+	printPathUtil(previous, source, dest) {
+		var path = "";
+		if (dest == source)
+			path += source;
+		else {
+			path += this.printPathUtil(previous, source, previous[dest]);
+			path += ("->" + dest);
+		}
+		return path;
+	}
+
+	printPath(previous, dist, count, source) {
+		var output = "Shortest Paths: ";
+		for (var i = 0; i < count; i++) {
+			if (dist[i] == 99999)
+				output += ("(" + source + "->" + i + " @ Unreachable) ");
+			else if (i != previous[i]) {
+				output += "(";
+				output += this.printPathUtil(previous, source, i);
+				output += (" @ " + dist[i] + ") ");
+			}
+		}
+		console.log(output);
+	}
+
 
     hamiltonianPathUtil(path, pSize, added) {
         if (pSize === this.count)
@@ -304,6 +329,7 @@ class Graph {
     }
 }
 
+/* Testing Code */
 function test1(){
     const graph = new Graph(4);
     graph.addUndirectedEdge(0, 1, 1);
@@ -313,8 +339,7 @@ function test1(){
     graph.print2();
 }
 
-//test1()
-
+/* Testing Code */
 function test2(){
     const gph = new Graph(9);
     gph.addUndirectedEdge(0, 1, 4);
@@ -338,8 +363,7 @@ function test2(){
 //    gph.dijkstra(0);
 }
 
-//test2()
-
+/* Testing Code */
 function test3(){
     const gph = new Graph(9);
     gph.addUndirectedEdge(0, 1, 4)
@@ -360,8 +384,7 @@ function test3(){
     gph.dijkstra(1);
 }
 
-//test3()
-
+/* Testing Code */
 function test4(){
     const count = 5;
     const graph = new Graph(count);
@@ -398,8 +421,7 @@ function test4(){
     console.info(`hamiltonianPath :  ${graph2.hamiltonianPath()}`);
 }
 
-test4()
-
+/* Testing Code */
 function test5(){
     const count = 5;
     const graph = new Graph(count);
@@ -436,4 +458,8 @@ function test5(){
     console.info(`hamiltonianCycle :  ${graph2.hamiltonianCycle()}`);
 }
 
+test1()
+test2()
+test3()
+test4()
 test5()

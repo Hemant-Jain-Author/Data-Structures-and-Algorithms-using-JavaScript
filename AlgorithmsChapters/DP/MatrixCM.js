@@ -75,12 +75,57 @@ function MatrixChainMulBU(p, n)
 	return dp[1][n - 1];
 }
 
+function MatrixChainMulBU2(p, n)
+{
+	const dp = Array(n).fill(0).map(() => new Array(n).fill(Number.MAX_VALUE));
+	const pos = Array(n).fill(0).map(() => new Array(n));
+	for (let i = 1; i < n; i++)
+	{
+		dp[i][i] = 0;
+		pos[i][i] = i;
+	}
+	for (let l = 1; l < n; l++)
+	{
+		// l is length of range.
+		for (let i = 1, j = i + l; j < n; i++, j++)
+		{
+			for (let k = i; k < j; k++)
+			{
+				dp[i][j] = Math.min(dp[i][j], dp[i][k] + p[i - 1] * p[k] * p[j] + dp[k + 1][j]);
+				pos[i][j] = k;
+			}
+		}
+	}
+	PrintOptimalParenthesis(n, pos);
+	return dp[1][n - 1];
+}
+
+function PrintOptPar(n, pos, i, j) {
+	var output = "";
+	if (i === j)
+		output +=  "M" + pos[i][i] + " ";
+	else {
+		output +=  "( ";
+		output +=  PrintOptPar(n, pos, i, pos[i][j]);
+		output +=  PrintOptPar(n, pos, pos[i][j] + 1, j);
+		output +=  ") ";
+	}
+	return output;
+};
+
+function PrintOptimalParenthesis(n, pos) {
+	console.info("OptimalParenthesis : " + PrintOptPar(n, pos, 1, n - 1));
+};
+
+
 /* Testing Code */
 const arr = [1, 2, 3, 4];
 const n = arr.length;
 console.log("Matrix Chain Multiplication is:" + MatrixChainMulBruteForce(arr, n));
 console.log("Matrix Chain Multiplication is:" + MatrixChainMulTD(arr, n));
 console.log("Matrix Chain Multiplication is:" + MatrixChainMulBU(arr, n));
+console.log("Matrix Chain Multiplication is:" + MatrixChainMulBU2(arr, n));
+
 
 /*
 Matrix Chain Multiplication is:18

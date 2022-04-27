@@ -21,6 +21,7 @@ function matchExp(exp, str) {
     return matchExpUtil(exp, str, 0, 0);
 }
 
+// Testing code.
 function test1() {
     console.log(matchExp("hello*", "helloworld"));
     console.log(matchExp("hello?d", "hellowd"));
@@ -52,6 +53,7 @@ function match(source, pattern) {
     return false;
 }
 
+// Testing code.
 function test2() {
     console.log(match("hellofskdlfjsdlfjsldjflksdworld", "helloworld"));
     console.log(match("hellod", "hellowd"));
@@ -77,6 +79,7 @@ function isPrime(n) {
     return answer;
 }
 
+// Testing code.
 function test3() {
     process.stdout.write("Prime numbers under 100 :: ");
     for (let i = 0; i < 100; i++) {
@@ -117,6 +120,7 @@ function isUniqueChar(str) {
     return true;
 }
 
+// Testing code.
 function test5() {
     isUniqueChar("aple");
     isUniqueChar("apple");
@@ -155,6 +159,7 @@ function LowerUpper(s) {
     return s;
 }
 
+// Testing code.
 function test6() {
     console.info(ToLower('A'));
     console.info(ToUpper('a'));
@@ -191,6 +196,7 @@ function isPermutation(s1, s2) {
     return true;
 }
 
+// Testing code.
 function test7() {
     console.info("isPermutation :", isPermutation("apple", "plepa"));
     console.info("isPermutation :", isPermutation("appleb", "plepaa"));
@@ -220,6 +226,7 @@ function isPalindrome(str) {
     }
 }
 
+// Testing code.
 function test8() {
     isPalindrome("hello");
     isPalindrome("eoloe");
@@ -246,6 +253,7 @@ function pow(x, n) {
     }
 }
 
+// Testing code.
 function test9() {
     console.info(pow(5, 2));
 }
@@ -279,6 +287,7 @@ function myStrcmp(a, b) {
     }
 }
 
+// Testing code.
 function test10() {
     console.info("StrCmp returns :", myStrcmp("aba", "aas"));
 }
@@ -340,6 +349,7 @@ function reverseWords(str) {
     return a.join("");
 }
 
+// Testing code.
 function test11() {
     console.info(reverseString("apple"));
     console.info(reverseWords("hello world"));
@@ -376,6 +386,7 @@ function printAnagramUtil(arr, i, size) {
     }
 }
     
+// Testing code.
 function test12() {
     printAnagram("123");
 }
@@ -415,6 +426,7 @@ function shuffle(str) {
     return ar.join("")
 }
 
+// Testing code.
 function test13() {
     console.log(shuffle("ABCDE12345"));
 }
@@ -454,6 +466,7 @@ function addBinary(first, second) {
     return total.join("");
 }
 
+// Testing code.
 function test14() {
     console.info(addBinary("1000", "11111111"));
 }

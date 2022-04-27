@@ -100,6 +100,7 @@ function closestPairDC(arr)
 	return closestPairUtil(p, 0, n - 1, q, n);
 }
 
+// Testing code.
 const arr = [
 	[648, 896],
 	[269, 879],

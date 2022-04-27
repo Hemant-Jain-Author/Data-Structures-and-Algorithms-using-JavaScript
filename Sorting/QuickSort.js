@@ -27,7 +27,6 @@ function quickSort(arr) {
 }
 
 less = (value1, value2) => value1 < value2;
-
 more = (value1, value2) => value1 > value2;
 
 swap = (arr, first, second) => {
@@ -36,6 +35,7 @@ swap = (arr, first, second) => {
     arr[second] = temp;
 }
 
+// Testing code.
 const array = [3, 4, 2, 1, 6, 5, 7, 8, 1, 1];
 quickSort(array);
 console.log(array);

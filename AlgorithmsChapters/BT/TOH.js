@@ -14,6 +14,7 @@ function toh(num)
 	tohUtil(num, 'A', 'C', 'B');
 }
 
+// Testing code.
 toh(3);
 
 /*

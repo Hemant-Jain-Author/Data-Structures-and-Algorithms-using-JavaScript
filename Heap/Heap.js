@@ -94,6 +94,7 @@ function HeapSort(array, cmp) {
     }
 }
 
+// Testing code.
 function test1() {
     const hp1 = new Heap() // default is minheap.
     hp1.add(1)
@@ -137,6 +138,7 @@ function test1() {
 */
 
 
+// Testing code.
 function test2() {
     const a = [1, 2, 4, 5, 3];
     const hp = new Heap(a); // Min Heap
@@ -157,6 +159,7 @@ test2()
 5
 */
 
+// Testing code.
 function test3() {
     const a = [1, 2, 4, 5, 3];
     const hp = new Heap(a, less); // Max Heap
@@ -176,6 +179,7 @@ function test3() {
 */
 
 
+// Testing code.
 function test4() {
     const b = [6, 5, 3, 4, 1, 2];
     HeapSort(b, less); // Increasing Order
@@ -244,6 +248,7 @@ function KthSmallest3(arr, size, k) {
     return arr[k-1];
 }
 
+// Testing code.
 function test5() {
     const arr = [8, 7, 6, 5, 7, 5, 2, 1];
     console.info(`Kth Smallest :: ${KthSmallest(arr, arr.length, 3)}`);
@@ -293,6 +298,7 @@ function isMaxHeap(arr) {
 }
 
 
+// Testing code.
 function test6() {
     const arr3 = [8, 7, 6, 5, 7, 5, 2, 1];
     console.info(`isMaxHeap :: ${isMaxHeap(arr3, arr3.length)}`);
@@ -337,6 +343,7 @@ function KSmallestProduct2(arr, size, k) {
     return product;
 }
 
+// Testing code.
 function test7() {
     const arr = [8, 7, 6, 5, 7, 5, 2, 1];
     console.info(`Kth Smallest product:: ${KSmallestProduct(arr, 8, 4)}`);
@@ -381,6 +388,7 @@ function PrintLargerHalf3(arr, size) {
     console.info();
 }
 
+// Testing code.
 function test8() {
     const arr = [8, 7, 6, 4, 7, 5, 2, 1];
     PrintLargerHalf(arr, 8);
@@ -420,6 +428,7 @@ function sortK(arr, size, k) {
     console.info(arr);
 }
 
+// Testing code.
 function test9() {
     const k = 3;
     const arr = [1, 5, 4, 10, 50, 9];
@@ -472,6 +481,7 @@ function ChotaBhim2(cups, size){
     return total;
 }
 
+// Testing code.
 function test10(){
     const cups = [2, 1, 7, 4, 2];
     ChotaBhim(cups, cups.length);
@@ -523,6 +533,7 @@ function JoinRopes2(ropes, size) {
     return total;
 }
 
+// Testing code.
 function test11(){
     const ropes = [2, 1, 7, 4, 2];
     JoinRopes(ropes, ropes.length);
@@ -571,6 +582,7 @@ class MedianHeap {
     }
 }
 
+// Testing code.
 function test12(){
     const arr = [1, 9, 2, 8, 3, 7];
     const hp = new MedianHeap();

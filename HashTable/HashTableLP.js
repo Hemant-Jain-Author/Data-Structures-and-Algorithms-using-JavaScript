@@ -125,14 +125,17 @@ class HashTable {
     }
 
     print() {
+        let output = "Hash Table contains ::";
         for (let i = 0; i < this.tableSize; i++) {
             if (this.FlagArr[i] === FILLED_VALUE) {
-                console.log(`Node at index [${i} ] :: ${this.DataArr[i]}`);
+                output += "(" + this.KeyArr[i] + "=>" + this.DataArr[i] + ") ";
             }
         }
+        console.log(output);
     }
 }
 
+// Testing code.
 const ht = new HashTable(1000);
 ht.add(1, 10);
 ht.add(2, 20);

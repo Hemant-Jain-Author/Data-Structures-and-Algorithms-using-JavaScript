@@ -19,6 +19,7 @@ function minCoins(coins, n, val) // Greedy may be wrong.
 	}
 	return (val == 0) ? count : -1;
 }
+
 function minCoins2(coins, n, val) // Brute force.
 {
 	if (val == 0)
@@ -39,19 +40,19 @@ function minCoins2(coins, n, val) // Brute force.
 
 function minCoinsTD(coins, n, val) // DP top down approach.
 {
-	const dp = new Array(val + 1);
-	dp.fill(Number.MAX_VALUE);
-	return minCoinsTDUtil(dp, coins, n, val);
+	const count = new Array(val + 1);
+	count.fill(Number.MAX_VALUE);
+	return minCoinsTDUtil(count, coins, n, val);
 }
 
-function minCoinsTDUtil(dp, coins, n, val)
+function minCoinsTDUtil(count, coins, n, val)
 {
 	// Base Case
 	if (val == 0)
 		return 0;
 
-	if (dp[val] != Number.MAX_VALUE)
-		return dp[val];
+	if (count[val] != Number.MAX_VALUE)
+		return count[val];
 
 	// Recursion
 	for (let i = 0; i < n; i++)
@@ -59,41 +60,84 @@ function minCoinsTDUtil(dp, coins, n, val)
 		if (coins[i] <= val)
 		{
 			// check validity of a sub-problem
-			let subCount = minCoinsTDUtil(dp, coins, n, val - coins[i]);
+			let subCount = minCoinsTDUtil(count, coins, n, val - coins[i]);
 			if (subCount != Number.MAX_VALUE)
-				dp[val] = Math.min(dp[val], subCount + 1);
+				count[val] = Math.min(count[val], subCount + 1);
 		}
 	}
-	return dp[val];
+	return count[val];
 }
 
-function minCoinsBU(coins, n, val) // DP bottom up approach.
+function minCoinsBU(coins, n, val) // count bottom up approach.
 {
-	const dp = new Array(val + 1);
-	dp.fill(Number.MAX_VALUE);
-	dp[0] = 0;
-	// Base value.
+	const count = new Array(val + 1);
+	count.fill(Number.MAX_VALUE);
+	count[0] = 0; // Base value.
 	for (let i = 1; i <= val; i++)
 	{
 		for (let j = 0; j < n; j++)
 		{
-			if (coins[j] <= i) // For all coins smaller than or equal to i.
+			if (coins[j] <= i && count[i - coins[j]] !== Number.MAX_VALUE && count[i] > count[i - coins[j]] + 1) 			
 			{
-				if (dp[i - coins[j]] != Number.MAX_VALUE)
-					dp[i] = Math.min(dp[i], dp[i - coins[j]] + 1);
+				count[i] = count[i - coins[j]] + 1;
 			}
 		}
 	}
-	return (dp[val] != Number.MAX_VALUE) ? dp[val] : -1;
+
+	if (count[val] == Number.MAX_VALUE)
+		return -1;
+	
+	return count[val];
+}
+
+function minCoinsBU2(coins, n, val) // DP bottom up approach.
+{
+	const count = new Array(val + 1);
+	count.fill(Number.MAX_VALUE);
+	const cvalue = new Array(val + 1);
+	cvalue.fill(Number.MAX_VALUE);
+	
+	count[0] = 0; // Base value.
+	for (let i = 1; i <= val; i++)
+	{
+		for (let j = 0; j < n; j++)
+		{
+			if (coins[j] <= i && count[i - coins[j]] !== Number.MAX_VALUE && count[i] > count[i - coins[j]] + 1) 			
+			{
+				count[i] = count[i - coins[j]] + 1;
+				cvalue[i] = coins[j];
+			}
+		}
+	}
+
+	if (count[val] == Number.MAX_VALUE)
+		return -1;
+	
+	printCoins(cvalue, val);
+	return count[val];
+}
+
+function printCoinsUtil(cvalue, val) {
+	if (val > 0) {
+		var ret = printCoinsUtil(cvalue, val - cvalue[val]);
+		return ret + cvalue[val] + " ";
+	}
+	return "";
+}
+
+function printCoins(cvalue, val) {
+	var ret = printCoinsUtil(cvalue, val);
+	console.info("Coins are : " + ret);
 }
 
 /* Testing Code */
-const coins = [1, 5, 6, 9, 12];
-const value = 15;
+const coins = [5, 6];
+const value = 16;
 const n = coins.length;
 console.log("Count is : " + minCoins(coins, n, value));
 console.log("Count is : " + minCoins2(coins, n, value));
 console.log("Count is : " + minCoinsBU(coins, n, value));
+console.log("Count is : " + minCoinsBU2(coins, n, value));
 console.log("Count is : " + minCoinsTD(coins, n, value));
 
 /*
@@ -102,3 +146,4 @@ Count is : 2
 Count is : 2
 Count is : 2
 */
+

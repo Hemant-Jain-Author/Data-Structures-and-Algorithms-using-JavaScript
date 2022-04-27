@@ -99,6 +99,7 @@ class rangeMaxST
 	}
 }
 
+// Testing code.
 let arr = [1, 8, 2, 7, 3, 6, 4, 5];
 let tree = new rangeMaxST(arr);
 console.log("Max value in the range(1, 5): " + tree.getMax(1, 5));

@@ -86,6 +86,7 @@ function countBits(a)
     return count;
 }
 
+// Testing code.
 let a = 4;
 let b = 8;
 console.log(andEx(a, b));

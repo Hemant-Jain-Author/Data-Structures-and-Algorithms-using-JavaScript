@@ -35,6 +35,7 @@ class Stack {
     }
 }
 
+// Testing code.
 const s = new Stack();
 s.push(1);
 s.push(2);

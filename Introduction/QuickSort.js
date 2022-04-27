@@ -40,6 +40,7 @@ class QuickSort {
     }
 }
 
+// Testing code.
 const array = [3, 4, 2, 1, 6, 5, 7, 8, 1, 10];
 const m = new QuickSort(array);
 m.sort();

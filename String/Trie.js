@@ -73,6 +73,7 @@ class Trie {
     }
 }
 
+// Testing code.
 const tt = new Trie();
 tt.insert("banana");
 tt.insert("apple");

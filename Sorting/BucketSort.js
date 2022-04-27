@@ -53,6 +53,7 @@ function bucketSortUtil(arr, maxValue, numBucket)
 	}
 }
 
+// Testing code.
 let array = [1, 34, 7, 99, 5, 23, 45, 88, 77, 19, 91, 100];
 let maxValue = 100;
 bucketSort(array, maxValue);

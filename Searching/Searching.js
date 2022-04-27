@@ -105,6 +105,7 @@ function fibonacciSearch(arr, value)
 }
 
 
+// Testing code.
 function test1() {
     const first = [1, 3, 5, 7, 6, 4, 2];
     console.log(linearSearchUnsorted(first, 7));
@@ -172,6 +173,7 @@ function firstRepeated2(arr)
 	return 0;
 }
 
+// Testing code.
 function test2() {
     first = [1, 3, 5, 3, 9, 1, 30]
     console.log(`firstRepeated :: ${firstRepeated(first)}`);
@@ -241,6 +243,7 @@ function printRepeating4(arr, range) {
     console.log(output)
 }
 
+// Testing code.
 function test3() {
     const first = [1, 3, 5, 3, 9, 1, 30];
     printRepeating(first);
@@ -291,6 +294,7 @@ function removeDuplicates2(arr)
 	return arr.slice(0, j);
 }
 
+// Testing code.
 function test4() {
     first = [1, 3, 5, 3, 9, 1, 30]
     console.log(removeDuplicates(first));
@@ -437,6 +441,7 @@ function findMissingNumber8(arr, upperRange) {
     return -1;
 }
 
+// Testing code.
 function test5() {
 	let first = [1, 5, 4, 3, 2, 7, 8, 9];
 	
@@ -540,6 +545,7 @@ function missingValues3(arr, size)
 	}
 }
 
+// Testing code.
 function test6()
 {
 	let arr = [11, 14, 13, 17, 21, 18, 19, 23, 24];
@@ -621,6 +627,7 @@ function oddNumbers(arr, size) {
     console.info(first, second);
 }
 
+// Testing code.
 function test7()
 {
 	let arr = [10, 25, 30, 10, 15, 25, 15];
@@ -657,6 +664,7 @@ function sumDistinct(arr, size) {
     console.info(sum);
 }
 
+// Testing code.
 function test8() {
 	let arr = [1, 2, 3, 1, 1, 4, 5, 6];
 	let size = arr.length;
@@ -717,6 +725,7 @@ function minAbsSumPair2(arr) {
     console.log(`Elements with minimum sum are : ${arr[minFirst]} , ${arr[minSecond]}`);
 }
 
+// Testing code.
 function test9() {
     const first = [1, 5, -10, 3, 2, -6, 8, 9, 6];
     minAbsSumPair(first);
@@ -794,6 +803,7 @@ function findPair4(arr, range, value)
 	return false;
 }
 
+// Testing code.
 function test10() {
     const first = [ 1, 5, 4, 3, 2, 7, 8, 9, 6];
     console.log(findPair(first, 8));
@@ -907,6 +917,7 @@ function findPairTwoLists5(arr1, size1, arr2, size2, range, value)
 	return false;
 }
 
+// Testing code.
 function test11()
 {
 	let first = [1, 5, 4, 3, 2, 7, 8, 9, 6];
@@ -964,6 +975,7 @@ function findDifference2(arr, value) {
     return false;
 }
 
+// Testing code.
 function test12() {
     const first = [1, 5, 4, 3, 2, 7, 8, 9, 6];
     console.info(findDifference(first, 6));
@@ -1006,6 +1018,7 @@ function findMinDiff2(arr) {
     return diff;
 }
 
+// Testing code.
 function test13()
 {
 	let second = [1, 6, 4, 19, 17, 20];
@@ -1073,6 +1086,7 @@ function minDiffPair2(arr1, size1, arr2, size2)
 	return minDiff;
 }
 
+// Testing code.
 function test14()
 {
 	let first = [1, 5, 4, 3, 2, 7, 8, 9, 6];
@@ -1135,6 +1149,7 @@ function closestPair2(arr, size, value) {
     console.info(`closest pair is :: ${first}, ${second}`);
 }
 
+// Testing code.
 function test15()
 {
 	let first = [10, 20, 3, 4, 50, 80];
@@ -1173,6 +1188,7 @@ function sumPairRestArray(arr, size) {
     return false;
 }
 
+// Testing code.
 function test16() {
     const first = [1, 2, 4, 3, 7, 3];
     sumPairRestArray(first, first.length);
@@ -1216,6 +1232,7 @@ function zeroSumTriplets2(arr, size) {
     }
 }
 
+// Testing code.
 function test17() {
     const first = [1, 2, -4, 3, 7, -3];
     zeroSumTriplets(first, first.length);
@@ -1267,6 +1284,7 @@ function findTriplet2(arr, size, value) {
     }
 }
 
+// Testing code.
 function test18() {
     const first = [1, 2, -4, 3, 7, -3];
     findTriplet(first, first.length, 6);
@@ -1321,6 +1339,7 @@ function abcTriplet2(arr, size) {
     }
 }
 
+// Testing code.
 function test19() {
     let first = [1, 5, 15, 6, 9, 8];
 	abcTriplet(first, first.length);
@@ -1376,6 +1395,7 @@ function smallerThenTripletCount2(arr, size, value) {
     console.info(count);
 }
 
+// Testing code.
 function test20() {
 	let first = [-2, -1, 0, 1];
 	smallerThenTripletCount(first, first.length, 2);
@@ -1425,6 +1445,7 @@ function GPTriplets(arr, size) {
     }
 }
 
+// Testing code.
 function test21() {
     const first = [1, 2, 3, 4, 9, 17];
     APTriplets(first, first.length);
@@ -1471,6 +1492,7 @@ function numberOfTriangles2(arr, size) {
     return count;
 }
 
+// Testing code.
 function test22() {
     const first = [1, 2, 5, 4, 3, 6];
     console.log(numberOfTriangles(first, first.length));
@@ -1543,6 +1565,7 @@ function getMax3(arr, range) {
     return max;
 }
 
+// Testing code.
 function test23() {
     const first = [1, 3, 5, 3, 1, 2, 4, 2, 2];
     console.log(getMax(first));
@@ -1657,6 +1680,7 @@ function isMajority2(arr, size) {
         return false;
 }
 
+// Testing code.
 function test24() {
     const first = [1, 3, 5, 3, 1, 2, 4, 2, 2, 2, 2, 2, 2];
     console.log(getMajority(first));
@@ -1691,6 +1715,7 @@ function getMedian2(arr)
     return arr[k-1];
 }
 
+// Testing code.
 function test25() {
     const first = [10, 10, 5, 7, 9, 11, 12, 8, 5, 3, 10];
     console.log(`median value is :: ${getMedian(first)}`);
@@ -1741,6 +1766,7 @@ function searchBitonicArrayMax2(arr) {
 }
 
 
+// Testing code.
 function test26() {
     const first = [1, 3, 5, 7, 9, 11, 12, 8, 5, 3, 1];
     console.log(searchBitonicArrayMax(first));
@@ -1808,6 +1834,7 @@ function findMaxBitonicArray(arr) {
     return -1;
 }
 
+// Testing code.
 function test27() {
     const first = [1, 3, 5, 7, 9, 11, 12, 8, 5, 3, 1];
     console.log(searchBitonicArray(first, 8));
@@ -1874,6 +1901,7 @@ function findLastIndex(arr, start, end, key) {
     }
 }
 
+// Testing code.
 function test28() {
     const first = [1, 3, 5, 6, 6, 6, 6, 7, 9];
     console.info(findKeyCount(first, 6));
@@ -1945,6 +1973,7 @@ function maxProfit2(stocks) {
     console.log(`Sell day is ${sell} at price ${stocks[sell]}`);
 }
 
+// Testing code.
 function test29() {
     const first = [10, 10, 5, 7, 9, 11, 12, 8, 5, 3, 10];
     maxProfit(first);
@@ -1984,6 +2013,7 @@ function findMedian(arrFirst, arrSecond) {
     }
 }
 
+// Testing code.
 function test30() {
     const first = [10, 10, 5, 7, 9, 11];
     const second = [12, 8, 5, 3, 10];
@@ -2038,6 +2068,7 @@ function binarySearch01Util(arr, start, end) {
     }
 }
 
+// Testing code.
 function test31() {
     const first = "00000000111";
     console.log("search01 index is :: " + search01(first, first.length));
@@ -2156,6 +2187,7 @@ function CountRotation(arr, size) {
     return (maxIndex + 1) % size;
 }
 
+// Testing code.
 function test32() {
     first = [8, 9, 10, 11, 3, 5, 7]
     console.log(`binarySearchRotateArray index is :: ${binarySearchRotateArray(first, 7)}`);
@@ -2184,6 +2216,7 @@ function minAbsDiffAdjCircular(arr, size) {
     return diff;
 }
 
+// Testing code.
 function test33() {
     const arr = [5, 29, 18, 51, 11];
     console.info(minAbsDiffAdjCircular(arr, arr.length));
@@ -2211,6 +2244,7 @@ function transformArrayAB(str) {
     return arr.join("");
 }
 
+// Testing code.
 function test34() {
     first = "aaaabbbb"
     console.log(transformArrayAB(first));
@@ -2288,6 +2322,7 @@ function checkPermutation3(array1, array2)
 	return true;
 }
 
+// Testing code.
 function test35() {
     const first = [1, 2, 3, 1, 2, 3, 5, 6, 7, 7, 8, 9, 3, 4, 5];
     const second = [1, 2, 4, 5, 3, 1, 2, 3, 5, 6, 7, 7, 8, 9, 3];
@@ -2322,6 +2357,7 @@ function findElementIn2DArray(arr, r, c, value) {
     return false;
 }
 
+// Testing code.
 function test36() {
     const f = new Array(10);
     let count = 0;
@@ -2411,6 +2447,7 @@ function isAP3(arr, size) {
     return true;
 }
 
+// Testing code.
 function test37() {
     const first = [3, 6, 9, 12, 15];
     const size = first.length;
@@ -2445,6 +2482,7 @@ function findBalancedPoint(arr, size) {
     return -1;
 }
 
+// Testing code.
 function test38() {
     const arr = [-7, 1, 5, 2, -4, 3, 0];
     console.info("BalancedPoint : " , findBalancedPoint(arr, arr.length));
@@ -2488,6 +2526,7 @@ function findCeil(arr, size, value) {
     return Number.MAX_VALUE;
 }
 
+// Testing code.
 function test39()
 {
 	let arr = [2, 4, 8, 16];
@@ -2524,6 +2563,7 @@ function closestNumber(arr, size, num) {
     return output;
 }
 
+// Testing code.
 function test40() {
     const arr = [-7, 1, 2, 3, 6, 8, 10];
     console.info("findFloor : " , findFloor(arr, arr.length, 4));        
@@ -2552,6 +2592,7 @@ function duplicateKDistance(arr, size, k) {
     return false;
 }
 
+// Testing code.
 function test41() {
     const arr = [2, 3, 1, 4, 2, 1];
     duplicateKDistance(arr, arr.length, 3);
@@ -2642,6 +2683,7 @@ function frequencyCounts4(arr, size)
 	console.log();
 }
 
+// Testing code.
 function test42()
 {
 	let arr = [1, 2, 2, 2, 1];
@@ -2709,6 +2751,7 @@ function KLargestElements2(arr, size, k) {
     console.log(output);
 }
 
+// Testing code.
 function test43() {
     let arr = [1, 3, 4, 2, 2, 1, 5, 9, 3];
     KLargestElements(arr, arr.length, 4);
@@ -2747,6 +2790,7 @@ function fixPoint2(arr, size) {
     return -1;
 }
 
+// Testing code.
 function test44() {
     const arr = [-1, 0, 2, 3, 6, 7, 9, 10, 18];
     console.log(fixPoint(arr, arr.length));
@@ -2782,6 +2826,7 @@ function subArraySums(arr, size, value) {
     return false;
 }
 
+// Testing code.
 function test45() {
     const arr = [1, 3, 4, 4, 6, 7, 7, 8, 8];
     console.log(subArraySums(arr, arr.length, 17));
@@ -2807,6 +2852,7 @@ function maxConSub(arr, size) {
     return maximum;
 }
 
+// Testing code.
 function test46() {
     const arr = [1, -2, 3, 4, -4, 6, -4, 8, 2];
     console.log(maxConSub(arr, arr.length));
@@ -2876,6 +2922,7 @@ function maxConSubArr2(A, sizeA, B, sizeB) {
     return maximum;
 }
 
+// Testing code.
 function test47() {
     const arr = [1, 2, 3, 4, 4, 6, 4, 8, 2];
     const arr2 = [2,4, 8, 18, 10];
@@ -2943,6 +2990,7 @@ function rainWater2(arr, size) {
     return water;
 }
 
+// Testing code.
 function test48() {
     const arr = [4, 0, 1, 5];
     rainWater(arr, arr.length);
@@ -2975,6 +3023,7 @@ function separateEvenAndOdd(arr) {
     }
 }
 
+// Testing code.
 function test49() {
     const first = [1, 0, 5, 7, 9, 11, 12, 8, 5, 3, 1];
     separateEvenAndOdd(first);

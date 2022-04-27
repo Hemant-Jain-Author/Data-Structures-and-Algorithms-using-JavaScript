@@ -26,3 +26,12 @@ for (let i = 1; i <= 6; i++)
 {
 	console.log(findWays(i, 6, 6));
 }
+
+/*
+1
+5
+10
+10
+5
+1
+*/

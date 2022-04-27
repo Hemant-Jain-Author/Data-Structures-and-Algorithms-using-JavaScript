@@ -25,6 +25,7 @@ function shellSort(arr)
 	}
 }
 
+// Testing code.
 let array = [36, 32, 11, 6, 19, 31, 17, 3];
 shellSort(array);
 console.log(array);

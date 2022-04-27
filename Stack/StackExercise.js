@@ -40,6 +40,7 @@ function function1() {
     function2();
     console.log("fun1 line 2");
 }
+// Testing code.
 function test1() {
     console.log("test line 1");
     function1();
@@ -67,6 +68,7 @@ function sortedInsert(stk, element) {
     }
 }
 
+// Testing code.
 function test2() {
     const stk = ([]);
     stk.push(1);
@@ -107,6 +109,7 @@ function sortStack2(stk) {
     }
 }
 
+// Testing code.
 function test3() {
     const stk = ([]);
     stk.push(1);
@@ -133,6 +136,7 @@ function bottomInsert(stk, element) {
     }
 }
 
+// Testing code.
 function test4() {
     const stk = ([]);
     stk.push(1);
@@ -184,6 +188,7 @@ function reverseStack3(stk) {
     }
 }
 
+// Testing code.
 function test5() {
     const stk = ([]);
     stk.push(1);
@@ -212,6 +217,7 @@ function reverseKElementInStack(stk, k) {
     }
 }
 
+// Testing code.
 function test6() {
     const stk = ([]);
     stk.push(1);
@@ -238,6 +244,7 @@ function reverseQueue(que) {
     }
 }
 
+// Testing code.
 function test7() {
     const que = new Deque()
     que.add(1);
@@ -274,6 +281,7 @@ function reverseKElementInQueue(que, k) {
     }
 }
 
+// Testing code.
 function test8() {
     const que = new Deque()
     que.add(1);
@@ -323,6 +331,7 @@ function isBalancedParenthesis(expn) {
 }
 
 
+// Testing code.
 function test9() {
     const expn = "{()}[]";
     const value = isBalancedParenthesis(expn);
@@ -375,6 +384,7 @@ function maxDepthParenthesis2(expn, size) {
     return maxDepth;
 }
 
+// Testing code.
 function test10() {
     const expn = "((((A)))((((BBB()))))()()()())";
     const size = expn.length;
@@ -410,6 +420,7 @@ function longestContBalParen(string, size) {
     return length;
 }
 
+// Testing code.
 function test11() {
     const expn = "())((()))(())()(()";
     const size = expn.length;
@@ -452,6 +463,7 @@ function reverseParenthesis(expn, size) {
     return reversal;
 }
 
+// Testing code.
 function test12() {
     const expn  = ")(())(((";
     const size = expn.length;
@@ -484,6 +496,7 @@ function findDuplicateParenthesis(expn, size) {
     return false;
 }
 
+// Testing code.
 function test13() {
     const expn = "(((a+b))+c)";
     const size = expn.length;
@@ -513,6 +526,7 @@ function printParenthesisNumber(expn, size) {
     console.info("Parenthesis Count : ", output);
 }
 
+// Testing code.
 function test14() {
     const expn1 = "(((a+(b))+(c+d)))";
     const expn2 = "(((a+b))+c)(((";
@@ -592,6 +606,7 @@ function infixToPostfix(expn) {
     return output;
 }
 
+// Testing code.
 function test15() {
     const expn = "10+((3))*5/(16-4)";
     const value = infixToPostfix(expn);
@@ -643,6 +658,7 @@ function replaceParenthesis(expn) {
     return retval;
 }
 
+// Testing code.
 function test16() {
     const expn = "10+((3))*5/(16-4)";
     const value = infixToPrefix(expn);
@@ -689,6 +705,7 @@ function postfixEvaluate(expn) {
     return stk.pop();
 }
 
+// Testing code.
 function test17() {
     expn = "6 5 2 3 + 8 * + 3 + *";
     value = postfixEvaluate(expn);
@@ -731,6 +748,7 @@ function StockSpanRange2(arr) {
     return SR;
 }
 
+// Testing code.
 function test18() {
     let arr = [6, 5, 4, 3, 2, 4, 5, 7, 9];
     let value = StockSpanRange(arr);
@@ -792,6 +810,7 @@ function GetMaxArea2(arr) {
     return maxArea;
 }
 
+// Testing code.
 function test19() {
     const arr = [7, 6, 5, 4, 4, 1, 6, 3, 1];
     const size = arr.length;
@@ -870,6 +889,7 @@ function nextSmallerElement(arr, size) {
     console.log(output)
 }
 
+// Testing code.
 function test20() {
     const arr = [13, 21, 3, 6, 20, 3];
     const size = arr.length;
@@ -907,6 +927,7 @@ function nextLargerElementCircular(arr, size) {
     console.log(output)
 }
 
+// Testing code.
 function test21() {
     const arr = [6, 3, 9, 8, 10, 2, 1, 15, 7];
     const size = arr.length;
@@ -959,6 +980,7 @@ function RottenFruit(arr, maxCol, maxRow) {
     return maxDay;
 }
 
+// Testing code.
 function test22() {
     const arr = [[1, 0, 1, 1, 0], 
     [2, 1, 0, 1, 0], 
@@ -1001,6 +1023,7 @@ function StepsOfKnight(size, srcX, srcY, dstX, dstY) {
     return retval;
 }
 
+// Testing code.
 function test23() {
     console.info(StepsOfKnight(20, 10, 10, 20, 20));
 }
@@ -1039,6 +1062,7 @@ function DistNearestFill(arr, maxCol, maxRow) {
     }
 }
 
+// Testing code.
 function test24() {
     const arr = [[1, 0, 1, 1, 0], 
     [1, 1, 0, 1, 0], 
@@ -1086,6 +1110,7 @@ function findLargestIsland(arr, maxCol, maxRow) {
     return maxVal;
 }
 
+// Testing code.
 function test25() {
     const arr = [[1, 0, 1, 1, 0], 
     [1, 0, 0, 1, 0], 
@@ -1151,6 +1176,7 @@ function findCelebrity2(relation, count) {
     return first;
 }
 
+// Testing code.
 function test26() {
     const arr = [[1, 0, 1, 1, 0], 
     [1, 0, 0, 1, 0], 
