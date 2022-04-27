@@ -6,14 +6,11 @@ function min(x, y, z)
 
 function minCost(cost, m, n)
 {
-	if (m == 0 && n == 0)
-		return 0;
+	if (m == 0 || n == 0)
+		return 99999;
 	
-	if (m == 0)
-		return cost[0][n - 1] + minCost(cost, 0, n - 1);
-	
-	if (n == 0)
-		return cost[m - 1][0] + minCost(cost, m - 1, 0);
+	if (m == 1 && n == 1)
+		return cost[0][0];
 	
 	return cost[m - 1][n - 1] + min(minCost(cost, m - 1, n - 1), minCost(cost, m - 1, n), minCost(cost, m, n - 1));
 }
