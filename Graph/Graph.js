@@ -712,7 +712,7 @@ class Graph {
         const queue = new PriorityQueue(GraphEdgeComparator);
         let node = new GraphEdge(source, source, 0);
         queue.add(node)
-
+        
         while (queue.isEmpty() === false) {
             node = queue.remove()
             source = node.dest
@@ -1453,7 +1453,6 @@ function test15(){
     gph.addUndirectedEdge(5, 7, 1)
     gph.addUndirectedEdge(6, 7, 7)
     gph.addUndirectedEdge(7, 8, 17)
-    gph.bellmanFordshortestPath(1)
     console.log(`isConnectedUndirected :: ${gph.isConnectedUndirected()}`)
 }
 
