@@ -1,30 +1,30 @@
 class Deque {
     constructor() {
-        this.data = ([]);
+        this.arr = ([]);
     }
 
     size() {
-        return this.data.length;
+        return this.arr.length;
     }
 
     add(val) {
-        this.data.push(val);
+        this.arr.push(val);
     }
 
     remove() {
-        return this.data.shift();
+        return this.arr.shift();
     }
 
     front() {
-        return this.data[0]
+        return this.arr[0]
     }
 
     back() {
-        return this.data[this.data.length - 1]
+        return this.arr[this.arr.length - 1]
     }
 
     removeLast() {
-        return this.data.pop()
+        return this.arr.pop()
     }
 }
 

@@ -87,16 +87,9 @@ class Heap {
     }
 }
 
-function HeapSort(array, cmp) {
-    const hp = new Heap(array, cmp);
-    for (let i = 0; i < array.length; i++) {
-        array[array.length - i - 1] = hp.remove();
-    }
-}
-
 // Testing code.
 function test1() {
-    const hp1 = new Heap() // default is minheap.
+    let hp1 = new Heap() // default is minheap.
     hp1.add(1)
     hp1.add(4)
     hp1.add(2)
@@ -178,6 +171,13 @@ function test3() {
 1
 */
 
+function HeapSort(array, cmp) {
+    const hp = new Heap(array, cmp);
+    for (let i = 0; i < array.length; i++) {
+        array[array.length - i - 1] = hp.remove();
+    }
+}
+
 
 // Testing code.
 function test4() {
@@ -189,7 +189,7 @@ function test4() {
     console.log(b);
 }
 
-//test4()
+test4()
 /*
 [ 1, 2, 3, 4, 5, 6 ]
 [ 6, 5, 4, 3, 2, 1 ]

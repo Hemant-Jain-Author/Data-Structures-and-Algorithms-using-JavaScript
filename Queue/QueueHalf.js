@@ -1,29 +1,29 @@
 class Queue {
     constructor() {
         this.frontIndex = 0;
-        this.data = [];
+        this.arr = [];
     }
 
     add(value) {
-        this.data.push(value);
+        this.arr.push(value);
     }
 
     remove() {
-        const value = this.data[this.frontIndex];
+        const value = this.arr[this.frontIndex];
         this.frontIndex++;
-        if (this.data.length > 0 && this.frontIndex * 2 >= this.data.length) {
-            this.data = this.data.slice(this.frontIndex);
+        if (this.arr.length > 0 && this.frontIndex * 2 >= this.arr.length) {
+            this.arr = this.arr.slice(this.frontIndex);
             this.frontIndex = 0;
         }
         return value;
     }
 
     isEmpty() {
-        return (this.data.length - this.frontIndex) === 0;
+        return (this.arr.length - this.frontIndex) === 0;
     }
 
     length() {
-        return (this.data.length - this.frontIndex);
+        return (this.arr.length - this.frontIndex);
     }
 }
 

@@ -1,37 +1,37 @@
 class Stack {
     constructor(capacity) {
-        this.data = [];
+        this.arr = [];
     }
     /* other methods */
 
     size() {
-        return this.data.length;
+        return this.arr.length;
     }
 
     isEmpty() {
-        return (this.data.length === 0);
+        return (this.arr.length === 0);
     }
 
     push(value) {
-        this.data.push(value);
+        this.arr.push(value);
     }
 
     top() {
         if (this.isEmpty()) {
             throw new Error("Stack Empty Exception");
         }
-        return this.data[this.data.length-1];
+        return this.arr[this.arr.length-1];
     }
 
     pop() {
         if (this.isEmpty()) {
             throw new Error("Stack Empty Exception");
         }
-        return this.data.pop();
+        return this.arr.pop();
     }
 
     print() {
-            console.log(this.data);
+            console.log(this.arr);
     }
 }
 

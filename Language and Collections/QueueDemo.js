@@ -1,45 +1,3 @@
-class Queue2 {
-    constructor() {
-        this.stk1 = [];
-        this.stk2 = [];
-    }
-
-    add(value) {
-        this.stk1.push(value);
-    }
-
-    remove() {
-        let value;
-        if (this.stk2.length > 0) {
-            return this.stk2.pop();
-        }
-        while (this.stk1.length > 0) {
-            value = this.stk1.pop();
-            this.stk2.push(value);
-        };
-        return this.stk2.pop();
-    }
-
-    front() {
-        let value;
-        if (this.stk2.length < 1) {
-            while (this.stk1.length > 0) {
-                value = this.stk1.pop();
-                this.stk2.push(value);
-            };
-        }
-        return this.stk2[this.stk2.length - 1];
-    }
-
-    isEmpty() {
-        return (this.stk1.length + this.stk2.length) === 0
-    }
-
-    size() {
-        return (this.stk1.length + this.stk2.length)
-    }
-}
-
 class Queue {
     constructor() {
         this.arr = [];
@@ -49,10 +7,8 @@ class Queue {
         this.arr.push(value);
     }
 
-    remove() {
-        let value = this.arr[0];
-        this.arr.shift();
-        return value;
+    remove() {       
+        return this.arr.shift();
     }
 
     front() {
@@ -63,7 +19,7 @@ class Queue {
         return this.arr.length === 0
     }
 
-    size() {
+    length() {
         return this.arr.length
     }
 }
@@ -74,10 +30,13 @@ function main() {
     que.add(2);
     que.add(3);
     console.info(que);
-    console.info(`Queue size : ${que.size()}`);
+    console.info(`Queue size : ${que.length()}`);
+    console.info(`Queue isEmpty : ${que.isEmpty()}`);
     console.info(`Queue front : ${que.front()}`);
     console.info(`Queue remove : ${que.remove()}`);
-    console.info(`Queue size : ${que.size()}`);
+    console.info(`Queue size : ${que.length()}`);
+    console.info(`Queue remove : ${que.remove()}`);
+    console.info(`Queue remove : ${que.remove()}`);
     console.info(`Queue isEmpty : ${que.isEmpty()}`);
 };
 

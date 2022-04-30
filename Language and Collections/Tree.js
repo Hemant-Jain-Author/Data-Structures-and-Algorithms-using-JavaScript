@@ -4,8 +4,8 @@ function Tree() {
 
     function Node(data, left = null, right = null) {
         this.value = data;
-        this.lChild = left;
-        this.rChild = right;
+        this.left = left;
+        this.right = right;
     }
     Tree.Node = Node
 }
@@ -23,10 +23,10 @@ Tree.prototype.insertNodeUtil = function(value, node) {
     }
     else {
         if (node.value > value) {
-            node.lChild = this.insertNodeUtil(value, node.lChild);
+            node.left = this.insertNodeUtil(value, node.left);
         }
         else {
-            node.rChild = this.insertNodeUtil(value, node.rChild);
+            node.right = this.insertNodeUtil(value, node.right);
         }
     }
     return node;
@@ -39,8 +39,8 @@ Tree.prototype.printPreOrder = function() {
 Tree.prototype.printPreOrderUtil = function(node) {
     if (node != null) {
         console.log(node.value);
-        this.printPreOrderUtil(node.lChild);
-        this.printPreOrderUtil(node.rChild);
+        this.printPreOrderUtil(node.left);
+        this.printPreOrderUtil(node.right);
     }
 }
 

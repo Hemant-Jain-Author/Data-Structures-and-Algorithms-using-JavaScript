@@ -1,35 +1,27 @@
 
 class Queue {
     constructor() {
-        this.stk1 = [];
-        this.stk2 = [];
+        this.arr = [];
     }
 
     add(value) {
-        this.stk1.push(value);
+        this.arr.push(value);
     }
 
-    remove() {
-        let value;
-        if (this.stk2.length > 0) {
-            return this.stk2.pop();
-        }
-        while (this.stk1.length > 0) {
-            value = this.stk1.pop();
-            this.stk2.push(value);
-        }
-        return this.stk2.pop();
+    remove() {       
+        return this.arr.shift();
+    }
+
+    front() {
+        return this.arr[0];
     }
 
     isEmpty() {
-        if (this.stk2.length === 0 && this.stk1.length === 0) {
-            return true;
-        }
-        return false;
+        return this.arr.length === 0
     }
 
     length() {
-        return this.stk1.length + this.stk2.length;
+        return this.arr.length
     }
 }
 
@@ -39,8 +31,8 @@ const MIN_INT = -2147483647;
 class TreeNode {
     constructor(data, left = null, right = null) {
         this.value = data;
-        this.lChild = left;
-        this.rChild = right;
+        this.left = left;
+        this.right = right;
     }
 }
 
@@ -62,9 +54,9 @@ levelOrderBinaryTreeUtil(arr, start) {
     const right = 2 * start + 2;
 
     if (left < size)
-        curr.lChild = this.levelOrderBinaryTreeUtil(arr, left);
+        curr.left = this.levelOrderBinaryTreeUtil(arr, left);
     if (right < size)
-        curr.rChild = this.levelOrderBinaryTreeUtil(arr, right);
+        curr.right = this.levelOrderBinaryTreeUtil(arr, right);
 
     return curr;
 }
@@ -78,8 +70,8 @@ PrintPreOrder() {
 PrintPreOrderUtil(node) {
     if (node != null) {
         process.stdout.write(`${node.value} `);
-        this.PrintPreOrderUtil(node.lChild);
-        this.PrintPreOrderUtil(node.rChild);
+        this.PrintPreOrderUtil(node.left);
+        this.PrintPreOrderUtil(node.right);
     }
 }
 
@@ -91,8 +83,8 @@ PrintPostOrder() {
 
 PrintPostOrderUtil(node) {
     if (node != null) {
-        this.PrintPostOrderUtil(node.lChild);
-        this.PrintPostOrderUtil(node.rChild);
+        this.PrintPostOrderUtil(node.left);
+        this.PrintPostOrderUtil(node.right);
         process.stdout.write(`${node.value} `);
     }
 }
@@ -105,9 +97,9 @@ PrintInOrder() {
 
 PrintInOrderUtil(node) {
     if (node != null) {
-        this.PrintInOrderUtil(node.lChild);
+        this.PrintInOrderUtil(node.left);
         process.stdout.write(`${node.value} `);
-        this.PrintInOrderUtil(node.rChild);
+        this.PrintInOrderUtil(node.right);
     }
 }
 
@@ -123,10 +115,10 @@ InsertNodeUtil(node, value) {
     }
     else {
         if (node.value > value) {
-            node.lChild = this.InsertNodeUtil(node.lChild, value);
+            node.left = this.InsertNodeUtil(node.left, value);
         }
         else {
-            node.rChild = this.InsertNodeUtil(node.rChild, value);
+            node.right = this.InsertNodeUtil(node.right, value);
         }
     }
     return node;
@@ -144,8 +136,8 @@ NthPreOrderUtil(node, index, counter) {
         if (counter[0] === index) {
             console.info(`Nth Preorder node is :: ${node.value}`);
         }
-        this.NthPreOrderUtil(node.lChild, index, counter);
-        this.NthPreOrderUtil(node.rChild, index, counter);
+        this.NthPreOrderUtil(node.left, index, counter);
+        this.NthPreOrderUtil(node.right, index, counter);
     }
 }
 
@@ -157,8 +149,8 @@ NthPostOrder(index) {
 
 NthPostOrderUtil(node, index, counter) {
     if (node != null) {
-        this.NthPostOrderUtil(node.lChild, index, counter);
-        this.NthPostOrderUtil(node.rChild, index, counter);
+        this.NthPostOrderUtil(node.left, index, counter);
+        this.NthPostOrderUtil(node.right, index, counter);
         counter[0]++;
         if (counter[0] === index) {
             console.info(`Nth Post order : ${node.value}`);
@@ -174,12 +166,12 @@ NthInOrder(index) {
 
 NthInOrderUtil(node, index, counter) {
     if (node != null) {
-        this.NthInOrderUtil(node.lChild, index, counter);
+        this.NthInOrderUtil(node.left, index, counter);
         counter[0]++;
         if (counter[0] === index) {
             console.log(`Nth InOrder Node : ${node.value}`);
         }
-        this.NthInOrderUtil(node.rChild, index, counter);
+        this.NthInOrderUtil(node.right, index, counter);
     }
 }
 
@@ -194,10 +186,10 @@ PrintBredthFirst() {
     while (que.isEmpty() === false) {
         temp = que.remove();
         process.stdout.write(`${temp.value} `);
-        if (temp.lChild != null)
-            que.add(temp.lChild);
-        if (temp.rChild != null)
-            que.add(temp.rChild);
+        if (temp.left != null)
+            que.add(temp.left);
+        if (temp.right != null)
+            que.add(temp.right);
     }
     process.stdout.write("\n");
 }
@@ -212,10 +204,10 @@ PrintDepthFirst() {
     while (stk.length > 0) {
         temp = stk.pop();
         process.stdout.write(`${temp.value} `);
-        if (temp.rChild != null)
-            stk.push(temp.rChild);
-        if (temp.lChild != null)
-            stk.push(temp.lChild);
+        if (temp.right != null)
+            stk.push(temp.right);
+        if (temp.left != null)
+            stk.push(temp.left);
     }
     process.stdout.write("\n");
 }
@@ -231,20 +223,20 @@ PrintLevelOrderLineByLine() {
         while (que1.length() !== 0) {
             temp = que1.remove();
             process.stdout.write(` ${temp.value}`);
-            if (temp.lChild != null)
-                que2.add(temp.lChild);
-            if (temp.rChild != null)
-                que2.add(temp.rChild);
+            if (temp.left != null)
+                que2.add(temp.left);
+            if (temp.right != null)
+                que2.add(temp.right);
         }
         process.stdout.write("\n");
 
         while (que2.length() !== 0) {
             temp = que2.remove();
             process.stdout.write(` ${temp.value}`);
-            if (temp.lChild != null)
-                que1.add(temp.lChild);
-            if (temp.rChild != null)
-                que1.add(temp.rChild);
+            if (temp.left != null)
+                que1.add(temp.left);
+            if (temp.right != null)
+                que1.add(temp.right);
         }
         process.stdout.write("\n");
     }
@@ -263,10 +255,10 @@ PrintLevelOrderLineByLine2() {
         while (count > 0) {
             temp = que.remove();
             process.stdout.write(` ${temp.value}`);
-            if (temp.lChild != null)
-                que.add(temp.lChild);
-            if (temp.rChild != null)
-                que.add(temp.rChild);
+            if (temp.left != null)
+                que.add(temp.left);
+            if (temp.right != null)
+                que.add(temp.right);
             count -= 1;
         }
         process.stdout.write("\n");
@@ -285,19 +277,19 @@ PrintSpiralTree() {
         while (stk1.length !== 0) {
             temp = stk1.pop();
             process.stdout.write(` ${temp.value}`);
-            if (temp.rChild != null)
-                stk2.push(temp.rChild);
-            if (temp.lChild != null)
-                stk2.push(temp.lChild);
+            if (temp.right != null)
+                stk2.push(temp.right);
+            if (temp.left != null)
+                stk2.push(temp.left);
         }
         process.stdout.write("\n");
         while (stk2.length !== 0) {
             temp = stk2.pop();
             process.stdout.write(` ${temp.value}`);
-            if (temp.lChild != null)
-                stk1.push(temp.lChild);
-            if (temp.rChild != null)
-                stk1.push(temp.rChild);
+            if (temp.left != null)
+                stk1.push(temp.left);
+            if (temp.right != null)
+                stk1.push(temp.right);
         }
         process.stdout.write("\n");
     }
@@ -310,10 +302,10 @@ Find(value) {
             return true;
         }
         else if (curr.value > value) {
-            curr = curr.lChild;
+            curr = curr.left;
         }
         else {
-            curr = curr.rChild;
+            curr = curr.right;
         }
     }
     return false;
@@ -322,7 +314,7 @@ Find(value) {
 Find2(value) {
     let curr = this.root;
     while (curr != null && curr.value !== value) {
-        curr = (curr.value > value) ? curr.lChild : curr.rChild;
+        curr = (curr.value > value) ? curr.left : curr.right;
     }
     return curr != null;
 }
@@ -332,8 +324,8 @@ FindMin() {
     if (node == null) {
         return MAX_INT;
     }
-    while (node.lChild != null) {
-        node = node.lChild;
+    while (node.left != null) {
+        node = node.left;
     }
     return node.value;
 }
@@ -343,8 +335,8 @@ FindMinNode(curr) {
         return null;
     }
 
-    while (node.lChild != null) {
-        node = node.lChild;
+    while (node.left != null) {
+        node = node.left;
     }
 
     return node;
@@ -354,8 +346,8 @@ FindMax() {
     if (node == null) {
         return MIN_INT;
     }
-    while (node.rChild != null) {
-        node = node.rChild;
+    while (node.right != null) {
+        node = node.right;
     }
     return node.value;
 }
@@ -366,8 +358,8 @@ FindMaxNode(curr) {
         return null;
     }
 
-    while (node.rChild != null) {
-        node = node.rChild;
+    while (node.right != null) {
+        node = node.right;
     }
 
     return node;
@@ -387,30 +379,30 @@ DeleteNodeUtil(node, value) {
     let temp = null;
     if (node != null) {
         if (node.value === value) {
-            if (node.lChild == null && node.rChild == null) {
+            if (node.left == null && node.right == null) {
                 return null;
             }
             else {
-                if (node.lChild == null) {
-                    temp = node.rChild;
+                if (node.left == null) {
+                    temp = node.right;
                     return temp;
                 }
-                if (node.rChild == null) {
-                    temp = node.lChild;
+                if (node.right == null) {
+                    temp = node.left;
                     return temp;
                 }
-                const minNode = this.FindMinNode(node.rChild);
+                const minNode = this.FindMinNode(node.right);
                 const minValue = minNode.value;
                 node.value = minValue;
-                node.rChild = this.DeleteNodeUtil(node.rChild, minValue);
+                node.right = this.DeleteNodeUtil(node.right, minValue);
             }
         }
         else {
             if (node.value > value) {
-                node.lChild = this.DeleteNodeUtil(node.lChild, value);
+                node.left = this.DeleteNodeUtil(node.left, value);
             }
             else {
-                node.rChild = this.DeleteNodeUtil(node.rChild, value);
+                node.right = this.DeleteNodeUtil(node.right, value);
             }
         }
     }
@@ -425,8 +417,8 @@ TreeDepthUtil(curr) {
     if (curr == null)
         return 0;
     else {
-        const lDepth = this.TreeDepthUtil(curr.lChild);
-        const rDepth = this.TreeDepthUtil(curr.rChild);
+        const lDepth = this.TreeDepthUtil(curr.left);
+        const rDepth = this.TreeDepthUtil(curr.right);
 
         if (lDepth > rDepth)
             return lDepth + 1;
@@ -445,8 +437,8 @@ isEqualUtil(node1, node2) {
     else if (node1 == null || node2 == null)
         return false;
     else
-        return (this.isEqualUtil(node1.lChild, node2.lChild) && 
-            this.isEqualUtil(node1.rChild, node2.rChild) && 
+        return (this.isEqualUtil(node1.left, node2.left) && 
+            this.isEqualUtil(node1.right, node2.right) && 
             (node1.value === node2.value));
 }
 
@@ -464,10 +456,10 @@ AncestorUtil(curr, first, second) {
         return null;
     }
     if (curr.value > first && curr.value > second) {
-        return this.AncestorUtil(curr.lChild, first, second);
+        return this.AncestorUtil(curr.left, first, second);
     }
     if (curr.value < first && curr.value < second) {
-        return this.AncestorUtil(curr.rChild, first, second);
+        return this.AncestorUtil(curr.right, first, second);
     }
     return curr;
 }
@@ -481,8 +473,8 @@ CopyTree() {
 CopyTreeUtil(curr) {
     if (curr != null) {
         const temp = new TreeNode(curr.value);
-        temp.lChild = this.CopyTreeUtil(curr.lChild);
-        temp.rChild = this.CopyTreeUtil(curr.rChild);
+        temp.left = this.CopyTreeUtil(curr.left);
+        temp.right = this.CopyTreeUtil(curr.right);
         return temp;
     }
     else
@@ -498,8 +490,8 @@ CopyMirrorTree() {
 CopyMirrorTreeUtil(curr) {
     if (curr != null) {
         const temp = new TreeNode(curr.value);
-        temp.rChild = this.CopyMirrorTreeUtil(curr.lChild);
-        temp.lChild = this.CopyMirrorTreeUtil(curr.rChild);
+        temp.right = this.CopyMirrorTreeUtil(curr.left);
+        temp.left = this.CopyMirrorTreeUtil(curr.right);
         return temp;
     }
     else
@@ -514,7 +506,7 @@ numNodesUtil(curr) {
     if (curr == null)
         return 0;
     else
-        return (1 + this.numNodesUtil(curr.rChild) + this.numNodesUtil(curr.lChild));
+        return (1 + this.numNodesUtil(curr.right) + this.numNodesUtil(curr.left));
 }
 
 numFullNodesBT() {
@@ -525,8 +517,8 @@ numFullNodesBTUtil(curr) {
     let count;
     if (curr == null)
         return 0;
-    count = this.numFullNodesBTUtil(curr.rChild) + this.numFullNodesBTUtil(curr.lChild);
-    if (curr.rChild != null && curr.lChild != null)
+    count = this.numFullNodesBTUtil(curr.right) + this.numFullNodesBTUtil(curr.left);
+    if (curr.right != null && curr.left != null)
         count++;
     return count;
 }
@@ -539,12 +531,12 @@ maxLengthPathBTUtil(curr) {
     if (curr == null)
         return 0;
 
-    const leftPath = this.TreeDepthUtil(curr.lChild);
-    const rightPath = this.TreeDepthUtil(curr.rChild);
+    const leftPath = this.TreeDepthUtil(curr.left);
+    const rightPath = this.TreeDepthUtil(curr.right);
     let max = leftPath + rightPath + 1;
 
-    const leftMax = this.maxLengthPathBTUtil(curr.lChild);
-    const rightMax = this.maxLengthPathBTUtil(curr.rChild);
+    const leftMax = this.maxLengthPathBTUtil(curr.left);
+    const rightMax = this.maxLengthPathBTUtil(curr.right);
 
     if (leftMax > max)
         max = leftMax;
@@ -563,10 +555,10 @@ numLeafNodesUtil(curr) {
     if (curr == null)
         return 0;
 
-    if (curr.lChild == null && curr.rChild == null)
+    if (curr.left == null && curr.right == null)
         return 1;
     else
-        return (this.numLeafNodesUtil(curr.rChild) + this.numLeafNodesUtil(curr.lChild));
+        return (this.numLeafNodesUtil(curr.right) + this.numLeafNodesUtil(curr.left));
 }
 
 sumAllBT() {
@@ -576,7 +568,7 @@ sumAllBT() {
 sumAllBTUtil(curr) {
     if (curr == null)
         return 0;
-    return (curr.value + this.sumAllBTUtil(curr.lChild) + this.sumAllBTUtil(curr.rChild));
+    return (curr.value + this.sumAllBTUtil(curr.left) + this.sumAllBTUtil(curr.right));
 }
 
 iterativePreOrder() {
@@ -590,10 +582,10 @@ iterativePreOrder() {
     while (stk.length > 0) {
         curr = stk.pop();
         process.stdout.write(` ${curr.value}`);
-        if (curr.rChild != null)
-            stk.push(curr.rChild);
-        if (curr.lChild != null)
-            stk.push(curr.lChild);
+        if (curr.right != null)
+            stk.push(curr.right);
+        if (curr.left != null)
+            stk.push(curr.left);
     }
     process.stdout.write("\n");
 }
@@ -619,12 +611,12 @@ iterativePostOrder() {
         else {
             stk.push(curr);
             visited.push(1);
-            if (curr.rChild != null) {
-                stk.push(curr.rChild);
+            if (curr.right != null) {
+                stk.push(curr.right);
                 visited.push(0);
             }
-            if (curr.lChild != null) {
-                stk.push(curr.lChild);
+            if (curr.left != null) {
+                stk.push(curr.left);
                 visited.push(0);
             }
         }
@@ -651,14 +643,14 @@ iterativeInOrder() {
             process.stdout.write(` ${curr.value}`);
         }
         else {
-            if (curr.rChild != null) {
-                stk.push(curr.rChild);
+            if (curr.right != null) {
+                stk.push(curr.right);
                 visited.push(0);
             }
             stk.push(curr);
             visited.push(1);
-            if (curr.lChild != null) {
-                stk.push(curr.lChild);
+            if (curr.left != null) {
+                stk.push(curr.left);
                 visited.push(0);
             }
         }
@@ -669,11 +661,11 @@ iterativeInOrder() {
 isBST3(root) {
     if (root == null)
         return true;
-    if (root.lChild != null && this.FindMaxNode(root.lChild).value > root.value)
+    if (root.left != null && this.FindMaxNode(root.left).value > root.value)
         return false;
-    if (root.rChild != null && this.FindMinNode(root.rChild).value <= root.value)
+    if (root.right != null && this.FindMinNode(root.right).value <= root.value)
         return false;
-    return (this.isBST3(root.lChild) && this.isBST3(root.rChild));
+    return (this.isBST3(root.left) && this.isBST3(root.right));
 }
 
 isBST() {
@@ -685,7 +677,7 @@ isBSTUtil(curr, min, max) {
         return true;
     if (curr.value < min || curr.value > max)
         return false;
-    return this.isBSTUtil(curr.lChild, min, curr.value) && this.isBSTUtil(curr.rChild, curr.value, max);
+    return this.isBSTUtil(curr.left, min, curr.value) && this.isBSTUtil(curr.right, curr.value, max);
 }
 
 isBST2() {
@@ -696,14 +688,14 @@ isBST2() {
 isBST2Util(root, count) {
     let ret;
     if (root != null) {
-        ret = this.isBST2Util(root.lChild, count);
+        ret = this.isBST2Util(root.left, count);
         if (!ret)
             return false;
         if (count[0] > root.value)
             return false;
 
         count[0] = root.value;
-        ret = this.isBST2Util(root.rChild, count);
+        ret = this.isBST2Util(root.right, count);
         if (!ret)
             return false;
     }
@@ -719,18 +711,18 @@ isCompleteTree() {
 
     while (que.length() !== 0) {
         temp = que.remove();
-        if (temp.lChild != null) {
+        if (temp.left != null) {
             if (noChild === 1)
                 return false;
-            que.add(temp.lChild);
+            que.add(temp.left);
         }
         else
             noChild = 1;
 
-        if (temp.rChild != null) {
+        if (temp.right != null) {
             if (noChild === 1)
                 return false;
-            que.add(temp.rChild);
+            que.add(temp.right);
         }
         else
             noChild = 1;
@@ -743,7 +735,7 @@ isCompleteTreeUtil(curr, index, count) {
         return true;
     if (index > count)
         return false;
-    return this.isCompleteTreeUtil(curr.lChild, index * 2 + 1, count) && this.isCompleteTreeUtil(curr.rChild, index * 2 + 2, count);
+    return this.isCompleteTreeUtil(curr.left, index * 2 + 1, count) && this.isCompleteTreeUtil(curr.right, index * 2 + 2, count);
 }
 
 isCompleteTree2() {
@@ -756,8 +748,8 @@ isHeapUtil(curr, parentValue) {
         return true;
     if (curr.value < parentValue)
         return false;
-    return (this.isHeapUtil(curr.lChild, curr.value) &&
-        this.isHeapUtil(curr.rChild, curr.value));
+    return (this.isHeapUtil(curr.left, curr.value) &&
+        this.isHeapUtil(curr.right, curr.value));
 }
 
 isHeap() {
@@ -772,7 +764,7 @@ isHeapUtil2(curr, index, count, parentValue) {
         return false;
     if (curr.value < parentValue)
         return false;
-    return this.isHeapUtil2(curr.lChild, index * 2 + 1, count, curr.value) && this.isHeapUtil2(curr.rChild, index * 2 + 2, count, curr.value);
+    return this.isHeapUtil2(curr.left, index * 2 + 1, count, curr.value) && this.isHeapUtil2(curr.right, index * 2 + 2, count, curr.value);
 }
 
 isHeap2() {
@@ -794,32 +786,32 @@ treeToListRecUtil(curr) {
     if (curr == null)
         return null;
 
-    if (curr.lChild == null && curr.rChild == null) {
-        curr.lChild = curr;
-        curr.rChild = curr;
+    if (curr.left == null && curr.right == null) {
+        curr.left = curr;
+        curr.right = curr;
         return curr;
     }
 
-    if (curr.lChild != null) {
-        Head = this.treeToListRecUtil(curr.lChild);
-        Tail = Head.lChild;
-        curr.lChild = Tail;
-        Tail.rChild = curr;
+    if (curr.left != null) {
+        Head = this.treeToListRecUtil(curr.left);
+        Tail = Head.left;
+        curr.left = Tail;
+        Tail.right = curr;
     }
     else
         Head = curr;
 
-    if (curr.rChild != null) {
-        const tempHead = this.treeToListRecUtil(curr.rChild);
-        Tail = tempHead.lChild;
-        curr.rChild = tempHead;
-        tempHead.lChild = curr;
+    if (curr.right != null) {
+        const tempHead = this.treeToListRecUtil(curr.right);
+        Tail = tempHead.left;
+        curr.right = tempHead;
+        tempHead.left = curr;
     }
     else
         Tail = curr;
 
-    Head.lChild = Tail;
-    Tail.rChild = Head;
+    Head.left = Tail;
+    Tail.right = Head;
     return Head;
 }
 
@@ -828,11 +820,11 @@ printDLL() {
         return;
     }
     let curr = this.root;
-    let tail = curr.lChild;
+    let tail = curr.left;
     process.stdout.write(`DLL nodes are : `);
     while (curr !== tail) {
         process.stdout.write(`${curr.value} `);
-        curr = curr.rChild;
+        curr = curr.right;
     }
     process.stdout.write(`${curr.value}\n`);
 }
@@ -848,14 +840,14 @@ printAllPathUtil(curr, stk) {
         return;
     stk.push(curr.value);
 
-    if (curr.lChild == null && curr.rChild == null) {
+    if (curr.left == null && curr.right == null) {
         console.info(stk);
         stk.pop();
         return;
     }
 
-    this.printAllPathUtil(curr.rChild, stk);
-    this.printAllPathUtil(curr.lChild, stk);
+    this.printAllPathUtil(curr.right, stk);
+    this.printAllPathUtil(curr.left, stk);
     stk.pop();
 }
 
@@ -876,8 +868,8 @@ LCAUtil(curr, first, second) {
     if (curr.value === first || curr.value === second)
         return curr;
 
-    left = this.LCAUtil(curr.lChild, first, second);
-    right = this.LCAUtil(curr.rChild, first, second);
+    left = this.LCAUtil(curr.left, first, second);
+    right = this.LCAUtil(curr.right, first, second);
 
     if (left != null && right != null)
         return curr;
@@ -896,10 +888,10 @@ LcaBSTUtil(curr, first, second) {
         return MAX_INT;
     }
     if (curr.value > first && curr.value > second) {
-        return this.LcaBSTUtil(curr.lChild, first, second);
+        return this.LcaBSTUtil(curr.left, first, second);
     }
     if (curr.value < first && curr.value < second) {
-        return this.LcaBSTUtil(curr.rChild, first, second);
+        return this.LcaBSTUtil(curr.right, first, second);
     }
     return curr.value;
 }
@@ -912,14 +904,14 @@ trimOutsideRangeUtil(curr, min, max) {
     if (curr == null)
         return null;
 
-    curr.lChild = this.trimOutsideRangeUtil(curr.lChild, min, max);
-    curr.rChild = this.trimOutsideRangeUtil(curr.rChild, min, max);
+    curr.left = this.trimOutsideRangeUtil(curr.left, min, max);
+    curr.right = this.trimOutsideRangeUtil(curr.right, min, max);
 
     if (curr.value < min) {
-        return curr.rChild;
+        return curr.right;
     }
     if (curr.value > max) {
-        return curr.lChild;
+        return curr.left;
     }
     return curr;
 }
@@ -933,10 +925,10 @@ printInRange(min, max) {
 printInRangeUtil(curr, min, max) {
     if (curr == null)
         return;
-    this.printInRangeUtil(curr.lChild, min, max);
+    this.printInRangeUtil(curr.left, min, max);
     if (curr.value >= min && curr.value <= max)
         process.stdout.write(`${curr.value} `);
-    this.printInRangeUtil(curr.rChild, min, max);
+    this.printInRangeUtil(curr.right, min, max);
 }
 
 FloorBST(val) {
@@ -948,11 +940,11 @@ FloorBST(val) {
             break;
         }
         else if (curr.value > val) {
-            curr = curr.lChild;
+            curr = curr.left;
         }
         else {
             floor = curr.value;
-            curr = curr.rChild;
+            curr = curr.right;
         }
     }
     return floor;
@@ -968,10 +960,10 @@ CeilBST(val) {
         }
         else if (curr.value > val) {
             ceil = curr.value;
-            curr = curr.lChild;
+            curr = curr.left;
         }
         else {
-            curr = curr.rChild;
+            curr = curr.right;
         }
     }
     return ceil;
@@ -988,8 +980,8 @@ findMaxBTUtil(curr) {
         return MIN_INT;
 
     let max = curr.value;
-    const left = this.findMaxBTUtil(curr.lChild);
-    const right = this.findMaxBTUtil(curr.rChild);
+    const left = this.findMaxBTUtil(curr.left);
+    const right = this.findMaxBTUtil(curr.right);
 
     if (left > max)
         max = left;
@@ -1009,12 +1001,12 @@ searchBTUtil(curr, value) {
     if (curr.value === value)
         return true;
 
-    const left = this.searchBTUtil(curr.lChild, value);
+    const left = this.searchBTUtil(curr.left, value);
 
     if (left)
         return true;
 
-    const right = this.searchBTUtil(curr.rChild, value);
+    const right = this.searchBTUtil(curr.right, value);
 
     if (right)
         return true;
@@ -1032,8 +1024,8 @@ CreateBinarySearchTreeUtil(arr, start, end) {
 
     const mid = Math.floor((start + end) / 2);
     const curr = new TreeNode(arr[mid]);
-    curr.lChild = this.CreateBinarySearchTreeUtil(arr, start, mid - 1);
-    curr.rChild = this.CreateBinarySearchTreeUtil(arr, mid + 1, end);
+    curr.left = this.CreateBinarySearchTreeUtil(arr, start, mid - 1);
+    curr.right = this.CreateBinarySearchTreeUtil(arr, mid + 1, end);
     return curr;
 }
 }
@@ -1060,33 +1052,33 @@ function isBSTArray(preorder, size) {
 }
 
 
-//const t = new Tree();
-//const arr = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
-//t.levelOrderBinaryTree(arr);
-//t.PrintPreOrder()
-//t.PrintPostOrder()
-//t.PrintInOrder()
-//t.PrintBredthFirst()
-//t.PrintDepthFirst()
-//t.PrintLevelOrderLineByLine()
-//t.PrintLevelOrderLineByLine2()
-//t.PrintSpiralTree()
-//t.NthPreOrder(5)
-//t.NthPostOrder(5)
-//t.NthInOrder(5)
-//t.printAllPath()
-//console.log(t.numNodes())
-//console.log(t.sumAllBT())
-//console.log(t.numLeafNodes())
-//console.log(t.numFullNodesBT())
-//console.info(t.searchBT(9))
-//console.log(t.findMaxBT())
-//console.log(t.TreeDepth())
-//console.log(t.maxLengthPathBT())
-//const t2 = t.CopyTree()
-//const t2 = t.CopyMirrorTree()
-//console.log(t.isEqual(t2))
-//console.info(t.isCompleteTree());
+const t = new Tree();
+const arr = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
+t.levelOrderBinaryTree(arr);
+t.PrintPreOrder()
+t.PrintPostOrder()
+t.PrintInOrder()
+t.PrintBredthFirst()
+t.PrintDepthFirst()
+t.PrintLevelOrderLineByLine()
+t.PrintLevelOrderLineByLine2()
+t.PrintSpiralTree()
+t.NthPreOrder(5)
+t.NthPostOrder(5)
+t.NthInOrder(5)
+t.printAllPath()
+console.log(t.numNodes())
+console.log(t.sumAllBT())
+console.log(t.numLeafNodes())
+console.log(t.numFullNodesBT())
+console.info(t.searchBT(9))
+console.log(t.findMaxBT())
+console.log(t.TreeDepth())
+console.log(t.maxLengthPathBT())
+const t2 = t.CopyTree()
+const t3 = t.CopyMirrorTree()
+console.log(t.isEqual(t2))
+console.info(t.isCompleteTree());
 //console.info(t.isCompleteTree2());
 //console.info(t.isHeap());
 //console.info(t.isHeap2());
@@ -1120,9 +1112,9 @@ function isBSTArray(preorder, size) {
 //console.log(t.FloorBST(8))
 
 /* Testing Code */
-const t = new Tree();
-const arr = [5, 2, 4, 6, 9, 10];
-console.log(isBSTArray(arr, arr.length))
+///const t = new Tree();
+//const arr = [5, 2, 4, 6, 9, 10];
+//console.log(isBSTArray(arr, arr.length))
 
-const arr2 = [5, 2, 6, 4, 7, 9, 10];
-console.log(isBSTArray(arr2, arr2.length))
+//const arr2 = [5, 2, 6, 4, 7, 9, 10];
+//console.log(isBSTArray(arr2, arr2.length))

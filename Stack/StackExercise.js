@@ -1,34 +1,34 @@
 class Deque {
     constructor() {
-        this.data = ([]);
+        this.arr = ([]);
     }
 
     size() {
-        return this.data.length;
+        return this.arr.length;
     }
 
     isEmpty() {
-        return (this.data.length === 0);
+        return (this.arr.length === 0);
     }
 
     add(val) {
-        this.data.push(val);
+        this.arr.push(val);
     }
 
     remove() {
-        return this.data.shift();
+        return this.arr.shift();
     }
 
     front() {
-        return this.data[0]
+        return this.arr[0]
     }
 
     back() {
-        return this.data[this.data.length - 1]
+        return this.arr[this.arr.length - 1]
     }
 
     removeLast() {
-        return this.data.pop()
+        return this.arr.pop()
     }
 }
 
@@ -258,8 +258,8 @@ function test7() {
 //test7()
 
 /*
-Deque { data: [ 1, 2, 3 ] }
-Deque { data: [ 3, 2, 1 ] }
+Deque { arr: [ 1, 2, 3 ] }
+Deque { arr: [ 3, 2, 1 ] }
 */
 function reverseKElementInQueue(que, k) {
     const stk = ([]);
@@ -296,8 +296,8 @@ function test8() {
 //test8()
 
 /*
-Deque { data: [ 1, 2, 3, 4 ] }
-Deque { data: [ 2, 1, 3, 4 ] }
+Deque { arr: [ 1, 2, 3, 4 ] }
+Deque { arr: [ 2, 1, 3, 4 ] }
 */
 
 function isBalancedParenthesis(expn) {
