@@ -268,7 +268,7 @@ function ArrayReduction(arr, size) {
             count += 1;
         }
     }
-    console.info(`Total number of reductions ${count}`);
+    console.log(`Total number of reductions ${count}`);
     return count
 }
 

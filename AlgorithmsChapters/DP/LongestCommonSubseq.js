@@ -36,7 +36,7 @@ function PrintLCSUtil(p, X, i, j)
 {
 	if (i == 0 || j == 0)
 		return "";
-	var output = "";
+	let output = "";
 	if (p[i][j] == 0)
 	{
 		output = PrintLCSUtil(p, X, i - 1, j - 1);

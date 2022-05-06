@@ -1,18 +1,20 @@
 const hs = new Set();
-hs.add("India")
-hs.add("USA")
-hs.add("Brazil")
+hs.add("Banana")
+hs.add("Apple")
+hs.add("Mango")
 
-console.info(hs);
+console.log(hs);
+console.log(`Set size : ${hs.size}`);
+console.log(`Apple present : ${hs.has("Apple")}`);
+console.log(`Grapes present : ${hs.has("Grapes")}`);
+hs.delete("Apple")    
+console.log(hs);
+console.log(`Apple present : ${hs.has("Apple")}`);
 
-for (const value of hs.values()) {
-    console.info(value);
-}
-
-console.info(`Hash Table contains USA : ${hs.has("USA")}`);
-console.info(`Hash Table contains UK : ${hs.has("UK")}`);
-
-hs.delete("USA")    
-
-console.info(hs);
-console.info(`Hash Table contains USA : ${hs.has("USA")}`);
+/*
+Set(3) { 'Banana', 'Apple', 'Mango' }
+Apple present : true
+Grapes present : false
+Set(2) { 'Banana', 'Mango' }
+Apple present : false
+*/

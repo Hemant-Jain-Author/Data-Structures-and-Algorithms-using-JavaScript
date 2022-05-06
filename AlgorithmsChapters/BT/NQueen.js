@@ -14,7 +14,7 @@ function nQueens(Q, k, n)
 {
 	if (k == n)
 	{
-		console.log(Q);
+		console.log(JSON.stringify(Q));
 		return;
 	}
 	for (let i = 0; i < n; i++)

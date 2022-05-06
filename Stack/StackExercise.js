@@ -76,7 +76,7 @@ function test2() {
     stk.push(4);
     stk.push(5);
     sortedInsert(stk, 3)
-    console.info(stk);
+    console.log(stk);
 }
 
 //test2()
@@ -118,7 +118,7 @@ function test3() {
     stk.push(2);
     stk.push(4);
     sortStack(stk)
-    console.info(stk);
+    console.log(stk);
 }
 
 //test3()
@@ -143,7 +143,7 @@ function test4() {
     stk.push(2);
     stk.push(3);
     bottomInsert(stk, 4)
-    console.info(stk);
+    console.log(stk);
 }
 
 //test4()
@@ -194,9 +194,9 @@ function test5() {
     stk.push(1);
     stk.push(2);
     stk.push(3);
-    console.info("Stack before reversal", stk);
+    console.log("Stack before reversal", stk);
     reverseStack(stk)
-    console.info("Stack after reversal", stk);
+    console.log("Stack after reversal", stk);
 }
 
 //test5()
@@ -225,7 +225,7 @@ function test6() {
     stk.push(3);
     stk.push(4);
     reverseKElementInStack(stk, 2)
-    console.info(stk);
+    console.log(stk);
 }
 
 //test6()
@@ -252,7 +252,7 @@ function test7() {
     que.add(3);
     console.log(que)
     reverseQueue(que)
-    console.info(que);
+    console.log(que);
 }
 
 //test7()
@@ -290,7 +290,7 @@ function test8() {
     que.add(4);
     console.log(que)
     reverseKElementInQueue(que, 2)
-    console.info(que);
+    console.log(que);
 }
 
 //test8()
@@ -390,9 +390,9 @@ function test10() {
     const size = expn.length;
     const value = maxDepthParenthesis(expn, size);
     const value2 = maxDepthParenthesis2(expn, size);
-    console.info(`Given expn ${expn}`);
-    console.info(`Max depth parenthesis is ${value}`);
-    console.info(`Max depth parenthesis is ${value2}`);
+    console.log(`Given expn ${expn}`);
+    console.log(`Max depth parenthesis is ${value}`);
+    console.log(`Max depth parenthesis is ${value2}`);
 }
 
 //test10()
@@ -425,7 +425,7 @@ function test11() {
     const expn = "())((()))(())()(()";
     const size = expn.length;
     const value = longestContBalParen(expn, size);
-    console.info(`longestContBalParen : ${value}`);
+    console.log(`longestContBalParen : ${value}`);
 }
 
 //test11()
@@ -438,7 +438,7 @@ function reverseParenthesis(expn, size) {
     let closeCount = 0;
     let ch;
     if (size % 2 === 1) {
-        console.info(`Invalid odd length ${size}`);
+        console.log(`Invalid odd length ${size}`);
         return -1;
     }
     for (let i = 0; i < size; i++) {
@@ -468,7 +468,7 @@ function test12() {
     const expn  = ")(())(((";
     const size = expn.length;
     const value = reverseParenthesis(expn, size);
-    console.info(`reverse Parenthesis is : ${value}`);
+    console.log(`reverse Parenthesis is : ${value}`);
 }
 
 //test12()
@@ -501,7 +501,7 @@ function test13() {
     const expn = "(((a+b))+c)";
     const size = expn.length;
     const value = findDuplicateParenthesis(expn, size);
-    console.info(`Duplicate Found : ${value}`);
+    console.log(`Duplicate Found : ${value}`);
 }
 
 //test13()
@@ -523,7 +523,7 @@ function printParenthesisNumber(expn, size) {
         else if (ch == ')')
             output += stk.pop();
     }
-    console.info("Parenthesis Count : ", output);
+    console.log("Parenthesis Count : ", output);
 }
 
 // Testing code.
@@ -531,10 +531,10 @@ function test14() {
     const expn1 = "(((a+(b))+(c+d)))";
     const expn2 = "(((a+b))+c)(((";
     let size = expn1.length;
-    console.info(`Given expn ${expn1}`);
+    console.log(`Given expn ${expn1}`);
     printParenthesisNumber(expn1, size);
     size = expn2.length;
-    console.info(`Given expn ${expn2}`);
+    console.log(`Given expn ${expn2}`);
     printParenthesisNumber(expn2, size);
 }
 
@@ -752,11 +752,11 @@ function StockSpanRange2(arr) {
 function test18() {
     let arr = [6, 5, 4, 3, 2, 4, 5, 7, 9];
     let value = StockSpanRange(arr);
-    console.info("StockSpanRange : ", value);
+    console.log("StockSpanRange : ", value);
 
     arr = [6, 5, 4, 3, 2, 4, 5, 7, 9];
     value = StockSpanRange2(arr);
-    console.info("StockSpanRange : ", value);
+    console.log("StockSpanRange : ", value);
 }
 
 //test18()
@@ -815,10 +815,10 @@ function test19() {
     const arr = [7, 6, 5, 4, 4, 1, 6, 3, 1];
     const size = arr.length;
     let value = GetMaxArea(arr);
-    console.info(`GetMaxArea :: ${value}`);
+    console.log(`GetMaxArea :: ${value}`);
     
     value = GetMaxArea2(arr);
-    console.info(`GetMaxArea :: ${value}`);
+    console.log(`GetMaxArea :: ${value}`);
 }
 
 //test19()
@@ -988,7 +988,7 @@ function test22() {
     [0, 2, 0, 0, 1], 
     [1, 1, 0, 0, 1]];
     
-    console.info(RottenFruit(arr, 5, 5));
+    console.log(RottenFruit(arr, 5, 5));
 }
 
 //test22()
@@ -1025,7 +1025,7 @@ function StepsOfKnight(size, srcX, srcY, dstX, dstY) {
 
 // Testing code.
 function test23() {
-    console.info(StepsOfKnight(20, 10, 10, 20, 20));
+    console.log(StepsOfKnight(20, 10, 10, 20, 20));
 }
 
 //test23()
@@ -1058,7 +1058,7 @@ function DistNearestFill(arr, maxCol, maxRow) {
     }
 
     for (let i = 0; i < maxCol; i++) {
-        console.info(traversed[i]);
+        console.log(traversed[i]);
     }
 }
 
@@ -1118,7 +1118,7 @@ function test25() {
     [0, 1, 0, 0, 0], 
     [1, 1, 0, 0, 1]];
 
-    console.info(`Largest Island : ${findLargestIsland(arr, 5, 5)}`);
+    console.log(`Largest Island : ${findLargestIsland(arr, 5, 5)}`);
 }
 
 //test25()
@@ -1184,8 +1184,8 @@ function test26() {
     [0, 0, 0, 0, 0], 
     [1, 1, 0, 1, 1]];
     
-    console.info(`Celebrity : ${findCelebrity(arr, 5)}`);
-    console.info(`Celebrity : ${findCelebrity2(arr, 5)}`);
+    console.log(`Celebrity : ${findCelebrity(arr, 5)}`);
+    console.log(`Celebrity : ${findCelebrity2(arr, 5)}`);
 }
 
 //test26()

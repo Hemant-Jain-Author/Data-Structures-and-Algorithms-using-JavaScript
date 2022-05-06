@@ -161,10 +161,10 @@ function LowerUpper(s) {
 
 // Testing code.
 function test6() {
-    console.info(ToLower('A'));
-    console.info(ToUpper('a'));
-    console.info(LowerUpper('s'));
-    console.info(LowerUpper('S'));
+    console.log(ToLower('A'));
+    console.log(ToUpper('a'));
+    console.log(LowerUpper('s'));
+    console.log(LowerUpper('S'));
 }
 
 test6();
@@ -198,8 +198,8 @@ function isPermutation(s1, s2) {
 
 // Testing code.
 function test7() {
-    console.info("isPermutation :", isPermutation("apple", "plepa"));
-    console.info("isPermutation :", isPermutation("appleb", "plepaa"));
+    console.log("isPermutation :", isPermutation("apple", "plepa"));
+    console.log("isPermutation :", isPermutation("appleb", "plepaa"));
 }
 
 test7();
@@ -217,11 +217,11 @@ function isPalindrome(str) {
     }
 
     if (i < j) {
-        console.info(str, "is not a Palindrome");
+        console.log(str, "is not a Palindrome");
         return false;
     }
     else {
-        console.info(str, "is a Palindrome");
+        console.log(str, "is a Palindrome");
         return true;
     }
 }
@@ -255,7 +255,7 @@ function pow(x, n) {
 
 // Testing code.
 function test9() {
-    console.info(pow(5, 2));
+    console.log(pow(5, 2));
 }
 
 test9();
@@ -289,7 +289,7 @@ function myStrcmp(a, b) {
 
 // Testing code.
 function test10() {
-    console.info("StrCmp returns :", myStrcmp("aba", "aas"));
+    console.log("StrCmp returns :", myStrcmp("aba", "aas"));
 }
 
 test10();
@@ -351,8 +351,8 @@ function reverseWords(str) {
 
 // Testing code.
 function test11() {
-    console.info(reverseString("apple"));
-    console.info(reverseWords("hello world"));
+    console.log(reverseString("apple"));
+    console.log(reverseWords("hello world"));
 }
 
 test11();
@@ -468,7 +468,7 @@ function addBinary(first, second) {
 
 // Testing code.
 function test14() {
-    console.info(addBinary("1000", "11111111"));
+    console.log(addBinary("1000", "11111111"));
 }
 test14();
 //100000111

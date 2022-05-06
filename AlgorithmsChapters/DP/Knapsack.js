@@ -79,7 +79,7 @@ function getMaxCost01BU(wt, cost, capacity)
 function printItems(dp, wt, cost, n, capacity)
 {
 	let totalCost = dp[capacity][n];
-	var output = "";
+	let output = "";
 	for (let i = n - 1; i > 0; i--)
 	{
 		if (totalCost != dp[capacity][i - 1])

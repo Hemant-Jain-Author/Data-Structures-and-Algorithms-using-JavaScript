@@ -11,7 +11,7 @@ function tspUtil(graph, n, path, pSize, pCost, visited, ans, ansPath)
 		let first = path[0];
 		if(graph[curr][0] > 0 && ans > pCost + graph[curr][first]) {
 			ans = pCost + graph[curr][first];
-			for (var i = 0; i <= n; i++) {
+			for (let i = 0; i <= n; i++) {
 				ansPath[i] = path[i%n];
 			}
 		}

@@ -101,7 +101,7 @@ function MatrixChainMulBU2(p, n)
 }
 
 function PrintOptPar(n, pos, i, j) {
-	var output = "";
+	let output = "";
 	if (i === j)
 		output +=  "M" + pos[i][i] + " ";
 	else {
@@ -114,7 +114,7 @@ function PrintOptPar(n, pos, i, j) {
 };
 
 function PrintOptimalParenthesis(n, pos) {
-	console.info("OptimalParenthesis : " + PrintOptPar(n, pos, 1, n - 1));
+	console.log("OptimalParenthesis : " + PrintOptPar(n, pos, 1, n - 1));
 };
 
 

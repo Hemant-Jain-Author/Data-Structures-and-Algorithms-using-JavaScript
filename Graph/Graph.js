@@ -790,7 +790,7 @@ class Graph {
 
 
 	printPathUtil(previous, source, dest) {
-		var path = "";
+		let path = "";
 		if (dest == source)
 			path += source;
 		else {
@@ -801,8 +801,8 @@ class Graph {
 	}
 
 	printPath(previous, dist, count, source) {
-		var output = "Shortest Paths: ";
-		for (var i = 0; i < count; i++) {
+		let output = "Shortest Paths: ";
+		for (let i = 0; i < count; i++) {
 			if (dist[i] == 99999)
 				output += ("(" + source + "->" + i + " @ Unreachable) ");
 			else if (i != previous[i]) {
@@ -829,7 +829,7 @@ class Graph {
         const queue = new PriorityQueue(GraphEdgeComparator);
         let node = new GraphEdge(source, source, 0);
         queue.add(node)
-        var curr;
+        let curr;
 
         while (queue.isEmpty() === false) {
             node = queue.remove()
@@ -1103,7 +1103,7 @@ class Graph {
 
 	static 	printSolution(cost, path, V)
     {
-        var output = "Shortest Paths : ";
+        let output = "Shortest Paths : ";
 		for (let u = 0; u < V; u++)
 		{
 			for (let v = 0; v < V; v++)

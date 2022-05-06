@@ -251,11 +251,11 @@ function KthSmallest3(arr, size, k) {
 // Testing code.
 function test5() {
     const arr = [8, 7, 6, 5, 7, 5, 2, 1];
-    console.info(`Kth Smallest :: ${KthSmallest(arr, arr.length, 3)}`);
+    console.log(`Kth Smallest :: ${KthSmallest(arr, arr.length, 3)}`);
     const arr2 = [8, 7, 6, 5, 7, 5, 2, 1];
-    console.info(`Kth Smallest :: ${KthSmallest2(arr2, arr2.length, 3)}`);
+    console.log(`Kth Smallest :: ${KthSmallest2(arr2, arr2.length, 3)}`);
     const arr3 = [8, 7, 6, 5, 7, 5, 2, 1];
-    console.info(`Kth Smallest :: ${KthSmallest3(arr3, arr3.length, 3)}`);
+    console.log(`Kth Smallest :: ${KthSmallest3(arr3, arr3.length, 3)}`);
 }
 
 //test5();
@@ -301,9 +301,9 @@ function isMaxHeap(arr) {
 // Testing code.
 function test6() {
     const arr3 = [8, 7, 6, 5, 7, 5, 2, 1];
-    console.info(`isMaxHeap :: ${isMaxHeap(arr3, arr3.length)}`);
+    console.log(`isMaxHeap :: ${isMaxHeap(arr3, arr3.length)}`);
     const arr4 = [1, 2, 3, 4, 5, 6, 7, 8];
-    console.info(`isMinHeap :: ${isMinHeap(arr4, arr4.length)}`);
+    console.log(`isMinHeap :: ${isMinHeap(arr4, arr4.length)}`);
 }
 
 //test6()
@@ -346,11 +346,11 @@ function KSmallestProduct2(arr, size, k) {
 // Testing code.
 function test7() {
     const arr = [8, 7, 6, 5, 7, 5, 2, 1];
-    console.info(`Kth Smallest product:: ${KSmallestProduct(arr, 8, 4)}`);
+    console.log(`Kth Smallest product:: ${KSmallestProduct(arr, 8, 4)}`);
     const arr2 = [8, 7, 6, 5, 7, 5, 2, 1];
-    console.info(`Kth Smallest product:: ${KSmallestProduct2(arr2, 8, 4)}`);
+    console.log(`Kth Smallest product:: ${KSmallestProduct2(arr2, 8, 4)}`);
     const arr3 = [8, 7, 6, 5, 7, 5, 2, 1];
-    console.info(`Kth Smallest product:: ${KSmallestProduct3(arr3, 8, 4)}`);
+    console.log(`Kth Smallest product:: ${KSmallestProduct3(arr3, 8, 4)}`);
 }
 
 //test7()
@@ -366,7 +366,7 @@ function PrintLargerHalf(arr, size) {
     for (let i = Math.floor(size / 2); i < size; i++) {
         process.stdout.write(`${arr[i]} `);
     }
-    console.info();
+    console.log();
 }
 
 function PrintLargerHalf2(arr, size) {
@@ -377,7 +377,7 @@ function PrintLargerHalf2(arr, size) {
     while (pq.isEmpty() === false){
             process.stdout.write(`${pq.remove()} `);
     }
-    console.info();
+    console.log();
 }
 
 function PrintLargerHalf3(arr, size) {
@@ -385,7 +385,7 @@ function PrintLargerHalf3(arr, size) {
     for (let i = (size / 2); i < size; i++) {
         process.stdout.write(`${arr[i]} `);
     }
-    console.info();
+    console.log();
 }
 
 // Testing code.
@@ -425,7 +425,7 @@ function sortK(arr, size, k) {
     for (i = 0; i < size; i++) {
         arr[i] = output[i];
     }
-    console.info(arr);
+    console.log(arr);
 }
 
 // Testing code.
@@ -460,7 +460,7 @@ function ChotaBhim(cups, size){
         cups[index] = temp;
         time -= 1;
     }
-    console.info(`Total : ${total}`);
+    console.log(`Total : ${total}`);
     return total;
 }
 
@@ -477,7 +477,7 @@ function ChotaBhim2(cups, size){
         pq.add(value);
         time -= 1;
     }
-    console.info(`Total : ${total}`);
+    console.log(`Total : ${total}`);
     return total;
 }
 
@@ -514,7 +514,7 @@ function JoinRopes(ropes, size) {
         ropes[index] = value;
         length--;
     }
-    console.info(`Total : ${total}`);
+    console.log(`Total : ${total}`);
     return total;
 }
 
@@ -529,7 +529,7 @@ function JoinRopes2(ropes, size) {
         pq.add(value);
         total += value;
     }
-    console.info(`Total : ${total}`);
+    console.log(`Total : ${total}`);
     return total;
 }
 

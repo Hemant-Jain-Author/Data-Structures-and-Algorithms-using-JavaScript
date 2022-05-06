@@ -2,10 +2,10 @@ const arr = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
 for (let i = 0; i < 10; i++) {
     arr[i] = i;
 }
-console.info(arr);
+console.log(JSON.stringify(arr));
 
 const arr2 = new Array(10).fill(0);
 for (let i = 0; i < 10; i++) {
     arr2[i] = i;
 }
-console.info(arr2);
+console.log(JSON.stringify(arr2));

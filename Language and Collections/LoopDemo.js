@@ -4,7 +4,7 @@ function main1() {
     for (let i = 0; i < numbers.length; i++) {
             sum += numbers[i];
     }
-    console.info(`Sum is :: ${sum}`);
+    console.log(`Sum is :: ${sum}`);
 }
 
 function main2() {
@@ -15,7 +15,7 @@ function main2() {
             sum += numbers[i];
             i++;
         }
-    console.info(`Sum is :: ${sum}`);
+    console.log(`Sum is :: ${sum}`);
 }
 
 main1();

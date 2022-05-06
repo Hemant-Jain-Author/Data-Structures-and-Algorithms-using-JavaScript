@@ -61,8 +61,8 @@ function test1(){
     const first = "hello";
     const second = "elloh";
     const third = "world";
-    console.info(`isAnagram : ${isAnagram(first, second)}`);
-    console.info(`isAnagram : ${isAnagram(first, third)}`);
+    console.log(`isAnagram : ${isAnagram(first, second)}`);
+    console.log(`isAnagram : ${isAnagram(first, third)}`);
 }
 
 test1()
@@ -87,7 +87,7 @@ function removeDuplicate(str){
 // Testing code.
 function test2(){
     const first = "hello";
-    console.info(removeDuplicate(first));
+    console.log(removeDuplicate(first));
 }
 
 test2()
@@ -110,7 +110,7 @@ function findMissing(arr, start, end){
 // Testing code.
 function test3(){
     const arr = [1, 2, 3, 5, 6, 7, 8, 9, 10];
-    console.info("Missing element is : ", findMissing(arr, 1, 10));
+    console.log("Missing element is : ", findMissing(arr, 1, 10));
 }
 
 test3()

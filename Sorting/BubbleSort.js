@@ -35,12 +35,12 @@ more = (value1, value2) => value1 > value2;
 // Testing code.
 const array = [9, 1, 8, 2, 7, 3, 6, 4, 5];
 bubbleSort(array, more);
-console.log(array);
+console.log(JSON.stringify(array));
 
 const array2 = [9, 1, 8, 2, 7, 3, 6, 4, 5];
 bubbleSort(array2, less);
-console.log(array2);
+console.log(JSON.stringify(array2));
 
 const array3 = [9, 1, 8, 2, 7, 3, 6, 4, 5];
 bubbleSort2(array3, more);
-console.log(array3);
+console.log(JSON.stringify(array3));

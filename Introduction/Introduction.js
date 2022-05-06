@@ -346,10 +346,10 @@ function SmallestPositiveMissingNumber4(arr, size) {
 function test8() {
     const arr = [8, 5, 6, 1, 9, 11, 2, 7, 4, 10];
     const size = arr.length;
-    console.info(`Smallest Positive Missing Number :${SmallestPositiveMissingNumber(arr, size)}`);
-    console.info(`Smallest Positive Missing Number :${SmallestPositiveMissingNumber2(arr, size)}`);
-    console.info(`Smallest Positive Missing Number :${SmallestPositiveMissingNumber3(arr, size)}`);
-    console.info(`Smallest Positive Missing Number :${SmallestPositiveMissingNumber4(arr, size)}`);
+    console.log(`Smallest Positive Missing Number :${SmallestPositiveMissingNumber(arr, size)}`);
+    console.log(`Smallest Positive Missing Number :${SmallestPositiveMissingNumber2(arr, size)}`);
+    console.log(`Smallest Positive Missing Number :${SmallestPositiveMissingNumber3(arr, size)}`);
+    console.log(`Smallest Positive Missing Number :${SmallestPositiveMissingNumber4(arr, size)}`);
 }
 
 test8()
@@ -421,7 +421,7 @@ function maxCircularSum(arr, size) {
 // Testing code.
 function test10() {
     const arr = [10, 9, 8, 7, 6, 5, 4, 3, 2, 1];
-    console.info(`Max Circulr Sum: ${maxCircularSum(arr, arr.length)}`);
+    console.log(`Max Circulr Sum: ${maxCircularSum(arr, arr.length)}`);
 }
 
 test10()
@@ -486,8 +486,8 @@ function ArrayIndexMaxDiff2(arr, size) {
 // Testing code.
 function test11() {
     const arr = [33, 9, 10, 3, 2, 60, 30, 33, 1];
-    console.info(`ArrayIndexMaxDiff : ${ArrayIndexMaxDiff(arr, arr.length)}`);
-    console.info(`ArrayIndexMaxDiff : ${ArrayIndexMaxDiff2(arr, arr.length)}`);
+    console.log(`ArrayIndexMaxDiff : ${ArrayIndexMaxDiff(arr, arr.length)}`);
+    console.log(`ArrayIndexMaxDiff : ${ArrayIndexMaxDiff2(arr, arr.length)}`);
 }
 
 test11()
@@ -532,7 +532,7 @@ function maxPathSum(arr1, size1, arr2, size2) {
 function test12() {
     const arr1 = [12, 13, 18, 20, 22, 26, 70];
     const arr2 = [11, 15, 18, 19, 20, 26, 30, 31];
-    console.info(`Max Path Sum :: ${maxPathSum(arr1, arr1.length, arr2, arr2.length)}`);
+    console.log(`Max Path Sum :: ${maxPathSum(arr1, arr1.length, arr2, arr2.length)}`);
 }
 
 test12()
@@ -544,7 +544,7 @@ function factorial(i) {
     return i * factorial(i - 1);
 }
 
-//console.info("factorial 5 is ::", factorial(5))
+//console.log("factorial 5 is ::", factorial(5))
 
 function printHaxIntUtil(number, base, arr) {
     const conversion = "0123456789ABCDEF";
@@ -581,7 +581,7 @@ function towerOfHanoi(num, src, dst, temp) {
 // Testing code.
 function test14() {
     const num = 3;
-    console.info("The sequence of moves are :");
+    console.log("The sequence of moves are :");
     towerOfHanoi(num, 'A', 'C', 'B');
     return 0;
 }

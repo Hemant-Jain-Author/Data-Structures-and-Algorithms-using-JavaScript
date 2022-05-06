@@ -134,7 +134,7 @@ NthPreOrderUtil(node, index, counter) {
     if (node != null) {
         counter[0]++;
         if (counter[0] === index) {
-            console.info(`Nth Preorder node is :: ${node.value}`);
+            console.log(`Nth Preorder node is :: ${node.value}`);
         }
         this.NthPreOrderUtil(node.left, index, counter);
         this.NthPreOrderUtil(node.right, index, counter);
@@ -153,7 +153,7 @@ NthPostOrderUtil(node, index, counter) {
         this.NthPostOrderUtil(node.right, index, counter);
         counter[0]++;
         if (counter[0] === index) {
-            console.info(`Nth Post order : ${node.value}`);
+            console.log(`Nth Post order : ${node.value}`);
         }
     }
 }
@@ -831,7 +831,7 @@ printDLL() {
 
 printAllPath() {
     const stk = ([]);
-    console.info("Print All Path : ");
+    console.log("Print All Path : ");
     this.printAllPathUtil(this.root, stk);
 }
 
@@ -841,7 +841,7 @@ printAllPathUtil(curr, stk) {
     stk.push(curr.value);
 
     if (curr.left == null && curr.right == null) {
-        console.info(stk);
+        console.log(stk);
         stk.pop();
         return;
     }
@@ -1071,17 +1071,17 @@ console.log(t.numNodes())
 console.log(t.sumAllBT())
 console.log(t.numLeafNodes())
 console.log(t.numFullNodesBT())
-console.info(t.searchBT(9))
+console.log(t.searchBT(9))
 console.log(t.findMaxBT())
 console.log(t.TreeDepth())
 console.log(t.maxLengthPathBT())
 const t2 = t.CopyTree()
 const t3 = t.CopyMirrorTree()
 console.log(t.isEqual(t2))
-console.info(t.isCompleteTree());
-//console.info(t.isCompleteTree2());
-//console.info(t.isHeap());
-//console.info(t.isHeap2());
+console.log(t.isCompleteTree());
+//console.log(t.isCompleteTree2());
+//console.log(t.isHeap());
+//console.log(t.isHeap2());
 
 //t.PrintInOrder()
 //t2 = t.treeToListRec(); 
@@ -1094,9 +1094,9 @@ console.info(t.isCompleteTree());
 //console.log(t.Find2(6))
 //console.log(t.FindMin())
 //console.log(t.FindMax())
-//console.info(t.isBST());
-//console.info(t.isBST2());
-//console.info(t.isBST3());
+//console.log(t.isBST());
+//console.log(t.isBST2());
+//console.log(t.isBST3());
 //console.log("Before delete operation.")
 //t.PrintInOrder()
 //t.DeleteNode(2)

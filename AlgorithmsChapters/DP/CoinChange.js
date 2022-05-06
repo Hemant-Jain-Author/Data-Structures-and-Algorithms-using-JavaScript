@@ -119,7 +119,7 @@ function minCoinsBU2(coins, n, val) // DP bottom up approach.
 
 function printCoinsUtil(cvalue, val) {
 	if (val > 0) {
-		var ret = printCoinsUtil(cvalue, val - cvalue[val]);
+		const ret = printCoinsUtil(cvalue, val - cvalue[val]);
 		return ret + cvalue[val] + " ";
 	}
 	return "";
@@ -127,7 +127,7 @@ function printCoinsUtil(cvalue, val) {
 
 function printCoins(cvalue, val) {
 	var ret = printCoinsUtil(cvalue, val);
-	console.info("Coins are : " + ret);
+	console.log("Coins are : " + ret);
 }
 
 /* Testing Code */

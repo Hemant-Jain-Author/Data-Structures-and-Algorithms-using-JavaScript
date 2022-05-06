@@ -89,7 +89,7 @@ function CircularTour(arr, n) {
 // Testing code.
 function test1() {
     const tour = [[8, 6], [1, 4], [7, 6]];
-    console.info(`Circular Tour : ${CircularTour(tour, 3)}`);
+    console.log(`Circular Tour : ${CircularTour(tour, 3)}`);
 }
 
 test1()
@@ -111,7 +111,7 @@ function convertXY(src, dst) {
             for (let i = 0; i < index; i++) {
                 process.stdout.write(`${arr[i]} `);
             }
-            console.info(`Steps count :: ${steps}`);
+            console.log(`Steps count :: ${steps}`);
             return steps;
         }
         steps++;
@@ -176,7 +176,7 @@ function minOfMaxSlidingWindows(arr, size, k) {
         if (i >= (k - 1) && minVal > arr[que.front()])
             minVal = arr[que.front()];
     }
-    console.info(`Min of max is :: ${minVal}`);
+    console.log(`Min of max is :: ${minVal}`);
     return minVal;
 }
 
@@ -206,7 +206,7 @@ function maxOfMinSlidingWindows(arr, size, k) {
         if (i >= (k - 1) && maxVal < arr[que.front()])
             maxVal = arr[que.front()];
     }
-    console.info(`Max of min is :: ${maxVal}`);
+    console.log(`Max of min is :: ${maxVal}`);
 }
 
 // Testing code.

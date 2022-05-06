@@ -138,7 +138,7 @@ class Graph {
     }
 
     print() {
-        console.info(this.adj);
+        console.log(this.adj);
     }
 
     print2() {
@@ -148,7 +148,7 @@ class Graph {
                 if (this.adj[i][j] !== 0)
                     t += j +"(" + this.adj[i][j] +") "
             }
-            console.info(t)
+            console.log(t)
         }
     }
 
@@ -233,7 +233,7 @@ class Graph {
         console.log(`Total MST cost : ${total}`)    }
 
 	printPathUtil(previous, source, dest) {
-		var path = "";
+		let path = "";
 		if (dest == source)
 			path += source;
 		else {
@@ -244,8 +244,8 @@ class Graph {
 	}
 
 	printPath(previous, dist, count, source) {
-		var output = "Shortest Paths: ";
-		for (var i = 0; i < count; i++) {
+		let output = "Shortest Paths: ";
+		for (let i = 0; i < count; i++) {
 			if (dist[i] == 99999)
 				output += ("(" + source + "->" + i + " @ Unreachable) ");
 			else if (i != previous[i]) {
@@ -283,10 +283,10 @@ class Graph {
         const added = new Array(count).fill(0);
 
         if (this.hamiltonianPathUtil(path, 0, added)) {
-            console.info("Hamiltonian Path found :: " , path);
+            console.log("Hamiltonian Path found :: " , path);
             return true;
         }
-        console.info("Hamiltonian Path not found");
+        console.log("Hamiltonian Path not found");
         return false;
     }
 
@@ -321,10 +321,10 @@ class Graph {
         const added = new Array(count).fill(0);
 
         if (this.hamiltonianCycleUtil(path, 0, added)) {
-            console.info("Hamiltonian Cycle found :: ", path);
+            console.log("Hamiltonian Cycle found :: ", path);
             return true;
         }
-        console.info("Hamiltonian Cycle not found");
+        console.log("Hamiltonian Cycle not found");
         return false;
     }
 }
@@ -402,7 +402,7 @@ function test4(){
         }
     }
 
-    console.info(`hamiltonianPath : ${graph.hamiltonianPath()}`);
+    console.log(`hamiltonianPath : ${graph.hamiltonianPath()}`);
 
     const graph2 = new Graph(count);
     const adj2 =
@@ -418,7 +418,7 @@ function test4(){
                 graph2.addDirectedEdge(i, j, 1);
         }
     }
-    console.info(`hamiltonianPath :  ${graph2.hamiltonianPath()}`);
+    console.log(`hamiltonianPath :  ${graph2.hamiltonianPath()}`);
 }
 
 /* Testing Code */
@@ -439,7 +439,7 @@ function test5(){
         }
     }
 
-    console.info(`hamiltonianCycle : ${graph.hamiltonianCycle()}`);
+    console.log(`hamiltonianCycle : ${graph.hamiltonianCycle()}`);
 
     const graph2 = new Graph(count);
     const adj2 =
@@ -455,7 +455,7 @@ function test5(){
                 graph2.addDirectedEdge(i, j, 1);
         }
     }
-    console.info(`hamiltonianCycle :  ${graph2.hamiltonianCycle()}`);
+    console.log(`hamiltonianCycle :  ${graph2.hamiltonianCycle()}`);
 }
 
 test1()
