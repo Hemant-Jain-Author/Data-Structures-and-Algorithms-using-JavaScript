@@ -1,6 +1,6 @@
 less = (value1, value2) => value1 < value2;
 
-more = (value1, value2) => value1 > value2;
+greater = (value1, value2) => value1 > value2;
 
 function selectionSort(arr, compare) {
     const size = arr.length;
@@ -38,10 +38,14 @@ function selectionSort2(arr, compare) {
 
 // Testing code.
 const array = [4, 5, 3, 2, 6, 7, 1, 8, 9, 10];
-
-selectionSort(array, more);
-console.log(array);
+selectionSort(array, greater);
+console.log(JSON.stringify(array));
 
 const array2 = [9, 1, 8, 2, 7, 3, 6, 4, 5];
 selectionSort2(array2, less);
-console.log(array2);
+console.log(JSON.stringify(array2));
+
+/*
+[1,2,3,4,5,6,7,8,9,10]
+[9,8,7,6,5,4,3,2,1]
+*/

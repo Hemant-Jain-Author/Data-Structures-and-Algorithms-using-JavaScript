@@ -1,8 +1,6 @@
 
-function MatrixChainMulBruteForceUtil(p, i, j)
-{
-	if (i == j)
-	{
+function MatrixChainMulBruteForceUtil(p, i, j) {
+	if (i == j) {
 		return 0;
 	}
 	let min = Number.MAX_VALUE;
@@ -10,8 +8,7 @@ function MatrixChainMulBruteForceUtil(p, i, j)
 	// first and last matrix, recursively calculate
 	// count of multiplications for each parenthesis
 	// placement and return the minimum count
-	for (let k = i; k < j; k++)
-	{
+	for (let k = i; k < j; k++) {
 		let count = MatrixChainMulBruteForceUtil(p, i, k) + 
 		MatrixChainMulBruteForceUtil(p, k + 1, j) + p[i - 1] * p[k] * p[j];
 		min = Math.min(min, count);
@@ -20,54 +17,43 @@ function MatrixChainMulBruteForceUtil(p, i, j)
 	return min;
 }
 
-function MatrixChainMulBruteForce(p, n)
-{
+function MatrixChainMulBruteForce(p, n) {
 	let i = 1;
 	let j = n - 1;
 	return MatrixChainMulBruteForceUtil(p, i, j);
 }
 
-function MatrixChainMulTD(p, n)
-{
+function MatrixChainMulTD(p, n) {
 	const dp = Array(n).fill(0).map(() => new Array(n).fill(Number.MAX_VALUE));
 	return MatrixChainMulTDUtil(dp, p, 1, n - 1);
 }
 
 // Function for matrix chain multiplication
-function MatrixChainMulTDUtil(dp, p, i, j)
-{
+function MatrixChainMulTDUtil(dp, p, i, j) {
 	// Base Case
-	if (i == j)
-	{
+	if (i == j) {
 		return 0;
 	}
-	if (dp[i][j] != Number.MAX_VALUE)
-	{
+	if (dp[i][j] != Number.MAX_VALUE) {
 		return dp[i][j];
 	}
-	for (let k = i; k < j; k++)
-	{
+	for (let k = i; k < j; k++) {
 		dp[i][j] = Math.min(dp[i][j], MatrixChainMulTDUtil(dp, p, i, k) +
 		 MatrixChainMulTDUtil(dp, p, k + 1, j) + p[i - 1] * p[k] * p[j]);
 	}
 	return dp[i][j];
 }
 
-function MatrixChainMulBU(p, n)
-{
+function MatrixChainMulBU(p, n) {
 	const dp = Array(n).fill(0).map(() => new Array(n).fill(Number.MAX_VALUE));
 
-	for (let i = 1; i < n; i++)
-	{
+	for (let i = 1; i < n; i++) {
 		dp[i][i] = 0;
 	}
-	for (let l = 1; l < n; l++)
-	{
+	for (let l = 1; l < n; l++) {
 		// l is length of range.
-		for (let i = 1, j = i + l; j < n; i++, j++)
-		{
-			for (let k = i; k < j; k++)
-			{
+		for (let i = 1, j = i + l; j < n; i++, j++) {
+			for (let k = i; k < j; k++) {
 				dp[i][j] = Math.min(dp[i][j], dp[i][k] + p[i - 1] * p[k] * p[j] + dp[k + 1][j]);
 			}
 		}
@@ -75,22 +61,17 @@ function MatrixChainMulBU(p, n)
 	return dp[1][n - 1];
 }
 
-function MatrixChainMulBU2(p, n)
-{
+function MatrixChainMulBU2(p, n) {
 	const dp = Array(n).fill(0).map(() => new Array(n).fill(Number.MAX_VALUE));
 	const pos = Array(n).fill(0).map(() => new Array(n));
-	for (let i = 1; i < n; i++)
-	{
+	for (let i = 1; i < n; i++) {
 		dp[i][i] = 0;
 		pos[i][i] = i;
 	}
-	for (let l = 1; l < n; l++)
-	{
+	for (let l = 1; l < n; l++) {
 		// l is length of range.
-		for (let i = 1, j = i + l; j < n; i++, j++)
-		{
-			for (let k = i; k < j; k++)
-			{
+		for (let i = 1, j = i + l; j < n; i++, j++) {
+			for (let k = i; k < j; k++) {
 				dp[i][j] = Math.min(dp[i][j], dp[i][k] + p[i - 1] * p[k] * p[j] + dp[k + 1][j]);
 				pos[i][j] = k;
 			}

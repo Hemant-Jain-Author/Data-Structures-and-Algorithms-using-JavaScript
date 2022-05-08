@@ -5,15 +5,11 @@ function minCoins(coins, n, val) // Greedy may be wrong.
 
 	let count = 0;
 	coins.sort(function(a, b){return a - b;});
-	for (let i = n - 1; i >= 0 && val > 0;)
-	{
-		if (coins[i] <= val)
-		{
+	for (let i = n - 1; i >= 0 && val > 0;) {
+		if (coins[i] <= val) {
 			count++;
 			val -= coins[i];
-		}
-		else
-		{
+		} else {
 			i--;
 		}
 	}
@@ -26,10 +22,8 @@ function minCoins2(coins, n, val) // Brute force.
 		return 0;
 
 	let count = Number.MAX_VALUE;
-	for (let i = 0; i < n; i++)
-	{
-		if (coins[i] <= val)
-		{
+	for (let i = 0; i < n; i++) {
+		if (coins[i] <= val) {
 			let subCount = minCoins2(coins, n, val - coins[i]);
 			if (subCount >= 0)
 				count = Math.min(count, subCount + 1);
@@ -45,8 +39,7 @@ function minCoinsTD(coins, n, val) // DP top down approach.
 	return minCoinsTDUtil(count, coins, n, val);
 }
 
-function minCoinsTDUtil(count, coins, n, val)
-{
+function minCoinsTDUtil(count, coins, n, val) {
 	// Base Case
 	if (val == 0)
 		return 0;
@@ -55,10 +48,8 @@ function minCoinsTDUtil(count, coins, n, val)
 		return count[val];
 
 	// Recursion
-	for (let i = 0; i < n; i++)
-	{
-		if (coins[i] <= val)
-		{
+	for (let i = 0; i < n; i++) {
+		if (coins[i] <= val) {
 			// check validity of a sub-problem
 			let subCount = minCoinsTDUtil(count, coins, n, val - coins[i]);
 			if (subCount != Number.MAX_VALUE)
@@ -73,10 +64,8 @@ function minCoinsBU(coins, n, val) // count bottom up approach.
 	const count = new Array(val + 1);
 	count.fill(Number.MAX_VALUE);
 	count[0] = 0; // Base value.
-	for (let i = 1; i <= val; i++)
-	{
-		for (let j = 0; j < n; j++)
-		{
+	for (let i = 1; i <= val; i++) {
+		for (let j = 0; j < n; j++) {
 			if (coins[j] <= i && count[i - coins[j]] !== Number.MAX_VALUE && count[i] > count[i - coins[j]] + 1) 			
 			{
 				count[i] = count[i - coins[j]] + 1;
@@ -98,10 +87,8 @@ function minCoinsBU2(coins, n, val) // DP bottom up approach.
 	cvalue.fill(Number.MAX_VALUE);
 	
 	count[0] = 0; // Base value.
-	for (let i = 1; i <= val; i++)
-	{
-		for (let j = 0; j < n; j++)
-		{
+	for (let i = 1; i <= val; i++) {
+		for (let j = 0; j < n; j++) {
 			if (coins[j] <= i && count[i - coins[j]] !== Number.MAX_VALUE && count[i] > count[i - coins[j]] + 1) 			
 			{
 				count[i] = count[i - coins[j]] + 1;

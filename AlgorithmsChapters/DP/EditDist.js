@@ -1,19 +1,16 @@
 
-function min(x, y, z)
-{
+function min(x, y, z) {
 	x = Math.min(x, y);
 	return Math.min(x, z);
 }
 
-function editDist(str1, str2)
-{
+function editDist(str1, str2) {
 	const m = str1.length;
 	const n = str2.length;
 	return editDistUtil(str1, str2, m, n);
 }
 
-function editDistUtil(str1, str2, m, n)
-{
+function editDistUtil(str1, str2, m, n) {
 	// If any one string is empty, then empty the other string.
 	if (m == 0 || n == 0) 
 		return m + n;
@@ -31,17 +28,14 @@ function editDistUtil(str1, str2, m, n)
 					editDistUtil(str1, str2, m - 1, n - 1));
 }
 
-function editDistDP(str1, str2)
-{
+function editDistDP(str1, str2) {
 	const m = str1.length;
 	const n = str2.length;
 	const dp = Array(m + 1).fill(0).map(() => new Array(n + 1).fill(0));
 
 	// Fill dp[][] in bottom up manner.
-	for (let i = 0; i <= m; i++)
-	{
-		for (let j = 0; j <= n; j++)
-		{
+	for (let i = 0; i <= m; i++) {
+		for (let j = 0; j <= n; j++) {
 			// If any one string is empty, then empty the other string.
 			if (i == 0 || j == 0)
 				dp[i][j] = (i + j);

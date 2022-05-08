@@ -1,5 +1,4 @@
-function fastestWayBU2(a, t, e, x, n)
-{
+function fastestWayBU2(a, t, e, x, n) {
 	const f1 = Array(n).fill(0);
 	const f2 = Array(n).fill(0);
 	// Time taken to leave first station.
@@ -7,8 +6,7 @@ function fastestWayBU2(a, t, e, x, n)
 	f2[0] = e[1] + a[1][0];
 	// Fill the tables f1[] and f2[] using
 	// bottom up approach.
-	for (let i = 1; i < n; ++i)
-	{
+	for (let i = 1; i < n; ++i) {
 		f1[i] = Math.min(f1[i - 1] + a[0][i], f2[i - 1] + t[1][i - 1] + a[0][i]);
 		f2[i] = Math.min(f2[i - 1] + a[1][i], f1[i - 1] + t[0][i - 1] + a[1][i]);
 	}
@@ -16,16 +14,14 @@ function fastestWayBU2(a, t, e, x, n)
 	return Math.min(f1[n - 1] + x[0], f2[n - 1] + x[1]);
 }
 
-function fastestWayBU(a, t, e, x, n)
-{
+function fastestWayBU(a, t, e, x, n) {
 	const f = Array(2).fill(0).map(() => new Array(n).fill(0));
 	// Time taken to leave first station.
 	f[0][0] = e[0] + a[0][0];
 	f[1][0] = e[1] + a[1][0];
 	// Fill the tables f1[] and f2[] using
 	// bottom up approach.
-	for (let i = 1; i < n; ++i)
-	{
+	for (let i = 1; i < n; ++i) {
 		f[0][i] = Math.min(f[0][i - 1] + a[0][i], f[1][i - 1] + t[1][i - 1] + a[0][i]);
 		f[1][i] = Math.min(f[1][i - 1] + a[1][i], f[0][i - 1] + t[0][i - 1] + a[1][i]);
 	}
@@ -33,8 +29,7 @@ function fastestWayBU(a, t, e, x, n)
 	return Math.min(f[0][n - 1] + x[0], f[1][n - 1] + x[1]);
 }
 
-function fastestWayTD(a, t, e, x, n)
-{
+function fastestWayTD(a, t, e, x, n) {
 	const f = Array(2).fill(0).map(() => new Array(n).fill(0));
 	// Time taken to leave first station.
 	f[0][0] = e[0] + a[0][0];
@@ -43,8 +38,7 @@ function fastestWayTD(a, t, e, x, n)
 	return Math.min(f[0][n - 1] + x[0], f[1][n - 1] + x[1]);
 }
 
-function fastestWayTDUtil(f, a, t, i)
-{
+function fastestWayTDUtil(f, a, t, i) {
 	if (i == 0)
 		return;
 

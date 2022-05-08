@@ -46,16 +46,13 @@ class HashTable {
         let hashValue = this.ComputeHash(key);
         for (let i = 0; i < this.tableSize; i++) {
             if ((this.FlagArr[hashValue] === EMPTY_VALUE) || 
-                (this.FlagArr[hashValue] === DELETED_VALUE))
-            {
+                (this.FlagArr[hashValue] === DELETED_VALUE)) {
                 this.DataArr[hashValue] = value;
                 this.KeyArr[hashValue] = key;
                 this.FlagArr[hashValue] = FILLED_VALUE;
                 return true;
-            } 
-            else if (this.FlagArr[hashValue] === FILLED_VALUE && 
-                this.KeyArr[hashValue] === key) 
-            {
+            } else if (this.FlagArr[hashValue] === FILLED_VALUE && 
+                            this.KeyArr[hashValue] === key) {
                 this.DataArr[hashValue] = value;
                 return true;
             }

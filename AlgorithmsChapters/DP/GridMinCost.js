@@ -1,11 +1,9 @@
-function min(x, y, z)
-{
+function min(x, y, z) {
 	x = Math.min(x, y);
 	return Math.min(x, z);
 }
 
-function minCost(cost, m, n)
-{
+function minCost(cost, m, n) {
 	if (m == 0 || n == 0)
 		return 99999;
 	
@@ -15,8 +13,7 @@ function minCost(cost, m, n)
 	return cost[m - 1][n - 1] + min(minCost(cost, m - 1, n - 1), minCost(cost, m - 1, n), minCost(cost, m, n - 1));
 }
 
-function minCostBU(cost, m, n)
-{
+function minCostBU(cost, m, n) {
 	const tc = Array(m).fill(0).map(() => new Array(n).fill(0));
 	tc[0][0] = cost[0][0];
 	// Initialize first column.
@@ -27,8 +24,7 @@ function minCostBU(cost, m, n)
 	for (let j = 1; j < n; j++)
 		tc[0][j] = tc[0][j - 1] + cost[0][j];
 	
-	for (let i = 1; i < m; i++)
-	{
+	for (let i = 1; i < m; i++) {
 		for (let j = 1; j < n; j++)
 			tc[i][j] = cost[i][j] + min(tc[i - 1][j - 1], tc[i - 1][j], tc[i][j - 1]);
 	}

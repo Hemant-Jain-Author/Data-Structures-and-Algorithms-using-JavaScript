@@ -1,13 +1,11 @@
 
 // Function to find the minimum weight Hamiltonian Cycle 
-function tspUtil(graph, n, path, pSize, pCost, visited, ans, ansPath)
-{
+function tspUtil(graph, n, path, pSize, pCost, visited, ans, ansPath) {
 	if(pCost >= ans) // Ignore useless paths.
         return ans;
 
 	const curr = path[pSize - 1];
-	if (pSize == n)
-	{
+	if (pSize == n) {
 		let first = path[0];
 		if(graph[curr][0] > 0 && ans > pCost + graph[curr][first]) {
 			ans = pCost + graph[curr][first];
@@ -18,10 +16,8 @@ function tspUtil(graph, n, path, pSize, pCost, visited, ans, ansPath)
 		return ans;
 	}
 	
-	for (let i = 0; i < n; i++)
-	{
-		if (visited[i] == false && graph[curr][i] > 0)
-		{
+	for (let i = 0; i < n; i++) {
+		if (visited[i] == false && graph[curr][i] > 0) {
 			visited[i] = true;
 			path[pSize] = i;
 			ans = tspUtil(graph, n, path, pSize + 1, pCost + graph[curr][i], visited, ans, ansPath);
@@ -31,8 +27,7 @@ function tspUtil(graph, n, path, pSize, pCost, visited, ans, ansPath)
 	return ans;
 }
 
-function tsp(graph, n)
-{
+function tsp(graph, n) {
 	const visited = Array(n).fill(false);
 	const path = Array(n).fill(0);
 	let ansPath = Array(n).fill(0);

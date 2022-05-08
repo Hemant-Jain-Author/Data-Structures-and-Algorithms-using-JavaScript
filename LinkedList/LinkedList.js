@@ -178,7 +178,6 @@ class LinkedList {
             return false;
         else
             return this.compareListUtil(head1.next, head2.next);
-
     }
 
     compareList2(head) {
@@ -191,6 +190,7 @@ class LinkedList {
             head1 = head1.next;
             head2 = head2.next;
         }
+
         if (head1 == null && head2 == null)
             return true;
         return false;
@@ -269,9 +269,11 @@ class LinkedList {
         } else {
             diff = l1 - l2;
         }
+
         for (; diff > 0; diff--) {
             head = head.next;
         }
+
         while (head !== head2) {
             head = head.next;
             head2 = head2.next;
@@ -301,6 +303,7 @@ class LinkedList {
             this.head = newNode;
             return;
         }
+        
         while (curr.next != null && curr.next.value < value) {
             curr = curr.next;
         }

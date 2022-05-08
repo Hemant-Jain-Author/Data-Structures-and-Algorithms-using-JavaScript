@@ -1,6 +1,5 @@
 
-function findWays(n, m, V)
-{
+function findWays(n, m, V) {
 	const dp = new Array(n + 1);
 	for (let i = 0; i < (n + 1); i++)
 		dp[i] = new Array(V + 1).fill(0);
@@ -10,10 +9,8 @@ function findWays(n, m, V)
 		dp[1][j] = 1;
 
 	// i is number of dice, j is Value, k value of dice.
-	for (let i = 2; i <= n; i++)
-	{
-		for (let j = 1; j <= V; j++)
-		{
+	for (let i = 2; i <= n; i++) {
+		for (let j = 1; j <= V; j++) {
 			for (let k = 1; k <= j && k <= m; k++)
 				dp[i][j] += dp[i - 1][j - k];
 		}
@@ -22,8 +19,7 @@ function findWays(n, m, V)
 }
 
 /* Testing Code */
-for (let i = 1; i <= 6; i++)
-{
+for (let i = 1; i <= 6; i++) {
 	console.log(findWays(i, 6, 6));
 }
 

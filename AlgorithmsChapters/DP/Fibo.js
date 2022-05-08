@@ -1,12 +1,10 @@
-function fibonacci(n)
-{
+function fibonacci(n) {
 	if (n < 2)
 		return n;
 	return fibonacci(n - 1) + fibonacci(n - 2);
 }
 
-function fibonacciBU2(n)
-{
+function fibonacciBU2(n) {
 	if (n < 2)
 		return n;
 
@@ -14,8 +12,7 @@ function fibonacciBU2(n)
 	let second = 1;
 	let temp = 0;
 
-	for (let i = 2; i <= n; i++)
-	{
+	for (let i = 2; i <= n; i++) {
 		temp = first + second;
 		first = second;
 		second = temp;
@@ -23,8 +20,7 @@ function fibonacciBU2(n)
 	return temp;
 }
 
-function fibonacciBU(n)
-{
+function fibonacciBU(n) {
 	if (n < 2)
 		return n;
 	
@@ -38,15 +34,13 @@ function fibonacciBU(n)
 	return dp[n];
 }
 
-function fibonacciTD(n)
-{
+function fibonacciTD(n) {
 	const dp = Array(n+1).fill(0);
 	fibonacciTDUtil(n, dp);
 	return dp[n];
 }
 
-function fibonacciTDUtil(n, dp)
-{
+function fibonacciTDUtil(n, dp) {
 	if (n < 2)
 		return dp[n] = n;
 	

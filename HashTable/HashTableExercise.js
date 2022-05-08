@@ -137,7 +137,7 @@ function printFirstRepeating(arr){
     for (let i = 0; i < size; i++) {
         hs.insert(arr[i]);
     }
- for (let i = 0; i < size; i++) {
+    for (let i = 0; i < size; i++) {
         hs.remove(arr[i]);
         if (hs.find(arr[i])) {
             console.log(`First Repeating number is : ${arr[i]}`);

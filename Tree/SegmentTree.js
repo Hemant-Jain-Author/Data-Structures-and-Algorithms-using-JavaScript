@@ -1,7 +1,6 @@
 class SegmentTree
 {
-	constructor(input)
-	{
+	constructor(input) {
 		this.size = input.length; // Height of segment tree.
 		let x = parseInt(Math.ceil(Math.log(this.size) / Math.log(2))); //Maximum size of segment tree
 		let max_size = 2 * parseInt(Math.pow(2, x)) - 1; // Allocate memory for segment tree
@@ -9,11 +8,9 @@ class SegmentTree
 		this.constructST(input, 0, this.size - 1, 0);
 	}
 
-	constructST(input, start, end, index)
-	{
+	constructST(input, start, end, index) {
 		// Store it in current node of the segment tree and return
-		if (start == end)
-		{
+		if (start == end) {
 			this.segArr[index] = input[start];
 			return input[start];
 		}
@@ -25,26 +22,21 @@ class SegmentTree
 		return this.segArr[index];
 	}
     
-	getSum(start, end)
-	{
+	getSum(start, end) {
 		// Check for error conditions.
-		if (start > end || start < 0 || end > this.size - 1)
-		{
+		if (start > end || start < 0 || end > this.size - 1) {
 			console.log("Invalid Input.");
 			return -1;
 		}
 		return this.getSumUtil(0, this.size - 1, start, end, 0);
 	}
 
-	getSumUtil(segStart, segEnd, queryStart, queryEnd, index)
-	{
-		if (queryStart <= segStart && segEnd <= queryEnd)
-		{
+	getSumUtil(segStart, segEnd, queryStart, queryEnd, index) {
+		if (queryStart <= segStart && segEnd <= queryEnd) {
 			// complete overlapping case.
 			return this.segArr[index];
 		}
-		if (segEnd < queryStart || queryEnd < segStart)
-		{
+		if (segEnd < queryStart || queryEnd < segStart) {
 			// no overlapping case.
 			return 0;
 		}
@@ -53,11 +45,9 @@ class SegmentTree
 		return this.getSumUtil(segStart, mid, queryStart, queryEnd, 2 * index + 1) + this.getSumUtil(mid + 1, segEnd, queryStart, queryEnd, 2 * index + 2);
 	}
 	
-    set(arr, ind, val)
-	{
+    set(arr, ind, val) {
 		// Check for error conditions.
-		if (ind < 0 || ind > this.size - 1)
-		{
+		if (ind < 0 || ind > this.size - 1) {
 			console.log("Invalid Input.");
 			return;
 		}
@@ -67,27 +57,21 @@ class SegmentTree
 	}
 	
     // Always diff will be returned.
-	setUtil(segStart, segEnd, ind, val, index)
-	{
+	setUtil(segStart, segEnd, ind, val, index) {
 		// set index lies outside the range of current segment.
 		// So diff to its parent node will be zero.
-		if (ind < segStart || ind > segEnd)
-		{
+		if (ind < segStart || ind > segEnd) {
 			return 0;
 		}
 		// If the input index is in range of this node, then set the
 		// value of the node and its children
-		if (segStart == segEnd)
-		{
-			if (segStart == ind)
-			{
+		if (segStart == segEnd) {
+			if (segStart == ind) {
 				// Index that need to be set.
 				let diff = val - this.segArr[index];
 				this.segArr[index] = val;
 				return diff;
-			}
-			else
-			{
+			} else {
 				return 0;
 			}
 		}

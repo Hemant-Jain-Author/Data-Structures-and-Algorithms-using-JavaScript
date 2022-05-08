@@ -374,6 +374,7 @@ function PrintLargerHalf2(arr, size) {
     for (let i = 0; i < (size / 2); i++) {
         pq.remove();
     }
+    
     while (pq.isEmpty() === false){
             process.stdout.write(`${pq.remove()} `);
     }
@@ -412,6 +413,7 @@ function sortK(arr, size, k) {
     for (i = 0; i < k; i++) {
         pq.add(arr[i]);
     }
+
     const output = new Array(size);
     let index = 0;
     for (i = k; i < size; i++) {
@@ -422,6 +424,7 @@ function sortK(arr, size, k) {
     while (pq.isEmpty() === false) {
         output[index++] = pq.remove();
     }
+
     for (i = 0; i < size; i++) {
         arr[i] = output[i];
     }
@@ -556,14 +559,15 @@ class MedianHeap {
     insert(value) {
         if (this.maxHeap.isEmpty() === true || this.maxHeap.peek() >= value) {
             this.maxHeap.add(value);
-        }
-        else {
+        } else {
             this.minHeap.add(value);
         }
+
         if (this.maxHeap.length() > this.minHeap.length() + 1) {
             value = this.maxHeap.remove();
             this.minHeap.add(value);
         }
+
         if (this.minHeap.length() > this.maxHeap.length() + 1) {
             value = this.minHeap.remove();
             this.maxHeap.add(value);
@@ -573,6 +577,7 @@ class MedianHeap {
     getMedian() {
         if (this.maxHeap.isEmpty() === true && this.minHeap.isEmpty() === true)
             return MAX_VALUE;
+        
         if (this.maxHeap.length() === this.minHeap.length())
             return ((this.maxHeap.peek() + this.minHeap.peek()) / 2 | 0);
         else if (this.maxHeap.length() > this.minHeap.length())

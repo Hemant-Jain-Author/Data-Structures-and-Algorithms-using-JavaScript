@@ -17,7 +17,6 @@ class HashTable {
             hashFun = this.DefaultHashFun;
 
         this.HashFun = hashFun;
-
         this.tableSize = 512;
         this.listArray = new Array(this.tableSize).fill(null);
     }
@@ -42,8 +41,7 @@ class HashTable {
             value = key;
 
         const index = this.ComputeHash(key);
-        this.listArray[index] = new HashTableNode(key, value,
-            this.listArray[index]);
+        this.listArray[index] = new HashTableNode(key, value,this.listArray[index]);
     }
 
     delete(key) {
@@ -60,8 +58,7 @@ class HashTable {
             if (nextNode != null && nextNode.key === key) {
                 head.next = nextNode.next;
                 return true;
-            }
-            else {
+            } else {
                 head = nextNode;
             }
         }

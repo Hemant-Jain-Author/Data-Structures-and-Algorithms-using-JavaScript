@@ -1,5 +1,4 @@
 
-
 greater = (x, y) => (x > y);
 less = (x, y) => (x < y);
 
@@ -80,20 +79,17 @@ class PriorityQueue {
     }
 }
 
-function chotaBhim(cups)
-{
+function chotaBhim(cups) {
 	const size = cups.length;
 	let time = 60;
 	cups.sort(function(a, b){return b - a;});
 	let total = 0, index = 0, temp = 0;
-	while (time > 0)
-	{
+	while (time > 0) {
 		total += cups[0];
 		cups[0] = parseInt(Math.ceil(cups[0] / 2.0));
 		index = 0;
 		temp = cups[0];
-		while (index < size - 1 && temp < cups[index + 1])
-		{
+		while (index < size - 1 && temp < cups[index + 1]) {
 			cups[index] = cups[index + 1];
 			index += 1;
 		}
@@ -104,19 +100,16 @@ function chotaBhim(cups)
 	return total;
 }
 
-function chotaBhim2(cups)
-{
+function chotaBhim2(cups) {
 	const size = cups.length;
 	let time = 60;
 	let pq = new PriorityQueue(less);
-	for (let i = 0; i < size; i++)
-	{
+	for (let i = 0; i < size; i++) {
 		pq.add(cups[i]);
 	}
 	let total = 0;
 	let value = 0;
-	while (time > 0)
-	{
+	while (time > 0) {
 		value = pq.remove();
 		total += value;
 		value = Math.ceil(value / 2.0);

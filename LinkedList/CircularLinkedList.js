@@ -30,8 +30,7 @@ class CircularLinkedList {
         if (this.isEmpty()) {
             this.tail = temp;
             temp.next = temp;
-        }
-        else {
+        } else {
             temp.next = this.tail.next;
             this.tail.next = temp;
             this.tail = temp;
@@ -44,8 +43,7 @@ class CircularLinkedList {
         if (this.isEmpty()) {
             this.tail = temp;
             temp.next = temp;
-        }
-        else {
+        } else {
             temp.next = this.tail.next;
             this.tail.next = temp;
         }
@@ -105,6 +103,7 @@ class CircularLinkedList {
             cl.addHead(curr.value);
             curr = curr.next;
         }
+
         while (curr !== head) {
             cl.addHead(curr.value);
             curr = curr.next;
@@ -121,6 +120,7 @@ class CircularLinkedList {
             cl.addTail(curr.value);
             curr = curr.next;
         }
+
         while (curr !== head) {
             cl.addTail(curr.value);
             curr = curr.next;
@@ -138,6 +138,7 @@ class CircularLinkedList {
         if (this.isEmpty()) {
             return;
         }
+        
         let temp = this.tail.next;
         while (temp !== this.tail) {
             process.stdout.write(`${temp.value} `);

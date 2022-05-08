@@ -116,8 +116,7 @@ InsertNodeUtil(node, value) {
     else {
         if (node.value > value) {
             node.left = this.InsertNodeUtil(node.left, value);
-        }
-        else {
+        } else {
             node.right = this.InsertNodeUtil(node.right, value);
         }
     }
@@ -218,6 +217,7 @@ PrintLevelOrderLineByLine() {
     let temp = null;
     if (this.root != null)
         que1.add(this.root);
+    
     process.stdout.write("Level Order LineByLine : \n");
     while (que1.length() !== 0 || que2.length() !== 0) {
         while (que1.length() !== 0) {
@@ -303,8 +303,7 @@ Find(value) {
         }
         else if (curr.value > value) {
             curr = curr.left;
-        }
-        else {
+        } else {
             curr = curr.right;
         }
     }
@@ -381,8 +380,7 @@ DeleteNodeUtil(node, value) {
         if (node.value === value) {
             if (node.left == null && node.right == null) {
                 return null;
-            }
-            else {
+            } else {
                 if (node.left == null) {
                     temp = node.right;
                     return temp;
@@ -396,12 +394,10 @@ DeleteNodeUtil(node, value) {
                 node.value = minValue;
                 node.right = this.DeleteNodeUtil(node.right, minValue);
             }
-        }
-        else {
+        } else {
             if (node.value > value) {
                 node.left = this.DeleteNodeUtil(node.left, value);
-            }
-            else {
+            } else {
                 node.right = this.DeleteNodeUtil(node.right, value);
             }
         }
@@ -517,6 +513,7 @@ numFullNodesBTUtil(curr) {
     let count;
     if (curr == null)
         return 0;
+    
     count = this.numFullNodesBTUtil(curr.right) + this.numFullNodesBTUtil(curr.left);
     if (curr.right != null && curr.left != null)
         count++;
@@ -607,8 +604,7 @@ iterativePostOrder() {
         vtd = visited.pop();
         if (vtd === 1) {
             process.stdout.write(` ${curr.value}`);
-        }
-        else {
+        } else {
             stk.push(curr);
             visited.push(1);
             if (curr.right != null) {
@@ -641,8 +637,7 @@ iterativeInOrder() {
         vtd = visited.pop();
         if (vtd === 1) {
             process.stdout.write(` ${curr.value}`);
-        }
-        else {
+        } else {
             if (curr.right != null) {
                 stk.push(curr.right);
                 visited.push(0);
@@ -661,10 +656,13 @@ iterativeInOrder() {
 isBST3(root) {
     if (root == null)
         return true;
+    
     if (root.left != null && this.FindMaxNode(root.left).value > root.value)
         return false;
+    
     if (root.right != null && this.FindMinNode(root.right).value <= root.value)
         return false;
+    
     return (this.isBST3(root.left) && this.isBST3(root.right));
 }
 
@@ -675,8 +673,10 @@ isBST() {
 isBSTUtil(curr, min, max) {
     if (curr == null)
         return true;
+    
     if (curr.value < min || curr.value > max)
         return false;
+    
     return this.isBSTUtil(curr.left, min, curr.value) && this.isBSTUtil(curr.right, curr.value, max);
 }
 
@@ -691,6 +691,7 @@ isBST2Util(root, count) {
         ret = this.isBST2Util(root.left, count);
         if (!ret)
             return false;
+        
         if (count[0] > root.value)
             return false;
 
@@ -715,16 +716,14 @@ isCompleteTree() {
             if (noChild === 1)
                 return false;
             que.add(temp.left);
-        }
-        else
+        } else
             noChild = 1;
 
         if (temp.right != null) {
             if (noChild === 1)
                 return false;
             que.add(temp.right);
-        }
-        else
+        } else
             noChild = 1;
     }
     return true;
@@ -733,8 +732,10 @@ isCompleteTree() {
 isCompleteTreeUtil(curr, index, count) {
     if (curr == null)
         return true;
+    
     if (index > count)
         return false;
+    
     return this.isCompleteTreeUtil(curr.left, index * 2 + 1, count) && this.isCompleteTreeUtil(curr.right, index * 2 + 2, count);
 }
 
@@ -746,8 +747,10 @@ isCompleteTree2() {
 isHeapUtil(curr, parentValue) {
     if (curr == null)
         return true;
+    
     if (curr.value < parentValue)
         return false;
+    
     return (this.isHeapUtil(curr.left, curr.value) &&
         this.isHeapUtil(curr.right, curr.value));
 }
@@ -760,10 +763,13 @@ isHeap() {
 isHeapUtil2(curr, index, count, parentValue) {
     if (curr == null)
         return true;
+    
     if (index > count)
         return false;
+    
     if (curr.value < parentValue)
         return false;
+    
     return this.isHeapUtil2(curr.left, index * 2 + 1, count, curr.value) && this.isHeapUtil2(curr.right, index * 2 + 2, count, curr.value);
 }
 
@@ -797,8 +803,7 @@ treeToListRecUtil(curr) {
         Tail = Head.left;
         curr.left = Tail;
         Tail.right = curr;
-    }
-    else
+    } else
         Head = curr;
 
     if (curr.right != null) {
@@ -806,8 +811,7 @@ treeToListRecUtil(curr) {
         Tail = tempHead.left;
         curr.right = tempHead;
         tempHead.left = curr;
-    }
-    else
+    } else
         Tail = curr;
 
     Head.left = Tail;
@@ -887,12 +891,15 @@ LcaBSTUtil(curr, first, second) {
     if (curr == null) {
         return MAX_INT;
     }
+
     if (curr.value > first && curr.value > second) {
         return this.LcaBSTUtil(curr.left, first, second);
     }
+
     if (curr.value < first && curr.value < second) {
         return this.LcaBSTUtil(curr.right, first, second);
     }
+
     return curr.value;
 }
 
@@ -910,9 +917,11 @@ trimOutsideRangeUtil(curr, min, max) {
     if (curr.value < min) {
         return curr.right;
     }
+
     if (curr.value > max) {
         return curr.left;
     }
+
     return curr;
 }
 
@@ -925,6 +934,7 @@ printInRange(min, max) {
 printInRangeUtil(curr, min, max) {
     if (curr == null)
         return;
+    
     this.printInRangeUtil(curr.left, min, max);
     if (curr.value >= min && curr.value <= max)
         process.stdout.write(`${curr.value} `);
@@ -938,11 +948,9 @@ FloorBST(val) {
         if (curr.value === val) {
             floor = curr.value;
             break;
-        }
-        else if (curr.value > val) {
+        } else if (curr.value > val) {
             curr = curr.left;
-        }
-        else {
+        } else {
             floor = curr.value;
             curr = curr.right;
         }
@@ -957,12 +965,10 @@ CeilBST(val) {
         if (curr.value === val) {
             ceil = curr.value;
             break;
-        }
-        else if (curr.value > val) {
+        } else if (curr.value > val) {
             ceil = curr.value;
             curr = curr.left;
-        }
-        else {
+        } else {
             curr = curr.right;
         }
     }
@@ -976,7 +982,6 @@ findMaxBT() {
 
 findMaxBTUtil(curr) {
     if (curr == null)
-
         return MIN_INT;
 
     let max = curr.value;
@@ -985,8 +990,10 @@ findMaxBTUtil(curr) {
 
     if (left > max)
         max = left;
+    
     if (right > max)
         max = right;
+    
     return max;
 }
 
@@ -1002,12 +1009,10 @@ searchBTUtil(curr, value) {
         return true;
 
     const left = this.searchBTUtil(curr.left, value);
-
     if (left)
         return true;
 
     const right = this.searchBTUtil(curr.right, value);
-
     if (right)
         return true;
 

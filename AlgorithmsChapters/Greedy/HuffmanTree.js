@@ -78,10 +78,8 @@ class PriorityQueue {
     }
 }
 
-class Node
-{
-	constructor(ch, fr, l, r)
-	{
+class Node {
+	constructor(ch, fr, l, r) {
 		this.c = ch;
 		this.freq = fr;
 		this.left = l;
@@ -89,21 +87,17 @@ class Node
 	}
 }
 
-class HuffmanTree
-{
-	constructor(arr, freq)
-	{
+class HuffmanTree {
+	constructor(arr, freq) {
 		const n = arr.length;
 		const que = new PriorityQueue(function(a, b){return  (a.freq - b.freq) > 0 });
 		
-		for (let i = 0; i < n; i++)
-		{
+		for (let i = 0; i < n; i++) {
 			let node = new Node(arr[i], freq[i], null, null);
 			que.add(node);
 		}
 
-		while (que.length() > 1)
-		{
+		while (que.length() > 1) {
 			let lt = que.remove();
 			let rt = que.remove();
 			let nd = new Node('+', lt.freq + rt.freq, lt, rt);
@@ -112,10 +106,8 @@ class HuffmanTree
 		this.root = que.peek();
 	}
 
-	printUtil(root, s)
-	{
-		if (root.left == null && root.right == null && root.c != '+')
-		{
+	printUtil(root, s) {
+		if (root.left == null && root.right == null && root.c != '+') {
 			console.log(root.c + " = " + s);
 			return;
 		}
@@ -123,8 +115,7 @@ class HuffmanTree
 		this.printUtil(root.right, s + "1");
 	}
 	
-	print()
-	{
+	print() {
 		console.log("Char = Huffman code");
 		this.printUtil(this.root, "");
 	}

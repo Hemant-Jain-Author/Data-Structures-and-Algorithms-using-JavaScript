@@ -1,6 +1,5 @@
 // Towers Of Hanoi problem.
-function tohUtil(num, from, to, temp)
-{
+function tohUtil(num, from, to, temp) {
 	if (num < 1)
 		return;
 	tohUtil(num - 1, from, temp, to);
@@ -8,8 +7,7 @@ function tohUtil(num, from, to, temp)
 	tohUtil(num - 1, temp, to, from);
 }
 
-function toh(num)
-{
+function toh(num) {
 	console.log("The sequence of moves involved in the Tower of Hanoi are :");
 	tohUtil(num, 'A', 'C', 'B');
 }

@@ -44,8 +44,7 @@ class Stack {
     insertAtBottom(value) {
         if (this.isEmpty()) {
             this.push(value);
-        }
-        else {
+        } else {
             const temp = this.pop();
             this.insertAtBottom(value);
             this.push(temp);

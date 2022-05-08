@@ -78,16 +78,14 @@ class PriorityQueue {
     }
 }
 
-function optimalMerge(lists, size)
-{
+function optimalMerge(lists, size) {
 	const pq = new PriorityQueue(function(a, b) { return (a > b)});
 	for (let i = 0; i < size; i++)
 		pq.add(lists[i]);
 
 	let total = 0;
 	let value = 0;
-	while (pq.length() > 1)
-	{
+	while (pq.length() > 1) {
 		value = pq.remove();
 		value += pq.remove();
 		pq.add(value);

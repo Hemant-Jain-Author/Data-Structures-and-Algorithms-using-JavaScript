@@ -78,20 +78,14 @@ class PriorityQueue {
     }
 }
 
-function joinRopes(ropes, size)
-{
+function joinRopes(ropes, size) {
 	ropes.sort(function(a, b) { return b - a; });
-	let total = 0;
-	let value = 0;
-	let index = 0;
-	let length = size;
-	while (length >= 2)
-	{
+	let total = 0, value = 0, index = 0, length = size;
+	while (length >= 2) {
 		value = ropes[length - 1] + ropes[length - 2];
 		total += value;
 		index = length - 2;
-		while (index > 0 && ropes[index - 1] < value)
-		{
+		while (index > 0 && ropes[index - 1] < value) {
 			ropes[index] = ropes[index - 1];
 			index -= 1;
 		}
@@ -102,18 +96,13 @@ function joinRopes(ropes, size)
 	return total;
 }
 
-function joinRopes2(ropes, size)
-{
+function joinRopes2(ropes, size) {
 	const pq = new PriorityQueue(function(a, b) { return (a > b)});
-	let i = 0;
-	for (i = 0; i < size; i++)
-	{
+	for (let i = 0; i < size; i++) {
 		pq.add(ropes[i]);
 	}
-	let total = 0;
-	let value = 0;
-	while (pq.length() > 1)
-	{
+	let total = 0, value = 0;
+	while (pq.length() > 1) {
 		value = pq.remove();
 		value += pq.remove();
 		pq.add(value);

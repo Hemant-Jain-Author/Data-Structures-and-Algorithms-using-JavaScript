@@ -8,8 +8,7 @@ function merge(arr, tempArray, lowerIndex, middleIndex, upperIndex, compare) {
     while (lowerStart <= lowerStop && upperStart <= upperStop) {
         if (compare(arr[lowerStart], arr[upperStart])) {
             tempArray[count++] = arr[lowerStart++];
-        }
-        else {
+        } else {
             tempArray[count++] = arr[upperStart++];
         }
     }
@@ -41,9 +40,14 @@ function mergeSort(arr, compare) {
 }
 
 less = (value1, value2) => value1 < value2;
-more = (value1, value2) => value1 > value2;
+greater = (value1, value2) => value1 > value2;
 
 // Testing code.
-const array = [3, 4, 2, 1, 6, 5, 7, 8, 1, 1];
+const array = [3, 4, 2, 1, 6, 5, 7, 8];
 mergeSort(array, less);
-console.log(array);
+console.log(JSON.stringify(array));
+
+/*
+[1,2,3,4,5,6,7,8]
+
+*/

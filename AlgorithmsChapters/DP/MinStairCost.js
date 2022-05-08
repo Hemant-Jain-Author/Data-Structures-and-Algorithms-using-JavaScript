@@ -1,6 +1,5 @@
 
-function minStairCost(cost)
-{
+function minStairCost(cost) {
 	const n = a.length;
 
 	// base case

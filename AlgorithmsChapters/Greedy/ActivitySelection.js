@@ -5,15 +5,13 @@
 
 class Activity
 {
-	constructor(s, f)
-	{
+	constructor(s, f) {
 		this.start = s;
 		this.stop = f;
 	}
 }
 
-function maxActivities(s, f, n)
-{
+function maxActivities(s, f, n) {
 	const act = Array(n).fill(0);
 	for (let i = 0; i < n; i++)
 		act[i] = new Activity(s[i], f[i]);
@@ -22,12 +20,10 @@ function maxActivities(s, f, n)
 	let i = 0;
 	// The first activity at index 0 is always gets selected.
 	let output = "Activities are : (" + act[i].start + "," + act[i].stop + ")";
-	for (let j = 1; j < n; j++)
-	{
+	for (let j = 1; j < n; j++) {
 		// Find next activity whose start time is greater than or equal
 		// to the finish time of previous activity.
-		if (act[j].start >= act[i].stop)
-		{
+		if (act[j].start >= act[i].stop) {
 			output += ", (" + act[j].start + "," + act[j].stop + ")";
 			i = j;
 		}

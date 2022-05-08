@@ -1,10 +1,8 @@
-function wildCharMatchExp(exp, str)
-{
+function wildCharMatchExp(exp, str) {
 	return wildCharMatchExpUtil(exp.split(''), str.split(''), 0, 0);
 }
 
-function wildCharMatchExpUtil(exp, str, m, n)
-{
+function wildCharMatchExpUtil(exp, str, m, n) {
 	if (m == exp.length && (n == str.length || exp[m - 1] == '*'))
 		return true;
 
@@ -20,30 +18,25 @@ function wildCharMatchExpUtil(exp, str, m, n)
 	return false;
 }
 
-function wildCharMatchExpDP(exp, str)
-{
+function wildCharMatchExpDP(exp, str) {
 	return wildCharMatchExpDPUtil(exp.split(''), str.split(''), exp.length, str.length);
 }
 
-function wildCharMatchExpDPUtil(exp, str, m, n)
-{
+function wildCharMatchExpDPUtil(exp, str, m, n) {
 	const lookup = Array(m + 1).fill(false).map(() => new Array(n + 1).fill(false));
 	lookup[0][0] = true;
 	// empty exp and empty str match.
 	// 0 row will remain all false. empty exp can't match any str.
 	// '*' can match with empty string, column 0 update.
-	for (let i = 1; i <= m; i++)
-	{
+	for (let i = 1; i <= m; i++) {
 		if (exp[i - 1] == '*')
 			lookup[i][0] = lookup[i - 1][0];
 		else
 			break;
 	}
 	// Fill the table in bottom-up fashion
-	for (let i = 1; i <= m; i++)
-	{
-		for (let j = 1; j <= n; j++)
-		{
+	for (let i = 1; i <= m; i++) {
+		for (let j = 1; j <= n; j++) {
 			// If we see a '*' in pattern:
 			// 1) We ignore '*' character and consider 
 			// next character in the pattern.

@@ -1,8 +1,8 @@
 
 const INF = Number.MAX_VALUE;
+
 // Returns shortest distance from 0 to N-1.
-function shortestDist(graph, n)
-{
+function shortestDist(graph, n) {
 	// dist[i] is going to store shortest
 	// distance from node i to node n-1.
 	const dist = Array(n).fill(INF);
@@ -12,18 +12,15 @@ function shortestDist(graph, n)
 	path[0] = -1;
 
 	// Calculating shortest path for the nodes
-	for (let i = 0; i < n; i++)
-	{
+	for (let i = 0; i < n; i++) {
 		// Check all nodes of next 
-		for (let j = i; j < n; j++)
-		{
+		for (let j = i; j < n; j++) {
 			// Reject if no edge exists
 			if (graph[i][j] == INF)
 				continue;
 
 			value = graph[i][j] + dist[i];
-			if (dist[j] > value)
-			{
+			if (dist[j] > value) {
 				dist[j] = value;
 				path[j] = i;
 			}
@@ -31,8 +28,7 @@ function shortestDist(graph, n)
 	}
 	value = n - 1;
 	let pathOut = "";
-	while (value != -1)
-	{
+	while (value != -1) {
 		pathOut = " " + value + pathOut;
 		value = path[value];
 	}

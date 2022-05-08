@@ -62,10 +62,8 @@ class Queue {
 
 function CircularTour(arr, n) {
     const que = new Queue();
-    let nextPump = 0;
-    let prevPump;
-    let count = 0;
-    let petrol = 0;
+    let nextPump = 0, prevPump = 0;
+    let count = 0, petrol = 0;
     while (que.size() !== n) {
         while (petrol >= 0 && que.size() !== n) {
             que.add(nextPump);
@@ -227,8 +225,10 @@ function firstNegSlidingWindows(arr, size, k) {
     for (let i = 0; i < size; i++) {
         if (que.size() > 0 && que.front() <= i - k)
             que.remove();
+        
         if (arr[i] < 0)
             que.add(i);
+        
         if (i >= (k - 1)) {
             if (que.size() > 0)
                 process.stdout.write(`${arr[que.front()]} `);

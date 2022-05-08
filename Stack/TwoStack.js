@@ -10,8 +10,7 @@ class TwoStack {
     StackPush1(value) {
         if (this.top1 < this.top2 - 1) {
             this.data[++this.top1] = value;
-        }
-        else {
+        } else {
             console.log("Stack is Full!");
         }
     }
@@ -19,8 +18,7 @@ class TwoStack {
     StackPush2(value) {
         if (this.top1 < this.top2 - 1) {
             this.data[--this.top2] = value;
-        }
-        else {
+        } else {
             console.log("Stack is Full!");
         }
     }
@@ -29,8 +27,7 @@ class TwoStack {
         if (this.top1 >= 0) {
             const value = this.data[this.top1--];
             return value;
-        }
-        else {
+        } else {
             console.log("Stack Empty!");
         }
         return -999;
@@ -40,8 +37,7 @@ class TwoStack {
         if (this.top2 < this.MAX_SIZE) {
             const value = this.data[this.top2++];
             return value;
-        }
-        else {
+        } else {
             console.log("Stack Empty!");
         }
         return -999;

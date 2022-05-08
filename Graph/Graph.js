@@ -105,56 +105,43 @@ class PriorityQueue {
     }
 }
 
-class Sets
-{
-    constructor(p, r)
-    {
+class Sets {
+    constructor(p, r) {
         this.parent = p;
         this.rank = r;
     }
 }
 // Get root of set
-function find(sets, index)
-{
+function find(sets, index) {
     let p = sets[index].parent;
-    while (p != index)
-    {
+    while (p != index) {
         index = p;
         p = sets[index].parent;
     }
     return index;
 }
 // consider x and y are roots of sets.
-function union(sets, x, y)
-{
-    if (sets[x].rank < sets[y].rank)
-    {
+function union(sets, x, y) {
+    if (sets[x].rank < sets[y].rank) {
         sets[x].parent = y;
-    }
-    else if (sets[y].rank < sets[x].rank)
-    {
+    } else if (sets[y].rank < sets[x].rank) {
         sets[y].parent = x;
-    }
-    else
-    {
+    } else {
         sets[x].parent = y;
         sets[y].rank++;
     }
 }
 
-function find1(parent, index)
-{
+function find1(parent, index) {
     let p = parent[index];
-    while (p != -1)
-    {
+    while (p != -1) {
         index = p;
         p = parent[index];
     }
     return index;
 }
 
-function union1(parent, x, y)
-{
+function union1(parent, x, y) {
     parent[y] = x;
 }
 
@@ -474,8 +461,7 @@ class Graph {
             if (visited[dest] === false) {
                 if (this.isCyclePresentUndirectedDFS(dest, src, visited))
                     return true
-            }
-            else if (parentIndex !== dest)
+            } else if (parentIndex !== dest)
                 return true
         }
         return false
@@ -486,39 +472,33 @@ class Graph {
         const visited = new Array(count).fill(false);
 
         for (let i = 0; i < count; i++) {
-            if (visited[i] === false)
-                if (this.isCyclePresentUndirectedDFS(i, -1, visited))
+            if (visited[i] === false &&
+                    this.isCyclePresentUndirectedDFS(i, -1, visited))
                     return true
         }
         return false
     }
 
-    isCyclePresentUndirected2()
-	{
+    isCyclePresentUndirected2() {
 		const count = this.count;
 		const parent = new Array(count).fill(-1);
 		let edge = [];
 		const flags = new Array(count).fill(false).map(() => new Array(count).fill(false));
-		for (let i = 0; i < count; i++)
-		{
+		for (let i = 0; i < count; i++) {
 			let ad = this.Adj[i];
-			for (const adn of ad)
-			{
+			for (const adn of ad) {
 				// Using flags[][] array, if considered edge x to y, 
 				// then ignore edge y to x.
-				if (flags[adn.dest][adn.src] == false)
-				{
+				if (flags[adn.dest][adn.src] == false) {
 					edge.push(adn);
 					flags[adn.src][adn.dest] = true;
 				}
 			}
 		}
-		for (const e of edge)
-		{
+		for (const e of edge) {
 			let x = find1(parent, e.src);
 			let y = find1(parent, e.dest);
-			if (x == y)
-			{
+			if (x == y) {
 				return true;
 			}
 			union1(parent, x, y);
@@ -526,37 +506,30 @@ class Graph {
 		return false;
 	}
 
-	isCyclePresentUndirected3()
-	{
+	isCyclePresentUndirected3() {
 		const count = this.count;
 		//Different subsets are created.
 		const sets = new Array(count);
-		for (let i = 0; i < count; i++)
-		{
+		for (let i = 0; i < count; i++) {
 			sets[i] = new Sets(i, 0);
 		}
 		let edge = [];
 		const flags = new Array(count).fill(false).map(() => new Array(count).fill(false));
-		for (let i = 0; i < count; i++)
-		{
+		for (let i = 0; i < count; i++) {
 			let ad = this.Adj[i];
-			for (const adn of ad)
-			{
+			for (const adn of ad) {
 				// Using flags[][] array, if considered edge x to y, 
 				// then ignore edge y to x.
-				if (flags[adn.dest][adn.src] == false)
-				{
+				if (flags[adn.dest][adn.src] == false) {
 					edge.push(adn);
 					flags[adn.src][adn.dest] = true;
 				}
 			}
 		}
-		for (const e of edge)
-		{
+		for (const e of edge) {
 			let x = find(sets, e.src);
 			let y = find(sets, e.dest);
-			if (x == y)
-			{
+			if (x == y) {
 				return true;
 			}
 			union(sets, x, y);
@@ -749,23 +722,19 @@ class Graph {
         console.log(`Total MST cost : ${total}`)
     }
 
-    kruskalMST()
-    {
+    kruskalMST() {
         const count = this.count;
         //Different subsets are created.
         const sets = new Array(count);
-        for (let i = 0; i < count; i++)
-        {
+        for (let i = 0; i < count; i++) {
             sets[i] = new Sets(i, 0);
         }
         // Edges are added to array and sorted.
         let E = 0;
         let edge = [];
-        for (let i = 0; i < count; i++)
-        {
+        for (let i = 0; i < count; i++) {
             let ad = this.Adj[i];
-            for (const adn of ad)
-            {
+            for (const adn of ad) {
                 edge.push(adn);
                 E++
             }
@@ -773,12 +742,10 @@ class Graph {
         edge.sort(function (a, b){	return (a.cost - b.cost);});
         let sum = 0;
         let output = "Edges are "
-        for (let i = 0; i < E; i++)
-        {
+        for (let i = 0; i < E; i++) {
             let x = find(sets, edge[i].src);
             let y = find(sets, edge[i].dest);
-            if (x != y)
-            {
+            if (x != y) {
                 output += ("(" + edge[i].src + ", " + edge[i].dest + ", " + edge[i].cost + ")");
                 sum += edge[i].cost;
                 union(sets, x, y);
@@ -817,7 +784,6 @@ class Graph {
 
     dijkstra(source) {
         const count = this.count;
-        
         const previous = new Array(count).fill(-1);
         const Infinity = 999999;
         const dist = new Array(count).fill(Infinity);
@@ -956,9 +922,8 @@ class Graph {
         }
         for (let i = 0; i < count; i++) {
             adl = this.Adj[i]
-            if (adl.length > 0)
-                if (visited[i] === false)
-                    return false
+            if (adl.length > 0 && visited[i] === false)
+                return false
         }
         return true
     }
@@ -1054,19 +1019,16 @@ class Graph {
         return true
     }
 
-    floydWarshall()
-	{
+    floydWarshall() {
 		const V = this.count;
         const INF = Number.MAX_VALUE;
 		const dist = Array(V).fill(0).map(() => new Array(V).fill(INF));
 		const path = Array(V).fill(0).map(() => new Array(V).fill(-1));
-		for (let i = 0; i < V; i++)
-		{
+		for (let i = 0; i < V; i++) {
 			path[i][i] = 0;
 		}
 
-		for (let i = 0; i < V; i++)
-		{
+		for (let i = 0; i < V; i++) {
             const adl = this.Adj[i];
             for (let index = 0; index < adl.length; index++) {
                 const adn = adl[index];
@@ -1075,24 +1037,19 @@ class Graph {
 			}
 		}
 		
-		for (let k = 0; k < V; k++) // Pick intermediate vertices.
-		{
-			for (let i = 0; i < V; i++) // Pick source vertices one by one.
-			{
-				for (let j = 0; j < V; j++) // Pick destination vertices.
-				{
+		for (let k = 0; k < V; k++) { // Pick intermediate vertices.
+			for (let i = 0; i < V; i++) { // Pick source vertices one by one.
+				for (let j = 0; j < V; j++) { // Pick destination vertices.
 					// If we have a shorter path from i to j via k.
 					// then update dist[i][j] and  and path[i][j]
-					if (dist[i][k] + dist[k][j] < dist[i][j])
-					{
+					if (dist[i][k] + dist[k][j] < dist[i][j]) {
 						dist[i][j] = dist[i][k] + dist[k][j];
 						path[i][j] = path[k][j];
 					}
 				}
 				// dist[i][i] is 0 in the start.
 				// If there is a better path from i to i and is better path then we have -ve cycle.                //
-				if (dist[i][i] < 0)
-				{
+				if (dist[i][i] < 0) {
 					console.log("Negative-weight cycle found.");
 					return;
 				}
@@ -1101,15 +1058,11 @@ class Graph {
 		Graph.printSolution(dist, path, V);
 	}
 
-	static 	printSolution(cost, path, V)
-    {
+	static 	printSolution(cost, path, V) {
         let output = "Shortest Paths : ";
-		for (let u = 0; u < V; u++)
-		{
-			for (let v = 0; v < V; v++)
-			{
-				if (u != v && path[u][v] != -1)
-                {
+		for (let u = 0; u < V; u++) {
+			for (let v = 0; v < V; v++) {
+				if (u != v && path[u][v] != -1) {
                     output += "(";
                     output += Graph.printPath(path, u, v);
                     output += " @ " + cost[u][v] + ") "
@@ -1119,10 +1072,8 @@ class Graph {
         console.log(output);
     }
     
-	static printPath(path, u, v)
-	{
-		if (path[u][v] == u)
-		{
+	static printPath(path, u, v) {
+		if (path[u][v] == u) {
 			return (u + "->" + v );
 		}
         let output = Graph.printPath(path, u, path[u][v]);
@@ -1582,8 +1533,7 @@ true
 */
 
 /* Testing Code */
-function test20()
-{
+function test20() {
     const gph = new Graph(4);
     gph.addDirectedEdge(0, 0, 0);
     gph.addDirectedEdge(1, 1, 0);

@@ -1,7 +1,6 @@
 class rmqST
 {
-	constructor(input)
-	{
+	constructor(input) {
 		this.n = input.length; // Height of segment tree.
 		let x = parseInt(Math.ceil(Math.log(this.n) / Math.log(2))); //Maximum size of segment tree
 		let maxSize = 2 * parseInt(Math.pow(2, x)) - 1; // Allocate memory for segment tree
@@ -9,11 +8,9 @@ class rmqST
 		this.constructST(input, 0, this.n - 1, 0);
 	}
 
-	constructST(input, start, end, index)
-	{
+	constructST(input, start, end, index) {
 		// Store it in current node of the segment tree and return
-		if (start == end)
-		{
+		if (start == end) {
 			this.segArr[index] = input[start];
 			return input[start];
 		}
@@ -26,26 +23,21 @@ class rmqST
 	}
 
 
-	getMin(start, end)
-	{
+	getMin(start, end) {
 		// Check for error conditions.
-		if (start > end || start < 0 || end > this.n - 1)
-		{
+		if (start > end || start < 0 || end > this.n - 1) {
 			console.log("Invalid Input.");
 			return Number.MAX_VALUE;
 		}
 		return this.getMinUtil(0, this.n - 1, start, end, 0);
 	}
 
-	getMinUtil(segStart, segEnd, queryStart, queryEnd, index)
-	{
-		if (queryStart <= segStart && segEnd <= queryEnd)
-		{
+	getMinUtil(segStart, segEnd, queryStart, queryEnd, index) {
+		if (queryStart <= segStart && segEnd <= queryEnd) {
 			// complete overlapping case.
 			return this.segArr[index];
 		}
-		if (segEnd < queryStart || queryEnd < segStart)
-		{
+		if (segEnd < queryStart || queryEnd < segStart) {
 			// no overlapping case.
 			return Number.MAX_VALUE;
 		}
@@ -54,11 +46,9 @@ class rmqST
 		return Math.min(this.getMinUtil(segStart, mid, queryStart, queryEnd, 2 * index + 1), this.getMinUtil(mid + 1, segEnd, queryStart, queryEnd, 2 * index + 2));
 	}
 
-	update(ind, val)
-	{
+	update(ind, val) {
 		// Check for error conditions.
-		if (ind < 0 || ind > this.n - 1)
-		{
+		if (ind < 0 || ind > this.n - 1) {
 			console.log("Invalid Input.");
 			return;
 		}
@@ -67,26 +57,20 @@ class rmqST
 	}
 
 	// Always min inside valid range will be returned.
-	updateUtil(segStart, segEnd, ind, val, index)
-	{
+	updateUtil(segStart, segEnd, ind, val, index) {
 		// Update index lies outside the range of current segment.
 		// So minimum will not change.
-		if (ind < segStart || ind > segEnd)
-		{
+		if (ind < segStart || ind > segEnd) {
 			return this.segArr[index];
 		}
 		// If the input index is in range of this node, then update the
 		// value of the node and its children
-		if (segStart == segEnd)
-		{
-			if (segStart == ind)
-			{
+		if (segStart == segEnd) {
+			if (segStart == ind) {
 				// Index value need to be updated.
 				this.segArr[index] = val;
 				return val;
-			}
-			else
-			{
+			} else {
 				return this.segArr[index];
 			}
 		}

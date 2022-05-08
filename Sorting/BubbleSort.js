@@ -30,11 +30,11 @@ function bubbleSort2(arr, compare) {
 }
 
 less = (value1, value2) => value1 < value2;
-more = (value1, value2) => value1 > value2;
+greater = (value1, value2) => value1 > value2;
 
 // Testing code.
 const array = [9, 1, 8, 2, 7, 3, 6, 4, 5];
-bubbleSort(array, more);
+bubbleSort(array, greater);
 console.log(JSON.stringify(array));
 
 const array2 = [9, 1, 8, 2, 7, 3, 6, 4, 5];
@@ -42,5 +42,11 @@ bubbleSort(array2, less);
 console.log(JSON.stringify(array2));
 
 const array3 = [9, 1, 8, 2, 7, 3, 6, 4, 5];
-bubbleSort2(array3, more);
+bubbleSort2(array3, greater);
 console.log(JSON.stringify(array3));
+
+/*
+[1,2,3,4,5,6,7,8,9]
+[9,8,7,6,5,4,3,2,1]
+[1,2,3,4,5,6,7,8,9]
+*/

@@ -10,9 +10,13 @@ function insertionSort(arr, compare) {
     }
 }
 
-more = (value1, value2) => value1 > value2;
+greater = (value1, value2) => value1 > value2;
 
 // Testing code.
 const array = [9, 1, 8, 2, 7, 3, 6, 4, 5];
-insertionSort(array, more);
-console.log(array);
+insertionSort(array, greater);
+console.log(JSON.stringify(array));
+
+/*
+[1,2,3,4,5,6,7,8,9]
+*/

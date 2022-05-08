@@ -9,6 +9,7 @@ function BruteForceSearch(text, pattern) {
             while (j < m && pattern[j] === text[i + j]) {
                 j++;
             }
+
             if (j === m) {
                 return (i);
             }
@@ -40,13 +41,16 @@ function RobinKarpUtil(text, pattern) {
     if (m === 0 || m > n) {
         return -1;
     }
+
     for (i = 0; i < m - 1; i++) {
         powm = (powm << 1) % prime;
     }
+
     for (i = 0; i < m; i++) {
         PatternHash = ((PatternHash << 1) + (pattern[i]).charCodeAt(0)) % prime;
         TextHash = ((TextHash << 1) + (text[i]).charCodeAt(0)) % prime;
     }
+    
     for (i = 0; i <= (n - m); i++) {
         if (TextHash === PatternHash) {
             for (j = 0; j < m; j++) {

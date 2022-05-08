@@ -26,9 +26,6 @@ function quickSort(arr) {
     quickSortUtil(arr, 0, size - 1);
 }
 
-less = (value1, value2) => value1 < value2;
-more = (value1, value2) => value1 > value2;
-
 swap = (arr, first, second) => {
     const temp = arr[first];
     arr[first] = arr[second];
@@ -36,6 +33,10 @@ swap = (arr, first, second) => {
 }
 
 // Testing code.
-const array = [3, 4, 2, 1, 6, 5, 7, 8, 1, 1];
+const array = [3, 4, 2, 1, 6, 5, 7, 8];
 quickSort(array);
-console.log(array);
+console.log(JSON.stringify(array));
+
+/*
+[1,2,3,4,5,6,7,8]
+*/

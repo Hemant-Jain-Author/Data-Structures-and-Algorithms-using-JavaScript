@@ -1,24 +1,18 @@
-class Point
-{
-	constructor(a, b)
-	{
+class Point {
+	constructor(a, b) {
 		this.x = a;
 		this.y = b;
 	}
 }
 
-function closestPairBF(arr)
-{
+function closestPairBF(arr) {
 	const n = arr.length;
 	let dmin = 9999999;
 	let d = 0.0;
-	for (let i = 0; i < n - 1; i++)
-	{
-		for (let j = i + 1; j < n; j++)
-		{
+	for (let i = 0; i < n - 1; i++) {
+		for (let j = i + 1; j < n; j++) {
 			d = Math.sqrt((arr[i][0] - arr[j][0]) * (arr[i][0] - arr[j][0]) + (arr[i][1] - arr[j][1]) * (arr[i][1] - arr[j][1]));
-			if (d < dmin)
-			{
+			if (d < dmin) {
 				dmin = d;
 			}
 		}
@@ -26,25 +20,20 @@ function closestPairBF(arr)
 	return dmin;
 }
 
-function distance(a, b)
-{
+function distance(a, b) {
 	return Math.sqrt((a.x - b.x) * (a.x - b.x) + (a.y - b.y) * (a.y - b.y));
 }
 
 
-function stripMin(q, n, d)
-{
+function stripMin(q, n, d) {
 	let min = d;
 	// Find the distance between all the points in the strip. 
 	// Array q is sorted according to the y axis coordinate.
 	// The inner loop will run at most 6 times for each point.
-	for (let i = 0; i < n; ++i)
-	{
-		for (let j = i + 1; j < n && (q[j].y - q[i].y) < min; ++j)
-		{
+	for (let i = 0; i < n; ++i) {
+		for (let j = i + 1; j < n && (q[j].y - q[i].y) < min; ++j) {
 			d = distance(q[i], q[j]);
-			if (d < min)
-			{
+			if (d < min) {
 				min = d;
 			}
 		}
@@ -52,14 +41,11 @@ function stripMin(q, n, d)
 	return min;
 }
 
-function closestPairUtil(p, start, stop, q, n)
-{
-	if (stop - start < 1)
-	{
+function closestPairUtil(p, start, stop, q, n) {
+	if (stop - start < 1) {
 		return 999999;
 	}
-	if (stop - start == 1)
-	{
+	if (stop - start == 1) {
 		return distance(p[start], p[stop]);
 	}
 	// Find the middle point
@@ -72,10 +58,8 @@ function closestPairUtil(p, start, stop, q, n)
 	// Points are already sorted according to y axis.
 	let strip = Array(n).fill(null);
 	let j = 0;
-	for (let i = 0; i < n; i++)
-	{
-		if (Math.abs(q[i].x - p[mid].x) < d)
-		{
+	for (let i = 0; i < n; i++) {
+		if (Math.abs(q[i].x - p[mid].x) < d) {
 			strip[j] = q[i];
 			j++;
 		}
@@ -84,12 +68,10 @@ function closestPairUtil(p, start, stop, q, n)
 	return Math.min(d, stripMin(strip, j, d));
 }
 
-function closestPairDC(arr)
-{
+function closestPairDC(arr) {
 	const n = arr.length;
 	const p = Array(n).fill(null);
-	for (let i = 0; i < n; i++)
-	{
+	for (let i = 0; i < n; i++) {
 		p[i] = new Point(arr[i][0], arr[i][1]);
 	}
 	// Sort according to x axis.

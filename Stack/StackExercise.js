@@ -681,8 +681,7 @@ function postfixEvaluate(expn) {
         temp = parseInt(tokens[tok]);
         if (isNaN(temp) === false) {
             stk.push(temp);
-        }
-        else {
+        } else {
             num1 = stk.pop();
             num2 = stk.pop();
             op = tokens[tok];

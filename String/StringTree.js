@@ -35,8 +35,7 @@ class StringTree {
             curr.value = value;
             curr.left = curr.right = null;
             curr.count = 1;
-        }
-        else {
+        } else {
             compare = curr.value.localeCompare(value);
             if (compare === 0)
                 curr.count++;

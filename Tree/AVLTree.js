@@ -1,7 +1,6 @@
 class Node
 {
-    constructor(d, l, r)
-    {
+    constructor(d, l, r) {
         this.data = d;
         this.left = l;
         this.right = r;
@@ -11,53 +10,40 @@ class Node
 
 class AVLTree
 {
-	constructor()
-	{
+	constructor() {
 		this.root = null;
 	}
 
-	height(n)
-	{
-		if (n == null)
-		{
+	height(n) {
+		if (n == null) {
 			return -1;
 		}
 		return n.height;
 	}
 
-	getBalance(node)
-	{
+	getBalance(node) {
 		return (node == null) ? 0 : this.height(node.left) - this.height(node.right);
 	}
 
-	insert(data)
-	{
+	insert(data) {
 		this.root = this.insertUtil(this.root, data);
 	}
 
-	insertUtil(node, data)
-	{
-		if (node == null)
-		{
+	insertUtil(node, data) {
+		if (node == null) {
 			return new Node(data, null, null);
 		}
-		if (node.data > data)
-		{
+		if (node.data > data) {
 			node.left = this.insertUtil(node.left, data);
-		}
-		else if (node.data < data)
-		{
+		} else if (node.data < data) {
 			node.right = this.insertUtil(node.right, data);
-		}
-		else
-		{
+		} else {
 			// Duplicate data not allowed
 			return node;
 		}
 		node.height = Math.max(this.height(node.left), this.height(node.right)) + 1;
 		let balance = this.getBalance(node);
-		if (balance > 1)
-		{
+		if (balance > 1) {
 			if (data < node.left.data) // Left Left Case
 			{
 				return this.rightRotate(node);
@@ -67,8 +53,7 @@ class AVLTree
 				return this.leftRightRotate(node);
 			}
 		}
-		if (balance < -1)
-		{
+		if (balance < -1) {
 			if (data > node.right.data) // Right Right Case
 			{
 				return this.leftRotate(node);
@@ -81,8 +66,7 @@ class AVLTree
 		return node;
 	}
 	// Function to right rotate subtree rooted with x
-	rightRotate(x)
-	{
+	rightRotate(x) {
 		let y = x.left;
 		let T = y.right;
 		// Rotation
@@ -95,8 +79,7 @@ class AVLTree
 		return y;
 	}
 	// Function to left rotate subtree rooted with x
-	leftRotate(x)
-	{
+	leftRotate(x) {
 		let y = x.right;
 		let T = y.left;
 		// Rotation
@@ -110,123 +93,90 @@ class AVLTree
 	}
 
 	// Function to right then left rotate subtree rooted with x
-	rightLeftRotate(x)
-	{
+	rightLeftRotate(x) {
 		x.right = this.rightRotate(x.right);
 		return this.leftRotate(x);
 	}
 
 	// Function to left then right rotate subtree rooted with x
-	leftRightRotate(x)
-	{
+	leftRightRotate(x) {
 		x.left = this.leftRotate(x.left);
 		return this.rightRotate(x);
 	}
 
-	delete(data)
-	{
+	delete(data) {
 		this.root = this.deleteUtil(this.root, data);
 	}
 
-	deleteUtil(node, data)
-	{
-		if (node == null)
-		{
+	deleteUtil(node, data) {
+		if (node == null) {
 			return null;
 		}
-		if (node.data == data)
-		{
-			if (node.left == null && node.right == null)
-			{
+		if (node.data == data) {
+			if (node.left == null && node.right == null) {
 				return null;
-			}
-			else if (node.left == null)
-			{
+			} else if (node.left == null) {
 				return node.right;
-			}
-			else if (node.right == null)
-			{
+			} else if (node.right == null) {
 				return node.left;
-			}
-			else
-			{
+			} else {
 				let minNode = this.findMin(node.right);
 				node.data = minNode.data;
 				node.right = this.deleteUtil(node.right, minNode.data);
 			}
-		}
-		else
-		{
-			if (node.data > data)
-			{
+		} else {
+			if (node.data > data) {
 				node.left = this.deleteUtil(node.left, data);
-			}
-			else
-			{
+			} else {
 				node.right = this.deleteUtil(node.right, data);
 			}
 		}
 		node.height = Math.max(this.height(node.left), this.height(node.right)) + 1;
 		let balance = this.getBalance(node);
-		if (balance > 1)
-		{
-			if (data >= node.left.data) // Left Left Case 
-			{
+		if (balance > 1) {
+			if (data >= node.left.data) { // Left Left Case 
 				return this.rightRotate(node);
 			}
-			if (data < node.left.data) // Left Right Case
-			{
+			if (data < node.left.data) { // Left Right Case
 				return this.leftRightRotate(node);
 			}
 		}
-		if (balance < -1)
-		{
-			if (data <= node.right.data) // Right Right Case
-			{
+		if (balance < -1) {
+			if (data <= node.right.data) { // Right Right Case
 				return this.leftRotate(node);
 			}
-			if (data > node.right.data) // Right Left Case
-			{
+			if (data > node.right.data) { // Right Left Case
 				return this.rightLeftRotate(node);
 			}
 		}
 		return node;
 	}
 
-	findMin(curr)
-	{
+	findMin(curr) {
 		let node = curr;
-		if (node == null)
-		{
+		if (node == null) {
 			return null;
 		}
-		while (node.left != null)
-		{
+		while (node.left != null) {
 			node = node.left;
 		}
 		return node;
 	}
 
-	printTree()
-	{
+	printTree() {
 		this.printTreeUtil(this.root, "", false);
 		console.log();
 	}
 
-	printTreeUtil(node, indent, isLeft)
-	{
-		if (node == null)
-		{
+	printTreeUtil(node, indent, isLeft) {
+		if (node == null) {
 			return;
 		}
         let out = "";
-		if (isLeft)
-		{
+		if (isLeft) {
 			out += indent + "L:";
 			indent += "|  ";
-		}
-		else
-		{
+		} else {
 			out += indent + "R:";
 			indent += "   ";
 		}

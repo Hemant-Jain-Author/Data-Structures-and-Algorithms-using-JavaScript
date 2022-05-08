@@ -1,7 +1,6 @@
 class Node
 {
-    constructor(d, l, r)
-    {
+    constructor(d, l, r) {
         this.data = d;
         this.left = l;
         this.right = r;
@@ -11,31 +10,24 @@ class Node
 
 class SPLAYTree
 {
-	constructor()
-	{
+	constructor() {
 		this.root = null;
 	}
 
-	printTree()
-	{
+	printTree() {
 		this.printTreeUtil(this.root, "", false);
 		console.log();
 	}
 
-	printTreeUtil(node, indent, isLeft)
-	{
-		if (node == null)
-		{
+	printTreeUtil(node, indent, isLeft) {
+		if (node == null) {
 			return;
 		}
         let output = "";
-		if (isLeft)
-		{
+		if (isLeft) {
 			output += (indent + "L:");
 			indent += "|  ";
-		}
-		else
-		{
+		} else {
 			output += (indent + "R:");
 			indent += "   ";
 		}
@@ -45,8 +37,7 @@ class SPLAYTree
 	}
 
 	// Function to right rotate subtree rooted with x
-	rightRotate(x)
-	{
+	rightRotate(x) {
 		let y = x.left;
 		let T = y.right;
 		// Rotation
@@ -54,16 +45,12 @@ class SPLAYTree
 		y.right = x;
 		x.parent = y;
 		x.left = T;
-		if (T != null)
-		{
+		if (T != null) {
 			T.parent = x;
 		}
-		if (y.parent != null && y.parent.left == x)
-		{
+		if (y.parent != null && y.parent.left == x) {
 			y.parent.left = y;
-		}
-		else if (y.parent != null && y.parent.right == x)
-		{
+		} else if (y.parent != null && y.parent.right == x) {
 			y.parent.right = y;
 		}
 		// Return new root
@@ -71,8 +58,7 @@ class SPLAYTree
 	}
 
 	// Function to left rotate subtree rooted with x
-	leftRotate(x)
-	{
+	leftRotate(x) {
 		let y = x.right;
 		let T = y.left;
 		// Rotation
@@ -80,76 +66,55 @@ class SPLAYTree
 		y.left = x;
 		x.parent = y;
 		x.right = T;
-		if (T != null)
-		{
+		if (T != null) {
 			T.parent = x;
 		}
-		if (y.parent != null && y.parent.left == x)
-		{
+		if (y.parent != null && y.parent.left == x) {
 			y.parent.left = y;
-		}
-		else if (y.parent != null && y.parent.right == x)
-		{
+		} else if (y.parent != null && y.parent.right == x) {
 			y.parent.right = y;
 		}
 		// Return new root
 		return y;
 	}
 
-	parent(node)
-	{
-		if (node == null || node.parent == null)
-		{
+	parent(node) {
+		if (node == null || node.parent == null) {
 			return null;
 		}
 		return node.parent;
 	}
 
-	splay(node)
-	{
+	splay(node) {
 		let parent = null;
 		let grand = null;
-		while (node != this.root)
-		{
+		while (node != this.root) {
 			parent = this.parent(node);
 			grand = this.parent(parent);
-			if (parent == null)
-			{
+			if (parent == null) {
 				// rotations had created new root, always last condition.
 				this.root = node;
-			}
-			else if (grand == null)
-			{
+			} else if (grand == null) {
 				// single rotation case.
 				if (parent.left == node)
 				{
 					node = this.rightRotate(parent);
-				}
-				else
-				{
+				} else {
 					node = this.leftRotate(parent);
 				}
-			}
-			else if (grand.left == parent && parent.left == node)
-			{
+			} else if (grand.left == parent && parent.left == node) {
 				// Zig Zig case.
 				this.rightRotate(grand);
 				node = this.rightRotate(parent);
-			}
-			else if (grand.right == parent && parent.right == node)
-			{
+			} else if (grand.right == parent && parent.right == node) {
 				// Zag Zag case.
 				this.leftRotate(grand);
 				node = this.leftRotate(parent);
-			}
-			else if (grand.left == parent && parent.right == node)
-			{
+			} else if (grand.left == parent && parent.right == node) {
 				//Zig Zag case.
 				this.leftRotate(parent);
 				node = this.rightRotate(grand);
-			}
-			else if (grand.right == parent && parent.left == node)
-			{
+			} else if (grand.right == parent && parent.left == node) {
 				// Zag Zig case.
 				this.rightRotate(parent);
 				node = this.leftRotate(grand);
@@ -157,121 +122,86 @@ class SPLAYTree
 		}
 	}
 
-	find(data)
-	{
+	find(data) {
 		let curr = this.root;
-		while (curr != null)
-		{
-			if (curr.data == data)
-			{
+		while (curr != null) {
+			if (curr.data == data) {
 				this.splay(curr);
 				return true;
-			}
-			else if (curr.data > data)
-			{
+			} else if (curr.data > data) {
 				curr = curr.left;
-			}
-			else
-			{
+			} else {
 				curr = curr.right;
 			}
 		}
 		return false;
 	}
 
-	insert(data)
-	{
+	insert(data) {
 		let newNode = new Node(data, null, null);
-		if (this.root == null)
-		{
+		if (this.root == null) {
 			this.root = newNode;
 			return;
 		}
 		let node = this.root;
 		let parent = null;
-		while (node != null)
-		{
+		while (node != null) {
 			parent = node;
-			if (node.data > data)
-			{
+			if (node.data > data) {
 				node = node.left;
-			}
-			else if (node.data < data)
-			{
+			} else if (node.data < data) {
 				node = node.right;
-			}
-			else
-			{
+			} else {
 				this.splay(node);
 				// duplicate insertion not allowed but splaying for it.
 				return;
 			}
 		}
 		newNode.parent = parent;
-		if (parent.data > data)
-		{
+		if (parent.data > data) {
 			parent.left = newNode;
-		}
-		else
-		{
+		} else {
 			parent.right = newNode;
 		}
 		this.splay(newNode);
 	}
 
-	findMinNode(curr)
-	{
+	findMinNode(curr) {
 		let node = curr;
-		if (node == null)
-		{
+		if (node == null) {
 			return null;
 		}
-		while (node.left != null)
-		{
+		while (node.left != null) {
 			node = node.left;
 		}
 		return node;
 	}
 
-	delete(data)
-	{
+	delete(data) {
 		let node = this.root;
 		let parent = null;
 		let next = null;
-		while (node != null)
-		{
-			if (node.data == data)
-			{
+		while (node != null) {
+			if (node.data == data) {
 				parent = node.parent;
-				if (node.left == null && node.right == null)
-				{
+				if (node.left == null && node.right == null) {
 					next = null;
-				}
-				else if (node.left == null)
-				{
+				} else if (node.left == null) {
 					next = node.right;
-				}
-				else if (node.right == null)
-				{
+				} else if (node.right == null) {
 					next = node.left;
 				}
-				if (node.left == null || node.right == null)
-				{
-					if (node == this.root)
-					{
+				if (node.left == null || node.right == null) {
+					if (node == this.root) {
 						this.root = next;
 						return;
 					}
-					if (parent.left == node)
-					{
+					if (parent.left == node) {
 						parent.left = next;
-					}
-					else
-					{
+					} else {
 						parent.right = next;
 					}
-					if (next != null)
-					{
+					if (next != null) {
 						next.parent = parent;
 					}
 					break;
@@ -280,14 +210,10 @@ class SPLAYTree
 				data = minNode.data;
 				node.data = data;
 				node = node.right;
-			}
-			else if (node.data > data)
-			{
+			} else if (node.data > data) {
 				parent = node;
 				node = node.left;
-			}
-			else
-			{
+			} else {
 				parent = node;
 				node = node.right;
 			}
@@ -295,17 +221,14 @@ class SPLAYTree
 		this.splay(parent);
 	}
 
-	printInOrder()
-	{
+	printInOrder() {
 		this.printInOrderUtil(this.root);
 		console.log();
 	}
 
-	printInOrder(node)
-	{
+	printInOrder(node) {
 		/* In order */
-		if (node != null)
-		{
+		if (node != null) {
 			this.printInOrderUtil(node.left);
 			console.log(node.data + " ");
 			this.printInOrderUtil(node.right);

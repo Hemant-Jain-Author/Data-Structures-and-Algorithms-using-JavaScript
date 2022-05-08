@@ -219,8 +219,7 @@ function isPalindrome(str) {
     if (i < j) {
         console.log(str, "is not a Palindrome");
         return false;
-    }
-    else {
+    } else {
         console.log(str, "is a Palindrome");
         return true;
     }
@@ -242,12 +241,10 @@ function pow(x, n) {
     let value;
     if (n === 0) {
         return (1);
-    }
-    else if (n % 2 === 0) {
+    } else if (n % 2 === 0) {
         value = pow(x, Math.floor(n / 2));
         return (value * value);
-    }
-    else {
+    } else {
         value = pow(x, Math.floor(n / 2));
         return (x * value * value);
     }
@@ -275,14 +272,11 @@ function myStrcmp(a, b) {
     }
     if (index === len1 && index === len2) {
         return 0;
-    }
-    else if (len1 === index) {
+    } else if (len1 === index) {
         return -1;
-    }
-    else if (len2 === index) {
+    } else if (len2 === index) {
         return 1;
-    }
-    else {
+    } else {
         return (a.charCodeAt(index) - b.charCodeAt(index));
     }
 }
@@ -442,8 +436,7 @@ function addBinary(first, second) {
     if (size1 > size2) {
         total = new Array(size1 + 2).fill(null);
         totalIndex = size1;
-    }
-    else {
+    } else {
         total = new Array(size2 + 2).fill(null);
         totalIndex = size2;
     }

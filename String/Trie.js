@@ -24,10 +24,10 @@ class Trie {
         if (curr == null) {
             curr = new TrieNode(this, str[index - 1]);
         }
+
         if (str.length === index) {
             curr.isLastChar = true;
-        }
-        else {
+        } else {
             curr.child[str[index].charCodeAt(0) - 'a'.charCodeAt(0)] = this.insertUtil(curr.child[str[index].charCodeAt(0) - 'a'.charCodeAt(0)], str, index + 1);
         }
         return curr;
@@ -45,6 +45,7 @@ class Trie {
         if (curr == null) {
             return;
         }
+        
         if (str.length === index) {
             if (curr.isLastChar) {
                 curr.isLastChar = false;

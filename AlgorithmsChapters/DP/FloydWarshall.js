@@ -1,28 +1,21 @@
 
 const INF = Number.MAX_VALUE;
-function floydWarshall(graph, V)
-{
+function floydWarshall(graph, V) {
 	const dist = Array(V).fill(0).map(() => new Array(V).fill(0));
-	for (let i = 0; i < V; i++)
-	{
-		for (let j = 0; j < V; j++)
-		{
+	for (let i = 0; i < V; i++) {
+		for (let j = 0; j < V; j++) {
 			dist[i][j] = graph[i][j];
 		}
 	}
 	// Pick intermediate vertices.
-	for (let k = 0; k < V; k++)
-	{
+	for (let k = 0; k < V; k++) {
 		// Pick source vertices one by one.
-		for (let i = 0; i < V; i++)
-		{
+		for (let i = 0; i < V; i++) {
 			// Pick destination vertices.
-			for (let j = 0; j < V; j++)
-			{
+			for (let j = 0; j < V; j++) {
 				// If we have shorter path from i to j via k.
 				// then update dist[i][j]
-				if (dist[i][k] != INF && dist[k][j] != INF && dist[i][k] + dist[k][j] < dist[i][j])
-				{
+				if (dist[i][k] != INF && dist[k][j] != INF && dist[i][k] + dist[k][j] < dist[i][j]) {
 					dist[i][j] = dist[i][k] + dist[k][j];
 				}
 			}

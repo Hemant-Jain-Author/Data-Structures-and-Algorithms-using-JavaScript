@@ -1,36 +1,28 @@
-function maxVal(max, i, j)
-{
-	if (max[i][j] != Number.MIN_VALUE)
-	{
+function maxVal(max, i, j) {
+	if (max[i][j] != Number.MIN_VALUE) {
 		return max[i][j];
 	}
-	for (let k = i; k < j; k++)
-	{
+	for (let k = i; k < j; k++) {
 		max[i][j] = Math.max(max[i][j], Math.max(maxVal(max, i, k), maxVal(max, k + 1, j)));
 	}
 	return max[i][j];
 }
 
-function findSumTDUtil(dp, max, i, j, arr)
-{
-	if (j <= i)
-	{
+function findSumTDUtil(dp, max, i, j, arr) {
+	if (j <= i) {
 		return 0;
 	}
-	if (dp[i][j] != Number.MAX_VALUE)
-	{
+	if (dp[i][j] != Number.MAX_VALUE) {
 		return dp[i][j];
 	}
-	for (let k = i; k < j; k++)
-	{
+	for (let k = i; k < j; k++) {
 		dp[i][j] = Math.min(dp[i][j], findSumTDUtil(dp, max, i, k, arr) +
 		findSumTDUtil(dp, max, k + 1, j, arr) + maxVal(max, i, k) * maxVal(max, k + 1, j));
 	}
 	return dp[i][j];
 }
 
-function findSumTD(arr)
-{
+function findSumTD(arr) {
 	const n = arr.length;
 	const dp = Array(n).fill(0).map(() => new Array(n).fill(Number.MAX_VALUE));
 	const max = Array(n).fill(0).map(() => new Array(n).fill(Number.MIN_VALUE));
@@ -40,22 +32,18 @@ function findSumTD(arr)
 	return findSumTDUtil(dp, max, 0, n - 1, arr);
 }
 
-function findSumBU(arr)
-{
+function findSumBU(arr) {
 	const n = arr.length;
 	const dp = Array(n).fill(0).map(() => new Array(n).fill(0));
 	const max = Array(n).fill(0).map(() => new Array(n).fill(0));
 	for (let i = 0; i < n; i++)
 		max[i][i] = arr[i];
 	
-	for (let l = 1; l < n; l++)
-	{
+	for (let l = 1; l < n; l++) {
 		// l is length of range.
-		for (let i = 0, j = i + l; j < n; i++, j++)
-		{
+		for (let i = 0, j = i + l; j < n; i++, j++) {
 			dp[i][j] = Number.MAX_VALUE;
-			for (let k = i; k < j; k++)
-			{
+			for (let k = i; k < j; k++) {
 				dp[i][j] = Math.min(dp[i][j], dp[i][k] + dp[k + 1][j] + max[i][k] * max[k + 1][j]);
 				max[i][j] = Math.max(max[i][k], max[k + 1][j]);
 			}

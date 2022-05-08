@@ -1,5 +1,4 @@
-function printSubset(flags, arr, size)
-{
+function printSubset(flags, arr, size) {
 	const out = [];
 	for (let i = 0; i < size; i++)
 		if (flags[i])
@@ -7,21 +6,17 @@ function printSubset(flags, arr, size)
 	console.log(out);
 }
 
-function subsetSum(arr, n, target)
-{
+function subsetSum(arr, n, target) {
 	const flags = Array(n).fill(false);
 	subsetSumUtil(arr, n, flags, 0, 0, target);
 }
 
-function subsetSumUtil(arr, n, flags, sum, curr, target)
-{
-	if (target == sum)
-	{
+function subsetSumUtil(arr, n, flags, sum, curr, target) {
+	if (target == sum) {
 		printSubset(flags, arr, n); // Solution found.
 		return;
 	}
-	if (curr >= n || sum > target)
-	{
+	if (curr >= n || sum > target) {
 		// constraint check
 		// Backtracking.
 		return;

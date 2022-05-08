@@ -1,14 +1,11 @@
-function makePairs(nuts, bolts)
-{
+function makePairs(nuts, bolts) {
 	makePairsUtil(nuts, bolts, 0, nuts.length - 1);
 	console.log("Matched nuts and bolts are : ", nuts, bolts);
 }
 
 // Quick sort kind of approach.
-function makePairsUtil(nuts, bolts, low, high)
-{
-	if (low < high)
-	{
+function makePairsUtil(nuts, bolts, low, high) {
+	if (low < high) {
 		// Choose first element of bolts array as pivot to partition nuts.
 		let pivot = partition(nuts, low, high, bolts[low]);
 		// Using nuts[pivot] as pivot to partition bolts.
@@ -18,26 +15,20 @@ function makePairsUtil(nuts, bolts, low, high)
 		makePairsUtil(nuts, bolts, pivot + 1, high);
 	}
 }
-function swap(arr, first, second)
-{
+function swap(arr, first, second) {
 	let temp = arr[first];
 	arr[first] = arr[second];
 	arr[second] = temp;
 }
 
 // Partition method similar to quick sort algorithm.
-function partition(arr, low, high, pivot)
-{
+function partition(arr, low, high, pivot) {
 	let i = low;
-	for (let j = low; j < high; j++)
-	{
-		if (arr[j] < pivot)
-		{
+	for (let j = low; j < high; j++) {
+		if (arr[j] < pivot) {
 			swap(arr, i, j);
 			i++;
-		}
-		else if (arr[j] == pivot)
-		{
+		} else if (arr[j] == pivot) {
 			swap(arr, high, j);
 			j--;
 		}

@@ -1,11 +1,9 @@
-function diffUniqueWaysBU(n)
-{
+function diffUniqueWaysBU(n) {
 	if (n <= 2)
 		return n;
 
 	let first = 1, second = 2, temp = 0;
-	for (let i = 3; i <= n; i++)
-	{
+	for (let i = 3; i <= n; i++) {
 		temp = first + second;
 		first = second;
 		second = temp;
@@ -13,8 +11,7 @@ function diffUniqueWaysBU(n)
 	return temp;
 }
 
-function diffUniqueWaysBU2(n)
-{
+function diffUniqueWaysBU2(n) {
 	if (n < 2)
 		return n;
 

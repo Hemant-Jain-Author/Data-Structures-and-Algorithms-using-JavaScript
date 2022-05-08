@@ -1,19 +1,15 @@
-function swap(arr, i, j)
-{
+function swap(arr, i, j) {
 	let temp = arr[i];
 	arr[i] = arr[j];
 	arr[j] = temp;
 }
 
-function permutation(arr, i, length)
-{
-	if (length == i)
-	{
+function permutation(arr, i, length) {
+	if (length == i) {
 		console.log(arr);
 		return;
 	}
-	for (let j = i; j < length; j++)
-	{
+	for (let j = i; j < length; j++) {
 		swap(arr, i, j);
 		permutation(arr, i + 1, length);
 		swap(arr, i, j);
@@ -21,56 +17,43 @@ function permutation(arr, i, length)
 	return;
 }
 
-function isValid(arr, n)
-{
-	for (let j = 1; j < n; j++)
-	{
-		if (Math.abs(arr[j] - arr[j - 1]) < 2)
-		{
+function isValid(arr, n) {
+	for (let j = 1; j < n; j++) {
+		if (Math.abs(arr[j] - arr[j - 1]) < 2) {
 			return false;
 		}
 	}
 	return true;
 }
 
-function permutation2(arr, i, length)
-{
-	if (length == i)
-	{
-		if (isValid(arr, length))
-		{
+function permutation2(arr, i, length) {
+	if (length == i) {
+		if (isValid(arr, length)) {
 			console.log(arr);
 		}
 		return;
 	}
-	for (let j = i; j < length; j++)
-	{
+	for (let j = i; j < length; j++) {
 		swap(arr, i, j);
 		permutation2(arr, i + 1, length);
 		swap(arr, i, j);
 	}
 	return;
 }
-function isValid2(arr, i)
-{
-	if (i < 1 || Math.abs(arr[i] - arr[i - 1]) >= 2)
-	{
+function isValid2(arr, i) {
+	if (i < 1 || Math.abs(arr[i] - arr[i - 1]) >= 2) {
 		return true;
 	}
 	return false;
 }
-function permutation3(arr, i, length)
-{
-	if (length == i)
-	{
+function permutation3(arr, i, length) {
+	if (length == i) {
 		console.log(arr);
 		return;
 	}
-	for (let j = i; j < length; j++)
-	{
+	for (let j = i; j < length; j++) {
 		swap(arr, i, j);
-		if (isValid2(arr, i))
-		{
+		if (isValid2(arr, i)) {
 			permutation3(arr, i + 1, length);
 		}
 		swap(arr, i, j);
@@ -79,8 +62,7 @@ function permutation3(arr, i, length)
 }
 /* Testing code */
 const arr = Array(4).fill(0);
-for (let i = 0; i < 4; i++)
-{
+for (let i = 0; i < 4; i++) {
 	arr[i] = i + 1;
 }
 permutation(arr, 0, 4);

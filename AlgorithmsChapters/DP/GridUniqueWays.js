@@ -1,6 +1,5 @@
 
-function uniqueWays(m, n)
-{
+function uniqueWays(m, n) {
 	const dp = Array(m).fill(0).map(() => new Array(n).fill(0));
 	dp[0][0] = 1;
 	// Initialize first column.
@@ -11,8 +10,7 @@ function uniqueWays(m, n)
 	for (let j = 1; j < n; j++)
 		dp[0][j] = dp[0][j - 1];
 	
-	for (let i = 1; i < m; i++)
-	{
+	for (let i = 1; i < m; i++) {
 		for (let j = 1; j < n; j++)
 			dp[i][j] = dp[i - 1][j] + dp[i][j - 1];
 	}
@@ -20,8 +18,7 @@ function uniqueWays(m, n)
 }
 
 // Diagonal movement allowed.
-function unique3Ways(m, n)
-{
+function unique3Ways(m, n) {
 	const dp = Array(m).fill(0).map(() => new Array(n).fill(0));
 	dp[0][0] = 1;
 	// Initialize first column.
@@ -32,8 +29,7 @@ function unique3Ways(m, n)
 	for (let j = 1; j < n; j++)
 		dp[0][j] = dp[0][j - 1];
 
-	for (let i = 1; i < m; i++)
-	{
+	for (let i = 1; i < m; i++) {
 		for (let j = 1; j < n; j++)
 			dp[i][j] = dp[i - 1][j - 1] + dp[i - 1][j] + dp[i][j - 1];
 	}
