@@ -1,35 +1,30 @@
 function BruteForceSearch(text, pattern) {
-    if ((typeof text === 'string') && (typeof pattern === 'string')) {
-        let i = 0;
-        let j = 0;
-        const n = text.length;
-        const m = pattern.length;
-        while (i <= n - m) {
-            j = 0;
-            while (j < m && pattern[j] === text[i + j]) {
-                j++;
-            }
-
-            if (j === m) {
-                return (i);
-            }
-            i++;
-        }
-        return -1;
+    if ((typeof text != 'string') || (typeof pattern != 'string'))
+        throw new Error('invalid overload');
+    
+    let i = 0;
+    let j = 0;
+    const n = text.length;
+    const m = pattern.length;
+    
+    while (i <= n - m) {
+        j = 0;
+        while (j < m && pattern[j] === text[i + j])
+            j++;
+        
+        if (j === m)
+            return (i);
+        
+        i++;
     }
-    else
-        throw new Error('invalid arguments');
+    return -1;
 }
 
 function RobinKarp(text, pattern) {
 
-    if ((typeof text === 'string') && (typeof pattern === 'string')) {
-        return RobinKarpUtil(text, pattern);
-    } else
+    if ((typeof text != 'string') || (typeof pattern != 'string'))
         throw new Error('invalid overload');
-}
 
-function RobinKarpUtil(text, pattern) {
     const n = text.length;
     const m = pattern.length;
     let i;
@@ -86,19 +81,17 @@ function KMPPreprocess(pattern, ShiftArr) {
 }
 
 function KMP(text, pattern) {
-    if ((typeof text === 'string') && (typeof pattern === 'string')) {
-        return KMPUtil(text, pattern);
-    } else
+    if ((typeof text != 'string') || (typeof pattern != 'string'))
         throw new Error('invalid overload');
-}
-
-function KMPUtil(text, pattern) {
+    
     let i = 0;
     let j = 0;
     const n = text.length;
     const m = pattern.length;
     const ShiftArr = new Array(m + 1);
+    
     KMPPreprocess(pattern, ShiftArr);
+    
     while (i < n) {
         while (j >= 0 && text[i] !== pattern[j])
             j = ShiftArr[j];
@@ -112,13 +105,18 @@ function KMPUtil(text, pattern) {
 }
 
 function KMPFindCount(text, pattern) {
+    if ((typeof text != 'string') || (typeof pattern != 'string'))
+        throw new Error('invalid overload');
+    
     let i = 0;
     let j = 0;
     let count = 0;
     const n = text.length;
     const m = pattern.length;
     const ShiftArr = new Array(m + 1);
+    
     KMPPreprocess(pattern, ShiftArr);
+    
     while (i < n) {
         while (j >= 0 && text[i] !== pattern[j]) {
             j = ShiftArr[j];

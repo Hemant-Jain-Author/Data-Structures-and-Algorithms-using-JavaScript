@@ -1,10 +1,3 @@
-class Point {
-	constructor(a, b) {
-		this.x = a;
-		this.y = b;
-	}
-}
-
 function closestPairBF(arr) {
 	const n = arr.length;
 	let dmin = 9999999;
@@ -20,25 +13,25 @@ function closestPairBF(arr) {
 	return dmin;
 }
 
-function distance(a, b) {
-	return Math.sqrt((a.x - b.x) * (a.x - b.x) + (a.y - b.y) * (a.y - b.y));
+class Point {
+	constructor(a, b) {
+		this.x = a;
+		this.y = b;
+	}
 }
 
-
-function stripMin(q, n, d) {
-	let min = d;
-	// Find the distance between all the points in the strip. 
-	// Array q is sorted according to the y axis coordinate.
-	// The inner loop will run at most 6 times for each point.
-	for (let i = 0; i < n; ++i) {
-		for (let j = i + 1; j < n && (q[j].y - q[i].y) < min; ++j) {
-			d = distance(q[i], q[j]);
-			if (d < min) {
-				min = d;
-			}
-		}
+function closestPairDC(arr) {
+	const n = arr.length;
+	const p = Array(n).fill(null);
+	for (let i = 0; i < n; i++) {
+		p[i] = new Point(arr[i][0], arr[i][1]);
 	}
-	return min;
+	// Sort according to x axis.
+	p.sort(function xComp(s1, s2){	return (s1.x - s2.x);});
+	let q = [...p];
+	// Sort according to y axis.
+	q.sort(function yComp(s1, s2){	return (s1.y - s2.y);});
+	return closestPairUtil(p, 0, n - 1, q, n);
 }
 
 function closestPairUtil(p, start, stop, q, n) {
@@ -68,28 +61,28 @@ function closestPairUtil(p, start, stop, q, n) {
 	return Math.min(d, stripMin(strip, j, d));
 }
 
-function closestPairDC(arr) {
-	const n = arr.length;
-	const p = Array(n).fill(null);
-	for (let i = 0; i < n; i++) {
-		p[i] = new Point(arr[i][0], arr[i][1]);
+function distance(a, b) {
+	return Math.sqrt((a.x - b.x) * (a.x - b.x) + (a.y - b.y) * (a.y - b.y));
+}
+
+function stripMin(q, n, d) {
+	let min = d;
+	// Find the distance between all the points in the strip. 
+	// Array q is sorted according to the y axis coordinate.
+	// The inner loop will run at most 6 times for each point.
+	for (let i = 0; i < n; ++i) {
+		for (let j = i + 1; j < n && (q[j].y - q[i].y) < min; ++j) {
+			d = distance(q[i], q[j]);
+			if (d < min) {
+				min = d;
+			}
+		}
 	}
-	// Sort according to x axis.
-	p.sort(function xComp(s1, s2){	return (s1.x - s2.x);});
-	let q = [...p];
-	// Sort according to y axis.
-	q.sort(function yComp(s1, s2){	return (s1.y - s2.y);});
-	return closestPairUtil(p, 0, n - 1, q, n);
+	return min;
 }
 
 // Testing code.
-const arr = [
-	[648, 896],
-	[269, 879],
-	[250, 922],
-	[453, 347],
-	[213, 17]
-];
+const arr = [[648, 896], [269, 879], [250, 922], [453, 347], [213, 17]];
 console.log("Smallest distance is:" + closestPairBF(arr));
 console.log("Smallest distance is:" + closestPairDC(arr));
 
@@ -97,3 +90,19 @@ console.log("Smallest distance is:" + closestPairDC(arr));
 Smallest distance is:47.01063709417264
 Smallest distance is:47.01063709417264
 */
+
+function power(x, n) {
+    let value;
+    if (n == 0) {
+        return (1);
+    } else if (n % 2 == 0) {
+        value = power(x, Math.floor(n / 2));
+        return (value * value);
+    } else {
+        value = power(x, Math.floor(n / 2));
+        return (x * value * value);
+    }
+}
+
+// Testing code.
+console.log(power(5, 2));

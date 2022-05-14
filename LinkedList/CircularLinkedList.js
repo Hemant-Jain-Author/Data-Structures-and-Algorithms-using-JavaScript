@@ -159,18 +159,94 @@ class CircularLinkedList {
     }
 }
 
-// Testing code.
-const ll = new CircularLinkedList();
-ll.addHead(1);
-ll.addHead(2);
-ll.addHead(3);
-ll.print();
-ll.addTail(3)
-ll.addTail(2)
-ll.print();
-console.log(ll.find(3))
-console.log(ll.find(4))
-const ll2 = ll.copyList()
-ll2.print()
-const ll3 = ll.copyListReversed()
-ll3.print()
+function main1() {
+	let ll = new CircularLinkedList();
+	ll.addHead(1);
+	ll.addHead(2);
+	ll.addHead(3);
+	ll.print();
+	console.log(ll.size());
+	console.log(ll.isEmpty());
+	console.log(ll.peek());
+	console.log(ll.find(3));
+}
+
+/*
+3 2 1
+3
+false
+3
+true
+*/
+
+function main2() {
+	let ll = new CircularLinkedList();
+	ll.addTail(1);
+	ll.addTail(2);
+	ll.addTail(3);
+	ll.print();
+}
+
+/*
+1 2 3
+*/
+
+function main3() {
+	let ll = new CircularLinkedList();
+	ll.addHead(1);
+	ll.addHead(2);
+	ll.addHead(3);
+	ll.print();
+	ll.removeHead();
+	ll.print();
+	ll.removeNode(2);
+	ll.print();
+	ll.freeList();
+	ll.print();
+}
+
+/*
+3 2 1
+2 1
+1
+Empty List.
+*/
+
+function main4() {
+	let ll = new CircularLinkedList();
+	ll.addHead(1);
+	ll.addHead(2);
+	ll.addHead(3);
+	ll.print();
+	let ll2 = ll.copyList();
+	ll2.print();
+	let ll3 = ll.copyListReversed();
+	ll3.print();
+}
+
+/*
+3 2 1
+3 2 1
+1 2 3
+*/
+
+function main5() {
+	let ll = new CircularLinkedList();
+	ll.addHead(1);
+	ll.addHead(2);
+	ll.addHead(3);
+	ll.print();
+	ll.removeNode(2);
+	ll.print();
+}
+
+/*
+3 2 1
+3 1
+*/
+
+main1();
+main2();
+main3();
+main4();
+main5();

@@ -8,15 +8,8 @@ class HashTableNode {
 
 class HashTable {
     constructor(cmp, hashFun) {
-        if (cmp === undefined || cmp === null)
-            cmp = this.DefaultCompare;
-        
-        this.comp = cmp;  
-
-        if (hashFun === undefined || hashFun === null)
-            hashFun = this.DefaultHashFun;
-
-        this.HashFun = hashFun;
+        this.comp = (cmp === undefined || cmp === null) ? this.DefaultCompare : cmp;
+        this.HashFun = (hashFun === undefined || hashFun === null) ? this.DefaultHashFun : hashFun; 
         this.tableSize = 512;
         this.listArray = new Array(this.tableSize).fill(null);
     }
@@ -32,7 +25,8 @@ class HashTable {
     DefaultHashFun(key) {
         return key;
     }
-
+    /* Other methods */
+    
     add(key, value) {
         if (key === undefined || key === null)
             return false;
@@ -44,7 +38,7 @@ class HashTable {
         this.listArray[index] = new HashTableNode(key, value,this.listArray[index]);
     }
 
-    delete(key) {
+    remove(key) {
         const index = this.ComputeHash(key);
         let nextNode;
         let head = this.listArray[index];
@@ -112,5 +106,5 @@ ht.print();
 
 console.log("Find key 2 : ", ht.find(2));
 console.log("Value at key 2 : ",ht.get(2))
-ht.delete(1)
+ht.remove(1)
 ht.print()

@@ -97,10 +97,15 @@ function test1() {
     const first = [1, 3, 5, 7, 6, 4, 2];
     console.log(linearSearchUnsorted(first, 7));
     console.log(linearSearchUnsorted(first, 9));
-    const second = [2, 4, 6, 8, 10, 12, 14, 16, 21, 23, 24];
+
+
+    const second = [1, 3, 5, 7, 9, 25, 30 ];
     console.log(linearSearchSorted(second, 8));
     console.log(linearSearchSorted(second, 9));
-    console.log(binarySearch(second, 10));
+
+    console.log(binarySearch(second, 8));
+    console.log(binarySearch(second, 25));
+
     console.log(binarySearchRecursive(second, 10));
     console.log(fibonacciSearch(second, 10));
 }
@@ -402,7 +407,7 @@ function findMissingNumber8(arr, upperRange) {
 
 // Testing code.
 function test5() {
-	let first = [1, 5, 4, 3, 2, 7, 8, 9];
+    let first = [1, 5, 4, 3, 2, 7, 8, 9];
     console.log(findMissingNumber(first));
 	console.log(findMissingNumber2(first));
 	console.log(findMissingNumber3(first));
@@ -489,9 +494,9 @@ function missingValues3(arr, size) {
 
 // Testing code.
 function test6() {
-	let arr = [11, 14, 13, 17, 21, 18, 19, 23, 24];
-	let size = arr.length;
-	missingValues(arr, size);
+    let arr = [11, 14, 13, 17, 21, 18, 19, 23, 24];
+    let size = arr.length;
+    missingValues(arr, size);
     console.log();
 	missingValues2(arr, size);
     console.log();
@@ -565,13 +570,13 @@ function oddNumbers(arr, size) {
 
 // Testing code.
 function test7() {
-	let arr = [10, 25, 30, 10, 15, 25, 15];
-	let size = arr.length;
-	oddCount(arr, size);
-	oddCount2(arr, size);
-	let arr2 = [10, 25, 30, 10, 15, 25, 15, 40];
-	let size2 = arr2.length;
-	oddCount3(arr2, size2);
+    let arr = [10, 25, 30, 10, 15, 25, 15];
+    let size = arr.length;
+    oddCount(arr, size);
+    oddCount2(arr, size);
+    let arr2 = [10, 25, 30, 10, 15, 25, 15, 40];
+    let size2 = arr2.length;
+    oddCount3(arr2, size2);
     oddNumbers(arr2, size2);
 }
 
@@ -601,9 +606,9 @@ function sumDistinct(arr, size) {
 
 // Testing code.
 function test8() {
-	let arr = [1, 2, 3, 1, 1, 4, 5, 6];
-	let size = arr.length;
-	sumDistinct(arr, size);
+    let arr = [1, 2, 3, 1, 1, 4, 5, 6];
+    let size = arr.length;
+    sumDistinct(arr, size);
 }
 
 test8();
@@ -830,9 +835,9 @@ function findPairTwoLists5(arr1, size1, arr2, size2, range, value) {
 
 // Testing code.
 function test11() {
-	let first = [1, 5, 4, 3, 2, 7, 8, 9, 6];
-	let second = [1, 5, 4, 3, 2, 7, 8, 9, 6];
-	console.log(findPairTwoLists(first, first.length, second, second.length, 8));
+    let first = [1, 5, 4, 3, 2, 7, 8, 9, 6];
+    let second = [1, 5, 4, 3, 2, 7, 8, 9, 6];
+    console.log(findPairTwoLists(first, first.length, second, second.length, 8));
 	console.log(findPairTwoLists2(first, first.length, second, second.length, 8));
 	console.log(findPairTwoLists3(first, first.length, second, second.length, 8));
 	console.log(findPairTwoLists4(first, first.length, second, second.length, 8));
@@ -926,8 +931,8 @@ function findMinDiff2(arr) {
 
 // Testing code.
 function test13() {
-	let second = [1, 6, 4, 19, 17, 20];
-	console.log("findMinDiff : " + findMinDiff(second));
+    let second = [1, 6, 4, 19, 17, 20];
+    console.log("findMinDiff : " + findMinDiff(second));
 	console.log("findMinDiff : " + findMinDiff2(second));
 }
 
@@ -982,9 +987,9 @@ function minDiffPair2(arr1, size1, arr2, size2) {
 
 // Testing code.
 function test14() {
-	let first = [1, 5, 4, 3, 2, 7, 8, 9, 6];
-	let second = [6, 4, 19, 17, 20];
-	minDiffPair(first, first.length, second, second.length);
+    let first = [1, 5, 4, 3, 2, 7, 8, 9, 6];
+    let second = [6, 4, 19, 17, 20];
+    minDiffPair(first, first.length, second, second.length);
 	minDiffPair(first, first.length, second, second.length);
 }
 
@@ -1039,8 +1044,8 @@ function closestPair2(arr, size, value) {
 
 // Testing code.
 function test15() {
-	let first = [10, 20, 3, 4, 50, 80];
-	closestPair(first, first.length, 47);
+    let first = [10, 20, 3, 4, 50, 80];
+    closestPair(first, first.length, 47);
 	closestPair2(first, first.length, 47);
 }
 
@@ -1220,7 +1225,7 @@ function abcTriplet2(arr, size) {
 // Testing code.
 function test19() {
     let first = [1, 5, 15, 6, 9, 8];
-	abcTriplet(first, first.length);
+    abcTriplet(first, first.length);
 	abcTriplet2(first, first.length);
 }
 
@@ -1270,8 +1275,8 @@ function smallerThenTripletCount2(arr, size, value) {
 
 // Testing code.
 function test20() {
-	let first = [-2, -1, 0, 1];
-	smallerThenTripletCount(first, first.length, 2);
+    let first = [-2, -1, 0, 1];
+    smallerThenTripletCount(first, first.length, 2);
 	smallerThenTripletCount(first, first.length, 2);
 }
 
@@ -1638,15 +1643,15 @@ function searchBitonicArrayMax2(arr) {
 // Testing code.
 function test26() {
     const first = [1, 3, 5, 7, 9, 11, 12, 8, 5, 3, 1];
-    console.log(searchBitonicArrayMax(first));
-    console.log(searchBitonicArrayMax2(first));
+    console.log(first[searchBitonicArrayMax(first)]);
+    console.log(first[searchBitonicArrayMax2(first)]);
 }
 
 test26();
 
 /*
-6
-6
+12
+12
 */
 
 function searchBitonicArray(arr, key) {
@@ -1840,22 +1845,26 @@ function maxProfit2(stocks) {
     }
     console.log(`Purchase day is ${buy} at price ${stocks[buy]}`);
     console.log(`Sell day is ${sell} at price ${stocks[sell]}`);
+    return maxProfit;
 }
 
 // Testing code.
 function test29() {
-    const first = [10, 10, 5, 7, 9, 11, 12, 8, 5, 3, 10];
-    maxProfit(first);
-    maxProfit2(first);
+    const first = [10, 150, 6, 67, 61, 16, 86, 6, 67, 78, 150, 3, 28, 143];
+    console.log("Profit is :", maxProfit(first));
+    console.log("Profit is :", maxProfit2(first));
 }
 
 test29();
 
 /*
-Purchase day is 2 at price 5
-Sell day is 6 at price 12
-Purchase day is 2 at price 5
-Sell day is 6 at price 12
+Purchase day is 2 at price 6
+Sell day is 10 at price 150
+Profit is : 144
+
+Purchase day is 2 at price 6
+Sell day is 10 at price 150
+Profit is : 144
 */
 
 function findMedian(arrFirst, arrSecond) {
@@ -1881,16 +1890,14 @@ function findMedian(arrFirst, arrSecond) {
 
 // Testing code.
 function test30() {
-    const first = [10, 10, 5, 7, 9, 11];
-    const second = [12, 8, 5, 3, 10];
-    first.sort(function cmp(a, b) { return (a - b); });
-    second.sort(function cmp(a, b) { return (a - b); });
+    const first = [1, 5, 6, 6, 6, 6, 6, 6, 7, 8, 10, 13, 20, 30];
+    const second = [1, 5, 6, 6, 6, 6, 6, 6, 7, 8, 10, 13, 20, 30 ];
     console.log(`median value is :: ${findMedian(first, second)}`);
 }
 
 test30();
 
-// median value is :: 9
+// median value is :: 6
 
 function swap(arr, first, second) {
     const temp = arr[first];
@@ -2220,7 +2227,6 @@ function test36() {
             f[i][j] = count++;
         }
     }
-
     console.log(findElementIn2DArray(f, 10, 10, 21));
     console.log(findElementIn2DArray(f, 10, 10, 121));
 }
@@ -2385,16 +2391,16 @@ function findCeil(arr, size, value) {
 
 // Testing code.
 function test39() {
-	let arr = [2, 4, 8, 16];
-	console.log(findFloor(arr, arr.length, 5));
-	console.log(findCeil(arr, arr.length, 5));
+    let arr = [2, 4, 8, 16];
+    console.log("Floor :", findFloor(arr, arr.length, 5));
+    console.log("Ceil :", findCeil(arr, arr.length, 5));
 }
 
 test39()
 
 /*
-4
-8
+Floor :  4
+Ceil :  8
 */
 
 function closestNumber(arr, size, num) {
@@ -2423,18 +2429,14 @@ function closestNumber(arr, size, num) {
 
 // Testing code.
 function test40() {
-    const arr = [-7, 1, 2, 3, 6, 8, 10];
-    console.info("findFloor : " , findFloor(arr, arr.length, 4));        
-    console.info("findCeil : " , findCeil(arr, arr.length, 4));
-    console.info("closestNumber : " , closestNumber(arr, arr.length, 4));
+    const arr = [ 2, 4, 8, 16];
+    console.info("closestNumber :" , closestNumber(arr, arr.length, 9));
 }
 
 test40();
 
 /*
-findFloor :  3
-findCeil :  6
-closestNumber :  3
+closestNumber : 8
 */
 
 function duplicateKDistance(arr, size, k) {
@@ -2528,8 +2530,8 @@ function frequencyCounts4(arr, size) {
 
 // Testing code.
 function test42() {
-	let arr = [1, 2, 2, 2, 1];
-	frequencyCounts(arr, arr.length);
+    let arr = [1, 2, 2, 2, 1];
+    frequencyCounts(arr, arr.length);
 	frequencyCounts2(arr, arr.length);
 	frequencyCounts3(arr, arr.length);
 	frequencyCounts4(arr, arr.length);
@@ -2650,38 +2652,35 @@ test44();
 */
 
 function subArraySums(arr, size, value) {
-    let first = 0;
-    let second = 0;
-    let sum = arr[first];
-    while (second < size && first < size) {
-        if (sum === value){
-            console.info("values between index : ", first ,"&", second);
-            return true;
-        }
+    let start = 0, end = 0, sum = 0;
+    var output = `Values between index : `;
 
+    while (start < size && end < size) {
         if (sum < value) {
-            second += 1;
-            if (second < size)
-                sum += arr[second];
+            sum += arr[end];
+            end += 1;
         } else {
-            sum -= arr[first];
-            first += 1;
+            sum -= arr[start];
+            start += 1;
+        }
+        
+        if (sum === value) {
+            output += `(${start} & ${end}) `
         }
     }
-    return false;
+    console.info(output);
 }
 
 // Testing code.
 function test45() {
-    const arr = [1, 3, 4, 4, 6, 7, 7, 8, 8];
-    console.log(subArraySums(arr, arr.length, 17));
+    const arr = [15, 5, 5, 20, 10, 5, 5, 20, 10, 10];
+    subArraySums(arr, arr.length, 20);
 }
 
 test45();
 
 /*
-values between index :  1 & 4
-true
+Values between index : (0 & 2) (3 & 4) (4 & 7) (7 & 8) (8 & 10) 
 */
 
 function maxConSub(arr, size) {
@@ -2973,8 +2972,8 @@ function ArrayIndexMaxDiff(arr, size) {
     let j;
     for (let i = 0; i < size; i++) {
         j = size - 1;
-        while (j > i) {
-            if (arr[j] > arr[i]) {
+        while (i < j) {
+            if (arr[i] <= arr[j]) {
                 maxDiff = Math.max(maxDiff, j - i);
                 break;
             }
@@ -2985,22 +2984,9 @@ function ArrayIndexMaxDiff(arr, size) {
 }
 
 function ArrayIndexMaxDiff2(arr, size) {
-    const leftMin = new Array(size);
     const rightMax = new Array(size);
-    leftMin[0] = arr[0];
-    let i, j;
-    let maxDiff;
-
-    for (i = 1; i < size; i++) {
-        if (leftMin[i - 1] < arr[i]) {
-            leftMin[i] = leftMin[i - 1];
-        } else {
-            leftMin[i] = arr[i];
-        }
-    }
-
     rightMax[size - 1] = arr[size - 1];
-    for (i = size - 2; i >= 0; i--) {
+    for (let i = size - 2; i >= 0; i--) {
         if (rightMax[i + 1] > arr[i]) {
             rightMax[i] = rightMax[i + 1];
         } else {
@@ -3008,12 +2994,13 @@ function ArrayIndexMaxDiff2(arr, size) {
         }
     }
 
-    i = 0;
-    j = 0;
-    maxDiff = -1;
+    let maxDiff = -1;
+    let i = 0;
+    let j = 1;
     while (j < size && i < size) {
-        if (leftMin[i] < rightMax[j]) {
-            maxDiff = Math.max(maxDiff, j - i);
+        if (arr[i] <= rightMax[j]) {
+            if (i < j)
+                maxDiff = Math.max(maxDiff, j - i);
             j = j + 1;
         } else {
             i = i + 1;
@@ -3031,8 +3018,8 @@ function test20() {
 
 test20();
 /*
-ArrayIndexMaxDiff : 6
-ArrayIndexMaxDiff : 6
+ArrayIndexMaxDiff : 7
+ArrayIndexMaxDiff : 7
 */
 
 function maxPathSum(arr1, size1, arr2, size2) {

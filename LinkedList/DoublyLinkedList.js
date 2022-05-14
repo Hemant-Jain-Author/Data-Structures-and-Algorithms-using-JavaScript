@@ -27,6 +27,8 @@ class DoublyLinkedList {
         return this.head.value;
     }
 
+    /* Other methods */
+
     addHead(value) {
         const newNode = new DLLNode(value, null, null);
         if (this.length === 0) {
@@ -85,7 +87,7 @@ class DoublyLinkedList {
                 if (curr.next == null)
                     this.tail = curr;
                 else
-                    curr.next = curr;
+                    curr.next.prev = curr;
                 this.length--;
                 return true;
             }
@@ -129,14 +131,14 @@ class DoublyLinkedList {
             return;
         }
         
-        if (this.head.value <= value) { // First node.
+        if (this.head.value > value) { // First node.
             temp.next = this.head;
             this.head.prev = temp;
             this.head = temp;
             return;
         }
         
-        while (curr.next != null && curr.next.value > value) {
+        while (curr.next != null && curr.next.value < value) {
             curr = curr.next;
         }
 
@@ -170,15 +172,13 @@ class DoublyLinkedList {
 
     removeDuplicate() {
         let curr = this.head;
-        let deleteMe;
         while (curr != null) {
-            if ((curr.next != null) && curr.value === curr.next.value) {
-                deleteMe = curr.next;
-                curr.next = deleteMe.next;
-                curr.next.prev = curr;
-                if (deleteMe === this.tail) {
+            if ((curr.next != null) && curr.value == curr.next.value) {
+                curr.next = curr.next.next;
+                if(curr.next != null)
+                    curr.next.prev = curr;
+                else 
                     this.tail = curr;
-                }
             } else {
                 curr = curr.next;
             }
@@ -207,30 +207,97 @@ class DoublyLinkedList {
 }
 
 // Testing code.
-const ll = new DoublyLinkedList();
-ll.addHead(1);
-ll.addHead(2);
-ll.addHead(3);
-ll.addTail(1);
-ll.addTail(2);
-ll.addTail(3);
-ll.print();
-console.log(ll.size())
-console.log(ll.isEmpty())
-console.log(ll.peek())
-ll.removeNode(3)
-ll.print()
-console.log(ll.find(3))
-ll.removeHead();
-ll.print()
-ll.freeList()
-ll.print();
+function main1() {
+    let ll = new DoublyLinkedList();
+    ll.addHead(1);
+    ll.addHead(2);
+    ll.addHead(3);
+    ll.print();
+    console.log("size : " + ll.size());
+    console.log("isEmpty : " + ll.isEmpty());
+        
+    ll.removeHead();
+    ll.print();
+	console.log(ll.find(2));
+}
+	/*
+3 2 1 
+size : 3
+isEmpty : false
+2 1 
+true
+	*/
 
-const ll2 = new DoublyLinkedList();
-ll2.sortedInsert(1);
-ll2.sortedInsert(5);
-ll2.sortedInsert(3);    
-ll2.sortedInsert(2);
-ll2.sortedInsert(4);
-ll2.sortedInsert(13);    
-ll2.print();
+function main2() {
+    let ll = new DoublyLinkedList();
+    ll.sortedInsert(1);
+    ll.sortedInsert(2);
+    ll.sortedInsert(3);
+    ll.print();
+    ll.sortedInsert(1);
+    ll.sortedInsert(2);
+    ll.sortedInsert(3);
+    ll.print();
+    ll.removeDuplicate();
+    ll.print();
+}
+/*
+1 2 3 
+1 1 2 2 3 3 
+1 2 3 
+*/
+
+function main3() {
+    let ll = new DoublyLinkedList();
+    ll.addHead(1);
+    ll.addHead(2);
+    ll.addHead(3);
+    ll.print();
+
+    let l2 = ll.copyList();
+    l2.print();
+    let l3 = ll.copyListReversed();
+    l3.print();
+}
+/*
+3 2 1 
+3 2 1 
+1 2 3
+*/
+
+function main4() {
+    let ll = new DoublyLinkedList();
+    ll.addHead(1);
+    ll.addHead(2);
+    ll.addHead(3);
+    ll.print();
+
+    ll.removeNode(2);
+    ll.print();
+}
+
+/*
+3 2 1 
+3 1 
+*/
+
+function main5() {
+    let ll = new DoublyLinkedList();
+    ll.addHead(1);
+    ll.addHead(2);
+    ll.addHead(3);
+    ll.print();
+    ll.reverseList();
+    ll.print();
+}
+
+/*
+3 2 1
+1 2 3
+*/
+
+main1();
+main2();
+main3();
+main4();
+main5();

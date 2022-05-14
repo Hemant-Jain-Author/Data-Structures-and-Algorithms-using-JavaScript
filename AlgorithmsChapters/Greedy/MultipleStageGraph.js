@@ -26,7 +26,7 @@ function shortestDist(graph, n) {
 			}
 		}
 	}
-	value = n - 1;
+	value = n-1;
 	let pathOut = "";
 	while (value != -1) {
 		pathOut = " " + value + pathOut;
@@ -34,7 +34,7 @@ function shortestDist(graph, n) {
 	}
 	pathOut = "Path is :" + pathOut;
 	console.log(pathOut);
-	return dist[n - 1];
+	return dist[n-1];
 }
 
 /* Testing Code */

@@ -1,10 +1,3 @@
-function printSubset(flags, arr, size) {
-	const out = [];
-	for (let i = 0; i < size; i++)
-		if (flags[i])
-			out.push(arr[i]);
-	console.log(out);
-}
 
 function subsetSum(arr, n, target) {
 	const flags = Array(n).fill(false);
@@ -27,6 +20,14 @@ function subsetSumUtil(arr, n, flags, sum, curr, target) {
 	// Current element excluded.
 	flags[curr] = false;
 	subsetSumUtil(arr, n, flags, sum, curr + 1, target);
+}
+
+function printSubset(flags, arr, size) {
+	const out = [];
+	for (let i = 0; i < size; i++)
+		if (flags[i])
+			out.push(arr[i]);
+	console.log(out);
 }
 
 // Testing code.

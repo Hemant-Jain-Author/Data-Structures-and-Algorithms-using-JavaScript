@@ -27,6 +27,7 @@ class DoublyCircularLinkedList {
             throw new Error("EmptyListError");
         return this.head.value;
     }
+	/* Other methods */
 
     addHead(value) {
         const newNode = new DCLLNode(value, null, null);
@@ -106,7 +107,7 @@ class DoublyCircularLinkedList {
         return false;
     }
 
-    free() {
+    freeList() {
         this.head = null;
         this.tail = null;
         this.length = 0;
@@ -125,24 +126,81 @@ class DoublyCircularLinkedList {
     }
 }
 
-// Testing code.
-const ll = new DoublyCircularLinkedList();
-ll.addHead(1);
-ll.addHead(2);
-ll.addHead(3);
-ll.addTail(11);
-ll.addTail(22);
-ll.addTail(33);
-ll.print();
-console.log(ll.size())
-console.log(ll.isEmpty())
-console.log(ll.peekHead())
-console.log(ll.removeHead())
-console.log(ll.removeTail())
-ll.print();
-console.log(ll.find(22))
-console.log(ll.find(25))
-ll.free()
-ll.print();
-console.log(ll.size())
-console.log(ll.isEmpty())
+function main1() {
+    let ll = new DoublyCircularLinkedList();
+    ll.addHead(1);
+    ll.addHead(2);
+    ll.addHead(3);
+    ll.print();
+    console.log("Size : " + ll.size());
+    console.log("Is empty : " + ll.isEmpty());
+    console.log("Peek : " + ll.peekHead());
+    console.log("search : " + ll.find(3));
+}
+
+/*
+3 2 1
+3
+false
+3
+true
+*/
+
+function main2() {
+    let ll = new DoublyCircularLinkedList();
+    ll.addTail(1);
+    ll.addTail(2);
+    ll.addTail(3);
+    ll.print();
+
+	ll.removeHead();
+	ll.print();
+	ll.removeTail();
+	ll.print();
+	ll.freeList();
+	ll.print();
+}
+
+/*
+1 2 3
+2 3
+2
+Empty List.
+*/
+
+function main3() {
+    let ll = new DoublyCircularLinkedList();
+    ll.addHead(1);
+    ll.addHead(2);
+    ll.addHead(3);
+    ll.print();
+    ll.removeHead();
+    ll.print();
+
+}
+
+/*
+3 2 1
+2 1
+*/
+
+function main4() {
+    let ll = new DoublyCircularLinkedList();
+    ll.addHead(1);
+    ll.addHead(2);
+    ll.addHead(3);
+    ll.print();
+
+    ll.removeTail();
+    ll.print();
+}
+
+/*
+3 2 1
+3 2
+*/
+	
+main1();
+main2();
+main3();
+main4();

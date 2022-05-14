@@ -3,8 +3,7 @@
 // s[] is an array that contains start time of all activities
 // f[] is an array that contains finish time of all activities
 
-class Activity
-{
+class Activity {
 	constructor(s, f) {
 		this.start = s;
 		this.stop = f;

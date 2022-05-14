@@ -85,6 +85,27 @@ class Heap {
         }
         return this.arr[0]
     }
+
+    find(val) {
+        for (let i = 0; i < this.size; i++) {
+            if (this.arr[i] == val)
+                return true;
+        }
+        return false;
+    }
+
+    delete(value) {
+        for (let i = 0; i < this.size; i++) {
+            if (arr[i] == value) {
+                arr[i] = arr[size - 1];
+                size -= 1;
+                percolateUp(i);
+                percolateDown(i);
+                return true;
+            }
+        }
+        return false;
+    }
 }
 
 // Testing code.
@@ -120,7 +141,7 @@ function test1() {
     }
 }
 
- test1()
+test1()
 
 /*
 [ 1, 3, 2, 4 ]
@@ -161,7 +182,7 @@ function test3() {
         console.log(hp.remove())
     }
 }
-//test3() 
+test3() 
 /*
 [ 5, 3, 4, 2, 1 ]
 5
@@ -195,12 +216,12 @@ test4()
 [ 6, 5, 4, 3, 2, 1 ]
 */
 
-function KthSmallest(arr, size, k) {
+function kthSmallest(arr, size, k) {
     arr = arr.sort();
     return arr[k - 1];
 }
 
-function KthSmallest2(arr, size, k) {
+function kthSmallest2(arr, size, k) {
     let value = 0;
     const pq = new Heap(arr);
     let i = 0;
@@ -210,6 +231,22 @@ function KthSmallest2(arr, size, k) {
     }
     return value;
 }
+
+function kthSmallest3(arr, size, k) {
+    const pq = new Heap(less);
+    for (let i = 0; i < size; i++) {
+        if (i < k)
+            pq.add(arr[i]);
+        else {
+            if (pq.peek() > arr[i]) {
+                pq.add(arr[i]);
+                pq.remove();
+            }
+        }
+    }
+    return pq.peek();
+}
+
 
 function swap(arr, i, j) {
     const temp = arr[i];
@@ -243,7 +280,7 @@ function QuickSelectUtil(arr, lower, upper, k) {
         QuickSelectUtil(arr, upper + 1, stop, k);
 }
 
-function KthSmallest3(arr, size, k) {
+function kthSmallest4(arr, size, k) {
     QuickSelectUtil(arr, 0, size - 1, k);
     return arr[k-1];
 }
@@ -251,16 +288,19 @@ function KthSmallest3(arr, size, k) {
 // Testing code.
 function test5() {
     const arr = [8, 7, 6, 5, 7, 5, 2, 1];
-    console.log(`Kth Smallest :: ${KthSmallest(arr, arr.length, 3)}`);
+    console.log(`Kth Smallest :: ${kthSmallest(arr, arr.length, 3)}`);
     const arr2 = [8, 7, 6, 5, 7, 5, 2, 1];
-    console.log(`Kth Smallest :: ${KthSmallest2(arr2, arr2.length, 3)}`);
+    console.log(`Kth Smallest :: ${kthSmallest2(arr2, arr2.length, 3)}`);
     const arr3 = [8, 7, 6, 5, 7, 5, 2, 1];
-    console.log(`Kth Smallest :: ${KthSmallest3(arr3, arr3.length, 3)}`);
+    console.log(`Kth Smallest :: ${kthSmallest3(arr3, arr3.length, 3)}`);
+    const arr4 = [8, 7, 6, 5, 7, 5, 2, 1];
+    console.log(`Kth Smallest :: ${kthSmallest4(arr4, arr4.length, 3)}`);
 }
 
-//test5();
+test5();
 
 /*
+Kth Smallest :: 5
 Kth Smallest :: 5
 Kth Smallest :: 5
 Kth Smallest :: 5
@@ -306,14 +346,14 @@ function test6() {
     console.log(`isMinHeap :: ${isMinHeap(arr4, arr4.length)}`);
 }
 
-//test6()
+test6()
 /*
 isMaxHeap :: true
 isMinHeap :: true
 */
 
 
-function KSmallestProduct(arr, size, k) {
+function kSmallestProduct(arr, size, k) {
     arr = arr.sort();
     let product = 1;
     for (let i = 0; i < k; i++) {
@@ -322,8 +362,7 @@ function KSmallestProduct(arr, size, k) {
     return product;
 }
 
-
-function KSmallestProduct3(arr, size, k) {
+function kSmallestProduct2(arr, size, k) {
     QuickSelectUtil(arr, 0, size - 1, k);
     let product = 1;
     for (let i = 0; i < k; i++) {
@@ -332,7 +371,27 @@ function KSmallestProduct3(arr, size, k) {
     return product;
 }
 
-function KSmallestProduct2(arr, size, k) {
+function kSmallestProduct3(arr, size, k) {
+    const pq = new Heap(less);
+    for (let i = 0; i < size; i++) {
+        if (i < k)
+            pq.add(arr[i]);
+        else {
+            if (pq.peek() > arr[i]) {
+                pq.add(arr[i]);
+                pq.remove();
+            }
+        }
+    }
+    let product = 1;
+    for (let i = 0; i < k; i++) {
+        product *= pq.remove();
+    }
+    return product;
+}
+
+
+function kSmallestProduct4(arr, size, k) {
     const pq = new Heap(arr);
     let i = 0;
     let product = 1;
@@ -346,14 +405,16 @@ function KSmallestProduct2(arr, size, k) {
 // Testing code.
 function test7() {
     const arr = [8, 7, 6, 5, 7, 5, 2, 1];
-    console.log(`Kth Smallest product:: ${KSmallestProduct(arr, 8, 4)}`);
+    console.log(`Kth Smallest product:: ${kSmallestProduct(arr, 8, 4)}`);
     const arr2 = [8, 7, 6, 5, 7, 5, 2, 1];
-    console.log(`Kth Smallest product:: ${KSmallestProduct2(arr2, 8, 4)}`);
+    console.log(`Kth Smallest product:: ${kSmallestProduct2(arr2, 8, 4)}`);
     const arr3 = [8, 7, 6, 5, 7, 5, 2, 1];
-    console.log(`Kth Smallest product:: ${KSmallestProduct3(arr3, 8, 4)}`);
+    console.log(`Kth Smallest product:: ${kSmallestProduct3(arr3, 8, 4)}`);
+    const arr4 = [8, 7, 6, 5, 7, 5, 2, 1];
+    console.log(`Kth Smallest product:: ${kSmallestProduct4(arr4, 8, 4)}`);
 }
 
-//test7()
+test7()
 /*
 Kth Smallest product:: 50
 Kth Smallest product:: 50
@@ -399,7 +460,7 @@ function test8() {
     PrintLargerHalf3(arr3, 8);
 }
 
-//test8()
+test8()
 /*
 6 7 7 8 
 6 7 7 8 
@@ -439,7 +500,7 @@ function test9() {
     sortK(arr, size, k);
 }
 
-//test9()
+test9()
 /*
 [ 1, 4, 5, 9, 10, 50 ]
 */
@@ -492,7 +553,7 @@ function test10(){
     ChotaBhim2(cups2, cups.length);
 }
 
-//test10()
+test10()
 /*
 Total : 76
 Total : 76
@@ -544,7 +605,7 @@ function test11(){
     JoinRopes2(rope2, rope2.length);
 }
 
-//test11()
+test11()
 /*
 Total : 33
 Total : 33
@@ -589,21 +650,21 @@ class MedianHeap {
 
 // Testing code.
 function test12(){
-    const arr = [1, 9, 2, 8, 3, 7];
-    const hp = new MedianHeap();
-    for (let i = 0; i < arr.length; i++) {
-        hp.insert(arr[i]);
-        console.log(`Median after insertion of ${arr[i]} is  ${hp.getMedian()}`);
-    }
+const arr = [1, 9, 2, 8, 3, 7];
+const hp = new MedianHeap();
+for (let i = 0; i < arr.length; i++) {
+    hp.insert(arr[i]);
+    console.log(`Median after insertion of ${arr[i]} is  ${hp.getMedian()}`);
+}
 }
 
-//test12()
+test12()
 
 /*
-Median after insertion of 1 is  1
-Median after insertion of 9 is  5
-Median after insertion of 2 is  2
-Median after insertion of 8 is  5
-Median after insertion of 3 is  3
-Median after insertion of 7 is  5
+Median after insertion of 1 is 1
+Median after insertion of 9 is 5
+Median after insertion of 2 is 2
+Median after insertion of 8 is 5
+Median after insertion of 3 is 3
+Median after insertion of 7 is 5
 */

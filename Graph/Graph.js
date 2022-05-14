@@ -146,7 +146,7 @@ function union1(parent, x, y) {
 }
 
 class GraphEdge {
-    constructor(src, dst, cst = 1) {       
+    constructor(src, dst, cst = 1) {
         this.src = src
         this.dest = dst
         this.cost = cst      
@@ -211,7 +211,7 @@ class Graph {
                 }
             }
         }
-        console.log("DFS Path is : ", path)
+        console.log("DFS Path is : " + path)
         return visited[target]
     }
 
@@ -220,8 +220,8 @@ class Graph {
         const visited = new Array(count).fill(false);
         const path = []
         this.dfsUtil(source, visited, path)
-        console.log("DFS Path is : ", path)
-            return visited[target]
+        console.log("DFS Path is : " + path)
+        return visited[target]
     }
 
     dfsUtil(index, visited, path) {
@@ -255,21 +255,11 @@ class Graph {
                 }
             }
         }
-        console.log("BFS Path is : ", path)
+        console.log("BFS Path is : " + path)
         return visited[target]
     }
 
-    dfsUtil2(src, visited, stk) {
-        visited[src] = true
-        const adl = this.Adj[src];
-        for (let index = 0; index < adl.length; index++) {
-            const adn = adl[index];
-            if (visited[adn.dest] === false) {
-                this.dfsUtil2(adn.dest, visited, stk)
-            }
-        }
-        stk.push(src)
-    }
+
 
     topologicalSort() {
         const stk = ([]);
@@ -285,7 +275,7 @@ class Graph {
         while (stk.length != 0) {
             output.push(stk.pop())
         }
-        console.log(output)
+        console.log("Topological sort : " + output)
     }
 
     dfsUtil3(index, visited) {
@@ -296,6 +286,18 @@ class Graph {
             if (visited[adn.dest] === false)
                 this.dfsUtil3(adn.dest, visited)
         }
+    }
+
+    dfsUtil2(src, visited, stk) {
+        visited[src] = true
+        const adl = this.Adj[src];
+        for (let index = 0; index < adl.length; index++) {
+            const adn = adl[index];
+            if (visited[adn.dest] === false) {
+                this.dfsUtil2(adn.dest, visited, stk)
+            }
+        }
+        stk.push(src)
     }
 
     pathExist(source, dest) {
@@ -714,7 +716,7 @@ class Graph {
             if (dist[i] === infi) {
                 output += `( ${i},  Unreachable)`
             } else if (previous[i] != i) {
-                output += `(${previous[i]}, ${i}, ${dist[i]})`
+                output += `(${previous[i]}->${i} @ ${dist[i]}) `
                 total += dist[i];
             }
         }
@@ -746,7 +748,7 @@ class Graph {
             let x = find(sets, edge[i].src);
             let y = find(sets, edge[i].dest);
             if (x != y) {
-                output += ("(" + edge[i].src + ", " + edge[i].dest + ", " + edge[i].cost + ")");
+                output += ("(" + edge[i].src + "->" + edge[i].dest + " @ " + edge[i].cost + ") ");
                 sum += edge[i].cost;
                 union(sets, x, y);
             }
@@ -756,30 +758,30 @@ class Graph {
     }
 
 
-	printPathUtil(previous, source, dest) {
-		let path = "";
-		if (dest == source)
-			path += source;
-		else {
-			path += this.printPathUtil(previous, source, previous[dest]);
-			path += ("->" + dest);
-		}
-		return path;
-	}
+    printPathUtil(previous, source, dest) {
+        let path = "";
+        if (dest == source)
+            path += source;
+        else {
+            path += this.printPathUtil(previous, source, previous[dest]);
+            path += ("->" + dest);
+        }
+        return path;
+    }
 
-	printPath(previous, dist, count, source) {
-		let output = "Shortest Paths: ";
-		for (let i = 0; i < count; i++) {
-			if (dist[i] == 99999)
-				output += ("(" + source + "->" + i + " @ Unreachable) ");
-			else if (i != previous[i]) {
-				output += "(";
-				output += this.printPathUtil(previous, source, i);
-				output += (" @ " + dist[i] + ") ");
-			}
-		}
-		console.log(output);
-	}
+    printPath(previous, dist, count, source) {
+        let output = "Shortest Paths: ";
+        for (let i = 0; i < count; i++) {
+            if (dist[i] == 99999)
+                output += ("(" + source + "->" + i + " @ Unreachable) ");
+            else if (i != previous[i]) {
+                output += "(";
+                output += this.printPathUtil(previous, source, i);
+                output += (" @ " + dist[i] + ") ");
+            }
+        }
+        console.log(output);
+    }
 
 
     dijkstra(source) {
@@ -1020,109 +1022,109 @@ class Graph {
     }
 
     floydWarshall() {
-		const V = this.count;
+        const V = this.count;
         const INF = Number.MAX_VALUE;
-		const dist = Array(V).fill(0).map(() => new Array(V).fill(INF));
-		const path = Array(V).fill(0).map(() => new Array(V).fill(-1));
-		for (let i = 0; i < V; i++) {
-			path[i][i] = 0;
-		}
+        const dist = Array(V).fill(0).map(() => new Array(V).fill(INF));
+        const path = Array(V).fill(0).map(() => new Array(V).fill(-1));
+        for (let i = 0; i < V; i++) {
+            path[i][i] = 0;
+        }
 
-		for (let i = 0; i < V; i++) {
+        for (let i = 0; i < V; i++) {
             const adl = this.Adj[i];
             for (let index = 0; index < adl.length; index++) {
                 const adn = adl[index];
-				path[i][adn.dest] = i;
-				dist[i][adn.dest] = adn.cost;
-			}
-		}
-		
-		for (let k = 0; k < V; k++) { // Pick intermediate vertices.
-			for (let i = 0; i < V; i++) { // Pick source vertices one by one.
-				for (let j = 0; j < V; j++) { // Pick destination vertices.
-					// If we have a shorter path from i to j via k.
-					// then update dist[i][j] and  and path[i][j]
-					if (dist[i][k] + dist[k][j] < dist[i][j]) {
-						dist[i][j] = dist[i][k] + dist[k][j];
-						path[i][j] = path[k][j];
-					}
-				}
-				// dist[i][i] is 0 in the start.
-				// If there is a better path from i to i and is better path then we have -ve cycle.                //
-				if (dist[i][i] < 0) {
-					console.log("Negative-weight cycle found.");
-					return;
-				}
-			}
-		}
-		Graph.printSolution(dist, path, V);
-	}
+                path[i][adn.dest] = i;
+                dist[i][adn.dest] = adn.cost;
+            }
+        }
+        
+        for (let k = 0; k < V; k++) { // Pick intermediate vertices.
+            for (let i = 0; i < V; i++) { // Pick source vertices one by one.
+                for (let j = 0; j < V; j++) { // Pick destination vertices.
+                    // If we have a shorter path from i to j via k.
+                    // then update dist[i][j] and  and path[i][j]
+                    if (dist[i][k] + dist[k][j] < dist[i][j]) {
+                        dist[i][j] = dist[i][k] + dist[k][j];
+                        path[i][j] = path[k][j];
+                    }
+                }
+                // dist[i][i] is 0 in the start.
+                // If there is a better path from i to i and is better path then we have -ve cycle.                //
+                if (dist[i][i] < 0) {
+                    console.log("Negative-weight cycle found.");
+                    return;
+                }
+            }
+        }
+        Graph.printSolution(dist, path, V);
+    }
 
-	static 	printSolution(cost, path, V) {
+    static 	printSolution(cost, path, V) {
         let output = "Shortest Paths : ";
-		for (let u = 0; u < V; u++) {
-			for (let v = 0; v < V; v++) {
-				if (u != v && path[u][v] != -1) {
+        for (let u = 0; u < V; u++) {
+            for (let v = 0; v < V; v++) {
+                if (u != v && path[u][v] != -1) {
                     output += "(";
                     output += Graph.printPath(path, u, v);
                     output += " @ " + cost[u][v] + ") "
-				}
-			}
+                }
+            }
         }
         console.log(output);
     }
-    
-	static printPath(path, u, v) {
-		if (path[u][v] == u) {
-			return (u + "->" + v );
-		}
+
+    static printPath(path, u, v) {
+        if (path[u][v] == u) {
+            return (u + "->" + v );
+        }
         let output = Graph.printPath(path, u, path[u][v]);
-		output += ("->" + v);
+        output += ("->" + v);
         return output;
-	}
+    }
 }
 
 /* Testing Code */
 function test1(){
     const graph = new Graph(4);
-    graph.addUndirectedEdge(0, 1, 1);
-    graph.addUndirectedEdge(0, 2, 1);
-    graph.addUndirectedEdge(1, 2, 1);
-    graph.addUndirectedEdge(2, 3, 1);
+    graph.addUndirectedEdge(0, 1);
+    graph.addUndirectedEdge(0, 2);
+    graph.addUndirectedEdge(1, 2);
+    graph.addUndirectedEdge(2, 3);
     graph.print();
 }
 
 /*
-Vertex 0 is connected to : 1(1) 2(1) 
-Vertex 1 is connected to : 0(1) 2(1) 
-Vertex 2 is connected to : 0(1) 1(1) 3(1) 
-Vertex 3 is connected to : 2(1) 
+Vertex 0 is connected to : 1(cost: 1) 2(cost: 1) 
+Vertex 1 is connected to : 0(cost: 1) 2(cost: 1) 
+Vertex 2 is connected to : 0(cost: 1) 1(cost: 1) 3(cost: 1) 
+Vertex 3 is connected to : 2(cost: 1) 
 */
 
 /* Testing Code */
 function test2(){
     const gph = new Graph(8);
-    gph.addUndirectedEdge(0, 1)
-    gph.addUndirectedEdge(0, 2)
-    gph.addUndirectedEdge(0, 3)
-    gph.addUndirectedEdge(1, 4)
-    gph.addUndirectedEdge(2, 5)
-    gph.addUndirectedEdge(3, 6)
-    gph.addUndirectedEdge(4, 7)
-    gph.addUndirectedEdge(5, 7)
-    gph.addUndirectedEdge(6, 7)
-    console.log("Path between 0 & 6 : ", gph.dfs(0, 6))
-    console.log("Path between 0 & 6 : ", gph.bfs(0, 6))
-    console.log("Path between 0 & 6 : ", gph.dfsStack(0, 6))
+    gph.addUndirectedEdge(0, 3);
+    gph.addUndirectedEdge(0, 2);
+    gph.addUndirectedEdge(0, 1);
+    gph.addUndirectedEdge(1, 4);
+    gph.addUndirectedEdge(2, 5);
+    gph.addUndirectedEdge(3, 6);
+    gph.addUndirectedEdge(6, 7);
+    gph.addUndirectedEdge(5, 7);
+    gph.addUndirectedEdge(4, 7);
+    console.log("Path between 0 & 6 :", gph.dfs(0, 6))
+    console.log("Path between 0 & 6 :", gph.bfs(0, 6))
+    console.log("Path between 0 & 6 :", gph.dfsStack(0, 6))
 }
 
 /*
-DFS Path is :  [ 0, 1, 4, 7, 5, 2, 6, 3 ]
-Path between 0 & 6 :  true
-BFS Path is :  [ 0, 1, 2, 3, 4, 5, 6, 7 ]
-Path between 0 & 6 :  true
-DFS Path is :  [ 0, 1, 4, 7, 5, 6, 2, 3 ]
-Path between 0 & 6 :  true
+DFS Path is : 0,1,4,7,5,2,6,3
+Path between 0 & 6 : true
+BFS Path is : 0,1,2,3,4,5,6,7
+Path between 0 & 6 : true
+DFS Path is : 0,1,4,7,5,6,2,3
+Path between 0 & 6 : true
 */
 
 /* Testing Code */
@@ -1143,18 +1145,18 @@ function test3(){
 }
 
 /*
-[ 1, 4, 6, 3, 5, 7, 8, 0, 2 ]
+Topological sort : 1,4,6,3,5,7,8,0,2
 */
 
 /* Testing Code */
 function test4(){
     const gph = new Graph(5);
-    gph.addDirectedEdge(0, 1, 1)
-    gph.addDirectedEdge(0, 2, 1)
-    gph.addDirectedEdge(2, 3, 1)
-    gph.addDirectedEdge(1, 3, 1)
-    gph.addDirectedEdge(3, 4, 1)
-    gph.addDirectedEdge(1, 4, 1)
+    gph.addDirectedEdge(0, 1)
+    gph.addDirectedEdge(0, 2)
+    gph.addDirectedEdge(2, 3)
+    gph.addDirectedEdge(1, 3)
+    gph.addDirectedEdge(3, 4)
+    gph.addDirectedEdge(1, 4)
     console.log(`PathExist :: ${gph.pathExist(0, 4)}`)
     console.log(`Path Count :: ${gph.countAllPath(0, 4)}`)
     gph.printAllPath(0, 4)
@@ -1171,14 +1173,14 @@ Path Count :: 3
 /* Testing Code */
 function test5(){
     const gph = new Graph(7);
-    gph.addDirectedEdge(0, 1, 1)
-    gph.addDirectedEdge(0, 2, 1)
-    gph.addDirectedEdge(1, 3, 1)
-    gph.addDirectedEdge(4, 1, 1)
-    gph.addDirectedEdge(6, 4, 1)
-    gph.addDirectedEdge(5, 6, 1)
-    gph.addDirectedEdge(5, 2, 1)
-    gph.addDirectedEdge(6, 0, 1)
+    gph.addDirectedEdge(0, 1)
+    gph.addDirectedEdge(0, 2)
+    gph.addDirectedEdge(1, 3)
+    gph.addDirectedEdge(4, 1)
+    gph.addDirectedEdge(6, 4)
+    gph.addDirectedEdge(5, 6)
+    gph.addDirectedEdge(5, 2)
+    gph.addDirectedEdge(6, 0)
     gph.rootVertex()
 }
 
@@ -1189,36 +1191,35 @@ Root vertex is :: 5
 /* Testing Code */
 function test6(){
     const gph = new Graph(4);
-    gph.addDirectedEdge(0, 1, 1)
-    gph.addDirectedEdge(0, 2, 1)
-    gph.addDirectedEdge(1, 2, 1)
-    gph.addDirectedEdge(2, 0, 1)
-    gph.addDirectedEdge(2, 3, 1)
-    gph.addDirectedEdge(3, 3, 1)
+    gph.addDirectedEdge(0, 1)
+    gph.addDirectedEdge(0, 2)
+    gph.addDirectedEdge(1, 2)
+    gph.addDirectedEdge(2, 0)
+    gph.addDirectedEdge(2, 3)
+    gph.addDirectedEdge(3, 3)
     const tc = gph.transitiveClosure();
-    console.log(tc)
+    for (let i = 0; i < 4; i++)
+        console.log(tc[i])
 }
 
 /*
-[ 
-    [ 1, 1, 1, 1 ], 
-    [ 1, 1, 1, 1 ], 
-    [ 1, 1, 1, 1 ], 
-    [ 0, 0, 0, 1 ] 
-]
+[ 1, 1, 1, 1 ]
+[ 1, 1, 1, 1 ]
+[ 1, 1, 1, 1 ]
+[ 0, 0, 0, 1 ]
 */
 
 /* Testing Code */
 function test7(){
     const gph = new Graph(7);
-    gph.addUndirectedEdge(0, 1, 1)
-    gph.addUndirectedEdge(0, 2, 1)
-    gph.addUndirectedEdge(0, 4, 1)
-    gph.addUndirectedEdge(1, 2, 1)
-    gph.addUndirectedEdge(2, 5, 1)
-    gph.addUndirectedEdge(3, 4, 1)
-    gph.addUndirectedEdge(4, 5, 1)
-    gph.addUndirectedEdge(4, 6, 1)
+    gph.addUndirectedEdge(0, 1)
+    gph.addUndirectedEdge(0, 2)
+    gph.addUndirectedEdge(0, 4)
+    gph.addUndirectedEdge(1, 2)
+    gph.addUndirectedEdge(2, 5)
+    gph.addUndirectedEdge(3, 4)
+    gph.addUndirectedEdge(4, 5)
+    gph.addUndirectedEdge(4, 6)
     gph.bfsLevelNode(1)
     console.log("BfsDistance ::" , gph.bfsDistance(1, 6))
 }
@@ -1239,11 +1240,14 @@ BfsDistance :: 3
 /* Testing Code */
 function test8(){
     const gph = new Graph(6);
-    gph.addUndirectedEdge(0, 1, 1)
-    gph.addUndirectedEdge(1, 2, 1)
-    gph.addUndirectedEdge(3, 4, 1)
-    gph.addUndirectedEdge(4, 2, 1)
-    gph.addUndirectedEdge(2, 5, 1)
+    gph.addUndirectedEdge(0, 1)
+    gph.addUndirectedEdge(1, 2)
+    gph.addUndirectedEdge(3, 4)
+    gph.addUndirectedEdge(4, 2)
+    gph.addUndirectedEdge(2, 5)
+    console.log(gph.isCyclePresentUndirected())
+    console.log(gph.isCyclePresentUndirected2());
+	console.log(gph.isCyclePresentUndirected3());
     gph.addUndirectedEdge(3, 5, 1)
     console.log(gph.isCyclePresentUndirected())
     console.log(gph.isCyclePresentUndirected2());
@@ -1252,6 +1256,9 @@ function test8(){
 }
 
 /*
+false
+false
+false
 true
 true
 true
@@ -1266,9 +1273,11 @@ function test9(){
     gph.addDirectedEdge(2, 3, 1)
     gph.addDirectedEdge(1, 3, 1)
     gph.addDirectedEdge(3, 4, 1)
+    console.log("isCyclePresent : " + gph.isCyclePresent())
+    console.log("isCyclePresent : " + gph.isCyclePresentColor())
     gph.addDirectedEdge(4, 1, 1)
-    console.log(gph.isCyclePresent())
-    console.log(gph.isCyclePresentColor())
+    console.log("isCyclePresent : " + gph.isCyclePresent())
+    console.log("isCyclePresent : " + gph.isCyclePresentColor())
 }
 
 /*
@@ -1278,20 +1287,23 @@ true
 
 /* Testing Code */
 function test10(){
-    const graph = new Graph(4);
-    graph.addDirectedEdge(0, 1);
-    graph.addDirectedEdge(0, 2);
-    graph.addDirectedEdge(1, 2);
-    graph.addDirectedEdge(2, 3);
-    const g = graph.transposeGraph()
+    const gph = new Graph(5);
+    gph.addDirectedEdge(0, 1);
+    gph.addDirectedEdge(0, 2);
+    gph.addDirectedEdge(2, 3);
+    gph.addDirectedEdge(1, 3);
+    gph.addDirectedEdge(3, 4);
+    gph.addDirectedEdge(4, 1);
+    const g = gph.transposeGraph()
     g.print();
 }
 
 /*
 Vertex 0 is connected to : 
-Vertex 1 is connected to : 0(1) 
-Vertex 2 is connected to : 0(1) 1(1) 
-Vertex 3 is connected to : 2(1) 
+Vertex 1 is connected to : 0(cost: 1) 4(cost: 1) 
+Vertex 2 is connected to : 0(cost: 1) 
+Vertex 3 is connected to : 1(cost: 1) 2(cost: 1) 
+Vertex 4 is connected to : 3(cost: 1) 
 */
 
 /* Testing Code */
@@ -1350,14 +1362,13 @@ function test13(){
     gph.primsMST()
     gph.kruskalMST()
     gph.dijkstra(0)
-
 }
 
 /*
-Edges are (0, 1, 4)(5, 2, 4)(2, 3, 7)(3, 4, 9)(6, 5, 2)(7, 6, 1)(0, 7, 8)(2, 8, 2)
+Edges are (0->1 @ 4) (5->2 @ 4) (2->3 @ 7) (3->4 @ 9) (6->5 @ 2) (7->6 @ 1) (0->7 @ 8) (2->8 @ 2) 
 Total MST cost : 37
 
-Edges are (7, 6, 1)(8, 2, 2)(6, 5, 2)(5, 2, 4)(0, 1, 4)(3, 2, 7)(7, 0, 8)(4, 3, 9)
+Edges are (6->7 @ 1) (2->8 @ 2) (5->6 @ 2) (0->1 @ 4) (2->5 @ 4) (2->3 @ 7) (0->7 @ 8) (3->4 @ 9) 
 Total MST cost : 37
 
 Shortest Paths: (0->1 @ 4) (0->1->2 @ 12) (0->1->2->3 @ 19) (0->7->6->5->4 @ 21) (0->7->6->5 @ 11) (0->7->6 @ 9) (0->7 @ 8) (0->1->2->8 @ 14) 
@@ -1503,17 +1514,19 @@ function test17(){
 /* Testing Code */
 function test18(){
     const gph = new Graph(5);
-    gph.addDirectedEdge(1, 0, 1)
-    gph.addDirectedEdge(0, 2, 1)
-    gph.addDirectedEdge(2, 1, 1)
-    gph.addDirectedEdge(0, 3, 1)
-    gph.addDirectedEdge(3, 4, 1)
-    console.log(gph.isEulerian())
+    gph.addDirectedEdge(1, 0)
+    gph.addDirectedEdge(0, 2)
+    gph.addDirectedEdge(2, 1)
+    gph.addDirectedEdge(0, 3)
+    gph.addDirectedEdge(3, 4)
+    gph.isEulerian()
+    gph.addDirectedEdge(4, 0);
+    gph.isEulerian();
 }
 
 /*
 graph is Semi-Eulerian
-1
+graph is Eulerian
 */
 
 /* Testing Code */

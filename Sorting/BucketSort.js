@@ -8,32 +8,36 @@ function bucketSortUtil(arr, maxValue, numBucket) {
 	if (length == 0) {
 		return;
 	}
-	let bucket = new Array();
-	// Create empty buckets
+	let bucket = new Array(); // Create empty buckets
+
 	for (let i = 0; i < numBucket; i++) {
 		(bucket.push(new Array()) > 0);
 	}
+
 	let div = parseInt(Math.ceil( maxValue / numBucket));
+	
 	// Add elements into the buckets
 	for (let i = 0; i < length; i++) {
 		if (arr[i] < 0 || arr[i] > maxValue) {
 			console.log("Value out of range.");
 			return;
 		}
+
 		let bucketIndex = (parseInt(arr[i] / div));
+		
 		// Maximum value will be assigned to last bucket.
-		if (bucketIndex >= numBucket) {
+		if (bucketIndex >= numBucket)
 			bucketIndex = numBucket - 1;
-		}
-		(bucket[bucketIndex].push(arr[i]) > 0);
+		bucket[bucketIndex].push(arr[i]);
 	}
+
 	// bucketSort the elements of each bucket.
 	for (let i = 0; i < numBucket; i++) {
 		bucket[i].sort(function(a, b){return a - b;});
 	}
+
 	// Populate output from the bucketSorted subarray.
-	let index = 0;
-	let count = 0;
+	let index = 0, count = 0;
 	for (let i = 0; i < numBucket; i++) {
 		let temp = bucket[i];
 		count = temp.length;
@@ -51,5 +55,4 @@ console.log(JSON.stringify(array));
 
 /*
 [1,5,7,19,23,34,45,77,88,91,99,100]
-
 */

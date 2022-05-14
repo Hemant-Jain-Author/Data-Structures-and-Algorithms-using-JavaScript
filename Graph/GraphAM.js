@@ -138,15 +138,11 @@ class Graph {
     }
 
     print() {
-        console.log(this.adj);
-    }
-
-    print2() {
         for (let i = 0; i < this.count; i++) {
-            let t = `Node index [ ${i} ] is connected with : `;
+            let t = `Vertex ${i} is connected to : `;
             for (let j = 0; j < this.count; j++) {
                 if (this.adj[i][j] !== 0)
-                    t += j +"(" + this.adj[i][j] +") "
+                    t += j +"(cost: " + this.adj[i][j] +") "
             }
             console.log(t)
         }
@@ -225,12 +221,13 @@ class Graph {
             if (dist[i] === Infinity) {
                 output += `( ${i},  Unreachable)`
             } else if (previous[i] != i) {
-                output += `(${previous[i]}, ${i}, ${dist[i]})`
+                output += `(${previous[i]}->${i} @ ${dist[i]}) `
                 total += dist[i];
             }
         }
         console.log(output);
-        console.log(`Total MST cost : ${total}`)    }
+        console.log(`Total MST cost : ${total}`)
+    }
 
 	printPathUtil(previous, source, dest) {
 		let path = "";
@@ -332,12 +329,19 @@ class Graph {
 /* Testing Code */
 function test1(){
     const graph = new Graph(4);
-    graph.addUndirectedEdge(0, 1, 1);
-    graph.addUndirectedEdge(0, 2, 1);
-    graph.addUndirectedEdge(1, 2, 1);
-    graph.addUndirectedEdge(2, 3, 1);
-    graph.print2();
+    graph.addUndirectedEdge(0, 1);
+    graph.addUndirectedEdge(0, 2);
+    graph.addUndirectedEdge(1, 2);
+    graph.addUndirectedEdge(2, 3);
+    graph.print();
 }
+
+/*
+Vertex 0 is connected to : 1(cost: 1) 2(cost: 1) 
+Vertex 1 is connected to : 0(cost: 1) 2(cost: 1) 
+Vertex 2 is connected to : 0(cost: 1) 1(cost: 1) 3(cost: 1) 
+Vertex 3 is connected to : 2(cost: 1) 
+*/
 
 /* Testing Code */
 function test2(){
@@ -356,12 +360,15 @@ function test2(){
     gph.addUndirectedEdge(6, 7, 1);
     gph.addUndirectedEdge(6, 8, 6);
     gph.addUndirectedEdge(7, 8, 7);
-    gph.print2();
     console.log("")
     gph.primsMST();
     console.log("")
-//    gph.dijkstra(0);
 }
+
+/*
+Edges are (0->1 @ 4) (5->2 @ 4) (2->3 @ 7) (3->4 @ 9) (6->5 @ 2) (7->6 @ 1) (0->7 @ 8) (2->8 @ 2) 
+Total MST cost : 37
+*/
 
 /* Testing Code */
 function test3(){
@@ -380,9 +387,12 @@ function test3(){
     gph.addUndirectedEdge(6, 7, 1)
     gph.addUndirectedEdge(6, 8, 6)
     gph.addUndirectedEdge(7, 8, 7)
-    //gph.primsMST()
     gph.dijkstra(1);
 }
+
+/*
+Shortest Paths: (1->0 @ 4) (1->2 @ 8) (1->2->3 @ 15) (1->2->5->4 @ 22) (1->2->5 @ 12) (1->7->6 @ 12) (1->7 @ 11) (1->2->8 @ 10) 
+*/
 
 /* Testing Code */
 function test4(){
@@ -421,6 +431,14 @@ function test4(){
     console.log(`hamiltonianPath :  ${graph2.hamiltonianPath()}`);
 }
 
+/*
+Hamiltonian Path found ::  [ 0, 1, 2, 4, 3 ]
+hamiltonianPath : true
+
+Hamiltonian Path found ::  [ 0, 3, 1, 2, 4 ]
+hamiltonianPath :  true
+*/
+
 /* Testing Code */
 function test5(){
     const count = 5;
@@ -457,6 +475,14 @@ function test5(){
     }
     console.log(`hamiltonianCycle :  ${graph2.hamiltonianCycle()}`);
 }
+
+/*
+Hamiltonian Cycle found ::  [ 0, 1, 2, 4, 3, 0 ]
+hamiltonianCycle : true
+
+Hamiltonian Cycle not found
+hamiltonianCycle :  false
+*/
 
 test1()
 test2()

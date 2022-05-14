@@ -61,10 +61,7 @@ function permutation3(arr, i, length) {
 	return;
 }
 /* Testing code */
-const arr = Array(4).fill(0);
-for (let i = 0; i < 4; i++) {
-	arr[i] = i + 1;
-}
+const arr = [1, 2, 3, 4]
 permutation(arr, 0, 4);
 permutation2(arr, 0, 4);
 permutation3(arr, 0, 4);

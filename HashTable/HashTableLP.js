@@ -4,21 +4,13 @@ FILLED_VALUE = 0;
 
 class HashTable {
     constructor(tSize, cmp, hashFun) {
-        if (cmp === undefined || cmp === null)
-            cmp = this.DefaultCompare;
-        
-        this.comp = cmp;
-
-        if (hashFun === undefined || hashFun === null)
-            hashFun = this.DefaultHashFun;
-        
-        this.HashFun = hashFun;
+        this.comp = (cmp === undefined || cmp === null) ? this.DefaultCompare : cmp;
+        this.HashFun = (hashFun === undefined || hashFun === null) ? this.DefaultHashFun : hashFun; 
         this.tableSize = tSize;
         this.KeyArr = new Array(tSize + 1);
         this.DataArr = new Array(tSize + 1);
         this.FlagArr = new Array(tSize + 1).fill(EMPTY_VALUE);
     }
-    /* Other methods */
 
     ComputeHash(key) {
         return this.HashFun(key) % this.tableSize;
@@ -35,6 +27,7 @@ class HashTable {
     DefaultHashFun(key) {
         return key;
     }
+    /* Other methods */
 
     add(key, value) {
         if (key === undefined || key === null)
@@ -101,7 +94,7 @@ class HashTable {
         return 0;
     }
 
-    delete(key) {
+    remove(key) {
         if (key === undefined || key === null)
             return false;
 
@@ -141,5 +134,12 @@ ht.print();
 
 console.log("Find key 2 : ", ht.find(2));
 console.log("Value at key 2 : ",ht.get(2))
-ht.delete(1)
+ht.remove(1)
 ht.print()
+
+/*
+Hash Table contains ::(1=>10) (2=>20) (3=>30) 
+Find key 2 :  true
+Value at key 2 :  20
+Hash Table contains ::(2=>20) (3=>30) 
+*/

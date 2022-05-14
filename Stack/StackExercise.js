@@ -1,6 +1,6 @@
 class Deque {
     constructor() {
-        this.arr = ([]);
+        this.arr = [];
     }
 
     size() {
@@ -47,7 +47,7 @@ function test1() {
     console.log("test line 2");
 }
 
-//test1()
+test1()
 
 /*
 test line 1
@@ -70,7 +70,7 @@ function sortedInsert(stk, element) {
 
 // Testing code.
 function test2() {
-    const stk = ([]);
+    const stk = [];
     stk.push(1);
     stk.push(2);
     stk.push(4);
@@ -79,7 +79,7 @@ function test2() {
     console.log(stk);
 }
 
-//test2()
+test2()
 
 // [ 1, 2, 3, 4, 5 ]
 
@@ -96,7 +96,7 @@ function sortStack(stk) {
 
 function sortStack2(stk) {
     let temp;
-    const stk2 = ([]);
+    const stk2 = [];
     while (stk.length > 0) {
         temp = stk.pop();
         while (stk2.length > 0 && stk2[stk2.length - 1] < temp) {
@@ -111,9 +111,8 @@ function sortStack2(stk) {
 
 // Testing code.
 function test3() {
-    const stk = ([]);
+    const stk = [];
     stk.push(1);
-    stk.push(5);
     stk.push(3);
     stk.push(2);
     stk.push(4);
@@ -121,7 +120,7 @@ function test3() {
     console.log(stk);
 }
 
-//test3()
+test3()
 
 // [ 1, 2, 3, 4, 5 ]
 
@@ -138,7 +137,7 @@ function bottomInsert(stk, element) {
 
 // Testing code.
 function test4() {
-    const stk = ([]);
+    const stk = [];
     stk.push(1);
     stk.push(2);
     stk.push(3);
@@ -146,7 +145,7 @@ function test4() {
     console.log(stk);
 }
 
-//test4()
+test4()
 
 // [ 4, 1, 2, 3 ]
 
@@ -190,7 +189,7 @@ function reverseStack3(stk) {
 
 // Testing code.
 function test5() {
-    const stk = ([]);
+    const stk = [];
     stk.push(1);
     stk.push(2);
     stk.push(3);
@@ -199,7 +198,7 @@ function test5() {
     console.log("Stack after reversal", stk);
 }
 
-//test5()
+test5()
 
 /*
 Stack before reversal [ 1, 2, 3 ]
@@ -219,7 +218,7 @@ function reverseKElementInStack(stk, k) {
 
 // Testing code.
 function test6() {
-    const stk = ([]);
+    const stk = [];
     stk.push(1);
     stk.push(2);
     stk.push(3);
@@ -228,14 +227,14 @@ function test6() {
     console.log(stk);
 }
 
-//test6()
+test6()
 
 /*
 [ 1, 2, 4, 3 ]
 */
 
 function reverseQueue(que) {
-    const stk = ([]);
+    const stk = [];
     while (que.isEmpty() === false) {
         stk.push(que.remove());
     }
@@ -255,14 +254,14 @@ function test7() {
     console.log(que);
 }
 
-//test7()
+test7()
 
 /*
 Deque { arr: [ 1, 2, 3 ] }
 Deque { arr: [ 3, 2, 1 ] }
 */
 function reverseKElementInQueue(que, k) {
-    const stk = ([]);
+    const stk = [];
     let i = 0;
     let diff;
     let temp;
@@ -293,7 +292,7 @@ function test8() {
     console.log(que);
 }
 
-//test8()
+test8()
 
 /*
 Deque { arr: [ 1, 2, 3, 4 ] }
@@ -339,7 +338,7 @@ function test9() {
     console.log(`Is Balanced Parenthesis : ${value}`);
 }
 
-//test9()
+test9()
 
 /*
 Given Expn:{()}[]
@@ -348,7 +347,7 @@ Is Balanced Parenthesis : true
 
 
 function maxDepthParenthesis(expn, size) {
-    const stk = ([]);
+    const stk = [];
     let maxDepth = 0;
     let depth = 0;
     let ch;
@@ -395,7 +394,7 @@ function test10() {
     console.log(`Max depth parenthesis is ${value2}`);
 }
 
-//test10()
+test10()
 
 /*
 Max depth parenthesis is 6
@@ -403,7 +402,7 @@ Max depth parenthesis is 6
 */
 
 function longestContBalParen(string, size) {
-    const stk = ([]);
+    const stk = [];
     stk.push(-1);
     let length = 0;
     for (let i = 0; i < size; i++) {
@@ -428,12 +427,12 @@ function test11() {
     console.log(`longestContBalParen : ${value}`);
 }
 
-//test11()
+test11()
 
 //longestContBalParen : 12
 
 function reverseParenthesis(expn, size) {
-    const stk = ([]);
+    const stk = [];
     let openCount = 0;
     let closeCount = 0;
     let ch;
@@ -471,12 +470,12 @@ function test12() {
     console.log(`reverse Parenthesis is : ${value}`);
 }
 
-//test12()
+test12()
 
 // reverse Parenthesis is : 3
 
 function findDuplicateParenthesis(expn, size) {
-    const stk = ([]);
+    const stk = [];
     let ch;
     let count;
     for (let i = 0; i < size; i++) {
@@ -504,13 +503,13 @@ function test13() {
     console.log(`Duplicate Found : ${value}`);
 }
 
-//test13()
+test13()
 
 //Duplicate Found : true
 
 function printParenthesisNumber(expn, size) {
     let ch;
-    const stk = ([]);
+    const stk = [];
     let output = "";
     let count = 1;
     for (let i = 0; i < size; i++) {
@@ -538,7 +537,7 @@ function test14() {
     printParenthesisNumber(expn2, size);
 }
 
-//test14()
+test14()
 
 /*
 Given expn (((a+(b))+(c+d)))
@@ -614,7 +613,7 @@ function test15() {
     console.log(`Postfix Expn: ${value}`);
 }
 
-//test15()
+test15()
 
 /*
 Infix Expn: 10+((3))*5/(16-4)
@@ -666,7 +665,7 @@ function test16() {
     console.log(`Prefix Expn: ${value}`);
 }
 
-//test16()
+test16()
 
 /*
 Infix Expn: 10+((3))*5/(16-4)
@@ -712,7 +711,7 @@ function test17() {
     console.log(`Result after Evaluation: ${value}`);
 }
 
-//test17()
+test17()
 
 /*
 Given Postfix Expn: 6 5 2 3 + 8 * + 3 + *
@@ -733,7 +732,7 @@ function StockSpanRange(arr) {
 }
 
 function StockSpanRange2(arr) {
-    const stk = ([]);
+    const stk = [];
     const SR = new Array(arr.length);
     stk.push(0);
     SR[0] = 1;
@@ -751,18 +750,18 @@ function StockSpanRange2(arr) {
 function test18() {
     let arr = [6, 5, 4, 3, 2, 4, 5, 7, 9];
     let value = StockSpanRange(arr);
-    console.log("StockSpanRange : ", value);
+    console.log("StockSpanRange :", value);
 
     arr = [6, 5, 4, 3, 2, 4, 5, 7, 9];
     value = StockSpanRange2(arr);
-    console.log("StockSpanRange : ", value);
+    console.log("StockSpanRange :", value);
 }
 
-//test18()
+test18()
 
 /*
-StockSpanRange :  [ 1, 1, 1, 1, 1, 4, 6, 8, 9 ]
-StockSpanRange :  [ 1, 1, 1, 1, 1, 4, 6, 8, 9 ]
+StockSpanRange : [ 1, 1, 1, 1, 1, 4, 6, 8, 9 ]
+StockSpanRange : [ 1, 1, 1, 1, 1, 4, 6, 8, 9 ]
 */
 
 function GetMaxArea(arr) {
@@ -820,12 +819,31 @@ function test19() {
     console.log(`GetMaxArea :: ${value}`);
 }
 
-//test19()
+test19()
 
 /*
 GetMaxArea :: 20
 GetMaxArea :: 20
 */
+
+
+function stockAnalystAdd(stk, value) {
+	while (stk.length > 0 && stk[stk.length - 1] <= value)
+		stk.pop();
+	stk.push(value);
+}
+
+function test19a() {
+let arr = [ 20, 19, 10, 21, 40, 35, 39, 50, 45, 42 ];
+let stk = [];
+for (let i = arr.length - 1; i >= 0; i--)
+	stockAnalystAdd(stk, arr[i]);
+console.log(stk);
+}
+
+test19a();
+// [ 50, 40, 21, 20 ]
+
 
 function nextLargerElement(arr, size) {
     const output = new Array(size);
@@ -846,7 +864,7 @@ function nextLargerElement(arr, size) {
 }
 
 function nextLargerElement2(arr, size) {
-    const stk = ([]);
+    const stk = [];
     const output = new Array(size);
     let index = 0;
     let curr;
@@ -867,7 +885,22 @@ function nextLargerElement2(arr, size) {
 }
 
 function nextSmallerElement(arr, size) {
-    const stk = ([]);
+    const output = new Array(size);
+    output.fill(-1);
+    for (let i = 0; i < size; i++) {
+        for (let j = i + 1; j < size; j++) {
+            if (arr[j] < arr[i]) {
+                output[i] = arr[j];
+                break;
+            }
+        }
+    }
+    console.log(output)
+}
+
+
+function nextSmallerElement2(arr, size) {
+    const stk = [];
     const output = new Array(size);
     let curr;
     let index;
@@ -895,18 +928,34 @@ function test20() {
     nextLargerElement(arr, size);
     nextLargerElement2(arr, size);
     nextSmallerElement(arr, size);
+    nextSmallerElement2(arr, size);
 }
 
-//test20()
+test20()
 
 /*
 [ 21, -1, 6, 20, -1, -1 ]
 [ 21, -1, 6, 20, -1, -1 ]
 [ 3, 3, -1, 3, 3, -1 ]
+[ 3, 3, -1, 3, 3, -1 ]
 */
 
 function nextLargerElementCircular(arr, size) {
-    const stk = ([]);
+    const output = new Array(size);
+    output.fill(-1);
+    for (let i = 0; i < size; i++) {
+        for (let j = 1; j < size; j++) {
+            if (arr[i] < arr[(i + j) % size]) {
+                output[i] = arr[(i + j) % size];
+                break;
+            }
+        }
+    }
+    console.log(output)
+}
+
+function nextLargerElementCircular2(arr, size) {
+    const stk = [];
     let curr;
     let index;
     const output = new Array(size);
@@ -931,200 +980,14 @@ function test21() {
     const arr = [6, 3, 9, 8, 10, 2, 1, 15, 7];
     const size = arr.length;
     nextLargerElementCircular(arr, size);
+    nextLargerElementCircular2(arr, size);
 }
 
-//test21()
+test21()
 
 /*
 [ 9, 9, 10, 10, 15, 15, 15, -1, 9 ]
 */
-
-function RottenFruitUtil(arr, maxCol, maxRow, currCol, currRow, traversed, day) {
-    if (currCol < 0 || currCol >= maxCol || currRow < 0 || currRow >= maxRow || 
-        traversed[currCol][currRow] <= day || arr[currCol][currRow] === 0)
-        return;
-    traversed[currCol][currRow] = day;
-    RottenFruitUtil(arr, maxCol, maxRow, currCol - 1, currRow, traversed, day + 1);
-    RottenFruitUtil(arr, maxCol, maxRow, currCol + 1, currRow, traversed, day + 1);
-    RottenFruitUtil(arr, maxCol, maxRow, currCol, currRow + 1, traversed, day + 1);
-    RottenFruitUtil(arr, maxCol, maxRow, currCol, currRow - 1, traversed, day + 1);
-}
-
-const Max_Int = 2147483647
-
-function RottenFruit(arr, maxCol, maxRow) {
-    const traversed = Array(maxRow);
-    for (let i = 0; i < maxRow; i++) {
-        traversed[i] = Array(maxCol).fill(Max_Int)
-    }
-
-    for (let i = 0; i < maxCol - 1; i++) {
-        for (let j = 0; j < maxRow - 1; j++) {
-            if (arr[i][j] === 2)
-                RottenFruitUtil(arr, maxCol, maxRow, i, j, traversed, 0);
-        }
-    }
-
-    let maxDay = 0;
-    for (let i = 0; i < maxCol - 1; i++) {
-        for (let j = 0; j < maxRow - 1; j++) {
-            if (arr[i][j] === 1) {
-                if (traversed[i][j] === Max_Int)
-                    return -1;
-                if (maxDay < traversed[i][j])
-                    maxDay = traversed[i][j];
-            }
-        }
-    }
-    return maxDay;
-}
-
-// Testing code.
-function test22() {
-    const arr = [[1, 0, 1, 1, 0], 
-    [2, 1, 0, 1, 0], 
-    [0, 0, 0, 2, 1], 
-    [0, 2, 0, 0, 1], 
-    [1, 1, 0, 0, 1]];
-    
-    console.log(RottenFruit(arr, 5, 5));
-}
-
-//test22()
-
-//3
-
-function StepsOfKnightUtil(size, currCol, currRow, traversed, dist) {
-    if (currCol < 0 || currCol >= size || currRow < 0 || currRow >= size )
-        return;
-    if (traversed[currCol][currRow] <= dist)
-        return;
-    
-    traversed[currCol][currRow] = dist;
-    StepsOfKnightUtil(size, currCol - 2, currRow - 1, traversed, dist + 1);
-    StepsOfKnightUtil(size, currCol - 2, currRow + 1, traversed, dist + 1);
-    StepsOfKnightUtil(size, currCol + 2, currRow - 1, traversed, dist + 1);
-    StepsOfKnightUtil(size, currCol + 2, currRow + 1, traversed, dist + 1);
-    StepsOfKnightUtil(size, currCol - 1, currRow - 2, traversed, dist + 1);
-    StepsOfKnightUtil(size, currCol + 1, currRow - 2, traversed, dist + 1);
-    StepsOfKnightUtil(size, currCol - 1, currRow + 2, traversed, dist + 1);
-    StepsOfKnightUtil(size, currCol + 1, currRow + 2, traversed, dist + 1);
-}
-
-function StepsOfKnight(size, srcX, srcY, dstX, dstY) {
-    const traversed = Array(size);
-    for (let i = 0; i < size; i++) {
-        traversed[i] = Array(size).fill(Max_Int)
-    }
-
-    StepsOfKnightUtil(size, srcX - 1, srcY - 1, traversed, 0);
-    const retval = traversed[dstX - 1][dstY - 1];
-    return retval;
-}
-
-// Testing code.
-function test23() {
-    console.log(StepsOfKnight(20, 10, 10, 20, 20));
-}
-
-//test23()
-
-// 8
-
-function DistNearestFillUtil(arr, maxCol, maxRow, currCol, currRow, traversed, dist) {
-    if (currCol < 0 || currCol >= maxCol || currRow < 0 || currRow >= maxRow)
-        return;
-    if (traversed[currCol][currRow] <= dist)
-        return;
-    traversed[currCol][currRow] = dist;
-    DistNearestFillUtil(arr, maxCol, maxRow, currCol - 1, currRow, traversed, dist + 1);
-    DistNearestFillUtil(arr, maxCol, maxRow, currCol + 1, currRow, traversed, dist + 1);
-    DistNearestFillUtil(arr, maxCol, maxRow, currCol, currRow + 1, traversed, dist + 1);
-    DistNearestFillUtil(arr, maxCol, maxRow, currCol, currRow - 1, traversed, dist + 1);
-}
-
-function DistNearestFill(arr, maxCol, maxRow) {
-    const traversed = Array(maxRow);
-    for (let i = 0; i < maxRow; i++) {
-        traversed[i] = Array(maxCol).fill(Max_Int)
-    }
-
-    for (let i = 0; i < maxCol; i++) {
-        for (let j = 0; j < maxRow; j++) {
-            if (arr[i][j] === 1)
-                DistNearestFillUtil(arr, maxCol, maxRow, i, j, traversed, 0);
-        }
-    }
-
-    for (let i = 0; i < maxCol; i++) {
-        console.log(traversed[i]);
-    }
-}
-
-// Testing code.
-function test24() {
-    const arr = [[1, 0, 1, 1, 0], 
-    [1, 1, 0, 1, 0], 
-    [0, 0, 0, 0, 1], 
-    [0, 0, 0, 0, 1], 
-    [0, 0, 0, 0, 1]];
-
-    DistNearestFill(arr, 5, 5);
-}
-
-//test24()
-/*
-[ 0, 1, 0, 0, 1 ]
-[ 0, 0, 1, 0, 1 ]
-[ 1, 1, 2, 1, 0 ]
-[ 2, 2, 2, 1, 0 ]
-[ 3, 3, 2, 1, 0 ]
-*/
-
-function findLargestIslandUtil(arr, maxCol, maxRow, currCol, currRow, value, traversed) {
-    if (currCol < 0 || currCol >= maxCol || currRow < 0 || currRow >= maxRow)
-        return 0;
-    if (traversed[currCol][currRow] === 1 || arr[currCol][currRow] !== value)
-        return 0;
-    traversed[currCol][currRow] = 1;
-    return 1 + findLargestIslandUtil(arr, maxCol, maxRow, currCol - 1, currRow - 1, value, traversed) + findLargestIslandUtil(arr, maxCol, maxRow, currCol - 1, currRow, value, traversed) + findLargestIslandUtil(arr, maxCol, maxRow, currCol - 1, currRow + 1, value, traversed) + findLargestIslandUtil(arr, maxCol, maxRow, currCol, currRow - 1, value, traversed) + findLargestIslandUtil(arr, maxCol, maxRow, currCol, currRow + 1, value, traversed) + findLargestIslandUtil(arr, maxCol, maxRow, currCol + 1, currRow - 1, value, traversed) + findLargestIslandUtil(arr, maxCol, maxRow, currCol + 1, currRow, value, traversed) + findLargestIslandUtil(arr, maxCol, maxRow, currCol + 1, currRow + 1, value, traversed);
-}
-
-function findLargestIsland(arr, maxCol, maxRow) {
-    let maxVal = 0;
-    let currVal = 0;
-    const traversed = Array(maxRow);
-    
-    for (let i = 0; i < maxRow; i++) {
-        traversed[i] = Array(maxCol).fill(Max_Int)
-    }
-
-    for (let i = 0; i < maxCol; i++) {
-        for (let j = 0; j < maxRow; j++) {
-            currVal = findLargestIslandUtil(arr, maxCol, maxRow, i, j, arr[i][j], traversed);
-            if (currVal > maxVal)
-                maxVal = currVal;
-        }
-    }
-    return maxVal;
-}
-
-// Testing code.
-function test25() {
-    const arr = [[1, 0, 1, 1, 0], 
-    [1, 0, 0, 1, 0], 
-    [0, 1, 1, 1, 1], 
-    [0, 1, 0, 0, 0], 
-    [1, 1, 0, 0, 1]];
-
-    console.log(`Largest Island : ${findLargestIsland(arr, 5, 5)}`);
-}
-
-//test25()
-/*
-Largest Island : 12
-*/
-
 
 function isKnown(relation, a, b) {
     if (relation[a][b] === 1)
@@ -1133,9 +996,24 @@ function isKnown(relation, a, b) {
 }
 
 function findCelebrity(relation, count) {
-    const stk = ([]);
-    let first = 0;
-    let second = 0;
+	let cel = true;
+	for (let i = 0; i < count; i++) {
+		cel = true;
+		for (let j = 0; j < count; j++) {
+			if (i != j && (!isKnown(relation, j, i) || isKnown(relation, i, j))) {
+				cel = false;
+				break;
+			}
+		}
+		if (cel == true)
+			return i;
+	}
+	return -1;
+}
+
+function findCelebrity2(relation, count) {
+    const stk = [];
+    let first = 0, second = 0;
     for (let i = 0; i < count; i++) {
         stk.push(i);
     }
@@ -1156,7 +1034,7 @@ function findCelebrity(relation, count) {
     return first;
 }
 
-function findCelebrity2(relation, count) {
+function findCelebrity3(relation, count) {
     let first = 0;
     let second = 1;
     
@@ -1185,9 +1063,10 @@ function test26() {
     
     console.log(`Celebrity : ${findCelebrity(arr, 5)}`);
     console.log(`Celebrity : ${findCelebrity2(arr, 5)}`);
+    console.log(`Celebrity : ${findCelebrity3(arr, 5)}`);
 }
 
-//test26()
+test26()
 /*
 Celebrity : 3
 Celebrity : 3

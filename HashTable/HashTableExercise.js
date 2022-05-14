@@ -3,7 +3,7 @@ class CountMap {
         this.hm = new Map();
     }
 
-    insert(key) {
+    add(key) {
         if (this.hm.has(key)) {
             const cnt = this.hm.get(key);
             this.hm.set(key, cnt + 1);
@@ -38,6 +38,17 @@ class CountMap {
     }
 }
 
+/* Testing Code */
+const cm = new CountMap();
+cm.insert(2);
+cm.insert(2);
+console.log(`count of 2 is : ${cm.get(2)}`);
+cm.remove(2);
+console.log(`count of 2 is : ${cm.get(2)}`);
+cm.remove(2);
+console.log(`count of 2 is : ${cm.get(2)}`);
+console.log(`count of 3 is : ${cm.get(3)}`);
+
 function isAnagram(str1, str2){
     const size1 = str1.length;
     const size2 = str2.length;
@@ -47,7 +58,7 @@ function isAnagram(str1, str2){
     const cm = new CountMap();
     for (let index = 0; index < str1.length; index++) {
         let ch = str1[index];
-        cm.insert(ch);
+        cm.add(ch);
     }
     for (let index = 0; index < str2.length; index++) {
         let ch = str2[index];
@@ -110,12 +121,12 @@ function findMissing(arr, start, end){
 // Testing code.
 function test3(){
     const arr = [1, 2, 3, 5, 6, 7, 8, 9, 10];
-    console.log("Missing element is : ", findMissing(arr, 1, 10));
+    console.log("Missing element is :", findMissing(arr, 1, 10));
 }
 
 test3()
 /*
-Missing element is :  4
+Missing element is : 4
 */
 
 function printRepeating(arr) {
@@ -135,7 +146,7 @@ function printFirstRepeating(arr){
     const size = arr.length;
     const hs = new CountMap();
     for (let i = 0; i < size; i++) {
-        hs.insert(arr[i]);
+        hs.add(arr[i]);
     }
     for (let i = 0; i < size; i++) {
         hs.remove(arr[i]);

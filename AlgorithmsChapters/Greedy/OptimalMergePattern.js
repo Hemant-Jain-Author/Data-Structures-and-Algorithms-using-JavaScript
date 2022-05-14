@@ -29,7 +29,7 @@ class PriorityQueue {
     }
 
     percolateUp(child) {
-        const parent = Math.floor((child - 1) / 2);
+        const parent = Math.floor((child-1) / 2);
         if (parent < 0) {
             return;
         }
@@ -44,7 +44,7 @@ class PriorityQueue {
     add(value) {
         this.arr[this.size] = value;
         this.size += 1;
-        this.percolateUp(this.size - 1);
+        this.percolateUp(this.size-1);
     }
 
     remove() {
@@ -52,7 +52,7 @@ class PriorityQueue {
             throw new Error("IllegalStateException");
         }
         const value = this.arr[0];
-        this.arr[0] = this.arr[this.size - 1];
+        this.arr[0] = this.arr[this.size-1];
         this.size--;
         this.percolateDown(0);
         return value;

@@ -40,6 +40,14 @@ const s = new Stack();
 s.push(1);
 s.push(2);
 s.push(3);
+s.print();
 console.log(s.pop());
 console.log(s.pop());
 console.log(s.pop());
+
+/*
+[ 1, 2, 3 ]
+3
+2
+1
+*/

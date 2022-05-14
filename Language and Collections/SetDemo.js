@@ -2,7 +2,6 @@ const hs = new Set();
 hs.add("Banana")
 hs.add("Apple")
 hs.add("Mango")
-
 console.log(hs);
 console.log(`Set size : ${hs.size}`);
 console.log(`Apple present : ${hs.has("Apple")}`);

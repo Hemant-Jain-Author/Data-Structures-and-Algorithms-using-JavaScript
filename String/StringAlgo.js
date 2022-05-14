@@ -37,7 +37,7 @@ true
 false
 */
 
-function match(source, pattern) {
+function matchPattern(source, pattern) {
     let iSource = 0;
     let iPattern = 0;
     const sourceLen = source.length;
@@ -55,9 +55,9 @@ function match(source, pattern) {
 
 // Testing code.
 function test2() {
-    console.log(match("hellofskdlfjsdlfjsldjflksdworld", "helloworld"));
-    console.log(match("hellod", "hellowd"));
-    console.log(match("hello*xxxxxxxxxxhemantxxxxxxxxxxxx", "hellnt"));
+    console.log(matchPattern("hellofskdlfjsdlfjsldjflksdworld", "helloworld"));
+    console.log(matchPattern("hellod", "hellowd"));
+    console.log(matchPattern("hello*xxxxxxxxxxhemantxxxxxxxxxxxx", "hellnt"));
     console.log()
 }
 
@@ -228,7 +228,7 @@ function isPalindrome(str) {
 // Testing code.
 function test8() {
     isPalindrome("hello");
-    isPalindrome("eoloe");
+    isPalindrome("oyo");
 }
 
 test8();
@@ -283,11 +283,18 @@ function myStrcmp(a, b) {
 
 // Testing code.
 function test10() {
-    console.log("StrCmp returns :", myStrcmp("aba", "aas"));
+    console.log("StrCmp returns :", myStrcmp("apple", "appke"));
+    console.log("StrCmp returns :", myStrcmp("apple", "apple"));
+    console.log("StrCmp returns :", myStrcmp("apple", "appme"));
 }
 
 test10();
-// StrCmp returns : 1
+
+/*
+StrCmp returns : 1
+StrCmp returns : 0
+StrCmp returns : -1
+*/
 
 
 function reverseString(str) {

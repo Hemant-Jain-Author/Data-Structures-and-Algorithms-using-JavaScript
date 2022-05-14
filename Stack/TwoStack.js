@@ -7,7 +7,7 @@ class TwoStack {
         this.data = new Array(this.MAX_SIZE);
     }
 
-    StackPush1(value) {
+    push1(value) {
         if (this.top1 < this.top2 - 1) {
             this.data[++this.top1] = value;
         } else {
@@ -15,7 +15,7 @@ class TwoStack {
         }
     }
 
-    StackPush2(value) {
+    push2(value) {
         if (this.top1 < this.top2 - 1) {
             this.data[--this.top2] = value;
         } else {
@@ -23,7 +23,7 @@ class TwoStack {
         }
     }
 
-    StackPop1() {
+    pop1() {
         if (this.top1 >= 0) {
             const value = this.data[this.top1--];
             return value;
@@ -33,7 +33,7 @@ class TwoStack {
         return -999;
     }
 
-    StackPop2() {
+    pop2() {
         if (this.top2 < this.MAX_SIZE) {
             const value = this.data[this.top2++];
             return value;
@@ -46,13 +46,20 @@ class TwoStack {
 
 // Testing code.
 const st = new TwoStack();
-for (let i = 0; i < 10; i++) {
-    st.StackPush1(i);
-}
-for (let j = 0; j < 10; j++) {
-    st.StackPush2(j + 10);
-}
-for (let i = 0; i < 10; i++) {
-    console.log(`stack one pop value is : ${st.StackPop1()}`);
-    console.log(`stack two pop value is : ${st.StackPop2()}`);
-}
+st.push1(1);
+st.push1(2);
+st.push1(3);
+st.push2(4);
+st.push2(5);
+st.push2(6);
+console.log("stk1 pop: " + st.pop1());
+console.log("stk1 pop: " + st.pop1());
+console.log("stk2 pop: " + st.pop2());
+console.log("stk2 pop: " + st.pop2());
+
+/*
+stk1 pop: 3
+stk1 pop: 2
+stk2 pop: 6
+stk2 pop: 5
+*/

@@ -10,15 +10,15 @@ class Queue {
     constructor() {
         this.head = null;
         this.tail = null;
-        this.size = 0;
+        this.length = 0;
     }
 
-    length() {
-        return this.size;
+    size() {
+        return this.length;
     }
 
     isEmpty() {
-        return this.size === 0;
+        return this.length === 0;
     }
 
     peek() {
@@ -35,7 +35,7 @@ class Queue {
             this.tail.next = temp;
             this.tail = temp;
         }
-        this.size++;
+        this.length++;
     }
 
     remove() {
@@ -43,16 +43,17 @@ class Queue {
             throw new Error("StackEmptyError");
         const value = this.head.value;
         this.head = this.head.next;
-        this.size--;
+        this.length--;
         return value;
     }
 
     print() {
-        let temp = this.head;
+        let output = "", temp = this.head;
         while (temp != null) {
-            process.stdout.write(`${temp.value} `)
+            output += `${temp.value} `
             temp = temp.next;
-       }
+        }
+        console.log(output);
     }
 }
 
@@ -61,6 +62,16 @@ const que = new Queue();
 que.add(1);
 que.add(2);
 que.add(3);
-while (que.isEmpty() === false) {
-    console.log(que.remove());
-}
+que.print();
+console.log("isEmpty : " + que.isEmpty());
+console.log("size : " + que.size());
+console.log("Queue remove : " + que.remove());
+console.log("Queue remove : " + que.remove());
+
+/*
+1 2 3 
+isEmpty : false
+size : 3
+Queue remove : 1
+Queue remove : 2
+*/

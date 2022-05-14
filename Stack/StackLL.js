@@ -52,11 +52,13 @@ class Stack {
     }
 
     print() {
+        let out = "";
         let temp = this.head;
         while (temp != null) {
-            console.log(temp.value);
+            out += temp.value + " ";
             temp = temp.next;
         };
+        console.log(out);
     }
 }
 
@@ -65,6 +67,6 @@ const s = new Stack();
 s.push(1);
 s.push(2);
 s.push(3);
-console.log(s.pop());
+s.print();
 console.log(s.pop());
 console.log(s.pop());

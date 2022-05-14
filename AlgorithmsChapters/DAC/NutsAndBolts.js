@@ -8,8 +8,10 @@ function makePairsUtil(nuts, bolts, low, high) {
 	if (low < high) {
 		// Choose first element of bolts array as pivot to partition nuts.
 		let pivot = partition(nuts, low, high, bolts[low]);
+		
 		// Using nuts[pivot] as pivot to partition bolts.
 		partition(bolts, low, high, nuts[pivot]);
+
 		// Recursively lower and upper half of nuts and bolts are matched.
 		makePairsUtil(nuts, bolts, low, pivot - 1);
 		makePairsUtil(nuts, bolts, pivot + 1, high);
