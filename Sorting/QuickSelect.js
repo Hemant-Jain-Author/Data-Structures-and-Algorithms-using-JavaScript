@@ -30,7 +30,8 @@ function quickSelectUtil(arr, lower, upper, k) {
 }
 
 function quickSelect(arr, k) {
-    quickSelectUtil(arr, 0, arr.length - 1, k);
+    quickSelectUtil(arr, 0, arr.length - 1, k - 1);
+    return arr[k - 1];
 }
 
 // Testing code.
