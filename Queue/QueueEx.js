@@ -198,7 +198,7 @@ function minOfMaxSlidingWindows(arr, size, k) {
         if (que.size() > 0 && que.front() <= i - k)
             que.remove();
         while (que.size() > 0 && arr[que.back()] <= arr[i]) {
-            que.remove();
+            que.removeLast();
         }
         que.add(i);
         if (i >= (k - 1) && minVal > arr[que.front()])
@@ -228,7 +228,7 @@ function maxOfMinSlidingWindows(arr, size, k) {
         if (que.size() > 0 && que.front() <= i - k)
             que.remove();
         while (que.size() > 0 && arr[que.back()] >= arr[i])
-            que.remove();
+            que.removeLast();
 
         que.add(i);
         if (i >= (k - 1) && maxVal < arr[que.front()])
