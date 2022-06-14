@@ -475,20 +475,16 @@ function sortK(arr, size, k) {
         pq.add(arr[i]);
     }
 
-    const output = new Array(size);
     let index = 0;
     for (i = k; i < size; i++) {
-        output[index++] = pq.remove();
+        arr[index++] = pq.remove();
         pq.add(arr[i]);
     }
 
     while (pq.isEmpty() === false) {
-        output[index++] = pq.remove();
+        arr[index++] = pq.remove();
     }
 
-    for (i = 0; i < size; i++) {
-        arr[i] = output[i];
-    }
     console.log(arr);
 }
 
