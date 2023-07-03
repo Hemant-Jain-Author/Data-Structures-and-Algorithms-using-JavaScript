@@ -757,7 +757,6 @@ class Graph {
         console.log(`Total MST cost : ${sum}`)
     }
 
-
     printPathUtil(previous, source, dest) {
         let path = "";
         if (dest == source)
@@ -782,7 +781,6 @@ class Graph {
         }
         console.log(output);
     }
-
 
     dijkstra(source) {
         const count = this.count;

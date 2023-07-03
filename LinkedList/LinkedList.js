@@ -169,8 +169,8 @@ class LinkedList {
         return ll2;
     }
 
-    compareList(head) {
-        return this.compareListUtil(this.head, head);
+    compareList(l2) {
+        return this.compareListUtil(this.head, l2.head);
     }
 
     compareListUtil(head1, head2) {
@@ -182,11 +182,10 @@ class LinkedList {
             return this.compareListUtil(head1.next, head2.next);
     }
 
-    compareList2(head) {
+    compareList2(l2) {
         let head1 = this.head;
-        let head2 = head;
-        while (head1 == null &&
-            head2 == null) {
+        let head2 = l2.head;
+        while (head1 !== null && head2 !== null) {
             if (head1.value !== head2.value)
                 return false;
             head1 = head1.next;
@@ -612,9 +611,9 @@ function main5() {
     const l3 = ll.copyListReversed();
     l3.print();
     console.log("compareList : " + ll.compareList(l2));
-	console.log("compareList : " + ll.compareList2(l2));
+	console.log("compareList2 : " + ll.compareList2(l2));
 	console.log("compareList : " + ll.compareList(l3));
-	console.log("compareList : " + ll.compareList2(l3));
+	console.log("compareList2 : " + ll.compareList2(l3));
 }
 main5();
 /*
