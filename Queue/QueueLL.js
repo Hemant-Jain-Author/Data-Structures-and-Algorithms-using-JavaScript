@@ -1,6 +1,5 @@
 class QueueNode {
     constructor(v, n) {
-        this.value = 0;
         this.value = v;
         this.next = n;
     }

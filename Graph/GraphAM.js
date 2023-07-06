@@ -307,7 +307,6 @@ class Graph {
                 pSize--;
                 added[vertex] = 0;
             }
-
         }
         return false;
     }
