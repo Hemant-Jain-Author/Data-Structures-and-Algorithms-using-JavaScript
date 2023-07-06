@@ -1,5 +1,6 @@
 class StringTreeNode {
     constructor() {
+        this.value = 0;
         this.count = 0;
         this.left = null;
         this.right = null;

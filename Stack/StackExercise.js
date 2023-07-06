@@ -85,8 +85,6 @@ test2()
 
 function sortStack(stk) {
     let temp;
-    console.log(stk)
-    console.log(stk.length)
     if (stk.length > 0) {
         temp = stk.pop();
         sortStack(stk);
@@ -204,6 +202,7 @@ test5()
 Stack before reversal [ 1, 2, 3 ]
 Stack after reversal [ 3, 2, 1 ]
 */
+
 function reverseKElementInStack(stk, k) {
     const que = new Deque();
     let i = 0;
@@ -260,6 +259,7 @@ test7()
 Deque { arr: [ 1, 2, 3 ] }
 Deque { arr: [ 3, 2, 1 ] }
 */
+
 function reverseKElementInQueue(que, k) {
     const stk = [];
     let i = 0;
@@ -334,15 +334,15 @@ function isBalancedParenthesis(expn) {
 function test9() {
     const expn = "{()}[]";
     const value = isBalancedParenthesis(expn);
-    console.log(`Given Expn:${expn}`);
-    console.log(`Is Balanced Parenthesis : ${value}`);
+    console.log(`Given Expn: ${expn}`);
+    console.log(`Is Balanced Parenthesis: ${value}`);
 }
 
 test9()
 
 /*
-Given Expn:{()}[]
-Is Balanced Parenthesis : true
+Given Expn: {()}[]
+Is Balanced Parenthesis: true
 */
 
 
