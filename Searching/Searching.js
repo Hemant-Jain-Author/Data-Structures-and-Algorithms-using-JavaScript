@@ -1953,8 +1953,9 @@ search01 index is :: 8
 binarySearch01 index is :: 8
 */
 
-function searchRotateArray(arr, size, key) {
-	for (let i = 0; i < size - 1; i++) {
+function searchRotateArray(arr, key) {
+    const size = arr.length;
+	for (let i = 0; i < size; i++) {
 		if (arr[i] == key) {
 			return i;
 		}
@@ -2053,6 +2054,8 @@ function CountRotation(arr, size) {
 // Testing code.
 function test32() {
     first = [8, 9, 10, 11, 3, 5, 7]
+    console.log(`searchRotateArray index is :: ${searchRotateArray(first, 7)}`);
+    console.log(`searchRotateArray index is :: ${searchRotateArray(first, 6)}`);
     console.log(`binarySearchRotateArray index is :: ${binarySearchRotateArray(first, 7)}`);
     console.log(`binarySearchRotateArray index is :: ${binarySearchRotateArray(first, 6)}`);
     console.log(`rotationMax is :: ${rotationMax(first, first.length)}`);

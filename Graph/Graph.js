@@ -826,11 +826,12 @@ class Graph {
         const count = this.count;
         const infi = 2147483647;
         const distance = new Array(count).fill(infi);
-        const previous = new Array(count).fill(0);
+        const previous = new Array(count).fill(-1);
 
         const que = new Queue();
         que.add(source)
         distance[source] = 0
+        previous[source] = source
         let curr;
         while (que.isEmpty() === false) {
             curr = que.remove()
@@ -1243,13 +1244,13 @@ function test8(){
     gph.addUndirectedEdge(3, 4)
     gph.addUndirectedEdge(4, 2)
     gph.addUndirectedEdge(2, 5)
-    console.log(gph.isCyclePresentUndirected())
-    console.log(gph.isCyclePresentUndirected2());
-	console.log(gph.isCyclePresentUndirected3());
+    console.log("isCyclePresentUndirected:", gph.isCyclePresentUndirected())
+    console.log("isCyclePresentUndirected:", gph.isCyclePresentUndirected2());
+    console.log("isCyclePresentUndirected:", gph.isCyclePresentUndirected3());
     gph.addUndirectedEdge(3, 5, 1)
-    console.log(gph.isCyclePresentUndirected())
-    console.log(gph.isCyclePresentUndirected2());
-	console.log(gph.isCyclePresentUndirected3());
+    console.log("isCyclePresentUndirected:", gph.isCyclePresentUndirected())
+    console.log("isCyclePresentUndirected:", gph.isCyclePresentUndirected2());
+    console.log("isCyclePresentUndirected:", gph.isCyclePresentUndirected3());
     console.log("IsConnectedUndirected :", gph.isConnectedUndirected())
 }
 
